@@ -1,0 +1,9 @@
+version: '3.2'
+
+services:
+  app:
+    build:
+      context: './'
+      args:
+        version: 'dev'
+        build_id: '(unknown build)'

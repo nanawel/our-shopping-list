@@ -1,0 +1,32 @@
+{
+  "name": "our-shopping-list",
+  "homepage": "https://github.com/nanawel/our-shopping-list",
+  "maintainers": [
+    {
+      "name": "Anaël Ollier",
+      "email": "nanawel@gmail.com",
+      "url": "https://github.com/nanawel"
+    }
+  ],
+  "description": "Simple shared shopping list running on Node",
+  "license": "AGPL-3.0-or-later",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shared",
+    "shopping",
+    "list"
+  ],
+  "dependencies": {
+    "@vue/cli": "^4.5.11",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.6",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.18",
+    "nodemon": "^2.0.7",
+    "socket.io": "^3.1.2",
+    "uuid": "^8.3.2"
+  }
+}

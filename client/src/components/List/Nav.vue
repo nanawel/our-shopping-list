@@ -1,0 +1,173 @@
+<template>
+  <div class="wrapper">
+    <nav-default>
+      <template v-slot:main-title>
+        {{ title }}
+      </template>
+      <template v-slot:main-title-after v-if="listModel && listModel._id">
+        <div class="list-title-after">
+          <v-btn @click="onEditClick" icon>
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+        </div>
+      </template>
+    </nav-default>
+
+    <v-checkbox
+        v-model="showAll"
+        color="white"
+        hide-details
+      ></v-checkbox>
+    
+    <v-dialog
+      v-model="showEditListDialog"
+      persistent
+      max-width="500"
+      @keydown.esc="onCancelListForm">
+      <v-card>
+        <v-card-title class="headline grey lighten-2">
+          <span>Edit List</span>
+        </v-card-title>
+
+        <v-card-text>
+          <ListForm
+            :model="editionListModel"
+            v-on:cancel="onCancelListForm"
+            v-on:save="onSaveListForm"
+            v-on:delete="onDeleteListForm"/>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red"
+            plain
+            @click="onDeleteListForm">
+            Delete
+          </v-btn>
+          <v-btn
+            color="grey"
+            plain
+            @click="onCancelListForm">
+            Cancel
+          </v-btn>
+          <v-btn
+            color="primary"
+            depressed
+            @click="onSaveListForm">
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script>
+import { DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_ALL } from '../../constants'
+
+import NavDefault from '../Nav/Default'
+import ListForm from "../ListForm";
+
+export default {
+  name: "List-Nav",
+  components: {
+    NavDefault,
+    ListForm
+  },
+  data: () => ({
+    editionListModel: null,
+    showEditListDialog: false,
+  }),
+  computed: {
+    title: {
+      get: function() {
+        return this.listModel && this.listModel.name
+          ? this.listModel.name
+          : '(New list)'
+      }
+    },
+    listModel: {
+      get: function() {
+        return this.$store.state.list.currentList
+      }
+    },
+    showAll: {
+      get: function() {
+        return this.$store.state.list.displayMode === DISPLAY_MODE_ALL
+      },
+      set: function(val) {
+        this.$store.commit(
+          'list/setDisplayMode',
+          { mode: val ? DISPLAY_MODE_ALL : DISPLAY_MODE_UNCHECKED_ONLY },
+          { root: true }
+        )
+      }
+    }
+  },
+  watch: {
+    editionListModel: function (val) {
+      this.showEditListDialog = !!val
+    }
+  },
+  methods: {
+    saveList(list, callback) {
+      console.log("saveList()", list)
+      callback = callback || function() {}
+      const self = this
+      this.$repository.save(list)
+        .then(callback)
+        .catch((e) => {
+          console.error(e)
+          self.$snackbar.msg("Could not save list :(")
+        })
+    },
+    deleteList(list, callback) {
+      console.log("deleteList()", list)
+      callback = callback || function() {}
+      const self = this
+      this.$repository.delete(list)
+        .then(callback)
+        .catch((e) => {
+          console.error(e)
+          self.$snackbar.msg("Could not delete list :(")
+        })
+    },
+    
+    onEditClick() {
+      this.editionListModel = this.listModel
+    },
+    onCancelListForm() {
+      this.editionListModel = null
+    },
+    onSaveListForm() {
+      const self = this
+      this.saveList(this.editionListModel, function() {
+        const listPath = `/list/${self.editionListModel._id}`
+        if (self.$route.path != listPath) {
+          self.$router.push(listPath)
+        }
+        self.closeEditListForm()
+      })
+    },
+    onDeleteListForm() {
+      const self = this
+      this.deleteList(this.editionListModel, function() {
+        self.closeEditListForm()
+        self.$router.push('/')
+      })
+    },
+    closeEditListForm() {
+      this.editionListModel = null
+    },
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.wrapper {
+  display: contents;  // Fix appbar display by forcing ignore
+}
+</style>
