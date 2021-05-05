@@ -4,5 +4,18 @@ services:
   app:
     image: node:${node_version}${node_variant_dev}
     command: sh -c 'cd /app && ${NODE_BIN:-node} server.js'
+    ports:
+      - '8080:8080'
     volumes:
-      - ./:/app
+      - ./server:/app
+      - ./client:/app/client
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:4
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:

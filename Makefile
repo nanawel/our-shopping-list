@@ -1,4 +1,4 @@
-dev-%: export COMPOSE_FILE = docker-compose.yml:docker-compose.dev.yml
+dev-%: export COMPOSE_FILE = docker-compose.dev.yml
 dev-%: export NODE_BIN = /app/node_modules/nodemon/bin/nodemon.js
 dev-%:
 	$(MAKE) $*

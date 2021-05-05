@@ -22,11 +22,10 @@ The current implementation provides the following features:
 - [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) basic support
 
 But, at this date it lacks the following:
-- Multi-account support[^1]
+- Multi-account support _(it means that a server instance currently exposes
+  **all** lists to **all** users/clients, since there's no concept of
+  "user account" yet)_
 - Full PWA support with offline mode and deferred sync
-
-[^1]: It means that a server instance currently exposes **all** lists to **all**
-users/clients, since there's no concept of "user account" yet.
 
 ## Screenshots
 
@@ -77,8 +76,8 @@ docker run --detach \
 
 ### :whale: With `docker-compose`
 
-Use the provided [`docker-compose.yml`](docker-compose.yml) and adapt it to your
-needs (you might want to take a look to the [`.env`](.env) file too).
+Use the provided [`docker-compose.yml`](doc/docker-compose.yml) and adapt it to
+your needs.
 
 Then to run:
 

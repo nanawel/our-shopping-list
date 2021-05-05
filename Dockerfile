@@ -1,7 +1,8 @@
 ARG node_version="15"
 ARG node_variant="-alpine"
-ARG version
+ARG build_version
 ARG build_id
+ARG build_date
 
 FROM node:${node_version}${node_variant} as client-builder
 
@@ -13,16 +14,20 @@ RUN cd /app/client \
 
 FROM node:${node_version}${node_variant}
 
-ARG version
+ARG build_version
 ARG build_id
+ARG build_date
 
-LABEL app-name="Our Shopping List"
-LABEL maintainer="Anaël Ollier <nanawel@gmail.com>"
+LABEL org.label-schema.name="Our Shopping List"
+LABEL org.label-schema.vcs-url="https://github.com/nanawel/our-shopping-list"
+LABEL org.label-schema.vendor="Anaël Ollier <nanawel@gmail.com>"
+LABEL org.label-schema.version="${build_version}#${build_id}"
+LABEL org.label-schema.build-date="${build_date}"
 
-ENV APP_VERSION=${version}
+ENV APP_VERSION=${build_version}
 ENV APP_BUILD_ID=${build_id}
 
-COPY ./ /app
+COPY ./server/ /app
 COPY --from=client-builder /app/client /app/client
 
 WORKDIR /app

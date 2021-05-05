@@ -5,5 +5,5 @@ services:
     build:
       context: './'
       args:
-        version: 'dev'
+        build_version: 'dev'
         build_id: '(unknown build)'

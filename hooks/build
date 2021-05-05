@@ -1,0 +1,14 @@
+#!/bin/bash
+# Docker Hub build script
+
+set -x
+
+build_version="${DOCKER_TAG:-dev}"
+build_id="${SOURCE_COMMIT:0:8}"
+build_date="$(date -Is)"
+
+docker build -t $IMAGE_NAME \
+  --build-arg build_version="${build_version}" \
+  --build-arg build_id="${build_id}" \
+  --build-arg build_date="${build_date}" \
+  .

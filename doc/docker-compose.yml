@@ -10,7 +10,7 @@ services:
       - mongodb
 
   mongodb:
-    image: mongo:4-bionic
+    image: mongo:4
     volumes:
       - dbdata:/data/db
 

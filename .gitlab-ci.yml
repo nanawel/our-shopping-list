@@ -16,7 +16,7 @@ build_image:
   stage: build
   script:
     - time make config
-    - time make build args="--build-arg version=${CI_COMMIT_REF_SLUG} --build-arg build_id=${CI_COMMIT_SHORT_SHA}"
+    - time make build args="--build-arg build_version=${CI_COMMIT_REF_SLUG} --build-arg build_id=${CI_COMMIT_SHORT_SHA} --build-arg build_date=$(date -Is)"
     - time docker tag ${APP_IMAGE}:${APP_VERSION:-latest} ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker push ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
   tags:
