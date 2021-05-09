@@ -22,6 +22,9 @@ upd:
 stop:
 	docker-compose stop
 
+down:
+	docker-compose down
+
 build:
 	docker-compose build $(args)
 
