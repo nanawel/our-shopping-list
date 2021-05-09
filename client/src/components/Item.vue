@@ -112,8 +112,9 @@ export default {
   }
 
   .v-list-item__subtitle.empty-qty {
-    font-style: italic;
-    color: lightgray;
+    display: none;
+    /*font-style: italic;
+    color: lightgray;*/
   }
 
   .v-list-item__action {
