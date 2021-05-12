@@ -82,6 +82,7 @@
                 id="new_item_name"
                 ref="searchInput"
                 label="Search or add a new item"
+                autocomplete="off"
                 prepend-icon="mdi-magnify"
                 clearable
                 v-model="searchInputValue"
