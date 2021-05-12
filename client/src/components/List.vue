@@ -427,7 +427,7 @@ export default {
     onSaveItemForm() {
       console.log('onSaveItemForm()', this.editionItemModel);
       this.saveItem(this.editionItemModel, function() {
-        this.$snackbar.msg(`${this.editionItemModel.name} saved successfully.`)
+        //this.$snackbar.msg(`${this.editionItemModel.name} saved successfully.`)
         this.closeEditItemForm()
       }.bind(this))
     },
