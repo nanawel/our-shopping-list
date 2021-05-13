@@ -9,6 +9,7 @@
               ref="nameInput"
               label="Name"
               autocapitalize="sentences"
+              autocomplete="off"
               v-model="model.name" />
             <v-text-field
               name="creationDate"
