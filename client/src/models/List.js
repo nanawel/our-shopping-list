@@ -11,6 +11,8 @@ class List extends AbstractModel {
       _id: this.attr(null),
       name: this.attr(''),
       creationDate: this.attr(''),
+      createdAt: this.attr(null),
+      updatedAt: this.attr(null),
 
       items: this.hasMany(Item, 'listId')
     }

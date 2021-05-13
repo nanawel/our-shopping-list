@@ -13,7 +13,7 @@ export default {
             || store.state.version.currentBuildId != data.buildId
           ) {
             console.warn('Server version mismatch, reloading app.')
-            localStorage.removeItem('oslAppState') // Not used yet
+            //localStorage.removeItem('oslAppState') // Not used yet
             window.location.reload()
           }
         }
@@ -54,5 +54,7 @@ export default {
 
       schema.delete(model._id)
     })
+
+    Vue.prototype.$ws = sock
   },
 }

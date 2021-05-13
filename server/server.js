@@ -14,6 +14,7 @@ const MONGODB_HOST = process.env.MONGODB_HOST    || 'mongodb';
 const MONGODB_PORT = process.env.MONGODB_PORT    || '27017';
 const MONGODB_DB = process.env.MONGODB_DB        || 'osl';
 
+app.disable('x-powered-by');
 app.use(express.static('client/dist'));
 app.use(express.json());
 
@@ -35,13 +36,9 @@ const ListSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
-  },
-  creationDate: {
-    type: Date,
-    default: Date.now,
-    immutable: true
   }
 }, {
+  timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
   // https://mongoosejs.com/docs/tutorials/virtuals.html#virtuals-in-json
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
@@ -51,6 +48,17 @@ ListSchema.virtual('items', {
   ref: 'Item',
   localField: '_id',
   foreignField: 'listId',
+});
+ListSchema.pre('save', function() {
+  // < v1.0.2 format compatibility hook
+  if (!this.createdAt && this.creationDate) {
+    this.createdAt = this.creationDate;
+  }
+  this.set('creationDate', undefined, { strict: false });
+  if (!this.updatedAt && this.lastModificationDate) {
+    this.updatedAt = this.lastModificationDate;
+  }
+  this.set('lastModificationDate', undefined, { strict: false });
 });
 const List = mongoose.model('List', ListSchema);
 
@@ -79,16 +87,23 @@ const ItemSchema = new mongoose.Schema({
   checked: {
     type: Boolean,
     default: false
-  },
-  creationDate: {
-    type: Date,
-    default: Date.now,
-    immutable: true
   }
 }, {
+  timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
   // https://mongoosejs.com/docs/tutorials/virtuals.html#virtuals-in-json
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
+});
+ItemSchema.pre('save', function() {
+  // < v1.0.2 format compatibility hook
+  if (!this.createdAt && this.creationDate) {
+    this.createdAt = this.creationDate;
+  }
+  this.set('creationDate', undefined, { strict: false });
+  if (!this.updatedAt && this.lastModificationDate) {
+    this.updatedAt = this.lastModificationDate;
+  }
+  this.set('lastModificationDate', undefined, { strict: false });
 });
 const Item = mongoose.model('Item', ItemSchema);
 
@@ -151,8 +166,30 @@ app.get('/lists', (req, res) => {
     });
 });
 
+app.head('/lists/:id', (req, res) => {
+  const id = req.params.id;
+
+  List
+    .findOne({
+      _id: id
+    })
+    .exec(function (err, doc) {
+      if (err) throw err;
+      if (doc) {
+        console.log(doc._id, 'updatedAt =', doc.updatedAt);
+        res.status(200)
+          .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
+          .end();
+      } else {
+        res.status(404)
+          .end();
+      }
+    });
+});
+
 app.get('/lists/:id', (req, res) => {
   const id = req.params.id;
+
   List
     .findOne({
       _id: id
@@ -176,11 +213,9 @@ app.get('/lists/:id', (req, res) => {
 });
 
 app.post('/lists', (req, res) => {
-  // This is a creation-only method, so remove incoming ID if any
-  delete req.body._id;
-  delete req.body.creationDate;
   const doc = new List(req.body);
   console.debug('POST LIST', doc);
+
   doc.save(function (err) {
     if (err) throw err;
     res.status(201)
@@ -192,6 +227,7 @@ app.post('/lists', (req, res) => {
 app.patch('/lists/:id', (req, res) => {
   const id = req.params.id;
   console.debug('PATCH LIST', id, req.body);
+
   List.findById(id, function (err, list) {
     if (err) throw err;
     if (list) {
@@ -218,6 +254,7 @@ app.patch('/lists/:id', (req, res) => {
 app.delete('/lists/:id', (req, res) => {
   const id = req.params.id;
   console.debug('DELETE LIST', id, req.body);
+
   List.findById(id, function (err, list) {
     if (err) throw err;
     if (list) {
@@ -254,6 +291,7 @@ app.get('/items', (req, res) => {
 
 app.get('/lists/:listId/items', (req, res) => {
   const listId = req.params.listId;
+
   List.findOne({
     _id: listId
   }, function (err, doc) {
@@ -278,11 +316,9 @@ app.get('/lists/:listId/items', (req, res) => {
 });
 
 app.post('/items', (req, res) => {
-  // This is a creation-only method, so remove incoming ID if any
-  delete req.body._id;
-  delete req.body.creationDate;
   const doc = new Item(req.body);
   console.debug('POST ITEM', doc);
+
   if (!doc.listId) {
     res.status(400)
       .json({
@@ -297,17 +333,20 @@ app.post('/items', (req, res) => {
         .json(doc);
       notifyModelUpdate('Item', doc);
     });
+
+    List.findById(doc.listId, function (err, list) {
+      list.markModified('items');
+      list.save();
+    });
   }
 });
 
 app.post('/lists/:listId/items', (req, res) => {
   const listId = req.params.listId;
+
   List.findById(listId, function (err, list) {
     if (err) throw err;
     if (list) {
-      // This is a creation-only method, so remove incoming ID if any
-      delete req.body._id;
-
       let itemData = req.body;
       const item = new Item(itemData);
       item.listId = list._id;
@@ -317,7 +356,11 @@ app.post('/lists/:listId/items', (req, res) => {
         res.status(201)
           .json(item);
         notifyModelUpdate('Item', item);
-      })
+      });
+
+      // Force update list
+      list.markModified('items');
+      list.save();
     } else {
       res.status(404)
         .json({
@@ -332,6 +375,7 @@ app.post('/lists/:listId/items', (req, res) => {
 app.patch('/items/:id', (req, res) => {
   const id = req.params.id;
   console.debug('PATCH ITEM', id, req.body);
+
   Item.findById(id, function (err, item) {
     if (err) throw err;
     if (item) {
@@ -343,7 +387,12 @@ app.patch('/items/:id', (req, res) => {
         res.status(200)
           .json(item);
         notifyModelUpdate('Item', item);
-      })
+      });
+
+      List.findById(item.listId, function (err, list) {
+        list.markModified('items');
+        list.save();
+      });
     } else {
       res.status(404)
         .json({
@@ -358,6 +407,7 @@ app.patch('/items/:id', (req, res) => {
 app.patch('/lists/:listId/items/:itemId', (req, res) => {
   const itemId = req.params.itemId;
   console.debug('PATCH ITEM', itemId, req.body);
+
   Item.findOneAndUpdate({
     _id: itemId
   }, req.body, {
@@ -368,6 +418,11 @@ app.patch('/lists/:listId/items/:itemId', (req, res) => {
       res.status(200)
         .json(doc);
       notifyModelUpdate('Item', doc);
+
+      List.findById(doc.listId, function (err, list) {
+        list.markModified('items');
+        list.save();
+      });
     } else {
       res.status(404)
         .json({
@@ -390,7 +445,12 @@ app.delete('/items/:id', (req, res) => {
         res.status(200)
           .json(item);
         notifyModelDelete('Item', item);
-      })
+      });
+
+      List.findById(item.listId, function (err, list) {
+        list.markModified('items');
+        list.save();
+      });
     } else {
       res.status(404)
         .json({

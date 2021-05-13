@@ -277,8 +277,19 @@ export default {
     }
   },
   created() {
-    //console.info("List component created!")
+    const self = this
     this.initList(this.currentListId, 2)
+
+    this.$ws.on('connect', () => {
+      if (self.listModel) {
+        self.$repository.checkSync(self.listModel)
+          .then((isSync) => {
+            if (!isSync) {
+              self.initList(this.currentListId, 2)
+            }
+          })
+      }
+    })
   },
   watch: {
     currentListId: function (val) {

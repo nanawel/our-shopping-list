@@ -32,7 +32,7 @@ export default {
         return schemas[0]
       },
       save: function(model) {
-        console.log('$repository::save', model);
+        console.log('$repository::save', model)
         const schema = this.findSchemaByModel(model)
 
         if (model._id) {
@@ -44,7 +44,7 @@ export default {
         }
       },
       delete: function(model) {
-        console.log('$repository::delete', model);
+        console.log('$repository::delete', model)
         const schema = this.findSchemaByModel(model)
 
         if (model._id) {
@@ -57,6 +57,38 @@ export default {
         } else {
             model.$delete()
         }
+      },
+      checkSync: function(model) {
+        console.log('$repository::checkSync', model)
+        const schema = this.findSchemaByModel(model)
+
+        return new Promise((resolve, reject) => {
+          if (model._id) {
+            fetch(`/${schema.entity}/${model._id}`, {
+                method: 'HEAD'
+              })
+              .then(function(res) {
+                if (!res.ok) {
+                  console.error(`[${res.status}] ${res.statusText}`);
+                } else {
+                  const lastModified = new Date(res.headers.get('last-modified-iso'))
+                  const modelUpdatedAt = new Date(model.updatedAt)
+                  resolve(lastModified.getTime() == modelUpdatedAt.getTime())
+                }
+              })
+              .catch(function(error) {
+                reject({
+                  reason: 'Network error',
+                  originalError: error
+                })
+              })
+          }
+          else {
+            reject({
+              reason: 'Model has no ID'
+            })
+          }
+        })
       }
     }
     Vue.$repository = Vue.prototype.$repository

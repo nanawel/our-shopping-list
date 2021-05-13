@@ -13,7 +13,8 @@ class Item extends AbstractModel {
       details: this.attr(''),
       qty: this.number(null).nullable(),
       checked: this.boolean(false),
-      creationDate: this.attr(null),
+      createdAt: this.attr(null),
+      updatedAt: this.attr(null),
       listId: this.attr(null),
 
       list: this.belongsTo(List, 'listId')
