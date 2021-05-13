@@ -9,7 +9,7 @@ module.exports = {
   pwa: {
     name: 'Our Shopping List',
     themeColor: '#80cbc4',
-    msTileColor: '#000000',
+    msTileColor: '#ffffff',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     workboxPluginMode: 'GenerateSW',
