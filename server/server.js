@@ -213,6 +213,7 @@ app.get('/lists/:id', (req, res) => {
 });
 
 app.post('/lists', (req, res) => {
+  delete req.body._id;
   const doc = new List(req.body);
   console.debug('POST LIST', doc);
 
@@ -316,6 +317,7 @@ app.get('/lists/:listId/items', (req, res) => {
 });
 
 app.post('/items', (req, res) => {
+  delete req.body._id;
   const doc = new Item(req.body);
   console.debug('POST ITEM', doc);
 
