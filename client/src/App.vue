@@ -22,15 +22,19 @@
       <v-navigation-drawer
         app
         v-model="sidebarMenu"
-        color="grey lighten-4"
-        >
+        color="grey lighten-4">
         <v-list dense>
           <v-list-item>
             <v-list-item-action>
               <v-icon @click.stop="sidebarMenu = !sidebarMenu">mdi-chevron-left</v-icon>
             </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title></v-list-item-title>
+            <v-list-item-content class="text-right align-self-start">
+              <v-list-item-title>
+                <v-img
+                  :src="require('./assets/logo.svg')"
+                  width="40"
+                  height="40"/>
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
