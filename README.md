@@ -11,6 +11,8 @@ OSL is a simple **shared list** application. Typical uses include **shopping
 lists** of course, and any other small todo-list that needs to be used
 **collaboratively**.
 
+<p align="center"><img src="doc/osl-usage.gif" height="400" /></p>
+
 The current implementation provides the following features:
 - **Multiple lists**
 - **Real-time sync** between users
