@@ -13,7 +13,7 @@ export default {
             || store.state.version.currentBuildId != data.buildId
           ) {
             console.warn('Server version mismatch, reloading app.')
-            //localStorage.removeItem('oslAppState') // Not used yet
+            store.dispatch('clearLocalState')
             window.location.reload()
           }
         }

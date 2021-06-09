@@ -291,13 +291,18 @@ export default {
       }
     })
   },
+  beforeRouteLeave(to, from, next) {
+    this.listModel = null
+    next()
+  },
   watch: {
     currentListId: function (val) {
       this.initList(val, 2)
+      this.cancelSearch()
     },
     editionItemModel: function (val) {
       this.showEditItemDialog = !!val
-    }
+    },
   },
   methods: {
     //

@@ -45,7 +45,7 @@
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-          
+
           <template v-for="list in lists">
             <v-list-item
               :key="list._id"

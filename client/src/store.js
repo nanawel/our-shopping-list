@@ -33,14 +33,6 @@ const store = new Vuex.Store({
     VuexORM.install(database),
     localStoragePlugin
   ],
-  mutations: {
-    initializeStore() {
-      const data = localStorage.getItem('oslAppState')
-      if (data) {
-        this.replaceState(Object.assign(this.state, JSON.parse(data)))
-      }
-    }
-  }
 })
 
 export default store

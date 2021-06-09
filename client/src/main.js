@@ -55,17 +55,18 @@ new Vue({
       this.isOnline = navigator.onLine
     }
   },
-  created() {
-    // Add delay to prevent display/sizing issue with Swiper and Drawer
-    // setTimeout(() => {
-    //   store.commit('initializeStore');
-    // }, 1000)
-  },
   mounted() {
     this.setTitle()
     window.addEventListener('online', this.updateConnectionStatus)
     window.addEventListener('offline', this.updateConnectionStatus)
     this.updateConnectionStatus()
-  },
-})
 
+    // Redirect to the list present in localStorage if any
+    if (this.$store.state.list.currentList) {
+      const currentListPath = `/list/${this.$store.state.list.currentList._id}`
+      if (this.$router.currentRoute.path != currentListPath) {
+        this.$router.push(currentListPath)
+      }
+    }
+  }
+})
