@@ -408,10 +408,16 @@ export default {
     onItemSwipeOutLeft(item) {
       console.log("LIST.onItemSwipeOutLeft", item);
       this.toggleCheckedItem(item)
+      if (this.searchString) {
+        this.cancelSearch()
+      }
     },
     onItemSwipeOutRight(item) {
       console.log("LIST.onItemSwipeOutRight", item);
       this.toggleCheckedItem(item)
+      if (this.searchString) {
+        this.cancelSearch()
+      }
     },
     onTouchHoldItem(item) {
       const self = this
@@ -423,6 +429,9 @@ export default {
     onClickItem(item) {
       if (this.searchString) {
         this.toggleCheckedItem(item)
+        if (this.searchString) {
+          this.cancelSearch()
+        }
       }
     },
     onDoubleClickItem(item) {
