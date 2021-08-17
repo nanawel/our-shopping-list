@@ -247,7 +247,7 @@ export default {
         if (self.listModel) {
           const q = self.itemQuery()
               .orderBy('checked')
-              .orderBy('name')
+              .orderBy(item => item.name.toUpperCase())
           if (self.debouncedSearchString) {
             q.where('name', (value) => containsIgnoreCase(value, self.debouncedSearchString))
           } else {
