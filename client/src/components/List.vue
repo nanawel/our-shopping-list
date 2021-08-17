@@ -156,6 +156,7 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce';
 import EmptyState from "./EmptyState";
 import ItemForm from "./ItemForm";
 import ItemView from "./Item";
@@ -185,7 +186,8 @@ export default {
         buttonText: "Close",
         buttonCallback: null,
       },
-      searchInputValue: null, // nullable, see also searchString (NOT nullable)
+      searchInputValue: null, // nullable, see also searchString and debouncedSearchString (NOT nullable)
+      debouncedSearchString: '',
       sock: null
     };
   },
@@ -240,13 +242,14 @@ export default {
     },
     items: {
       get: function () {
+        console.log('items.get()');
         const self = this
         if (self.listModel) {
           const q = self.itemQuery()
               .orderBy('checked')
               .orderBy('name')
-          if (self.searchString) {
-            q.where('name', (value) => containsIgnoreCase(value, self.searchString))
+          if (self.debouncedSearchString) {
+            q.where('name', (value) => containsIgnoreCase(value, self.debouncedSearchString))
           } else {
             if (self.displayMode === DISPLAY_MODE_UNCHECKED_ONLY) {
               q.where('checked', false)
@@ -303,6 +306,10 @@ export default {
     editionItemModel: function (val) {
       this.showEditItemDialog = !!val
     },
+    searchInputValue: debounce(function (val) {
+      console.log('watch searchInputValue');
+      this.debouncedSearchString = val
+    }, 400, {trailing: true}),
   },
   methods: {
     //
