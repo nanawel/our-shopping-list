@@ -1,4 +1,8 @@
 **/node_modules
 .history/
+.gitignore
+.gitlab-ci.yml
+.vscode/
 doc/
-docker/
+Makefile
+tmp/
