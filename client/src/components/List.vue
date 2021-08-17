@@ -242,7 +242,6 @@ export default {
     },
     items: {
       get: function () {
-        console.log('items.get()');
         const self = this
         if (self.listModel) {
           const q = self.itemQuery()
@@ -307,7 +306,6 @@ export default {
       this.showEditItemDialog = !!val
     },
     searchInputValue: debounce(function (val) {
-      console.log('watch searchInputValue');
       this.debouncedSearchString = val
     }, 400, {trailing: true}),
   },
