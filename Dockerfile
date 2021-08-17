@@ -27,12 +27,12 @@ LABEL org.label-schema.build-date="${build_date}"
 ENV APP_VERSION=${build_version}
 ENV APP_BUILD_ID=${build_id}
 
+WORKDIR /app
+EXPOSE 8080
+
 COPY ./server/ /app
 COPY --from=client-builder /app/client /app/client
-
-WORKDIR /app
 
 RUN yarn install --production
 
 CMD [ "node", "server.js" ]
-EXPOSE 8080
