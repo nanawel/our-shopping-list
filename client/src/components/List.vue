@@ -323,12 +323,14 @@ export default {
           .then(() => {
             self.listModel = List.query()
               .with("items")
-              .find(listId);
+              .find(listId)
           })
           .catch((e) => {
             console.error(e);
             if (e.response && e.response.status == 404) {
-              self.$snackbar.msg("List not found!");
+              // List seems to be invalid, so remove it from local repository
+              List.delete(listId)
+              self.$snackbar.msg("List not found!")
             } else {
               if (retryCount) {
                 setTimeout(function() {
@@ -336,10 +338,10 @@ export default {
                 }, 1000)
                 return
               }
-              self.$snackbar.msg("Could not load list :(");
+              self.$snackbar.msg("Could not load list :(")
             }
-            self.$router.push("/list/new");
-            self.initList();
+            self.$router.push("/list/new")
+            self.initList()
           });
       } else {
         this.listModel = new List();
