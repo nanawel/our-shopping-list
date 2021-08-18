@@ -30,10 +30,20 @@
             </v-list-item-action>
             <v-list-item-content class="text-right align-self-start">
               <v-list-item-title>
-                <v-img
-                  :src="require('./assets/logo.svg')"
-                  width="40"
-                  height="40"/>
+                <v-row>
+                  <v-col class="col-sm-6">
+                    <v-img
+                      class="app-logo"
+                      :src="require('./assets/logo.svg')"
+                      width="40"
+                      height="40"/>
+                  </v-col>
+                  <v-col class="col-sm-6">
+                    <v-icon class="force-refresh-btn"
+                            @click="onRefreshClick"
+                            size="40">mdi-refresh</v-icon>
+                  </v-col>
+                </v-row>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -116,6 +126,11 @@ export default {
   },
   mounted() {
     List.api().get("/lists")
+  },
+  methods: {
+    onRefreshClick: function () {
+      document.location.reload();
+    }
   }
 };
 </script>
