@@ -464,6 +464,30 @@ app.delete('/items/:id', (req, res) => {
   });
 });
 
+// ============================================================================
+// HEALTHCHECK
+// ============================================================================
+
+app.get('/healthcheck', (req, res) => {
+  const listPromise = List
+    .find({})
+    .limit(1)
+    .exec();
+  const itemPromise = Item
+    .find({})
+    .limit(1)
+    .exec();
+
+  Promise.all([listPromise, itemPromise]).then(() => {
+    res.status(200)
+      .json({success: true});
+  }).catch(reason => {
+    console.error('[500]', reason);
+    res.status(500)
+      .json({success: false, reason: reason});
+  });
+});
+
 /*****************************************************************************/
 
 app.use(function (err, req, res, next) {
