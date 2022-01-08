@@ -48,31 +48,41 @@
 
     <template v-else>
       <div class="list-wrapper">
-        <v-list :id="listContainerId">
-          <empty-state v-show="items.length === 0 && this.searchString">
-            <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
-            <template v-slot:title>No results</template>
-            <template v-slot:subtitle>Click "Add" to create a new item.</template>
-          </empty-state>
+        <empty-state v-show="items.length === 0 && this.searchString">
+          <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
+          <template v-slot:title>No results</template>
+          <template v-slot:subtitle>Click "Add" to create a new item.</template>
+        </empty-state>
 
-          <template v-for="(item, idx) in items">
-            <ItemView
-              :key="item._id"
-              :id="`item-${item._id}`"
+        <DynamicScroller
+          :items="items"
+          :min-item-size="60"
+          key-field="_id"
+          class="scroller"
+        >
+          <template v-slot:default="{ item, index, active }">
+            <DynamicScrollerItem
               :item="item"
-              v-touch:touchhold="onTouchHoldItem(item)"
-              @click="onClickItem(item)"
-              @editClick="onEditItem(item)"
-              @doubleClick="onDoubleClickItem(item)"
-              @swipeOutLeft="onItemSwipeOutLeft(item)"
-              @swipeOutRight="onItemSwipeOutRight(item)"/>
-            <v-divider :key="idx"/>
+              :active="active"
+              :data-index="index"
+            >
+              <ItemView
+                :key="item._id"
+                :item="item"
+                v-touch:touchhold="onTouchHoldItem(item)"
+                @click="onClickItem(item)"
+                @editClick="onEditItem(item)"
+                @doubleClick="onDoubleClickItem(item)"
+                @swipeOutLeft="onItemSwipeOutLeft(item)"
+                @swipeOutRight="onItemSwipeOutRight(item)"/>
+              <v-divider :key="index"/>
+            </DynamicScrollerItem>
           </template>
-        </v-list>
+        </DynamicScroller>
       </div>
     </template>
 
-    <div class="list-footer" v-if="shouldShowBottomSearchBar">
+    <div class="list-footer align-end" v-if="shouldShowBottomSearchBar">
       <v-footer class="pa-0">
         <v-container class="pa-0">
           <v-row class="ma-0">
@@ -156,12 +166,16 @@
 </template>
 
 <script>
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+
 import debounce from 'lodash.debounce';
+import { DynamicScroller } from 'vue-virtual-scroller'
 import EmptyState from "./EmptyState";
 import ItemForm from "./ItemForm";
 import ItemView from "./Item";
 import List from "../models/List";
 import Item from "../models/Item";
+
 
 import { containsIgnoreCase } from "../libs/compare-strings";
 
@@ -170,6 +184,7 @@ import { DISPLAY_MODE_UNCHECKED_ONLY } from '../constants'
 export default {
   name: "List",
   components: {
+    DynamicScroller,
     ItemForm,
     EmptyState,
     ItemView,

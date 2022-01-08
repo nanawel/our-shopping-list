@@ -1,6 +1,6 @@
 <template>
   <div
-    :id="id"
+    :id="containerId"
     class="swiper-container"
     v-bind:key="item._id">
     <div class="swiper-wrapper">
@@ -46,17 +46,13 @@ export default {
   components: {
   },
   props: [
-    'id',
     'item'
   ],
   data: function() {
     return {
+      'containerId': `item-${this._uid}`,
       'swiper': null
     }
-  },
-  computed: {
-  },
-  created: function() {
   },
   watch: {
     'item.checked': function() {
@@ -64,8 +60,9 @@ export default {
     }
   },
   mounted() {
+    const self = this
     this.$nextTick(function() {
-      this.initSwiper()
+      self.initSwiper()
     })
   },
   methods: {
@@ -75,8 +72,7 @@ export default {
         this.swiper.destroy(true)
       }
 
-      const el = '#' + this.id
-
+      const el = '#' + this.containerId
       this.swiper = new Swiper(el, {
         initialSlide: this.item.checked ? 0 : 1,
         resistanceRatio: 0,
