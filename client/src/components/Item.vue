@@ -4,7 +4,7 @@
     class="swiper-container"
     v-bind:key="item._id">
     <div class="swiper-wrapper">
-      <v-list-item 
+      <v-list-item
         v-if="!item.checked"
         class="swiper-slide swiper-slide-left"></v-list-item>
       <v-list-item
@@ -23,14 +23,14 @@
           <v-list-item-subtitle v-else class="empty-qty">(no quantity specified)</v-list-item-subtitle>
           <v-list-item-subtitle>{{ String(item.details).substring(0, 30) }}</v-list-item-subtitle>
         </v-list-item-content>
-        
+
         <v-list-item-action class="d-none d-sm-flex">
           <v-btn @click="onEditClick" icon>
             <v-icon color="primary">mdi-pencil</v-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>
-      <v-list-item 
+      <v-list-item
         v-if="item.checked"
         class="swiper-slide swiper-slide-right"></v-list-item>
     </div>
@@ -64,7 +64,9 @@ export default {
     }
   },
   mounted() {
-    this.initSwiper()
+    this.$nextTick(function() {
+      this.initSwiper()
+    })
   },
   methods: {
     initSwiper() {
@@ -120,6 +122,9 @@ export default {
   .v-list-item__action {
     margin-right: 3rem;
   }
+}
+.swiper-container {
+  overflow-x: hidden;
 }
 .swiper-slide-left,
 .swiper-slide-right {
