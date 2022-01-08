@@ -17,7 +17,7 @@
     "sass": "^1.32.8",
     "sass-loader": "10.1.1",
     "socket.io-client": "^4.0.1",
-    "swiper": "^6.5.0",
+    "swiper": "^7.4.1",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
     "vue2-touch-events": "^3.2.1",
