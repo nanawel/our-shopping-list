@@ -466,13 +466,15 @@ export default {
     onDeleteItemForm() {
       console.log('onDeleteItemForm()', this.editionItemModel);
       const self = this
-      if (this.editionItemModel._id) {
-        this.deleteItem(this.editionItemModel, function() {
-          self.closeEditItemForm()
-        })
-      } else {
-        // Just cancel
-        this.closeEditItemForm()
+      if (confirm('Are you sure?')) {
+        if (this.editionItemModel._id) {
+          this.deleteItem(this.editionItemModel, function () {
+            self.closeEditItemForm()
+          })
+        } else {
+          // Just cancel
+          this.closeEditItemForm()
+        }
       }
     },
     closeEditItemForm() {

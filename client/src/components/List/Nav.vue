@@ -18,7 +18,7 @@
         color="white"
         hide-details
       ></v-checkbox>
-    
+
     <v-dialog
       v-model="showEditListDialog"
       persistent
@@ -135,7 +135,7 @@ export default {
           self.$snackbar.msg("Could not delete list :(")
         })
     },
-    
+
     onEditClick() {
       this.editionListModel = this.listModel
     },
@@ -154,10 +154,12 @@ export default {
     },
     onDeleteListForm() {
       const self = this
-      this.deleteList(this.editionListModel, function() {
-        self.closeEditListForm()
-        self.$router.push('/')
-      })
+      if (confirm('Are you sure?')) {
+        this.deleteList(this.editionListModel, function() {
+          self.closeEditListForm()
+          self.$router.push('/')
+        })
+      }
     },
     closeEditListForm() {
       this.editionListModel = null
