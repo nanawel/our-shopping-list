@@ -144,7 +144,7 @@ export default {
 </style>
 
 <style lang="scss">
-html {
-  overflow-y: hidden;
+html, body {
+  overflow: hidden;
 }
 </style>

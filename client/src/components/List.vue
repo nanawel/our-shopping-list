@@ -85,7 +85,7 @@
     </template>
 
     <div class="list-footer align-end" v-if="shouldShowBottomSearchBar">
-      <v-footer class="px-4 px-md-20">
+      <v-footer class="px-6 px-md-20">
         <v-text-field
           name="new_item_name"
           id="new_item_name"
@@ -96,17 +96,17 @@
           clearable
           v-model="searchInputValue"
           autocapitalize="sentences"
-          class="pa-0 mx-4"
+          class="pr-4"
           @keydown.enter="submitSearchInput"/>
         <v-btn
-          class="mt-1 mx-4"
+          class=""
           depressed
           small
           color="primary"
           :disabled="this.searchString.length === 0"
           @click="submitSearchInput">
           <v-icon>mdi-plus</v-icon>
-          Add
+          <span>Add</span>
         </v-btn>
       </v-footer>
     </div>
@@ -500,6 +500,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~vuetify/src/styles/settings/_variables';
+
 [v-cloak] {
   display: none;
 }
@@ -526,5 +528,13 @@ export default {
 .v-footer {
   height: 80px;
   z-index: 5;
+
+  .v-btn__content {
+    @media #{map-get($display-breakpoints, 'md-and-down')} {
+      > span {
+        display: none;
+      }
+    }
+  }
 }
 </style>
