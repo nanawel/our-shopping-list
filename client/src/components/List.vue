@@ -58,7 +58,9 @@
           :items="items"
           :min-item-size="60"
           key-field="_id"
+          id="list-scroller"
           class="scroller"
+          page-mode>
         >
           <template v-slot:default="{ item, index, active }">
             <DynamicScrollerItem
@@ -520,6 +522,9 @@ export default {
   min-height: calc(100vh - (64px + 80px));
   max-height: calc(100vh - (64px + 80px));
 }
+.scroller {
+  height: 100%;
+}
 .list-footer {
   position: relative;
   bottom: 0;
@@ -529,11 +534,5 @@ export default {
 .v-footer {
   height: 80px;
   z-index: 5;
-}
-</style>
-
-<style lang="scss">
-html {
-  overflow-y: hidden;
 }
 </style>

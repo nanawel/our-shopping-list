@@ -77,7 +77,9 @@
       </v-navigation-drawer>
 
       <v-main>
-        <v-container fluid>
+        <v-container
+          id="router-view-container"
+          fluid>
           <router-view></router-view>
         </v-container>
       </v-main>
@@ -136,4 +138,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#router-view-container {
+  padding: .5rem 0 0 0;
+}
+</style>
+
+<style lang="scss">
+html {
+  overflow-y: hidden;
+}
 </style>
