@@ -85,37 +85,29 @@
     </template>
 
     <div class="list-footer align-end" v-if="shouldShowBottomSearchBar">
-      <v-footer class="pa-0">
-        <v-container class="pa-0">
-          <v-row class="ma-0">
-            <v-col class="pa-2" cols="8">
-              <v-text-field
-                name="new_item_name"
-                id="new_item_name"
-                ref="searchInput"
-                label="Search or add a new item"
-                autocomplete="off"
-                prepend-icon="mdi-magnify"
-                clearable
-                v-model="searchInputValue"
-                autocapitalize="sentences"
-                class="pa-0"
-                @keydown.enter="submitSearchInput"/>
-            </v-col>
-            <v-col cols="4" class="pa-2 d-flex justify-left align-center">
-              <v-btn
-                class="mt-1"
-                depressed
-                small
-                color="primary"
-                :disabled="this.searchString.length === 0"
-                @click="submitSearchInput">
-                <v-icon>mdi-plus</v-icon>
-                Add
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-container>
+      <v-footer class="px-4 px-md-20">
+        <v-text-field
+          name="new_item_name"
+          id="new_item_name"
+          ref="searchInput"
+          label="Search or add a new item"
+          autocomplete="off"
+          prepend-icon="mdi-magnify"
+          clearable
+          v-model="searchInputValue"
+          autocapitalize="sentences"
+          class="pa-0 mx-4"
+          @keydown.enter="submitSearchInput"/>
+        <v-btn
+          class="mt-1 mx-4"
+          depressed
+          small
+          color="primary"
+          :disabled="this.searchString.length === 0"
+          @click="submitSearchInput">
+          <v-icon>mdi-plus</v-icon>
+          Add
+        </v-btn>
       </v-footer>
     </div>
 
