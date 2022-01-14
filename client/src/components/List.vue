@@ -528,6 +528,7 @@ export default {
 .v-footer {
   height: 80px;
   z-index: 5;
+  flex-wrap: nowrap;
 
   .v-btn__content {
     @media #{map-get($display-breakpoints, 'md-and-down')} {
