@@ -38,7 +38,7 @@
 
     <template v-else-if="shouldDisplayAllChecked">
       <div class="list-wrapper">
-        <empty-state>
+        <empty-state key="empty-all-checked">
           <template v-slot:icon-name>mdi-check-outline</template>
           <template v-slot:title>{{ isListReady ? listModel.name : '' }}</template>
           <template v-slot:subtitle>All items are checked!</template>
@@ -48,7 +48,8 @@
 
     <template v-else>
       <div class="list-wrapper">
-        <empty-state v-show="items.length === 0 && this.searchString">
+        <empty-state key="empty-no-results"
+                     v-show="items.length === 0 && this.searchString">
           <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
           <template v-slot:title>No results</template>
           <template v-slot:subtitle>Click "Add" to create a new item.</template>
@@ -60,7 +61,7 @@
           key-field="_id"
           id="list-scroller"
           class="scroller"
-          page-mode>
+          page-mode
         >
           <template v-slot:default="{ item, index, active }">
             <DynamicScrollerItem
@@ -170,7 +171,6 @@ import ItemView from "./Item";
 import List from "../models/List";
 import Item from "../models/Item";
 
-
 import { containsIgnoreCase } from "../libs/compare-strings";
 
 import { DISPLAY_MODE_UNCHECKED_ONLY } from '../constants'
@@ -243,10 +243,20 @@ export default {
     },
     shouldDisplayAllChecked: {
       get: function() {
+        console.log(
+          !this.searchString,
+          this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY,
+          this.allItems.length,
+          this.uncheckedItems.length
+        );
+        console.log('shouldDisplayAllChecked = ', !this.searchString
+          && this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY
+          && this.allItems.length !== 0
+          && this.uncheckedItems.length === 0);
         return !this.searchString
           && this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY
           && this.allItems.length !== 0
-          && this.itemQuery().where('checked', false).get().length === 0
+          && this.uncheckedItems.length === 0
       }
     },
     items: {
@@ -274,6 +284,15 @@ export default {
       get: function () {
         if (this.listModel) {
           return this.itemQuery().get()
+        } else {
+          return []
+        }
+      },
+    },
+    uncheckedItems: {
+      get: function () {
+        if (this.listModel) {
+          return this.itemQuery().where('checked', false).get()
         } else {
           return []
         }
