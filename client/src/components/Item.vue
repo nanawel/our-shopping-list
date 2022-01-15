@@ -21,7 +21,7 @@
           <v-list-item-title>{{ item.name }}</v-list-item-title>
           <v-list-item-subtitle v-if="item.qty">{{ item.qty }}</v-list-item-subtitle>
           <v-list-item-subtitle v-else class="empty-qty">(no quantity specified)</v-list-item-subtitle>
-          <v-list-item-subtitle>{{ String(item.details).substring(0, 30) }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ item.details }}</v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-action class="d-none d-sm-flex">
@@ -111,8 +111,6 @@ export default {
 
   .v-list-item__subtitle.empty-qty {
     display: none;
-    /*font-style: italic;
-    color: lightgray;*/
   }
 
   .v-list-item__action {
