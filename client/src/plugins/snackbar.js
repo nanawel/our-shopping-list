@@ -15,7 +15,7 @@ export default {
           { root: true }
         )
       },
-      close: function () {
+      close: function() {
         store.commit(
           'snackbar/close',
           { root: true }

@@ -1,22 +1,19 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app v-cloak>
+      <v-progress-linear
+        id="global-top-progress-bar"
+        :active="showGlobalProgressBar"
+        absolute
+        indeterminate
+        />
+
       <v-app-bar
         app
         color="teal lighten-3"
         hide-on-scroll>
         <v-app-bar-nav-icon @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
         <router-view name="navigation"></router-view>
-        <!-- <v-toolbar-title>
-          <span><slot name="main-title">{{ $root.title }}</slot></span>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <div>
-          <v-checkbox
-              color="white"
-              hide-details
-            ></v-checkbox>
-        </div> -->
       </v-app-bar>
 
       <v-navigation-drawer
@@ -91,7 +88,8 @@
 
         <Snackbar></Snackbar>
 
-        <v-overlay :value="showNotConnectedOverlay">
+        <v-overlay
+          :value="showNotConnectedOverlay">
           <v-btn color="error">
             Not connected
           </v-btn>
@@ -114,7 +112,7 @@ export default {
   }),
   computed: {
     lists: {
-      get: function () {
+      get: function() {
         return List.query()
           .orderBy("name")
           .get()
@@ -124,13 +122,19 @@ export default {
       get: function() {
         return !this.$root.isOnline
       }
+    },
+    showGlobalProgressBar: {
+      get: function() {
+        // Must use this syntax here because the module may not be available yet at startup
+        return this.$store.getters['loadingProgress/isLoadingInProgress']
+      }
     }
   },
   mounted() {
     List.api().get("/lists")
   },
   methods: {
-    onRefreshClick: function () {
+    onRefreshClick: function() {
       document.location.reload();
     }
   }
@@ -138,6 +142,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#global-top-progress-bar {
+  z-index: 100;
+}
 #router-view-container {
   padding: .5rem 0 0 0;
 }

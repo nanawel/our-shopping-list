@@ -100,7 +100,6 @@
           class="pr-4"
           @keydown.enter="submitSearchInput"/>
         <v-btn
-          class=""
           depressed
           small
           color="primary"
@@ -157,6 +156,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-overlay
+      :value="loadingOverlay">
+      <v-progress-circular
+        indeterminate
+        size="64"/>
+    </v-overlay>
   </div>
 </template>
 
@@ -183,7 +189,7 @@ export default {
     EmptyState,
     ItemView,
   },
-  data: function () {
+  data: function() {
     return {
       listContainerId: 'list-container',
       editionItemModel: null,
@@ -197,12 +203,13 @@ export default {
       },
       searchInputValue: null, // nullable, see also searchString and debouncedSearchString (NOT nullable)
       debouncedSearchString: '',
-      sock: null
-    };
+      sock: null,
+      loadingOverlay: false
+    }
   },
   computed: {
     currentListId: {
-      get: function () {
+      get: function() {
         return this.$route.params.listId && this.$route.params.listId != "new"
           ? this.$route.params.listId
           : null;
@@ -243,16 +250,6 @@ export default {
     },
     shouldDisplayAllChecked: {
       get: function() {
-        console.log(
-          !this.searchString,
-          this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY,
-          this.allItems.length,
-          this.uncheckedItems.length
-        );
-        console.log('shouldDisplayAllChecked = ', !this.searchString
-          && this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY
-          && this.allItems.length !== 0
-          && this.uncheckedItems.length === 0);
         return !this.searchString
           && this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY
           && this.allItems.length !== 0
@@ -260,7 +257,7 @@ export default {
       }
     },
     items: {
-      get: function () {
+      get: function() {
         const self = this
         if (self.listModel) {
           const q = self.itemQuery()
@@ -281,7 +278,7 @@ export default {
       },
     },
     allItems: {
-      get: function () {
+      get: function() {
         if (this.listModel) {
           return this.itemQuery().get()
         } else {
@@ -290,7 +287,7 @@ export default {
       },
     },
     uncheckedItems: {
-      get: function () {
+      get: function() {
         if (this.listModel) {
           return this.itemQuery().where('checked', false).get()
         } else {
@@ -344,6 +341,7 @@ export default {
       console.log('initList', listId);
       const self = this
       if (listId) {
+        this.loadingOverlay = true
         List.api()
           .get("/lists/" + listId)
           .then(() => {
@@ -368,7 +366,10 @@ export default {
             }
             self.$router.push("/list/new")
             self.initList()
-          });
+          })
+          .finally(() => {
+            self.loadingOverlay = false
+          })
       } else {
         this.listModel = new List();
       }
@@ -496,7 +497,7 @@ export default {
       const self = this
       if (confirm('Are you sure?')) {
         if (this.editionItemModel._id) {
-          this.deleteItem(this.editionItemModel, function () {
+          this.deleteItem(this.editionItemModel, function() {
             self.closeEditItemForm()
           })
         } else {

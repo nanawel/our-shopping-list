@@ -79,7 +79,7 @@ export default {
         speed: 150
       })
 
-      this.swiper.on('transitionEnd', function () {
+      this.swiper.on('transitionEnd', function() {
       if (!self.item.checked && this.activeIndex === 0) {
         self.$emit('swipeOutRight', self.item, self)
       }
