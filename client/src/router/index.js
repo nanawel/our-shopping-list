@@ -2,11 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // Components
-import Home from '../components/Home.vue'
-import NavDefault from '../components/Nav/Default.vue'
-import List from '../components/List.vue'
-import NavList from '../components/List/Nav.vue'
-import About from '../components/About.vue'
+// Using closures instead of "import ... from ..." to speed up initial loading
+const Home = () => import('../components/Home.vue')
+const NavDefault = () => import('../components/Nav/Default.vue')
+const List = () => import('../components/List.vue')
+const NavList = () => import('../components/List/Nav.vue')
+const About = () => import('../components/About.vue')
 
 Vue.use(VueRouter)
 
