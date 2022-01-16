@@ -54,6 +54,7 @@ push_image_tagged:
 push_image_public:
   stage: release
   script:
+    - docker login -u "${PUBLIC_REGISTRY_USERNAME}" -p "${PUBLIC_REGISTRY_TOKEN}"
     - time docker pull ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker tag ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA} ${CONTAINER_PUBLIC_IMAGE}:latest
     - time docker push ${CONTAINER_PUBLIC_IMAGE}:latest
@@ -63,5 +64,5 @@ push_image_public:
     - shell
     - docker
   rules:
-    - if: '$CONTAINER_RELEASE_IMAGE != $CONTAINER_PUBLIC_IMAGE'
     - when: manual
+      if: '$CONTAINER_RELEASE_IMAGE != $CONTAINER_PUBLIC_IMAGE'
