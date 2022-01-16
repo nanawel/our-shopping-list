@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <v-app v-cloak>
       <v-progress-linear
         id="global-top-progress-bar"
