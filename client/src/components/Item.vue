@@ -105,6 +105,15 @@ export default {
 .v-list-item {
   user-select: none;
 
+  /*
+   * Just to make "text-overflow: ellipsis" work correctly with small devices and long texts.
+   * See https://chenhuijing.com/blog/flexbox-and-padding/
+   */
+  &::after {
+    content: '';
+    padding: 8px;
+  }
+
   &.checked {
     opacity: .65;
   }
