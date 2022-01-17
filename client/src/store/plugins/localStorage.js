@@ -16,6 +16,8 @@ export default store => {
 
   // Sync localStorage with each update of the store's state
   store.subscribe((mutation, state) => {
-    localStorage.setItem('oslAppState', JSON.stringify(state))
+    if (store.$app && !store.$app.isReloading) {
+      localStorage.setItem('oslAppState', JSON.stringify(state))
+    }
   })
 }

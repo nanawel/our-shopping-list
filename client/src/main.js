@@ -36,7 +36,7 @@ Vue.use(wsService, { sock, store })
 import router from './router'
 
 // Init app
-new Vue({
+const $app = new Vue({
   el: '#app',
   render: h => h(App),
   vuetify,
@@ -44,7 +44,8 @@ new Vue({
   router,
   data: {
     title: null,
-    isOnline: null
+    isOnline: null,
+    isReloading: false
   },
   watch: {
     title: function(v) {
@@ -74,3 +75,4 @@ new Vue({
     }
   }
 })
+store.$app = $app
