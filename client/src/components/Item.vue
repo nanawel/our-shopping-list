@@ -111,7 +111,7 @@ export default {
    */
   &::after {
     content: '';
-    padding: 16px; /* = .v-list-item margin-left (and still the right margin will be 8px less than the left's */
+    padding: 0 16px; /* = .v-list-item margin-left (and still the right margin will be 8px less than the left's */
   }
 
   &.checked {
