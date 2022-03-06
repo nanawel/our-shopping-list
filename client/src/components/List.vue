@@ -305,14 +305,14 @@ export default {
   },
   created() {
     const self = this
-    this.initList(this.currentListId, 2)
+    this.initList(this.currentListId)
 
     this.$ws.on('connect', () => {
       if (self.listModel) {
         self.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
-              self.initList(this.currentListId, 2)
+              self.initList(this.currentListId)
             }
           })
       }
@@ -324,7 +324,7 @@ export default {
   },
   watch: {
     currentListId: function (val) {
-      this.initList(val, 2)
+      this.initList(val)
       this.cancelSearch()
     },
     editionItemModel: function (val) {
@@ -338,8 +338,10 @@ export default {
     //
     // LIST
     initList(listId, retryCount) {
-      console.log('initList', listId);
       const self = this
+      retryCount = typeof retryCount !== 'number' ? 2 : retryCount
+
+      console.log('initList | listId = ', listId, 'retryCount = ', retryCount);
       if (listId) {
         this.loadingOverlay = true
         List.api()
