@@ -13,11 +13,13 @@
       </template>
     </nav-default>
 
-    <v-checkbox
-        v-model="showAll"
-        color="white"
-        hide-details
-      ></v-checkbox>
+    <v-btn
+        id="btn-toggle-history-mode"
+        @click="onToggleHistoryMode"
+        :class="showHistory ? 'active' : 'inactive'"
+        icon>
+      <v-icon>mdi-history</v-icon>
+    </v-btn>
 
     <v-dialog
       v-model="showEditListDialog"
@@ -66,7 +68,7 @@
 </template>
 
 <script>
-import { DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_ALL } from '../../constants'
+import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '../../constants'
 
 import NavDefault from '../Nav/Default'
 import ListForm from "../ListForm";
@@ -94,14 +96,14 @@ export default {
         return this.$store.state.list.currentList
       }
     },
-    showAll: {
+    showHistory: {
       get: function() {
-        return this.$store.state.list.displayMode === DISPLAY_MODE_ALL
+        return this.$store.state.list.displayMode === DISPLAY_MODE_CHECKED_HISTORY
       },
       set: function(val) {
         this.$store.commit(
           'list/setDisplayMode',
-          { mode: val ? DISPLAY_MODE_ALL : DISPLAY_MODE_UNCHECKED_ONLY },
+          { mode: val ? DISPLAY_MODE_CHECKED_HISTORY : DISPLAY_MODE_UNCHECKED_ONLY },
           { root: true }
         )
       }
@@ -113,6 +115,10 @@ export default {
     }
   },
   methods: {
+    onToggleHistoryMode: function() {
+      this.showHistory = !this.showHistory
+    },
+
     saveList(list, callback) {
       console.log("saveList()", list)
       callback = callback || function() {}
@@ -169,7 +175,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~vuetify/src/styles/styles';
+
 .wrapper {
   display: contents;  // Fix appbar display by forcing ignore
+}
+
+#btn-toggle-history-mode {
+  &.active {
+    background-color: map-get($material-theme, "background");
+  }
 }
 </style>

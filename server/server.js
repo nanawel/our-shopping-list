@@ -87,6 +87,10 @@ const ItemSchema = new mongoose.Schema({
   checked: {
     type: Boolean,
     default: false
+  },
+  lastCheckedAt: {
+    type: Date,
+    default: false
   }
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },

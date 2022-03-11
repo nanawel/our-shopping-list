@@ -36,7 +36,7 @@
       </div>
     </template>
 
-    <template v-else-if="shouldDisplayAllChecked">
+    <template v-else-if="shouldDisplayAllCheckedMessage">
       <div class="list-wrapper">
         <empty-state key="empty-all-checked">
           <template v-slot:icon-name>mdi-check-outline</template>
@@ -179,7 +179,7 @@ import Item from "../models/Item";
 
 import { containsIgnoreCase } from "../libs/compare-strings";
 
-import { DISPLAY_MODE_UNCHECKED_ONLY } from '../constants'
+import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '../constants'
 
 export default {
   name: "List",
@@ -248,7 +248,7 @@ export default {
         return this.allItems.length === 0
       }
     },
-    shouldDisplayAllChecked: {
+    shouldDisplayAllCheckedMessage: {
       get: function() {
         return !this.searchString
           && this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY
@@ -261,8 +261,15 @@ export default {
         const self = this
         if (self.listModel) {
           const q = self.itemQuery()
-              .orderBy('checked')
-              .orderBy(item => item.name.toUpperCase())
+
+          if (this.displayMode === DISPLAY_MODE_CHECKED_HISTORY) {
+              q.where('checked', true)
+                .orderBy(item => item.lastCheckedAt || 0, 'desc') // Need to handle specifically undefined values as 0
+          } else {
+              q.orderBy('checked')
+                .orderBy(item => item.name.toUpperCase())
+          }
+
           if (self.debouncedSearchString) {
             q.where('name', (value) => containsIgnoreCase(value, self.debouncedSearchString))
           } else {
@@ -434,7 +441,7 @@ export default {
         })
     },
     toggleCheckedItem(item) {
-      item.checked = !item.checked
+      item.toggleChecked()
       this.saveItem(item)
     },
     submitSearchInput() {
