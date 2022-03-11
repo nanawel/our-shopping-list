@@ -385,9 +385,7 @@ app.patch('/items/:id', (req, res) => {
   Item.findById(id, function (err, item) {
     if (err) throw err;
     if (item) {
-      for (f in req.body) {
-        item[f] = req.body[f];
-      }
+      updateItem(item, req.body)
       item.save(function (err) {
         if (err) throw err;
         res.status(200)
@@ -410,35 +408,46 @@ app.patch('/items/:id', (req, res) => {
   });
 });
 
-app.patch('/lists/:listId/items/:itemId', (req, res) => {
-  const itemId = req.params.itemId;
-  console.debug('PATCH ITEM', itemId, req.body);
+const updateItem = function(item, newData) {
+  const origChecked = item.checked
+  const newChecked = newData.checked
+  for (f in newData) {
+    item[f] = newData[f];
+  }
+  if (newChecked && !origChecked) {
+    item.lastCheckedAt = new Date().toISOString()
+  }
+}
 
-  Item.findOneAndUpdate({
-    _id: itemId
-  }, req.body, {
-    new: true
-  }, function (err, doc) {
-    if (err) throw err;
-    if (doc) {
-      res.status(200)
-        .json(doc);
-      notifyModelUpdate('Item', doc);
-
-      List.findById(doc.listId, function (err, list) {
-        list.markModified('items');
-        list.save();
-      });
-    } else {
-      res.status(404)
-        .json({
-          error: {
-            message: "Item not found"
-          }
-        });
-    }
-  });
-});
+// app.patch('/lists/:listId/items/:itemId', (req, res) => {
+//   const itemId = req.params.itemId;
+//   console.debug('PATCH ITEM', itemId, req.body);
+//
+//   Item.findOneAndUpdate({
+//     _id: itemId
+//   }, req.body, {
+//     new: true
+//   }, function (err, doc) {
+//     if (err) throw err;
+//     if (doc) {
+//       res.status(200)
+//         .json(doc);
+//       notifyModelUpdate('Item', doc);
+//
+//       List.findById(doc.listId, function (err, list) {
+//         list.markModified('items');
+//         list.save();
+//       });
+//     } else {
+//       res.status(404)
+//         .json({
+//           error: {
+//             message: "Item not found"
+//           }
+//         });
+//     }
+//   });
+// });
 
 app.delete('/items/:id', (req, res) => {
   const id = req.params.id;

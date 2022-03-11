@@ -267,8 +267,8 @@ export default {
                 .orderBy(item => item.lastCheckedAt || 0, 'desc') // Need to handle specifically undefined values as 0
           } else {
               q.orderBy('checked')
-                .orderBy(item => item.name.toUpperCase())
           }
+          q.orderBy(item => item.name.toUpperCase())
 
           if (self.debouncedSearchString) {
             q.where('name', (value) => containsIgnoreCase(value, self.debouncedSearchString))

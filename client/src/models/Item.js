@@ -23,10 +23,6 @@ class Item extends AbstractModel {
   }
 
   toggleChecked() {
-    if (!this.checked) {
-      this.lastCheckedAt = new Date().toISOString()
-    }
-    console.log('Item.toggleChecked()', this.name, !this.checked, this.lastCheckedAt);
     this.checked = !this.checked
   }
 }
