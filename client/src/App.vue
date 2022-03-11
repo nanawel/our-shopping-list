@@ -151,6 +151,8 @@ export default {
 </style>
 
 <style lang="scss">
+@import '~typeface-roboto/index.css';
+
 html, body {
   overflow: hidden;
 }
