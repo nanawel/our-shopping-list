@@ -10,14 +10,17 @@ export default {
       context.commit('reset')
 
       // See https://axios-http.com/docs/interceptors
+
       axios.interceptors.request.use(function (config) {
         context.commit('notifyRequest')
         return config
       })
-      axios.interceptors.response.use(function (response) {
+
+      const onComplete = function (response) {
         context.commit('notifyResponse')
         return response
-      })
+      }
+      axios.interceptors.response.use(onComplete, onComplete)
     }
   },
   mutations: {
