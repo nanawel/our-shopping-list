@@ -32,6 +32,9 @@
           v-model="model.details"
           :rows="3">
         </v-textarea>
+        <div v-if="model.lastCheckedAt">
+          <v-icon>mdi-calendar-check</v-icon> Last checked: {{ new Date(model.lastCheckedAt).toLocaleString() }}
+        </div>
       </form>
     </template>
   </div>

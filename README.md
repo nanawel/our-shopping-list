@@ -28,6 +28,7 @@ But, at this date it lacks the following:
   **all** lists to **all** users/clients, since there's no concept of
   "user account" yet)_
 - Full PWA support with offline mode and deferred sync
+- Internationalisation (i18n)
 
 ## Screenshots
 
