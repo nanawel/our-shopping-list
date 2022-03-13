@@ -19,6 +19,9 @@ config:
 upd:
 	docker-compose up -d $(args)
 
+upd-force:
+	docker-compose up -d --force-recreate $(args)
+
 stop:
 	docker-compose stop
 

@@ -10,7 +10,7 @@
   ],
   "description": "Simple shared shopping list running on Node",
   "license": "AGPL-3.0-or-later",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
