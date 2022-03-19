@@ -1,0 +1,101 @@
+{
+  "app-name": "Our Shopping List",
+  "back": "Back",
+  "close": "Close",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "save": "Save",
+  "confirmation-question": "Are you sure?",
+  "errors": {
+    "board": {
+      "invalid-name": "Invalid board name!"
+    },
+    "list": {
+      "load": "Could not load list :(",
+      "save": "Could not save list :(",
+      "delete": "Could not delete list :("
+    },
+    "item": {
+      "load": "Could not load item :(",
+      "save": "Could not save item :(",
+      "delete": "Could not delete item :("
+    },
+    "overlay": {
+      "not-connected": "Not connected"
+    }
+  },
+  "notice": {
+    "application-updated-alert": "The application has been updated.\nThis page will now be reloaded automatically."
+  },
+  "menu-nav": {
+    "item": {
+      "new-list": "New list...",
+      "about": "About"
+    }
+  },
+  "home": {
+    "title": "Open Board",
+    "subtitle": "A board holds one to several lists.",
+    "input": {
+      "board-name": "Name"
+    },
+    "button": {
+      "open-board": "Open board"
+    },
+    "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
+  },
+  "board-home-nav": {
+    "title": "Create a shopping list",
+    "subtitle": "You will then be able to share it with relatives and work with it.",
+    "button": "Create a list"
+  },
+  "list": {
+    "not-found": {
+      "title": "List not found!",
+      "subtitle": "This list does not exist (anymore?).",
+      "button": "Create a list"
+    },
+    "new": {
+      "title": "Name your list",
+      "input-placeholder": "My shopping list...",
+      "button": "Create"
+    },
+    "new-item": {
+      "subtitle": "This list is empty.",
+      "button": "New item"
+    },
+    "all-checked": {
+      "subtitle": "All items are checked!"
+    },
+    "no-results": {
+      "title": "No results",
+      "subtitle": "Click \"Add\" to create a new item."
+    },
+    "search-bar": {
+      "input-label": "Search or add a new item",
+      "add-button": "Add"
+    }
+  },
+  "list-nav": {
+
+  },
+  "item": {
+    "empty-qty-label": "(no quantity specified)",
+    "input": {
+      "name": "Name",
+      "qty": "Quantity",
+      "details": "Details"
+    },
+    "last-checked-label": "Last checked: %{date}"
+  },
+  "edit-list-dialog": {
+    "existing-title": "Edit List",
+    "new-title": "(New List)",
+    "name-input": "Name",
+    "creation-date-label": "Creation Date"
+  },
+  "edit-item-dialog": {
+    "existing-title": "Edit Item",
+    "new-title": "New Item"
+  }
+}

@@ -1,54 +1,59 @@
-const {app} = require('../app');
-const {notifyModelUpdate, notifyModelDelete} = require('../ws');
+const {router} = require('../app');
 
 const ListModel = require('./model');
 
-// NOTICE: Should *not* be available in production mode when accounts will be implemented
-app.get('/lists', (req, res) => {
-  ListModel
-    .find({})
-    //.populate('items')
-    .exec(function (err, docs) {
-      if (err) throw err;
-      console.log(docs)
-      res.status(200)
-        .json(docs);
-    });
-});
-
-app.head('/lists/:id', (req, res) => {
+router.head('/lists/:id', (req, res, next) => {
   const id = req.params.id;
 
   ListModel
-    .findOne({
-      _id: id
-    })
-    .exec(function (err, doc) {
-      if (err) throw err;
+    .findById(id)
+    .exec()
+    .then((doc) => {
       if (doc) {
-        console.log(doc._id, 'updatedAt =', doc.updatedAt);
+        console.log('HEAD LIST', doc._id, 'updatedAt =', doc.updatedAt);
         res.status(200)
           .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
+          .set('Osl-Entity-Type', ListModel.modelName)
+          .set('Osl-Entity-Id', doc._id)
           .end();
       } else {
         res.status(404)
           .end();
       }
-    });
+    })
+    .catch(next);
 });
 
-app.get('/lists/:id', (req, res) => {
+router.get('/lists', (req, res, next) => {
+  if (process.env.APP_ENV === 'production') {
+    res.status(403)
+      .json({
+        error: {
+          message: "Not available in production mode!"
+        }
+      });
+  } else {
+    ListModel
+      .find({})
+      .then((docs) => {
+        console.log('GET LISTS', docs)
+        res.status(200)
+          .json(docs);
+      })
+      .catch(next);
+  }
+});
+
+router.get('/lists/:id', (req, res, next) => {
   const id = req.params.id;
 
   ListModel
-    .findOne({
-      _id: id
-    })
+    .findById(id)
     .populate('items')
-    .exec(function (err, doc) {
-      if (err) throw err;
+    .exec()
+    .then((doc) => {
       if (doc) {
-        console.log(doc);
+        console.log('GET LIST', doc);
         res.status(200)
           .json(doc);
       } else {
@@ -59,69 +64,75 @@ app.get('/lists/:id', (req, res) => {
             }
           });
       }
-    });
+    })
+    .catch(next);
 });
 
-app.post('/lists', (req, res) => {
+router.post('/lists', (req, res, next) => {
   delete req.body._id;
-  const doc = new ListModel(req.body);
-  console.debug('POST LIST', doc);
+  const list = new ListModel(req.body);
+  console.debug('POST LIST', list);
 
-  doc.save(function (err) {
-    if (err) throw err;
-    res.status(201)
-      .json(doc);
-    notifyModelUpdate('List', doc);
-  });
+  list.save()
+    .then((list) => {
+      res.status(201)
+        .json(list);
+    })
+    .catch(next);
 });
 
-app.patch('/lists/:id', (req, res) => {
+router.patch('/lists/:id', (req, res, next) => {
   const id = req.params.id;
   console.debug('PATCH LIST', id, req.body);
 
-  ListModel.findById(id, function (err, list) {
-    if (err) throw err;
-    if (list) {
-      for (f in req.body) {
-        list[f] = req.body[f];
+  ListModel
+    .findById(id)
+    .exec()
+    .then((list) => {
+      if (list) {
+        for (f in req.body) {
+          list[f] = req.body[f];
+        }
+        list.save()
+          .then((list) => {
+            res.status(200)
+              .json(list);
+          })
+          .catch(next);
+      } else {
+        res.status(404)
+          .json({
+            error: {
+              message: "List not found"
+            }
+          });
       }
-      list.save(function (err) {
-        if (err) throw err;
-        res.status(200)
-          .json(list);
-        notifyModelUpdate('List', list);
-      })
-    } else {
-      res.status(404)
-        .json({
-          error: {
-            message: "List not found"
-          }
-        });
-    }
-  });
+    })
+    .catch(next);
 });
 
-app.delete('/lists/:id', (req, res) => {
+router.delete('/lists/:id', (req, res, next) => {
   const id = req.params.id;
   console.debug('DELETE LIST', id, req.body);
 
-  ListModel.findById(id, function (err, list) {
-    if (err) throw err;
-    if (list) {
-      list.delete(function (err) {
-        if (err) throw err;
-        res.status(200)
-          .json(list);
-        notifyModelDelete('List', list);
-      })
-    } else {
-      res.status(404)
-        .json({
-          error: {
-            message: "List not found"
-          }
-        });
-    }
-  });
+  ListModel
+    .findById(id)
+    .then((list) => {
+      if (list) {
+        list.delete()
+          .then(() => {
+            res.status(200)
+              .json(list);
+          })
+          .catch(next);
+      } else {
+        res.status(404)
+          .json({
+            error: {
+              message: "List not found"
+            }
+          });
+      }
+    })
+    .catch(next);
 });

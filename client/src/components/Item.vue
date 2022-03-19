@@ -20,7 +20,7 @@
         <v-list-item-content>
           <v-list-item-title>{{ item.name }}</v-list-item-title>
           <v-list-item-subtitle v-if="item.qty">{{ item.qty }}</v-list-item-subtitle>
-          <v-list-item-subtitle v-else class="empty-qty">(no quantity specified)</v-list-item-subtitle>
+          <v-list-item-subtitle v-else class="empty-qty">{{ $t('item.empty-qty-label') }}</v-list-item-subtitle>
           <v-list-item-subtitle>{{ item.details }}</v-list-item-subtitle>
         </v-list-item-content>
 
@@ -98,7 +98,7 @@ export default {
       this.$emit('editClick', this.item)
     }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

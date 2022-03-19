@@ -3,4 +3,7 @@
 .idea
 .history
 .vscode
+/docker-compose.dev.override.yml
+/server/.env
 /tmp/
+/docker-compose.dev.override.yml

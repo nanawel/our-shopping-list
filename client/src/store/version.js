@@ -1,13 +1,15 @@
 export default {
   namespaced: true,
   state: () => ({
-    currentVersion: null,
-    currentBuildId: null
+    version: null,
+    buildId: null,
+    configHash: null
   }),
   mutations: {
     setCurrentVersion (state, payload) {
-      state.currentVersion = payload.version
-      state.currentBuildId = payload.buildId
+      state.version = payload.version
+      state.buildId = payload.buildId
+      state.configHash = payload.configHash
     },
   }
 }

@@ -1,28 +1,36 @@
-const mongoose = require("mongoose");
+const MONGODB_HOST = process.env.MONGODB_HOST || 'mongodb';
+const MONGODB_PORT = process.env.MONGODB_PORT || '27017';
+const MONGODB_DB = process.env.MONGODB_DB     || 'osl';
 
-const express = require("express");
+const mongoose = require('mongoose');
+const express = require('express');
+const compression = require('compression');
+const {VUE_APP_SINGLEBOARD_MODE} = require('./config');
 
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 app.disable('x-powered-by');
+app.use(compression());
 app.use(express.static('client/dist'));
 app.use(express.json());
-
-const MONGODB_HOST = process.env.MONGODB_HOST || 'mongodb';
-const MONGODB_PORT = process.env.MONGODB_PORT || '27017';
-const MONGODB_DB = process.env.MONGODB_DB     || 'osl';
 
 mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-// https://mongoosejs.com/docs/deprecations.html
-mongoose.set('useFindAndModify', false);
+
+const router = express.Router();
+app.use(router);
+
+if (VUE_APP_SINGLEBOARD_MODE) {
+  require('./middleware/singleboard')(router);
+}
 
 module.exports = {
   app,
   http,
-  io
+  io,
+  router
 };
