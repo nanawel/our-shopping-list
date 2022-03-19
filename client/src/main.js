@@ -1,14 +1,14 @@
 // Vue
 import Vue from 'vue'
-import App from './App.vue'
+import App from '@/App.vue'
 
 Vue.config.productionTip = false
 
 // Vuetify
-import vuetify from './plugins/vuetify'
+import vuetify from '@/plugins/vuetify'
 
 // Vuex / Vuex ORM / Init store
-import store from './store'
+import store from '@/store'
 
 // Vue Touch Events
 import Vue2TouchEvents from 'vue2-touch-events'
@@ -19,21 +19,21 @@ import VueVirtualScroller from 'vue-virtual-scroller'
 Vue.use(VueVirtualScroller)
 
 // Snackbar
-import snackbarPlugin from './plugins/snackbar'
+import snackbarPlugin from '@/plugins/snackbar'
 Vue.use(snackbarPlugin, { store })
 
 // Repository
-import repositoryPlugin from './plugins/repository'
+import repositoryPlugin from '@/plugins/repository'
 Vue.use(repositoryPlugin, { store })
 
 // ORM Socket Service
-import wsService from './service/ws'
+import wsService from '@/service/ws'
 import { io } from 'socket.io-client'
 const sock = io()
 Vue.use(wsService, { sock, store })
 
 // Vue Router
-import router from './router'
+import router from '@/router'
 
 // Init app
 const $app = new Vue({
@@ -47,6 +47,11 @@ const $app = new Vue({
     isOnline: null,
     isReloading: false
   },
+  computed: {
+    isMultiBoardMode: function () {
+      return !!parseInt(process.env.MULTIBOARD_MODE)
+    }
+  },
   watch: {
     title: function(v) {
       document.title = v
@@ -58,6 +63,9 @@ const $app = new Vue({
     },
     updateConnectionStatus: function() {
       this.isOnline = navigator.onLine
+    },
+    forceRefresh: function() {
+      document.location.reload()
     }
   },
   mounted() {
@@ -66,13 +74,13 @@ const $app = new Vue({
     window.addEventListener('offline', this.updateConnectionStatus)
     this.updateConnectionStatus()
 
-    // Redirect to the list present in localStorage if any
+    /*// Redirect to the list present in localStorage if any
     if (this.$store.state.list.currentList) {
       const currentListPath = `/list/${this.$store.state.list.currentList._id}`
       if (this.$router.currentRoute.path != currentListPath) {
         this.$router.push(currentListPath)
       }
-    }
+    }*/
   }
 })
 store.$app = $app

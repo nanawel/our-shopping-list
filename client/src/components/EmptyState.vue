@@ -1,7 +1,7 @@
 <template>
   <div class="empty-state">
     <v-icon size="8em" color="teal lighten-3">
-      <slot name="icon-name">mdi-format-list-bulleted-type</slot>
+      <slot name="icon-name">mdi-checkbox-blank-circle-outline</slot>
     </v-icon>
     <h1>
       <slot name="title">TITLE</slot>
@@ -9,6 +9,9 @@
     <span class="text--secondary">
       <slot name="subtitle">Subtitle</slot>
     </span>
+    <div>
+      <slot name="content"></slot>
+    </div>
     <div class="btn-wrapper">
       <slot name="buttons"></slot>
     </div>

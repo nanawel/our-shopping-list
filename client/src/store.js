@@ -10,10 +10,10 @@ VuexORM.use(VuexORMAxios, { axios })
 
 
 // Modules
-import version from './store/version'
-import snackbar from './store/snackbar'
-import list from './store/list'
-import loadingProgress from './store/loadingProgress'
+import version from '@/store/version'
+import snackbar from '@/store/snackbar'
+import list from '@/store/list'
+import loadingProgress from '@/store/loadingProgress'
 
 // Models registration
 import List from '@/models/List'
@@ -24,7 +24,7 @@ database.register(List)
 database.register(Item)
 
 // Local Storage Plugin
-import localStoragePlugin from './store/plugins/localStorage'
+import localStoragePlugin from '@/store/plugins/localStorage'
 
 // Create Vuex Store and register database through Vuex ORM
 const store = new Vuex.Store({

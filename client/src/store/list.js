@@ -1,4 +1,4 @@
-import { DISPLAY_MODE_UNCHECKED_ONLY } from '../constants'
+import { DISPLAY_MODE_UNCHECKED_ONLY } from '@/constants'
 
 export default {
   namespaced: true,

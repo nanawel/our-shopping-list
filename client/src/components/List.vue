@@ -174,12 +174,12 @@ import { DynamicScroller } from 'vue-virtual-scroller'
 import EmptyState from "./EmptyState";
 import ItemForm from "./ItemForm";
 import ItemView from "./Item";
-import List from "../models/List";
-import Item from "../models/Item";
+import List from "@/models/List";
+import Item from "@/models/Item";
 
-import { containsIgnoreCase } from "../libs/compare-strings";
+import { containsIgnoreCase } from "@/libs/compare-strings";
 
-import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '../constants'
+import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 
 export default {
   name: "List",

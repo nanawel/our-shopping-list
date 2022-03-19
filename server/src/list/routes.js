@@ -1,10 +1,10 @@
-const {app} = require('../app');
+const {router} = require('../app');
 const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
 const ListModel = require('./model');
 
 // NOTICE: Should *not* be available in production mode when accounts will be implemented
-app.get('/lists', (req, res) => {
+router.get('/lists', (req, res) => {
   ListModel
     .find({})
     //.populate('items')
@@ -16,7 +16,7 @@ app.get('/lists', (req, res) => {
     });
 });
 
-app.head('/lists/:id', (req, res) => {
+router.head('/lists/:id', (req, res) => {
   const id = req.params.id;
 
   ListModel
@@ -37,7 +37,7 @@ app.head('/lists/:id', (req, res) => {
     });
 });
 
-app.get('/lists/:id', (req, res) => {
+router.get('/lists/:id', (req, res) => {
   const id = req.params.id;
 
   ListModel
@@ -62,7 +62,7 @@ app.get('/lists/:id', (req, res) => {
     });
 });
 
-app.post('/lists', (req, res) => {
+router.post('/lists', (req, res) => {
   delete req.body._id;
   const doc = new ListModel(req.body);
   console.debug('POST LIST', doc);
@@ -75,7 +75,7 @@ app.post('/lists', (req, res) => {
   });
 });
 
-app.patch('/lists/:id', (req, res) => {
+router.patch('/lists/:id', (req, res) => {
   const id = req.params.id;
   console.debug('PATCH LIST', id, req.body);
 
@@ -102,7 +102,7 @@ app.patch('/lists/:id', (req, res) => {
   });
 });
 
-app.delete('/lists/:id', (req, res) => {
+router.delete('/lists/:id', (req, res) => {
   const id = req.params.id;
   console.debug('DELETE LIST', id, req.body);
 

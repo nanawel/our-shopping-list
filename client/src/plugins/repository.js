@@ -1,5 +1,5 @@
-import Item from '../models/Item'
-import List from '../models/List'
+import Item from '@/models/Item'
+import List from '@/models/List'
 
 export default {
   install: (Vue, { store }) => {

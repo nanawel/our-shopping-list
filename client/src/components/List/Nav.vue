@@ -68,10 +68,10 @@
 </template>
 
 <script>
-import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '../../constants'
+import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '@/constants'
 
-import NavDefault from '../Nav/Default'
-import ListForm from "../ListForm";
+import NavDefault from '@/components/Nav/Default'
+import ListForm from "@/components/ListForm";
 
 export default {
   name: "List-Nav",

@@ -16,6 +16,7 @@
     "lodash.debounce": "^4.0.8",
     "sass": "^1.32.8",
     "sass-loader": "10.1.1",
+    "slugify": "^1.6.5",
     "socket.io-client": "^4.0.1",
     "swiper": "^7.4.1",
     "typeface-roboto": "^1.1.13",

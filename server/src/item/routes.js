@@ -1,11 +1,11 @@
-const {app} = require('../app');
+const {router} = require('../app');
 const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
 const ListModel = require('../list/model');
 const ItemModel = require('./model');
 
 // NOTICE: Should *not* be available in production mode
-app.get('/items', (req, res) => {
+router.get('/items', (req, res) => {
   ItemModel.find({}, function (err, docs) {
     if (err) throw err;
     console.log(docs)
@@ -14,7 +14,7 @@ app.get('/items', (req, res) => {
   });
 });
 
-app.get('/lists/:listId/items', (req, res) => {
+router.get('/lists/:listId/items', (req, res) => {
   const listId = req.params.listId;
 
   ListModel.findOne({
@@ -40,7 +40,7 @@ app.get('/lists/:listId/items', (req, res) => {
   });
 });
 
-app.post('/items', (req, res) => {
+router.post('/items', (req, res) => {
   delete req.body._id;
   const doc = new ItemModel(req.body);
   console.debug('POST ITEM', doc);
@@ -67,7 +67,7 @@ app.post('/items', (req, res) => {
   }
 });
 
-app.post('/lists/:listId/items', (req, res) => {
+router.post('/lists/:listId/items', (req, res) => {
   const listId = req.params.listId;
 
   ListModel.findById(listId, function (err, list) {
@@ -98,7 +98,7 @@ app.post('/lists/:listId/items', (req, res) => {
   });
 });
 
-app.patch('/items/:id', (req, res) => {
+router.patch('/items/:id', (req, res) => {
   const id = req.params.id;
   console.debug('PATCH ITEM', id, req.body);
 
@@ -139,7 +139,7 @@ const updateItem = function(item, newData) {
   }
 }
 
-app.delete('/items/:id', (req, res) => {
+router.delete('/items/:id', (req, res) => {
   const id = req.params.id;
   console.debug('DELETE ITEM', id, req.body);
   ItemModel.findById(id, function (err, item) {

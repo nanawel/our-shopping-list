@@ -26,6 +26,7 @@
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.18",
     "nodemon": "^2.0.7",
+    "slugify": "^1.6.5",
     "socket.io": "^3.1.2",
     "uuid": "^8.3.2"
   }
