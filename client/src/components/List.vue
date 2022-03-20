@@ -174,7 +174,6 @@ import { DynamicScroller } from 'vue-virtual-scroller'
 import EmptyState from "./EmptyState";
 import ItemForm from "./ItemForm";
 import ItemView from "./Item";
-import List from "@/models/List";
 import Item from "@/models/Item";
 
 import { containsIgnoreCase } from "@/libs/compare-strings";
@@ -210,8 +209,8 @@ export default {
   computed: {
     currentListId: {
       get: function() {
-        return this.$route.params.listId && this.$route.params.listId != "new"
-          ? this.$route.params.listId
+        return this.listModel && this.listModel._id
+          ? this.listModel._id
           : null;
       },
     },
@@ -219,9 +218,9 @@ export default {
       get: function() {
         return this.$store.state.list.currentList
       },
-      set: function(val) {
-        this.$store.commit('list/setCurrentList', { list: val })
-      }
+      // set: function(val) {
+      //   this.$store.commit('list/setCurrentList', { list: val })
+      // }
     },
     isListReady: {
       get: function() {
@@ -312,7 +311,6 @@ export default {
   },
   created() {
     const self = this
-    this.initList(this.currentListId)
 
     this.$ws.on('connect', () => {
       if (self.listModel) {
@@ -325,13 +323,8 @@ export default {
       }
     })
   },
-  beforeRouteLeave(to, from, next) {
-    this.listModel = null
-    next()
-  },
   watch: {
-    currentListId: function (val) {
-      this.initList(val)
+    currentListId: function () {
       this.cancelSearch()
     },
     editionItemModel: function (val) {
@@ -342,47 +335,6 @@ export default {
     }, 400, {trailing: true}),
   },
   methods: {
-    //
-    // LIST
-    initList(listId, retryCount) {
-      const self = this
-      retryCount = typeof retryCount !== 'number' ? 2 : retryCount
-
-      console.log('initList | listId = ', listId, 'retryCount = ', retryCount);
-      if (listId) {
-        this.loadingOverlay = true
-        List.api()
-          .get("/lists/" + listId)
-          .then(() => {
-            self.listModel = List.query()
-              .with("items")
-              .find(listId)
-          })
-          .catch((e) => {
-            console.error(e);
-            if (e.response && e.response.status == 404) {
-              // List seems to be invalid, so remove it from local repository
-              List.delete(listId)
-              self.$snackbar.msg("List not found!")
-            } else {
-              if (retryCount) {
-                setTimeout(function() {
-                  self.initList(listId, Math.max(0, retryCount - 1))
-                }, 1000)
-                return
-              }
-              self.$snackbar.msg("Could not load list :(")
-            }
-            self.$router.push("/list/new")
-            self.initList()
-          })
-          .finally(() => {
-            self.loadingOverlay = false
-          })
-      } else {
-        this.listModel = new List();
-      }
-    },
     saveList() {
       console.log("saveList()", this.listModel);
       const self = this

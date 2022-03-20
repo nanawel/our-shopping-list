@@ -9,7 +9,7 @@
 
     <h2>Source / Issues</h2>
     <p><a href="https://github.com/nanawel/our-shopping-list">https://github.com/nanawel/our-shopping-list</a></p>
-    
+
     <h2>License</h2>
     <p>AGPL-3.0</p>
     <!--
@@ -18,6 +18,10 @@
       TODO: Dump dependencies
     </div>
     -->
+
+    <hr/>
+
+    <v-btn @click="onBackClick">Back</v-btn>
   </div>
 </template>
 
@@ -34,6 +38,11 @@ export default {
       get: function() {
         return this.$store.state.version.currentBuildId
       }
+    }
+  },
+  methods: {
+    onBackClick: function () {
+      history.back()
     }
   },
   created() {

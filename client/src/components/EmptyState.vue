@@ -1,7 +1,7 @@
 <template>
   <div class="empty-state">
     <v-icon size="8em" color="teal lighten-3">
-      <slot name="icon-name">mdi-checkbox-blank-circle-outline</slot>
+      <slot name="icon-name"></slot>
     </v-icon>
     <h1>
       <slot name="title">TITLE</slot>

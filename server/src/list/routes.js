@@ -3,19 +3,6 @@ const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
 const ListModel = require('./model');
 
-// NOTICE: Should *not* be available in production mode when accounts will be implemented
-router.get('/lists', (req, res) => {
-  ListModel
-    .find({})
-    //.populate('items')
-    .exec(function (err, docs) {
-      if (err) throw err;
-      console.log(docs)
-      res.status(200)
-        .json(docs);
-    });
-});
-
 router.head('/lists/:id', (req, res) => {
   const id = req.params.id;
 

@@ -59,7 +59,7 @@ const $app = new Vue({
   },
   methods: {
     setTitle: function(title) {
-      this.title = title || 'Our Shopping List'
+      this.title = title || process.env.APP_TITLE || 'Our Shopping List'
     },
     updateConnectionStatus: function() {
       this.isOnline = navigator.onLine

@@ -16,6 +16,7 @@ require('./src/ws');
 // ROUTES
 // ============================================================================
 
+require('./src/board/routes');
 require('./src/list/routes');
 require('./src/item/routes');
 

@@ -10,7 +10,7 @@ const BoardSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    default: () => slugify(this.name),
+    immutable: true,
     required: true
   },
   name: {
@@ -29,16 +29,14 @@ BoardSchema.virtual('lists', {
   localField: '_id',
   foreignField: 'boardId',
 });
-BoardSchema.pre('save', function() {
-  // < v1.0.2 format compatibility hook
-  if (!this.createdAt && this.creationDate) {
-    this.createdAt = this.creationDate;
+BoardSchema.pre('validate', function() {
+  if (!this.name && this.slug) {
+    this.name = slug;
   }
-  this.set('creationDate', undefined, { strict: false });
-  if (!this.updatedAt && this.lastModificationDate) {
-    this.updatedAt = this.lastModificationDate;
+  if (!this.slug && this.name) {
+    this.slug = this.name;
   }
-  this.set('lastModificationDate', undefined, { strict: false });
+  this.slug = slugify(this.slug);
 });
 const BoardModel = mongoose.model('Board', BoardSchema);
 

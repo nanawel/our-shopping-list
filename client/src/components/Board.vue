@@ -5,7 +5,7 @@
       color="teal lighten-3"
       hide-on-scroll>
       <v-app-bar-nav-icon @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
-      <router-view name="navigation"></router-view>
+      <router-view name="boardNavigation"></router-view>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -38,9 +38,9 @@
         </v-list-item>
       </v-list>
       <v-list>
-        <v-list-item to="boardHomeRoute">
+        <v-list-item :to="{ name: 'board' }">
           <v-list-item-icon>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>mdi-clipboard-list-outline</v-icon>
           </v-list-item-icon>
           <v-list-item-title v-text="boardModel.name || 'Home'"></v-list-item-title>
         </v-list-item>
@@ -48,7 +48,7 @@
         <template v-for="list in lists">
           <v-list-item
             :key="list._id"
-            :to="`/list/${list._id}`">
+            :to="{ name: 'boardList', params: { listId: list._id } }">
             <v-list-item-icon>
               <v-icon>mdi-format-list-bulleted-type</v-icon>
             </v-list-item-icon>
@@ -69,7 +69,7 @@
       <v-container
         id="router-view-container"
         fluid>
-        <router-view name="board"></router-view>
+        <router-view name="boardContent"></router-view>
       </v-container>
     </v-main>
   </div>
@@ -86,27 +86,22 @@ export default {
     sidebarMenu: true
   }),
   computed: {
-    currentBoardId: {
-      get: function() {
-        return this.$route.params.boardId
-          ? this.$route.params.boardId
-          : null;
-      },
-    },
     boardModel: {
       get: function() {
-        return this.$store.state.list.currentBoard
+        return this.$store.state.board.currentBoard || {}
       },
-      set: function(val) {
-        this.$store.commit('list/setCurrentBoard', { board: val })
-      }
     },
     lists: {
       get: function () {
-        return List.query()
-          .where('boardId', this.currentBoardId)
-          .orderBy("name")
-          .get()
+        console.log('GET LISTS', this.boardModel._id)
+        if (this.boardModel._id) {
+          return List.query()
+            .where('boardId', this.boardModel._id)
+            .orderBy("name")
+            .get()
+        } else {
+          return []
+        }
       }
     }
   },
@@ -115,9 +110,6 @@ export default {
       this.$root.forceRefresh()
     }
   },
-  mounted() {
-    List.api().get("/lists")
-  }
 }
 </script>
 

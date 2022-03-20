@@ -1,7 +1,9 @@
 <template>
   <div>
+    <div class="logo-container">
+      <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
+    </div>
     <empty-state>
-      <template v-slot:icon-name>mdi-clipboard-list-outline</template>
       <template v-slot:title>Open board</template>
       <template v-slot:subtitle>A board holds one to several lists.</template>
       <template v-slot:content>
@@ -11,13 +13,14 @@
               <v-text-field
                 name="name"
                 label="Name"
-                v-model="boardNameInput" />
+                v-model="boardNameInput"
+                @keydown.enter="onOpenBoard"/>
             </v-col>
           </v-row>
         </v-container>
       </template>
       <template v-slot:buttons>
-        <v-btn @click="onOpenBoardClick" color="primary">Open board</v-btn>
+        <v-btn @click="onOpenBoard" color="primary">Open board</v-btn>
       </template>
     </empty-state>
   </div>
@@ -39,7 +42,7 @@ export default {
     }
   },
   methods: {
-    onOpenBoardClick: function() {
+    onOpenBoard: function() {
       const slug = Board.getSlugFromName(this.boardNameInput)
       this.$router.push(`board/${slug}`)
     }
@@ -48,4 +51,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logo-container {
+  text-align: center;
+  margin-top: 2rem;
+}
 </style>

@@ -1,3 +1,4 @@
+import Board from '@/models/Board'
 import Item from '@/models/Item'
 import List from '@/models/List'
 
@@ -8,8 +9,9 @@ export default {
     }
 
     const schemaMapping = {
-      'Item': Item,
-      'List': List,
+      Board,
+      Item,
+      List,
     }
 
     Vue.prototype.$repository = {

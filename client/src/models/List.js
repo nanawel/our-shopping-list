@@ -1,4 +1,5 @@
 import AbstractModel from './AbstractModel'
+import Board from './Board'
 import Item from './Item'
 
 class List extends AbstractModel {
@@ -13,7 +14,9 @@ class List extends AbstractModel {
       creationDate: this.attr(''),
       createdAt: this.attr(null),
       updatedAt: this.attr(null),
+      boardId: this.attr(null),
 
+      board: this.belongsTo(Board, 'boardId'),
       items: this.hasMany(Item, 'listId')
     }
   }

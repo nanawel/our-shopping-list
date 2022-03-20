@@ -8,18 +8,20 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import axios from 'axios'
 VuexORM.use(VuexORMAxios, { axios })
 
-
 // Modules
 import version from '@/store/version'
 import snackbar from '@/store/snackbar'
+import board from '@/store/board'
 import list from '@/store/list'
 import loadingProgress from '@/store/loadingProgress'
 
 // Models registration
+import Board from '@/models/Board'
 import List from '@/models/List'
 import Item from '@/models/Item'
 
 const database = new VuexORM.Database()
+database.register(Board)
 database.register(List)
 database.register(Item)
 
@@ -31,6 +33,7 @@ const store = new Vuex.Store({
   modules: {
     version,
     snackbar,
+    board,
     list,
     loadingProgress
   },

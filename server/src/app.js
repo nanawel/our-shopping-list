@@ -24,8 +24,9 @@ mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
 mongoose.set('useFindAndModify', false);
 
 const router = express.Router()
-if (MULTIBOARD_MODE) {
-  app.use('/something', router)
+if (false) {
+  // TODO: Handle arbitrary route prefix
+  //app.use('/something', router)
 } else {
   app.use(router)
 }

@@ -23,6 +23,32 @@ router.head('/boards/:slug', (req, res) => {
     });
 });
 
+// router.get('/boards/:boardId', (req, res) => {
+//   const boardId = req.params.boardId;
+//
+//   BoardModel
+//     .findOne({
+//       _id: boardId
+//     })
+//     .populate('lists')
+//     .exec(function (err, doc) {
+//       if (err) throw err;
+//       if (doc) {
+//         console.log(doc);
+//         res.status(200)
+//           .json(doc);
+//       } else {
+//         const doc = new BoardModel(req.body);
+//         console.debug('GET BOARD (create new)', doc);
+//         doc.save(function (err) {
+//           if (err) throw err;
+//           res.status(201)
+//             .json(doc);
+//         });
+//       }
+//     });
+// });
+
 router.get('/boards/:slug', (req, res) => {
   const slug = req.params.slug;
 
@@ -59,4 +85,33 @@ router.post('/boards', (req, res) => {
     res.status(201)
       .json(doc);
   });
+});
+
+router.get('/boards/:slug/lists', (req, res) => {
+  const slug = req.params.slug;
+
+  BoardModel
+    .findOne({
+      slug: slug
+    })
+    .populate('lists')
+    .exec(function (err, doc) {
+      if (err) throw err;
+      if (doc) {
+        console.log(doc);
+        res.status(200)
+          .json(doc.lists);
+      } else {
+        let boardData = req.body;
+        boardData.name = boardData.name || slug;
+
+        const doc = new BoardModel(boardData);
+        console.debug('GET BOARD LISTS (create new)', doc);
+        doc.save(function (err) {
+          if (err) throw err;
+          res.status(201)
+            .json(doc.lists);
+        });
+      }
+    });
 });
