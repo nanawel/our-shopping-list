@@ -2,8 +2,6 @@ import { DISPLAY_MODE_UNCHECKED_ONLY } from '@/constants'
 import List from "@/models/List"
 
 const loadList = function ({state}, listId) {
-  console.log('loadList', ...arguments)
-
   if (listId === 'new') {
     state.currentList = new List()
   } else {
@@ -26,6 +24,8 @@ const loadList = function ({state}, listId) {
       })
   }
 }
+
+List.o
 
 export default {
   namespaced: true,

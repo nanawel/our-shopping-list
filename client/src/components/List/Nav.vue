@@ -159,7 +159,6 @@ export default {
       if (confirm('Are you sure?')) {
         this.deleteList(this.editionListModel, function() {
           self.closeEditListForm()
-          self.$router.push('/')
         })
       }
     },

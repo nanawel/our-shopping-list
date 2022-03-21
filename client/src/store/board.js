@@ -25,7 +25,7 @@ export default {
           || state.currentBoard.slug !== payload.slug
         ) {
           Board.api()
-            .get(`/boards/${payload.slug}`)
+            .get(`/boards/by-slug/${payload.slug}`)
             .then(() => {
               state.currentBoard = Board.query()
                 .with("lists")

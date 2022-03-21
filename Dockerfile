@@ -24,6 +24,7 @@ LABEL org.label-schema.vendor="Anaël Ollier <nanawel@gmail.com>"
 LABEL org.label-schema.version="${build_version}#${build_id}"
 LABEL org.label-schema.build-date="${build_date}"
 
+ENV APP_ENV=production
 ENV APP_VERSION=${build_version}
 ENV APP_BUILD_ID=${build_id}
 

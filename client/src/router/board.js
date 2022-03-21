@@ -46,6 +46,7 @@ export default (router) => {
       ]
     },
   ])
+
   router.beforeResolve((to, from, next) => {
     if (to.params.boardSlug) {
       store.commit('board/setCurrentBoard', { slug: to.params.boardSlug })

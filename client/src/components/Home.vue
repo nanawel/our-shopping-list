@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="logo-container">
+    <div class="wrapper">
+      <h1>Our Shopping List</h1>
       <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
     </div>
     <empty-state>
@@ -51,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logo-container {
+.wrapper {
   text-align: center;
   margin-top: 2rem;
 }

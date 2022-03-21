@@ -4,14 +4,22 @@ const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 const ListModel = require('../list/model');
 const ItemModel = require('./model');
 
-// NOTICE: Should *not* be available in production mode
 router.get('/items', (req, res) => {
-  ItemModel.find({}, function (err, docs) {
-    if (err) throw err;
-    console.log(docs)
-    res.status(200)
-      .json(docs);
-  });
+  if (process.env.APP_ENV === 'production') {
+    res.status(403)
+      .json({
+        error: {
+          message: "Not available in production mode!"
+        }
+      });
+  } else {
+    ItemModel.find({}, function (err, docs) {
+      if (err) throw err;
+      console.log(docs)
+      res.status(200)
+        .json(docs);
+    });
+  }
 });
 
 router.get('/lists/:listId/items', (req, res) => {
@@ -60,10 +68,20 @@ router.post('/items', (req, res) => {
       notifyModelUpdate('Item', doc);
     });
 
-    ListModel.findById(doc.listId, function (err, list) {
-      list.markModified('items');
-      list.save();
-    });
+    try {
+      ListModel.findById(doc.listId, function (err, list) {
+        list.markModified('items');
+        list.save();
+      });
+    }
+    catch (e) {
+      res.status(500)
+        .json({
+          error: {
+            message: e.message
+          }
+        })
+    }
   }
 });
 
@@ -84,9 +102,19 @@ router.post('/lists/:listId/items', (req, res) => {
         notifyModelUpdate('Item', item);
       });
 
-      // Force update list
-      list.markModified('items');
-      list.save();
+      try {
+        // Force update list
+        list.markModified('items');
+        list.save();
+      }
+      catch (e) {
+        res.status(500)
+          .json({
+            error: {
+              message: e.message
+            }
+          })
+      }
     } else {
       res.status(404)
         .json({
@@ -113,10 +141,20 @@ router.patch('/items/:id', (req, res) => {
         notifyModelUpdate('Item', item);
       });
 
-      ListModel.findById(item.listId, function (err, list) {
-        list.markModified('items');
-        list.save();
-      });
+      try {
+        ListModel.findById(item.listId, function (err, list) {
+          list.markModified('items');
+          list.save();
+        });
+      }
+      catch (e) {
+        res.status(500)
+          .json({
+            error: {
+              message: e.message
+            }
+          })
+      }
     } else {
       res.status(404)
         .json({
@@ -152,10 +190,20 @@ router.delete('/items/:id', (req, res) => {
         notifyModelDelete('Item', item);
       });
 
-      ListModel.findById(item.listId, function (err, list) {
-        list.markModified('items');
-        list.save();
-      });
+      try {
+        ListModel.findById(item.listId, function (err, list) {
+          list.markModified('items');
+          list.save();
+        });
+      }
+      catch (e) {
+        res.status(500)
+          .json({
+            error: {
+              message: e.message
+            }
+          })
+      }
     } else {
       res.status(404)
         .json({

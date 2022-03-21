@@ -2,6 +2,7 @@ const {router} = require('../app');
 const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
 const ListModel = require('./model');
+const ItemModel = require("../item/model");
 
 router.head('/lists/:id', (req, res) => {
   const id = req.params.id;
@@ -22,6 +23,24 @@ router.head('/lists/:id', (req, res) => {
           .end();
       }
     });
+});
+
+router.get('/lists', (req, res) => {
+  if (process.env.APP_ENV === 'production') {
+    res.status(403)
+      .json({
+        error: {
+          message: "Not available in production mode!"
+        }
+      });
+  } else {
+    ListModel.find({}, function (err, docs) {
+      if (err) throw err;
+      console.log(docs)
+      res.status(200)
+        .json(docs);
+    });
+  }
 });
 
 router.get('/lists/:id', (req, res) => {

@@ -207,13 +207,9 @@ export default {
     }
   },
   computed: {
-    currentListId: {
-      get: function() {
-        return this.listModel._id
-      },
-    },
     listModel: {
       get: function() {
+        console.log(this.$store.state.list.currentList);
         return this.$store.state.list.currentList
       }
     },
@@ -315,7 +311,8 @@ export default {
     })
   },
   watch: {
-    currentListId: function () {
+    'listModel._id': function () {
+      // Empty search field when switching list
       this.cancelSearch()
     },
     editionItemModel: function (val) {
@@ -439,7 +436,6 @@ export default {
     onSaveItemForm() {
       console.log('onSaveItemForm()', this.editionItemModel)
       this.saveItem(this.editionItemModel, function() {
-        //this.$snackbar.msg(`${this.editionItemModel.name} saved successfully.`)
         this.closeEditItemForm()
       }.bind(this))
     },
