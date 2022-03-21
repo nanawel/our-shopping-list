@@ -21,11 +21,13 @@
             <v-list-item-title>
               <v-row>
                 <v-col class="col-sm-6">
-                  <v-img
-                    class="app-logo"
-                    :src="require('@/assets/logo.svg')"
-                    width="40"
-                    height="40"/>
+                  <router-link :to="{name: 'home'}">
+                    <v-img
+                      class="app-logo"
+                      :src="require('@/assets/logo.svg')"
+                      width="40"
+                      height="40"/>
+                  </router-link>
                 </v-col>
                 <v-col class="col-sm-6">
                   <v-icon class="force-refresh-btn"
