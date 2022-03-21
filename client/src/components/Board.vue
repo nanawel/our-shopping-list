@@ -38,7 +38,8 @@
         </v-list-item>
       </v-list>
       <v-list>
-        <v-list-item :to="{ name: 'board' }">
+        <v-list-item :to="{ name: 'board' }"
+                     exact-path>
           <v-list-item-icon>
             <v-icon>mdi-clipboard-list-outline</v-icon>
           </v-list-item-icon>
@@ -48,7 +49,7 @@
         <template v-for="list in lists">
           <v-list-item
             :key="list._id"
-            :to="{ name: 'boardList', params: { listId: list._id } }">
+            :to="{ name: 'list', params: { listId: list._id } }">
             <v-list-item-icon>
               <v-icon>mdi-format-list-bulleted-type</v-icon>
             </v-list-item-icon>
@@ -76,7 +77,7 @@
 </template>
 
 <script>
-import List from "@/models/List";
+import List from "@/models/List"
 
 export default {
   name: "Board",
@@ -93,7 +94,6 @@ export default {
     },
     lists: {
       get: function () {
-        console.log('GET LISTS', this.boardModel._id)
         if (this.boardModel._id) {
           return List.query()
             .where('boardId', this.boardModel._id)

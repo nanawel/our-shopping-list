@@ -1,22 +1,22 @@
 <template>
   <div id="list-panel">
-    <template v-if="!isListPersisted">
+    <template v-if="isNewList">
       <v-container class="col-md-4 offset-md-4 text-center">
         <v-row>
           <v-col>
             <div v-cloak>
               <v-icon size="8em" color="teal lighten-3">mdi-format-list-bulleted-type</v-icon>
               <h1>Name your list</h1>
-              <template v-if="isListReady">
-                <v-text-field
-                  autocapitalize="sentences"
-                  v-model="listModel.name"
-                  placeholder="My shopping list..."
-                  @keydown.enter="saveList"/>
-                <div class="btn-wrapper">
-                  <v-btn v-if="listModel.name.length > 0" class="md-raised md-primary" @click="saveList">Create</v-btn>
-                </div>
-              </template>
+              <v-text-field
+                autocapitalize="sentences"
+                v-model="listModel.name"
+                placeholder="My shopping list..."
+                @keydown.enter="saveList"/>
+              <div class="btn-wrapper">
+                <v-btn v-if="listModel.name.length > 0"
+                       class="md-raised md-primary"
+                       @click="saveList">Create</v-btn>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -27,7 +27,7 @@
       <div class="list-wrapper">
         <empty-state>
           <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
-          <template v-slot:title>{{ isListReady ? listModel.name : '' }}</template>
+          <template v-slot:title>{{ listModel.name }}</template>
           <template v-slot:subtitle>This list is empty.</template>
           <template v-slot:buttons>
             <v-btn @click="newItem" color="primary">New item</v-btn>
@@ -169,14 +169,14 @@
 <script>
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
-import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce'
 import { DynamicScroller } from 'vue-virtual-scroller'
-import EmptyState from "./EmptyState";
-import ItemForm from "./ItemForm";
-import ItemView from "./Item";
-import Item from "@/models/Item";
+import EmptyState from "./EmptyState"
+import ItemForm from "./ItemForm"
+import ItemView from "./Item"
+import Item from "@/models/Item"
 
-import { containsIgnoreCase } from "@/libs/compare-strings";
+import { containsIgnoreCase } from "@/libs/compare-strings"
 
 import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 
@@ -209,27 +209,17 @@ export default {
   computed: {
     currentListId: {
       get: function() {
-        return this.listModel && this.listModel._id
-          ? this.listModel._id
-          : null;
+        return this.listModel._id
       },
     },
     listModel: {
       get: function() {
         return this.$store.state.list.currentList
-      },
-      // set: function(val) {
-      //   this.$store.commit('list/setCurrentList', { list: val })
-      // }
-    },
-    isListReady: {
-      get: function() {
-        return !!this.listModel
       }
     },
-    isListPersisted: {
+    isNewList: {
       get: function() {
-        return this.isListReady && this.listModel._id
+        return !this.listModel._id
       }
     },
     displayMode: {
@@ -239,7 +229,7 @@ export default {
     },
     shouldShowBottomSearchBar: {
       get: function() {
-        return this.isListPersisted
+        return this.listModel._id
       }
     },
     shouldDisplayNewItemPrompt: {
@@ -313,11 +303,12 @@ export default {
     const self = this
 
     this.$ws.on('connect', () => {
-      if (self.listModel) {
+      if (self.listModel._id) {
         self.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
-              self.initList(this.currentListId)
+              console.log('Resync list', self.listModel)
+              self.$store.dispatch('list/syncCurrentList')
             }
           })
       }
@@ -336,12 +327,11 @@ export default {
   },
   methods: {
     saveList() {
-      console.log("saveList()", this.listModel);
+      console.log("saveList()", this.listModel)
       const self = this
       this.$repository.save(this.listModel)
         .then((response) => {
-          self.initList(response.entities.lists[0]._id)
-          self.$router.push(`/list/${response.entities.lists[0]._id}`)
+          self.$router.push({name: 'list', params: {listId: response.entities.lists[0]._id}})
         })
         .catch((e) => {
           console.error(e)
@@ -363,11 +353,11 @@ export default {
       }
     },
     newItem() {
-      this.editItem(null);
+      this.editItem(null)
     },
     editItem(item) {
-      console.log("editItem()", item, this.listModel);
-      this.editionItemModel = item || new Item();
+      console.log("editItem()", item, this.listModel)
+      this.editionItemModel = item || new Item()
     },
     saveItem(item, callback) {
       item.listId = this.listModel._id
@@ -382,7 +372,7 @@ export default {
         })
     },
     deleteItem(item, callback) {
-      console.log("deleteItem()", item, this.listModel);
+      console.log("deleteItem()", item, this.listModel)
       callback = callback || function() {}
       const self = this
       this.$repository.delete(item)
@@ -408,14 +398,14 @@ export default {
       this.editItem(item)
     },
     onItemSwipeOutLeft(item) {
-      console.log("LIST.onItemSwipeOutLeft", item);
+      console.log("LIST.onItemSwipeOutLeft", item)
       this.toggleCheckedItem(item)
       if (this.searchString) {
         this.cancelSearch()
       }
     },
     onItemSwipeOutRight(item) {
-      console.log("LIST.onItemSwipeOutRight", item);
+      console.log("LIST.onItemSwipeOutRight", item)
       this.toggleCheckedItem(item)
       if (this.searchString) {
         this.cancelSearch()
@@ -424,7 +414,7 @@ export default {
     onTouchHoldItem(item) {
       const self = this
       return function (ev) {
-        console.log("onTouchHoldItem", ev, item);
+        console.log("onTouchHoldItem", ev, item)
         self.editItem(item)
       }
     },
@@ -443,18 +433,18 @@ export default {
     //
     // ITEM FORM
     onCancelItemForm() {
-      console.log('onCancelItemForm()', this.editionItemModel);
+      console.log('onCancelItemForm()', this.editionItemModel)
       this.closeEditItemForm()
     },
     onSaveItemForm() {
-      console.log('onSaveItemForm()', this.editionItemModel);
+      console.log('onSaveItemForm()', this.editionItemModel)
       this.saveItem(this.editionItemModel, function() {
         //this.$snackbar.msg(`${this.editionItemModel.name} saved successfully.`)
         this.closeEditItemForm()
       }.bind(this))
     },
     onDeleteItemForm() {
-      console.log('onDeleteItemForm()', this.editionItemModel);
+      console.log('onDeleteItemForm()', this.editionItemModel)
       const self = this
       if (confirm('Are you sure?')) {
         if (this.editionItemModel._id) {
@@ -477,7 +467,7 @@ export default {
       this.searchInputValue = ''
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

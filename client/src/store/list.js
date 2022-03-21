@@ -1,8 +1,8 @@
 import { DISPLAY_MODE_UNCHECKED_ONLY } from '@/constants'
-import List from "@/models/List";
+import List from "@/models/List"
 
 const loadList = function ({state}, listId) {
-  console.log('loadList', ...arguments);
+  console.log('loadList', ...arguments)
 
   if (listId === 'new') {
     state.currentList = new List()
@@ -15,7 +15,7 @@ const loadList = function ({state}, listId) {
           .find(listId)
       })
       .catch((e) => {
-        console.error(e);
+        console.error(e)
         if (e.response && e.response.status === 404) {
           // List seems to be invalid, so remove it from local repository
           List.delete(listId)
@@ -34,7 +34,7 @@ export default {
     displayMode: DISPLAY_MODE_UNCHECKED_ONLY
   }),
   actions: {
-    syncList (context) {
+    syncCurrentList (context) {
       if (context.state.currentList && context.state.currentList._id) {
         loadList(context, context.state.currentList._id)
       }
@@ -42,7 +42,7 @@ export default {
   },
   mutations: {
     setCurrentList (state, payload) {
-      console.log('setCurrentList', payload);
+      console.log('setCurrentList', payload)
       if (payload.list instanceof List) {
         state.currentList = payload.list
       }

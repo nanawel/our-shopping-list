@@ -98,7 +98,7 @@ export default {
       this.$emit('editClick', this.item)
     }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

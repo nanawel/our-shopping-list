@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="model">
-      <form novalidate @submit.prevent="validateList">
+      <form novalidate>
         <v-row>
           <v-col>
             <v-text-field

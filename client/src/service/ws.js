@@ -26,7 +26,7 @@ export default {
     //
     // ORM SYNC
     sock.on("model-update", (data) => {
-      console.log('ORM WS :: MODEL UPDATE', data);
+      console.log('ORM WS :: MODEL UPDATE', data)
       const schema = Vue.$repository.findSchemaByClassName(data.type)
       if (!schema) {
         console.warn('Unknown model type: ', data.type)
@@ -47,7 +47,7 @@ export default {
     })
 
     sock.on("model-delete", (data) => {
-      console.log('ORM WS :: MODEL DELETE', data);
+      console.log('ORM WS :: MODEL DELETE', data)
       const schema = Vue.$repository.findSchemaByClassName(data.type)
       if (!schema) {
         console.warn('Unknown model type: ', data.type)

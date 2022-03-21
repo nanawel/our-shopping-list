@@ -44,7 +44,7 @@ export default {
   methods: {
     onOpenBoard: function() {
       const slug = Board.getSlugFromName(this.boardNameInput)
-      this.$router.push(`board/${slug}`)
+      this.$router.push({name: 'board', params: {boardSlug: slug}})
     }
   }
 }

@@ -46,10 +46,10 @@ export default {
     }
   },
   created() {
-    this.$root.setTitle('About');
+    this.$root.setTitle('About')
   },
   destroyed() {
-    this.$root.setTitle(null);
+    this.$root.setTitle(null)
   }
 }
 </script>

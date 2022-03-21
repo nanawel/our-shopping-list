@@ -71,7 +71,7 @@
 import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '@/constants'
 
 import NavDefault from '@/components/Nav/Default'
-import ListForm from "@/components/ListForm";
+import ListForm from "@/components/ListForm"
 
 export default {
   name: "List-Nav",
@@ -151,10 +151,6 @@ export default {
     onSaveListForm() {
       const self = this
       this.saveList(this.editionListModel, function() {
-        const listPath = `/list/${self.editionListModel._id}`
-        if (self.$route.path != listPath) {
-          self.$router.push(listPath)
-        }
         self.closeEditListForm()
       })
     },

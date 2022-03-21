@@ -1,4 +1,14 @@
-import Board from '@/models/Board';
+import {Query} from "@vuex-orm/core";
+import store from '@/store'
+
+import Board from '@/models/Board'
+import List from '@/models/List'
+
+Query.on('beforeCreate', function (model) {
+  if (model instanceof List && store.state.board.currentBoard._id) {
+    model.boardId = store.state.board.currentBoard._id
+  }
+})
 
 export default {
   namespaced: true,
@@ -11,7 +21,9 @@ export default {
         state.currentBoard = payload.board
       }
       else if (payload.slug) {
-        if (!state.currentBoard || state.currentBoard.slug !== payload.slug) {
+        if (!state.currentBoard
+          || state.currentBoard.slug !== payload.slug
+        ) {
           Board.api()
             .get(`/boards/${payload.slug}`)
             .then(() => {

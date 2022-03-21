@@ -7,8 +7,6 @@ const About = () => import('@/components/About.vue')
 
 Vue.use(VueRouter)
 
-import boardRoutes from './board'
-
 const routes = [
   {
     path: '/',
@@ -24,10 +22,13 @@ const routes = [
       root: About,
     }
   },
-].concat(boardRoutes)
+]
 
 const router = new VueRouter({
   routes
 })
+
+import boardRoutes from './board'
+boardRoutes(router)
 
 export default router

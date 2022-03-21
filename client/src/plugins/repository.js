@@ -71,7 +71,7 @@ export default {
               })
               .then(function(res) {
                 if (!res.ok) {
-                  console.error(`[${res.status}] ${res.statusText}`);
+                  console.error(`[${res.status}] ${res.statusText}`)
                 } else {
                   const lastModified = new Date(res.headers.get('last-modified-iso'))
                   const modelUpdatedAt = new Date(model.updatedAt)
