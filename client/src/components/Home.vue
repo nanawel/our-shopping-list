@@ -14,6 +14,7 @@
               <v-text-field
                 name="name"
                 label="Name"
+                ref="boardNameInput"
                 v-model="boardNameInput"
                 @keydown.enter="onOpenBoard"/>
             </v-col>
@@ -57,6 +58,9 @@ export default {
         return this.$store.state.board.lastBoard
       },
     },
+  },
+  mounted() {
+    this.$refs.boardNameInput.focus()
   },
   methods: {
     onOpenBoard: function() {

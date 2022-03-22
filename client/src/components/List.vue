@@ -20,6 +20,7 @@
               <v-icon size="8em" color="teal lighten-3">mdi-format-list-bulleted-type</v-icon>
               <h1>Name your list</h1>
               <v-text-field
+                ref="newListNameInput"
                 autocapitalize="sentences"
                 v-model="listModel.name"
                 placeholder="My shopping list..."
@@ -252,7 +253,7 @@ export default {
     shouldDisplayAllCheckedMessage: {
       get: function() {
         return !this.searchString
-          && this.displayMode == DISPLAY_MODE_UNCHECKED_ONLY
+          && this.displayMode === DISPLAY_MODE_UNCHECKED_ONLY
           && this.allItems.length !== 0
           && this.uncheckedItems.length === 0
       }
@@ -325,6 +326,11 @@ export default {
           })
       }
     })
+  },
+  mounted() {
+    if (this.isNewList && this.$refs.newListNameInput) {
+      this.$refs.newListNameInput.focus()
+    }
   },
   watch: {
     'listModel._id': function () {

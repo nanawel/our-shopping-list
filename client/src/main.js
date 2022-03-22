@@ -49,7 +49,7 @@ const $app = new Vue({
   },
   computed: {
     isMultiBoardMode: function () {
-      return !!parseInt(process.env.MULTIBOARD_MODE)
+      return !!parseInt(process.env.SINGLEBOARD_MODE)
     }
   },
   watch: {
