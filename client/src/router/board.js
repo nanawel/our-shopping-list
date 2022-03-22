@@ -12,7 +12,7 @@ export default (router) => {
       name: 'currentBoard',
       beforeEnter: (to, from, next) => {
         if (store.state.board.currentBoard) {
-          return { name: 'board', boardSlug: store.state.board.currentBoard.slug }
+          return {name: 'board', boardSlug: store.state.board.currentBoard.slug}
         }
         next()
       },
@@ -36,6 +36,13 @@ export default (router) => {
           }
         },
         {
+          path: 'list',
+          name: 'newList',
+          beforeEnter: (to, from, next) => {
+            next({name: 'list', params: {listId: 'new'}})
+          }
+        },
+        {
           path: 'list/:listId',
           name: 'list',
           components: {
@@ -49,10 +56,10 @@ export default (router) => {
 
   router.beforeResolve((to, from, next) => {
     if (to.params.boardSlug) {
-      store.commit('board/setCurrentBoard', { slug: to.params.boardSlug })
+      store.commit('board/setCurrentBoard', {slug: to.params.boardSlug})
     }
     if (to.params.listId) {
-      store.commit('list/setCurrentList', { id: to.params.listId })
+      store.commit('list/setCurrentList', {id: to.params.listId})
     }
     next()
   })

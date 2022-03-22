@@ -5,7 +5,10 @@ import Board from '@/models/Board'
 import List from '@/models/List'
 
 Query.on('beforeCreate', function (model) {
-  if (model instanceof List && store.state.board.currentBoard._id) {
+  if (model instanceof List
+    && store.state.board.currentBoard._id
+  ) {
+    // Set current board as list's owner
     model.boardId = store.state.board.currentBoard._id
   }
 })

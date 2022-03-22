@@ -1,6 +1,18 @@
 <template>
   <div id="list-panel">
-    <template v-if="isNewList">
+
+    <template v-if="!listModel">
+      <empty-state>
+        <template v-slot:icon-name>mdi-alert-octagon-outline</template>
+        <template v-slot:title>List not found!</template>
+        <template v-slot:subtitle>This list does not exist (anymore).</template>
+        <template v-slot:buttons>
+          <v-btn @click="newList" color="primary">Create a list</v-btn>
+        </template>
+      </empty-state>
+    </template>
+
+    <template v-else-if="isNewList">
       <v-container class="col-md-4 offset-md-4 text-center">
         <v-row>
           <v-col>
@@ -209,13 +221,17 @@ export default {
   computed: {
     listModel: {
       get: function() {
-        console.log(this.$store.state.list.currentList);
         return this.$store.state.list.currentList
+      }
+    },
+    listModelId: {
+      get: function() {
+        return this.listModel ? this.listModel._id : null
       }
     },
     isNewList: {
       get: function() {
-        return !this.listModel._id
+        return !this.listModelId
       }
     },
     displayMode: {
@@ -225,7 +241,7 @@ export default {
     },
     shouldShowBottomSearchBar: {
       get: function() {
-        return this.listModel._id
+        return this.listModelId
       }
     },
     shouldDisplayNewItemPrompt: {
@@ -299,7 +315,7 @@ export default {
     const self = this
 
     this.$ws.on('connect', () => {
-      if (self.listModel._id) {
+      if (self.listModelId) {
         self.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
@@ -323,6 +339,11 @@ export default {
     }, 400, {trailing: true}),
   },
   methods: {
+    newList() {
+      console.log("newList()", this.listModel)
+      this.$router.push({name: 'newList'})
+        .catch(() => {})  // Hide "Redirected when going from ... to ..." errors
+    },
     saveList() {
       console.log("saveList()", this.listModel)
       const self = this
@@ -341,7 +362,7 @@ export default {
     itemQuery() {
       if (this.listModel) {
         return Item.query()
-          .where('listId', this.listModel._id)
+          .where('listId', this.listModelId)
       } else {
         return Item.query()
           .where(() => {
@@ -357,7 +378,7 @@ export default {
       this.editionItemModel = item || new Item()
     },
     saveItem(item, callback) {
-      item.listId = this.listModel._id
+      item.listId = this.listModelId
       console.log("saveItem()", item, this.listModel)
       callback = callback || function() {}
       const self = this
@@ -443,7 +464,7 @@ export default {
       console.log('onDeleteItemForm()', this.editionItemModel)
       const self = this
       if (confirm('Are you sure?')) {
-        if (this.editionItemModel._id) {
+        if (this.editionItemModelId) {
           this.deleteItem(this.editionItemModel, function() {
             self.closeEditItemForm()
           })

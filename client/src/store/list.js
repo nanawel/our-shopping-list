@@ -1,5 +1,8 @@
+import {Query} from "@vuex-orm/core";
+
 import { DISPLAY_MODE_UNCHECKED_ONLY } from '@/constants'
 import List from "@/models/List"
+import store from "@/store";
 
 const loadList = function ({state}, listId) {
   if (listId === 'new') {
@@ -25,7 +28,13 @@ const loadList = function ({state}, listId) {
   }
 }
 
-List.o
+Query.on('afterDelete', function (model) {
+  if (model instanceof List
+    && store.state.list.currentList._id === model._id
+  ) {
+    store.commit('list/setCurrentList', null)
+  }
+})
 
 export default {
   namespaced: true,
@@ -42,8 +51,11 @@ export default {
   },
   mutations: {
     setCurrentList (state, payload) {
-      console.log('setCurrentList', payload)
-      if (payload.list instanceof List) {
+      console.log('list/setCurrentList', payload)
+      if (payload === null) {
+        state.currentList = null
+      }
+      else if (payload.list instanceof List) {
         state.currentList = payload.list
       }
       else if (payload.id) {
