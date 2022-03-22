@@ -67,7 +67,7 @@ const $app = new Vue({
     forceRefresh: function() {
       this.isReloading = true
       this.$store.dispatch('clearLocalState')
-      document.location.reload()
+      window.location.reload()
     }
   },
   mounted() {

@@ -55,6 +55,7 @@ export default {
       console.log('list/setCurrentList', payload)
 
       const doSet = (list) => {
+        console.log('list/setCurrentList/doSet', list)
         if (list) {
           if (!(list instanceof List)) {
             throw new Error('Invalid list! ' + JSON.stringify(list))
@@ -71,8 +72,10 @@ export default {
         doSet(payload.list)
       }
       else if (payload.id) {
-        if (!state.currentList || state.currentList._id !== payload.id) {
-          loadList({state}, payload.id)
+        if (!state.currentList
+          || state.currentList._id !== payload.id
+        ) {
+          loadList(payload.id)
             .then((list) => doSet(list))
             .catch((e) => {
               console.error(e)

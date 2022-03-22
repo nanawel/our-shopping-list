@@ -6,6 +6,7 @@ import List from '@/models/List'
 
 Query.on('beforeCreate', function (model) {
   if (model instanceof List
+    && store.state.board.currentBoard
     && store.state.board.currentBoard._id
   ) {
     // Set current board as list's owner
@@ -24,10 +25,11 @@ export default {
       console.log('board/setCurrentBoard', payload)
 
       const doSet = (board) => {
-        state.currentBoard = board
+        console.log('board/setCurrentBoard/doSet', board)
         if (board !== null) {
           state.lastBoard = board
         }
+        state.currentBoard = board
       }
 
       if (payload.board instanceof Board) {
