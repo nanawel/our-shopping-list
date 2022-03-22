@@ -32,7 +32,7 @@ Query.on('afterDelete', function (model) {
   if (model instanceof List
     && store.state.list.currentList._id === model._id
   ) {
-    store.commit('list/setCurrentList', null)
+    store.commit('list/setCurrentList', {'null': true})
   }
 })
 
@@ -52,7 +52,7 @@ export default {
   mutations: {
     setCurrentList (state, payload) {
       console.log('list/setCurrentList', payload)
-      if (payload === null) {
+      if (payload.null === true) {
         state.currentList = null
       }
       else if (payload.list instanceof List) {
