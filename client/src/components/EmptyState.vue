@@ -15,6 +15,9 @@
     <div class="btn-wrapper">
       <slot name="buttons"></slot>
     </div>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -29,6 +32,6 @@
   text-align: center;
 }
 .btn-wrapper {
-  margin: 2em;
+  margin-bottom: 1em;
 }
 </style>

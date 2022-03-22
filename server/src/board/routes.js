@@ -84,7 +84,7 @@ router.get('/boards/by-slug/:slug', (req, res) => {
         res.status(200)
           .json(doc);
       } else {
-        const doc = new BoardModel(req.body);
+        const doc = new BoardModel({slug: slug});
         console.debug('GET BOARD (create new)', doc);
         doc.save(function (err) {
           if (err) throw err;

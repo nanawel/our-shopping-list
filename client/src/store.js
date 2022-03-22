@@ -30,6 +30,7 @@ import localStoragePlugin from '@/store/plugins/localStorage'
 
 // Create Vuex Store and register database through Vuex ORM
 const store = new Vuex.Store({
+  //strict: true,
   modules: {
     version,
     snackbar,

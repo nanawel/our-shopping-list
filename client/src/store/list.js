@@ -4,27 +4,27 @@ import { DISPLAY_MODE_UNCHECKED_ONLY } from '@/constants'
 import List from "@/models/List"
 import store from "@/store";
 
-const loadList = function ({state}, listId) {
+/**
+ *
+ * @param {String} listId
+ * @returns {Promise}
+ */
+const loadList = function (listId) {
   if (listId === 'new') {
-    state.currentList = new List()
+    return new Promise((resolve) => {
+      resolve(new List())
+    })
   } else {
-    List.api()
-      .get(`/lists/${listId}`)
-      .then(() => {
-        state.currentList = List.query()
-          .with("items")
-          .find(listId)
-      })
-      .catch((e) => {
-        console.error(e)
-        if (e.response && e.response.status === 404) {
-          // List seems to be invalid, so remove it from local repository
-          List.delete(listId)
-          throw "List not found!"
-        } else {
-          throw "Could not load list :("
-        }
-      })
+    return new Promise((resolve, reject) => {
+      List.api()
+        .get(`/lists/${listId}`)
+        .then(() => {
+          resolve(List.query()
+            .with("items")
+            .find(listId))
+        })
+        .catch(reject)
+    })
   }
 }
 
@@ -40,6 +40,7 @@ export default {
   namespaced: true,
   state: () => ({
     currentList: null,
+    lastList: null,
     displayMode: DISPLAY_MODE_UNCHECKED_ONLY
   }),
   actions: {
@@ -52,15 +53,37 @@ export default {
   mutations: {
     setCurrentList (state, payload) {
       console.log('list/setCurrentList', payload)
+
+      const doSet = (list) => {
+        if (list) {
+          if (!(list instanceof List)) {
+            throw new Error('Invalid list! ' + JSON.stringify(list))
+          }
+          state.lastList = list
+        }
+        state.currentList = list
+      }
+
       if (payload.null === true) {
-        state.currentList = null
+        doSet(null)
       }
       else if (payload.list instanceof List) {
-        state.currentList = payload.list
+        doSet(payload.list)
       }
       else if (payload.id) {
         if (!state.currentList || state.currentList._id !== payload.id) {
           loadList({state}, payload.id)
+            .then((list) => doSet(list))
+            .catch((e) => {
+              console.error(e)
+              if (e.response && e.response.status === 404) {
+                // List seems to be invalid, so remove it from local repository
+                List.delete(payload.id)
+                throw "List not found!"
+              } else {
+                throw "Could not load list :("
+              }
+            })
         }
       }
       else {

@@ -60,6 +60,8 @@ export default (router) => {
     }
     if (to.params.listId) {
       store.commit('list/setCurrentList', {id: to.params.listId})
+    } else {
+      store.commit('list/setCurrentList', {null: true})
     }
 
     next()

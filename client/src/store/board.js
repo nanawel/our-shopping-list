@@ -17,11 +17,21 @@ export default {
   namespaced: true,
   state: () => ({
     currentBoard: null,
+    lastBoard: null,
   }),
   mutations: {
     setCurrentBoard (state, payload) {
+      console.log('board/setCurrentBoard', payload)
+
+      const doSet = (board) => {
+        state.currentBoard = board
+        if (board !== null) {
+          state.lastBoard = board
+        }
+      }
+
       if (payload.board instanceof Board) {
-        state.currentBoard = payload.board
+        doSet(payload.board)
       }
       else if (payload.slug) {
         if (!state.currentBoard
@@ -30,20 +40,31 @@ export default {
           Board.api()
             .get(`/boards/by-slug/${payload.slug}`)
             .then(() => {
-              state.currentBoard = Board.query()
+              doSet(Board.query()
                 .with("lists")
                 .where('slug', payload.slug)
-                .first()
+                .first())
             })
             .catch((e) => {
               console.error(e)
-              state.currentBoard = null
+              doSet(null)
             })
         }
       }
       else {
         throw "Invalid argument for setCurrentBoard()!"
       }
+    },
+    reset(state) {
+      console.log('board/reset')
+
+      state.currentBoard = null
+      state.lastBoard = null
+    }
+  },
+  actions: {
+    reset({commit}) {
+      commit('reset')
     }
   }
 }

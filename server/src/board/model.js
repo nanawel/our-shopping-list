@@ -31,7 +31,7 @@ BoardSchema.virtual('lists', {
 });
 BoardSchema.pre('validate', function() {
   if (!this.name && this.slug) {
-    this.name = slug;
+    this.name = this.slug;
   }
   if (!this.slug && this.name) {
     this.slug = this.name;

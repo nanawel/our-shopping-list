@@ -21,7 +21,16 @@
         </v-container>
       </template>
       <template v-slot:buttons>
-        <v-btn @click="onOpenBoard" color="primary">Open board</v-btn>
+        <v-btn v-if="boardNameInput.length > 0"
+               @click="onOpenBoard"
+               color="primary">Open board</v-btn>
+      </template>
+      <template v-slot:footer v-if="lastBoardModel">
+        <router-link :to="{name: 'board', params: {boardSlug: lastBoardModel.slug}}">
+          <span>Would you like to reopen <strong>{{ lastBoardModel.name }}</strong> instead?</span>
+        </router-link>
+        <v-btn @click="onClearLastBoard"
+          icon><v-icon>mdi-close-circle-outline</v-icon></v-btn>
       </template>
     </empty-state>
   </div>
@@ -42,10 +51,20 @@ export default {
       boardNameInput: ''
     }
   },
+  computed: {
+    lastBoardModel: {
+      get: function () {
+        return this.$store.state.board.lastBoard
+      },
+    },
+  },
   methods: {
     onOpenBoard: function() {
       const slug = Board.getSlugFromName(this.boardNameInput)
       this.$router.push({name: 'board', params: {boardSlug: slug}})
+    },
+    onClearLastBoard: function() {
+      this.$store.dispatch('board/reset')
     }
   }
 }

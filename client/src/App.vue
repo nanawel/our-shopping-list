@@ -8,16 +8,16 @@
         indeterminate
         />
 
-        <router-view name="root"></router-view>
+      <router-view name="root"></router-view>
 
-        <Snackbar></Snackbar>
+      <Snackbar></Snackbar>
 
-        <v-overlay
-          :value="showNotConnectedOverlay">
-          <v-btn color="error">
-            Not connected
-          </v-btn>
-        </v-overlay>
+      <v-overlay
+        :value="showNotConnectedOverlay">
+        <v-btn color="error">
+          Not connected
+        </v-btn>
+      </v-overlay>
     </v-app>
   </div>
 </template>
