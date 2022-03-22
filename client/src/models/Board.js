@@ -22,7 +22,7 @@ class Board extends AbstractModel {
   }
 
   static getSlugFromName(name) {
-    return slugify(name)
+    return slugify(name, {lower: true})
   }
 }
 

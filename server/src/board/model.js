@@ -36,7 +36,7 @@ BoardSchema.pre('validate', function() {
   if (!this.slug && this.name) {
     this.slug = this.name;
   }
-  this.slug = slugify(this.slug);
+  this.slug = slugify(this.slug, {lower: true});
 });
 const BoardModel = mongoose.model('Board', BoardSchema);
 

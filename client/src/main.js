@@ -65,6 +65,8 @@ const $app = new Vue({
       this.isOnline = navigator.onLine
     },
     forceRefresh: function() {
+      this.isReloading = true
+      this.$store.dispatch('clearLocalState')
       document.location.reload()
     }
   },

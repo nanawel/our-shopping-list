@@ -13,11 +13,8 @@ export default {
             || store.state.version.currentBuildId != data.buildId
           ) {
             console.warn('Server version mismatch, reloading app.')
-            store.$app.isReloading = true
-            store.dispatch('clearLocalState')
-
             alert("The application has been updated.\nThis page will now be reloaded automatically.")
-            window.location.reload()
+            store.$app.forceRefresh()
           }
         }
       })
