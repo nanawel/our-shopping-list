@@ -6,7 +6,7 @@ const List = () => import('@/components/List.vue')
 const NavList = () => import('@/components/List/Nav.vue')
 
 export default (router) => {
-  router.addRoutes([
+  [
     {
       path: '/board',
       name: 'currentBoard',
@@ -52,7 +52,7 @@ export default (router) => {
         }
       ]
     },
-  ])
+  ].forEach((r) => router.addRoute(r))
 
   router.beforeResolve((to, from, next) => {
     if (to.params.boardSlug) {

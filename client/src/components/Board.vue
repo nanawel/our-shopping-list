@@ -48,6 +48,8 @@
           <v-list-item-title v-text="boardModel.name || 'Home'"></v-list-item-title>
         </v-list-item>
 
+        <v-divider/>
+
         <template v-for="list in lists">
           <v-list-item
             :key="list._id"
