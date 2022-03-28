@@ -156,13 +156,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-    <v-overlay
-      :value="loadingOverlay">
-      <v-progress-circular
-        indeterminate
-        size="64"/>
-    </v-overlay>
   </div>
 </template>
 
@@ -203,8 +196,7 @@ export default {
       },
       searchInputValue: null, // nullable, see also searchString and debouncedSearchString (NOT nullable)
       debouncedSearchString: '',
-      sock: null,
-      loadingOverlay: false
+      sock: null
     }
   },
   computed: {
@@ -350,7 +342,6 @@ export default {
 
       console.log('initList | listId = ', listId, 'retryCount = ', retryCount);
       if (listId) {
-        this.loadingOverlay = true
         List.api()
           .get("/lists/" + listId)
           .then(() => {
@@ -375,9 +366,6 @@ export default {
             }
             self.$router.push("/list/new")
             self.initList()
-          })
-          .finally(() => {
-            self.loadingOverlay = false
           })
       } else {
         this.listModel = new List();
