@@ -1,7 +1,9 @@
+import { sock } from '@/service/socket-io'
+
 export default {
-  install: (Vue, { sock, store }) => {
+  install: (Vue, { store }) => {
     sock.on("connect", () => {
-      sock.emit("hello", (data) => {
+      sock.emit("hello", { connectionDate: new Date().toISOString() }, (data) => {
         console.info('Reply to Hello from server: ', data)
 
         if ((store.state.version.currentVersion === null || store.state.version.currentBuildId === null)

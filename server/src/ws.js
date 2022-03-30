@@ -8,7 +8,8 @@ const {app, io} = require('./app');
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
 
-  socket.on('hello', (callback) => {
+  socket.on('hello', (data, callback) => {
+    console.log('New connection', data)
     callback({
       serverString: `OSL Server (${SERVER_VERSION}-${SERVER_BUILD_ID})`,
       version: SERVER_VERSION,
@@ -18,6 +19,14 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`Client disconnected: ${socket.id}`);
   });
+  socket.on('join-board', (boardId) => {
+    console.log(`Client ${socket.id} joining board ${boardId}`);
+    socket.join(`board/${boardId}`)
+  });
+  socket.on('leave-board', (boardId) => {
+    console.log(`Client ${socket.id} leaving board ${boardId}`);
+    socket.leave(`board/${boardId}`)
+  });
 });
 // Proxify Node WS to Webpack server in developer mode
 app.use('/sockjs-node', createProxyMiddleware(
@@ -26,22 +35,20 @@ app.use('/sockjs-node', createProxyMiddleware(
     ws: true,
   }
 ));
-const notifyModelUpdate = function(modelType, model) {
-  console.log('notifyModelUpdate', modelType, model);
-  io.sockets.emit('model-update', {
-    type: modelType,
-    model
-  })
-}
-const notifyModelDelete = function(modelType, model) {
-  console.log('notifyModelDelete', modelType, model);
-  io.sockets.emit('model-delete', {
-    type: modelType,
-    model
-  })
-}
 
 module.exports = {
-  notifyModelUpdate,
-  notifyModelDelete
+  notifyModelUpdate(modelType, model) {
+    console.log('notifyModelUpdate', modelType, model);
+    io.sockets.emit('model-update', {
+      type: modelType,
+      model
+    })
+  },
+  notifyModelDelete(modelType, model) {
+    console.log('notifyModelDelete', modelType, model);
+    io.sockets.emit('model-delete', {
+      type: modelType,
+      model
+    })
+  }
 }

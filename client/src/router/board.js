@@ -1,4 +1,5 @@
 import store from '@/store'
+import { sock } from '@/service/socket-io'
 
 const Board = () => import('@/components/Board.vue')
 const BoardHome = () => import('@/components/Board/Home.vue')
@@ -68,6 +69,10 @@ export default (router) => {
 
       if (board) {
         store.commit('board/setCurrentBoard', board)
+
+        if (board._id) {
+          sock.emit('join-board', board._id)
+        }
       } else {
         BoardModel.api()
           .get(`/boards/by-slug/${to.params.boardSlug}`)
@@ -78,6 +83,11 @@ export default (router) => {
             console.error(e)
             throw "Could not load board :("
           })
+      }
+    } else {
+      const lastBoardId = store.state.board.currentBoardId || store.state.board.lastBoardId
+      if (lastBoardId) {
+        sock.emit('leave-board', lastBoardId)
       }
     }
     if (to.params.listId) {

@@ -26,12 +26,9 @@ Vue.use(snackbarPlugin, { store })
 import repositoryPlugin from '@/plugins/repository'
 Vue.use(repositoryPlugin, { store })
 
-
 // ORM Socket Service
 import wsService from '@/service/ws'
-import { io } from 'socket.io-client'
-const sock = io()
-Vue.use(wsService, { sock, store })
+Vue.use(wsService, { store })
 
 // Vue Router
 import router from '@/router'
