@@ -3,7 +3,7 @@
     <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
     <h1>Our Shopping List</h1>
     <em>{{ appVersion }}-{{ appBuildId }}</em>
-    <p>Copyright &copy; 2021 Anaël Ollier</p>
+    <p>Copyright &copy; 2021-{{new Date().getFullYear()}} Anaël Ollier</p>
 
     <hr/>
 

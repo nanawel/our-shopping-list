@@ -1,3 +1,5 @@
+import eventBus from '@/service/event-bus'
+
 import Board from '@/models/Board'
 import Item from '@/models/Item'
 import List from '@/models/List'
@@ -15,14 +17,14 @@ export default {
     }
 
     Vue.prototype.$repository = {
-      findSchemaByClassName: function(className) {
+      findSchemaByClassName(className) {
         if (!schemaMapping[className]) {
           throw ('Invalid model class name: ' + className)
         }
 
         return schemaMapping[className]
       },
-      findSchemaByModel: function(model) {
+      findSchemaByModel(model) {
         const schemas = Object.values(schemaMapping).filter((s) => {
           return model instanceof s
         });
@@ -33,9 +35,11 @@ export default {
 
         return schemas[0]
       },
-      save: function(model) {
+      save(model) {
         console.log('$repository::save', model)
         const schema = this.findSchemaByModel(model)
+
+        eventBus.$emit('repository_save::before', model, schema)
 
         if (model._id) {
           return schema.api()
@@ -45,9 +49,11 @@ export default {
             .post(`/${schema.entity}`, model)
         }
       },
-      delete: function(model) {
+      delete(model) {
         console.log('$repository::delete', model)
         const schema = this.findSchemaByModel(model)
+
+        eventBus.$emit('repository_delete::before', model, schema)
 
         if (model._id) {
           return schema.api()
@@ -60,8 +66,8 @@ export default {
             model.$delete()
         }
       },
-      checkSync: function(model) {
-        console.log('$repository::checkSync', model)
+      checkSync(model) {
+        console.log('$repository::checkSync', model, model.constructor.name)
         const schema = this.findSchemaByModel(model)
 
         return new Promise((resolve, reject) => {
@@ -75,7 +81,7 @@ export default {
                 } else {
                   const lastModified = new Date(res.headers.get('last-modified-iso'))
                   const modelUpdatedAt = new Date(model.updatedAt)
-                  resolve(lastModified.getTime() == modelUpdatedAt.getTime())
+                  resolve(lastModified.getTime() === modelUpdatedAt.getTime())
                 }
               })
               .catch(function(error) {
@@ -91,6 +97,16 @@ export default {
             })
           }
         })
+      },
+      sync(model) {
+        console.log('$repository::sync', model)
+
+        if (model._id) {
+          const schema = this.findSchemaByModel(model)
+
+          schema.api()
+            .get(`/${schema.entity}/${model._id}`)
+        }
       }
     }
     Vue.$repository = Vue.prototype.$repository

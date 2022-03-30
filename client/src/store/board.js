@@ -1,72 +1,76 @@
-import {Query} from "@vuex-orm/core";
-import store from '@/store'
-
 import Board from '@/models/Board'
-import List from '@/models/List'
 
-Query.on('beforeCreate', function (model) {
-  if (model instanceof List
-    && store.state.board.currentBoard
-    && store.state.board.currentBoard._id
-  ) {
-    // Set current board as list's owner
-    model.boardId = store.state.board.currentBoard._id
+/**
+ * @param {Object}
+ * @returns {Board|undefined}
+ */
+const loadBoard = function ({id, slug}) {
+  if (id) {
+    return Board.query()
+      .with('lists')
+      .find(id)
+  } else if (slug) {
+    return Board.query()
+      .with('lists')
+      .where('slug', slug)
+      .first()
+  } else {
+    throw "Invalid board for loading: " + JSON.stringify(arguments[0])
   }
-})
+}
 
 export default {
-  namespaced: true,
-  state: () => ({
-    currentBoard: null,
-    lastBoard: null,
-  }),
-  mutations: {
-    setCurrentBoard (state, payload) {
-      console.log('board/setCurrentBoard', payload)
+  module() {
+    return {
+      namespaced: true,
+      state: () => ({
+        currentBoard: null,     // *Not* persisted
+        currentBoardId: null,
+        lastBoard: null,        // *Not* persisted
+        lastBoardId: null,
+      }),
+      mutations: {
+        setCurrentBoard (state, payload) {
+          if (payload instanceof Board) {
+            payload = {board: payload}
+          }
+          const doSet = (board) => {
+            if (board !== null) {
+              state.lastBoard = board
+              state.lastBoardId = board ? board._id : null
+            }
+            state.currentBoard = board
+            state.currentBoardId = board ? board._id : null
+          }
 
-      const doSet = (board) => {
-        console.log('board/setCurrentBoard/doSet', board)
-        if (board !== null) {
-          state.lastBoard = board
+          if (payload.board instanceof Board
+            && payload.board !== state.currentBoard
+          ) {
+            doSet(payload.board)
+          }
+          else if (payload.slug) {
+            if (!state.currentBoard
+              || state.currentBoard.slug !== payload.slug
+            ) {
+              doSet(loadBoard(payload))
+            }
+          }
+          else {
+            throw "Invalid argument for setCurrentBoard()!"
+          }
+        },
+        reset(state) {
+          state.currentBoard = null
+          state.currentBoardId = null
+          state.lastBoard = null
+          state.lastBoardId = null
         }
-        state.currentBoard = board
-      }
-
-      if (payload.board instanceof Board) {
-        doSet(payload.board)
-      }
-      else if (payload.slug) {
-        if (!state.currentBoard
-          || state.currentBoard.slug !== payload.slug
-        ) {
-          Board.api()
-            .get(`/boards/by-slug/${payload.slug}`)
-            .then(() => {
-              doSet(Board.query()
-                .with("lists")
-                .where('slug', payload.slug)
-                .first())
-            })
-            .catch((e) => {
-              console.error(e)
-              doSet(null)
-            })
+      },
+      actions: {
+        reset({commit}) {
+          commit('reset')
         }
       }
-      else {
-        throw "Invalid argument for setCurrentBoard()!"
-      }
-    },
-    reset(state) {
-      console.log('board/reset')
-
-      state.currentBoard = null
-      state.lastBoard = null
-    }
-  },
-  actions: {
-    reset({commit}) {
-      commit('reset')
     }
   }
 }

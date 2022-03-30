@@ -320,8 +320,7 @@ export default {
         self.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
-              console.log('Resync list', self.listModel)
-              self.$store.dispatch('list/syncCurrentList')
+              self.$repository.sync(self.listModel)
             }
           })
       }
@@ -470,7 +469,7 @@ export default {
       console.log('onDeleteItemForm()', this.editionItemModel)
       const self = this
       if (confirm('Are you sure?')) {
-        if (this.editionItemModelId) {
+        if (this.editionItemModel && this.editionItemModel._id) {
           this.deleteItem(this.editionItemModel, function() {
             self.closeEditItemForm()
           })

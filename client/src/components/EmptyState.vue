@@ -1,15 +1,15 @@
 <template>
   <div class="empty-state">
-    <v-icon size="8em" color="teal lighten-3">
+    <v-icon class="icon" size="8em" color="teal lighten-3">
       <slot name="icon-name"></slot>
     </v-icon>
     <h1>
       <slot name="title">TITLE</slot>
     </h1>
-    <span class="text--secondary">
+    <div class="subtitle text--secondary">
       <slot name="subtitle">Subtitle</slot>
-    </span>
-    <div>
+    </div>
+    <div class="content">
       <slot name="content"></slot>
     </div>
     <div class="btn-wrapper">
@@ -30,6 +30,9 @@
 <style lang="scss" scoped>
 .empty-state {
   text-align: center;
+}
+.subtitle {
+  margin-bottom: 2rem;
 }
 .btn-wrapper {
   margin-bottom: 1em;

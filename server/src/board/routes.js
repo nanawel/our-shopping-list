@@ -12,7 +12,7 @@ router.head('/boards/:boardId', (req, res) => {
     .exec(function (err, doc) {
       if (err) throw err;
       if (doc) {
-        console.log(doc._id, 'updatedAt =', doc.updatedAt);
+        console.log('HEAD BOARD', doc._id, 'updatedAt =', doc.updatedAt);
         res.status(200)
           .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
           .end();
@@ -33,7 +33,7 @@ router.head('/boards/by-slug/:slug', (req, res) => {
     .exec(function (err, doc) {
       if (err) throw err;
       if (doc) {
-        console.log(doc._id, 'updatedAt =', doc.updatedAt);
+        console.log('HEAD BOARD', doc._id, 'updatedAt =', doc.updatedAt);
         res.status(200)
           .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
           .end();

@@ -10,7 +10,11 @@ const ListSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
-  }
+  },
+  boardId: {
+    type: String,
+    ref: 'Board'
+  },
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
   // https://mongoosejs.com/docs/tutorials/virtuals.html#virtuals-in-json

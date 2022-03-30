@@ -2,7 +2,7 @@ export default {
   install: (Vue, { sock, store }) => {
     sock.on("connect", () => {
       sock.emit("hello", (data) => {
-        console.info(data)
+        console.info('Reply to Hello from server: ', data)
 
         if ((store.state.version.currentVersion === null || store.state.version.currentBuildId === null)
           && (data.version || data.buildId)

@@ -45,7 +45,7 @@
           <v-list-item-icon>
             <v-icon>mdi-clipboard-list-outline</v-icon>
           </v-list-item-icon>
-          <v-list-item-title v-text="boardModel.name || 'Home'"></v-list-item-title>
+          <v-list-item-title v-if="boardModel" v-text="boardModel.name"></v-list-item-title>
         </v-list-item>
 
         <v-divider/>
@@ -82,6 +82,7 @@
 
 <script>
 import List from "@/models/List"
+import store from "@/store";
 
 export default {
   name: "Board",
@@ -93,21 +94,47 @@ export default {
   computed: {
     boardModel: {
       get: function() {
-        return this.$store.state.board.currentBoard || {}
+        return this.$store.state.board.currentBoard
       },
     },
     lists: {
       get: function () {
-        if (this.boardModel._id) {
-          return List.query()
-            .where('boardId', this.boardModel._id)
-            .orderBy("name")
-            .get()
-        } else {
-          return []
-        }
+        return List.query()
+          .where('boardId', this.boardModel ? this.boardModel._id : null)
+          .orderBy("name")
+          .get()
       }
     }
+  },
+  created() {
+    const self = this
+
+    this.$ws.on('connect', () => {
+      if (self.boardModel) {
+        self.$repository.checkSync(self.boardModel)
+          .then((isSync) => {
+            if (!isSync) {
+              self.$repository.sync(self.boardModel)
+            }
+          })
+      }
+    })
+  },
+  mounted() {
+    if (this.boardModel) {
+      this.$repository.checkSync(this.boardModel)
+    }
+
+    this.$on('repository_save::before', function (model) {
+      console.log('BEFORE beforeCreate', JSON.stringify(model));
+      if (model instanceof List
+        && store.state.board.currentBoardId
+      ) {
+        // Set current board as list's owner
+        model.boardId = store.state.board.currentBoardId
+      }
+      console.log('AFTER beforeCreate', JSON.stringify(model));
+    })
   },
   methods: {
     onRefreshClick: function() {

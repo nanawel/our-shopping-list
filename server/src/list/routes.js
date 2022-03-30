@@ -1,8 +1,8 @@
 const {router} = require('../app');
 const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
+const BoardModel = require('../board/model');
 const ListModel = require('./model');
-const ItemModel = require("../item/model");
 
 router.head('/lists/:id', (req, res) => {
   const id = req.params.id;
@@ -14,7 +14,7 @@ router.head('/lists/:id', (req, res) => {
     .exec(function (err, doc) {
       if (err) throw err;
       if (doc) {
-        console.log(doc._id, 'updatedAt =', doc.updatedAt);
+        console.log('HEAD LIST', doc._id, 'updatedAt =', doc.updatedAt);
         res.status(200)
           .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
           .end();
@@ -36,7 +36,7 @@ router.get('/lists', (req, res) => {
   } else {
     ListModel.find({}, function (err, docs) {
       if (err) throw err;
-      console.log(docs)
+      console.log('GET LISTS', docs)
       res.status(200)
         .json(docs);
     });
@@ -54,7 +54,7 @@ router.get('/lists/:id', (req, res) => {
     .exec(function (err, doc) {
       if (err) throw err;
       if (doc) {
-        console.log(doc);
+        console.log('GET LIST', doc);
         res.status(200)
           .json(doc);
       } else {
@@ -70,14 +70,31 @@ router.get('/lists/:id', (req, res) => {
 
 router.post('/lists', (req, res) => {
   delete req.body._id;
-  const doc = new ListModel(req.body);
-  console.debug('POST LIST', doc);
+  const list = new ListModel(req.body);
+  console.debug('POST LIST', list);
 
-  doc.save(function (err) {
+  list.save(function (err) {
     if (err) throw err;
     res.status(201)
-      .json(doc);
-    notifyModelUpdate('List', doc);
+      .json(list);
+    notifyModelUpdate('List', list);
+
+    if (list.boardId) {
+      try {
+        BoardModel.findById(list.boardId, function (err, board) {
+          board.markModified('lists');
+          board.save();
+        });
+      }
+      catch (e) {
+        res.status(500)
+          .json({
+            error: {
+              message: e.message
+            }
+          })
+      }
+    }
   });
 });
 
@@ -97,6 +114,23 @@ router.patch('/lists/:id', (req, res) => {
           .json(list);
         notifyModelUpdate('List', list);
       })
+
+      if (list.boardId) {
+        try {
+          BoardModel.findById(list.boardId, function (err, board) {
+            board.markModified('lists');
+            board.save();
+          });
+        }
+        catch (e) {
+          res.status(500)
+            .json({
+              error: {
+                message: e.message
+              }
+            })
+        }
+      }
     } else {
       res.status(404)
         .json({
@@ -115,11 +149,29 @@ router.delete('/lists/:id', (req, res) => {
   ListModel.findById(id, function (err, list) {
     if (err) throw err;
     if (list) {
+      const boardId = list.boardId;
       list.delete(function (err) {
         if (err) throw err;
         res.status(200)
           .json(list);
         notifyModelDelete('List', list);
+
+        if (boardId) {
+          try {
+            BoardModel.findById(boardId, function (err, board) {
+              board.markModified('lists');
+              board.save();
+            });
+          }
+          catch (e) {
+            res.status(500)
+              .json({
+                error: {
+                  message: e.message
+                }
+              })
+          }
+        }
       })
     } else {
       res.status(404)

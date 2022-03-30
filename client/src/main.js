@@ -26,6 +26,7 @@ Vue.use(snackbarPlugin, { store })
 import repositoryPlugin from '@/plugins/repository'
 Vue.use(repositoryPlugin, { store })
 
+
 // ORM Socket Service
 import wsService from '@/service/ws'
 import { io } from 'socket.io-client'
@@ -48,7 +49,7 @@ const $app = new Vue({
     isReloading: false
   },
   computed: {
-    isMultiBoardMode: function () {
+    isSingleBoardMode: function () {
       return !!parseInt(process.env.SINGLEBOARD_MODE)
     }
   },
@@ -66,7 +67,7 @@ const $app = new Vue({
     },
     forceRefresh: function() {
       this.isReloading = true
-      this.$store.dispatch('clearLocalState')
+      window.localStorage.clear()
       window.location.reload()
     }
   },
@@ -75,14 +76,6 @@ const $app = new Vue({
     window.addEventListener('online', this.updateConnectionStatus)
     window.addEventListener('offline', this.updateConnectionStatus)
     this.updateConnectionStatus()
-
-    /*// Redirect to the list present in localStorage if any
-    if (this.$store.state.list.currentList) {
-      const currentListPath = `/list/${this.$store.state.list.currentList._id}`
-      if (this.$router.currentRoute.path != currentListPath) {
-        this.$router.push(currentListPath)
-      }
-    }*/
   }
 })
 store.$app = $app
