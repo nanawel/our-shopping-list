@@ -7,7 +7,6 @@ const {app, io} = require('./app');
 const Board = require('./board/model');
 const List = require('./list/model');
 const Item = require('./item/model');
-const ListModel = require("./list/model");
 
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
@@ -80,7 +79,7 @@ const findParentBoardId = async function(model) {
     case model instanceof Item:
       //console.log('model instanceof Item', model);
       return findParentBoardId(
-        await ListModel.findOne({
+        await List.findOne({
             _id: model.listId
           })
           .exec()
