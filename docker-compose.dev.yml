@@ -9,6 +9,8 @@ services:
     volumes:
       - ./server:/app
       - ./client:/app/client
+    environment:
+      NODE_ENV: development
     depends_on:
       - mongodb
 

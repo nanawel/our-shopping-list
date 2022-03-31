@@ -22,6 +22,9 @@ upd:
 upd-force:
 	docker-compose up -d --force-recreate $(args)
 
+restart:
+	docker-compose restart $(args)
+
 stop:
 	docker-compose stop
 
@@ -42,3 +45,6 @@ logs:
 
 logs-follow:
 	docker-compose logs -f --tail=200 app
+
+watch:
+	docker-compose exec app sh -c 'cd /app/client && yarn serve'

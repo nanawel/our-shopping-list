@@ -134,10 +134,13 @@ make dev-init
 make dev-upd
 ```
 
-You may now enter the container and start the Webpack Development Server with
+Start the Webpack Development Server with
+
+```shell
+make dev-watch
+```
+
+If you want to enter the container, just use
 ```shell
 make dev-shell
-
-cd client/
-yarn serve
 ```
