@@ -8,8 +8,15 @@ const {app, io} = require('./app');
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
 
+  socket.conn.once('upgrade', () => {
+    console.log(`Client ${socket.id} upgraded transport:`, socket.conn.transport.name);
+  });
+  socket.conn.on("close", (reason) => {
+    console.log(`Client ${socket.id} closed connection |`, reason);
+  });
+
   socket.on('hello', (data, callback) => {
-    console.log('New connection', data)
+    console.log(`New connection from client ${socket.id}`, data)
     callback({
       serverString: `OSL Server (${SERVER_VERSION}-${SERVER_BUILD_ID})`,
       version: SERVER_VERSION,
@@ -19,15 +26,28 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`Client disconnected: ${socket.id}`);
   });
-  socket.on('join-board', (boardId) => {
+  socket.on('join-board', (boardId, callback) => {
     console.log(`Client ${socket.id} joining board ${boardId}`);
     socket.join(`board/${boardId}`)
+    if (callback) {
+      callback({
+        status: 'OK',
+        message: `Joined board ${boardId}`
+      })
+    }
   });
-  socket.on('leave-board', (boardId) => {
+  socket.on('leave-board', (boardId, callback) => {
     console.log(`Client ${socket.id} leaving board ${boardId}`);
     socket.leave(`board/${boardId}`)
+    if (callback) {
+      callback({
+        status: 'OK',
+        message: `Left board ${boardId}`
+      })
+    }
   });
 });
+
 // Proxify Node WS to Webpack server in developer mode
 app.use('/sockjs-node', createProxyMiddleware(
   '/sockjs-node', {
