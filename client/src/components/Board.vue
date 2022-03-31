@@ -61,6 +61,8 @@
           </v-list-item>
         </template>
 
+        <v-divider v-if="lists.length"/>
+
         <v-list-item to="/about">
           <v-list-item-icon>
             <v-icon>mdi-information-variant</v-icon>
@@ -111,6 +113,7 @@ export default {
 
     this.$ws.on('connect', () => {
       if (self.boardModel) {
+        self.$ws.emit('join-board', self.boardModel._id)
         self.$repository.checkSync(self.boardModel)
           .then((isSync) => {
             if (!isSync) {

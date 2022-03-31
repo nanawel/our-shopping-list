@@ -19,8 +19,6 @@ mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-// https://mongoosejs.com/docs/deprecations.html
-mongoose.set('useFindAndModify', false);
 
 const router = express.Router()
 if (false) {
