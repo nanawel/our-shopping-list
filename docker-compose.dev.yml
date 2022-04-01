@@ -3,7 +3,7 @@ version: '3.2'
 services:
   app:
     image: node:${node_version}${node_variant_dev}
-    command: sh -c 'cd /app && ${NODE_BIN:-node} server.js'
+    command: sh -c 'cd /app && ${NODE_BIN:-node} index.js'
     ports:
       - '8080:8080'
     volumes:

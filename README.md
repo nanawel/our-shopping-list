@@ -134,11 +134,13 @@ make dev-init
 make dev-upd
 ```
 
-Start the Webpack Development Server with
+Now start the Webpack Development Server with
 
 ```shell
 make dev-watch
 ```
+
+> If you don't, you'll get 504 errors in the console on /sockjs-node/* requests
 
 If you want to enter the container, just use
 ```shell
