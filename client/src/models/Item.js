@@ -1,3 +1,5 @@
+import {removeDiacritics} from "@/libs/compare-strings";
+
 import AbstractModel from './AbstractModel'
 import List from './List'
 
@@ -20,6 +22,14 @@ class Item extends AbstractModel {
 
       list: this.belongsTo(List, 'listId')
     }
+  }
+
+  get sortName() {
+    return removeDiacritics(this.name).toLowerCase()
+  }
+
+  get search() {
+    return removeDiacritics(this.name)
   }
 
   toggleChecked() {

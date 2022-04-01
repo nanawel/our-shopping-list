@@ -189,7 +189,7 @@ import ItemForm from "./ItemForm"
 import ItemView from "./Item"
 import Item from "@/models/Item"
 
-import { containsIgnoreCase } from "@/libs/compare-strings"
+import {containsIgnoreCase} from "@/libs/compare-strings"
 
 import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 
@@ -270,10 +270,10 @@ export default {
           } else {
               q.orderBy('checked')
           }
-          q.orderBy(item => item.name.toUpperCase())
+          q.orderBy('sortName', 'asc')
 
           if (self.debouncedSearchString) {
-            q.where('name', (value) => containsIgnoreCase(value, self.debouncedSearchString))
+            q.where('search', (value) => containsIgnoreCase(value, self.debouncedSearchString))
           } else {
             if (self.displayMode === DISPLAY_MODE_UNCHECKED_ONLY) {
               q.where('checked', false)
