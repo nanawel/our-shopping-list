@@ -65,7 +65,12 @@ export default {
   methods: {
     onOpenBoard: function() {
       const slug = Board.getSlugFromName(this.boardNameInput)
-      this.$router.push({name: 'board', params: {boardSlug: slug}})
+      if (!slug.length) {
+        this.$snackbar.msg('Invalid board name!')
+        this.boardNameInput = ''
+      } else {
+        this.$router.push({name: 'board', params: {boardSlug: slug}})
+      }
     },
     onClearLastBoard: function() {
       this.$store.dispatch('board/reset')
