@@ -4,3 +4,4 @@
 .history
 .vscode
 /tmp/
+/docker-compose.dev.override.yml
