@@ -32,5 +32,6 @@ module.exports = {
   app,
   http,
   io,
-  router
+  router,
+  SINGLEBOARD_MODE
 };

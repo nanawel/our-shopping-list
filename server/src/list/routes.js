@@ -1,4 +1,4 @@
-const {router} = require('../app');
+const {router, SINGLEBOARD_MODE} = require('../app');
 const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
 const BoardModel = require('../board/model');
@@ -26,7 +26,7 @@ router.head('/lists/:id', (req, res) => {
 });
 
 router.get('/lists', (req, res) => {
-  if (process.env.APP_ENV === 'production') {
+  if (!SINGLEBOARD_MODE && process.env.APP_ENV === 'production') {
     res.status(403)
       .json({
         error: {
@@ -79,7 +79,7 @@ router.post('/lists', (req, res) => {
       .json(list);
     notifyModelUpdate('List', list);
 
-    if (list.boardId) {
+    if (list.boardId && SINGLEBOARD_MODE) {
       try {
         BoardModel.findById(list.boardId, function (err, board) {
           board.markModified('lists');
@@ -115,7 +115,7 @@ router.patch('/lists/:id', (req, res) => {
         notifyModelUpdate('List', list);
       })
 
-      if (list.boardId) {
+      if (list.boardId && SINGLEBOARD_MODE) {
         try {
           BoardModel.findById(list.boardId, function (err, board) {
             board.markModified('lists');
@@ -156,7 +156,7 @@ router.delete('/lists/:id', (req, res) => {
           .json(list);
         notifyModelDelete('List', list);
 
-        if (boardId) {
+        if (boardId && SINGLEBOARD_MODE) {
           try {
             BoardModel.findById(boardId, function (err, board) {
               board.markModified('lists');
