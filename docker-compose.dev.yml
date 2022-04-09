@@ -11,7 +11,7 @@ services:
       - ./client:/app/client
     environment:
       NODE_ENV: development
-      #SINGLEBOARD_MODE: 0
+      #VUE_APP_SINGLEBOARD_MODE: 0
     depends_on:
       - mongodb
 

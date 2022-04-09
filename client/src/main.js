@@ -47,7 +47,7 @@ const $app = new Vue({
   },
   computed: {
     isSingleBoardMode: function () {
-      return !!parseInt(process.env.SINGLEBOARD_MODE)
+      return !!parseInt(process.env.VUE_APP_SINGLEBOARD_MODE)
     }
   },
   watch: {
@@ -64,6 +64,7 @@ const $app = new Vue({
     },
     forceRefresh: function() {
       this.isReloading = true
+      this.$store.replaceState({})
       window.localStorage.clear()
       window.location.reload()
     }

@@ -6,19 +6,34 @@ export default {
       sock.emit("hello", { connectionDate: new Date().toISOString() }, (data) => {
         console.info('Reply to Hello from server: ', data)
 
-        if ((store.state.version.currentVersion === null || store.state.version.currentBuildId === null)
-          && (data.version || data.buildId)
-        ) {
-          store.commit('version/setCurrentVersion', { version: data.version, buildId: data.buildId })
-        } else {
-          if (store.state.version.currentVersion != data.version
-            || store.state.version.currentBuildId != data.buildId
-          ) {
-            console.warn('Server version mismatch, reloading app.')
-            alert("The application has been updated.\nThis page will now be reloaded automatically.")
-            store.$app.forceRefresh()
+        let shouldRefresh = false
+        let isStoreInitialized = false
+        for (const k in store.state.version) {
+          if (store.state.version[k] !== null) {
+            isStoreInitialized = true
+            break
           }
         }
+
+        if (isStoreInitialized) {
+          Object.keys(data.serverVersion).forEach((k) => {
+            if (data.serverVersion[k]
+              && data.serverVersion[k] !== store.state.version[k]
+            ) {
+              shouldRefresh = true
+            }
+          })
+        }
+
+        if (shouldRefresh) {
+          console.warn('Server version mismatch, reloading app.')
+          alert("The application has been updated.\nThis page will now be reloaded automatically.")
+          store.$app.forceRefresh()
+          return
+        }
+
+        // Set current version / build ID / config hash
+        store.commit('version/setCurrentVersion', data.serverVersion)
       })
     })
 

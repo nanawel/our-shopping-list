@@ -77,6 +77,13 @@ export default {
               })
               .then(function(res) {
                 if (!res.ok) {
+                  switch (res.status) {
+                    case 404:
+                      // Model does not exist (anymore) on server: it should not exist either on client
+                      console.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
+                      model.$delete()
+                      break
+                  }
                   console.error(`[${res.status}] ${res.statusText}`)
                 } else {
                   const lastModified = new Date(res.headers.get('last-modified-iso'))

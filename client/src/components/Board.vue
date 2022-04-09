@@ -43,9 +43,11 @@
         <v-list-item :to="{ name: 'board' }"
                      exact-path>
           <v-list-item-icon>
-            <v-icon>mdi-clipboard-list-outline</v-icon>
+            <v-icon v-if="!isSingleBoardMode && boardModel" >mdi-clipboard-list-outline</v-icon>
+            <v-icon v-else>mdi-playlist-plus</v-icon>
           </v-list-item-icon>
-          <v-list-item-title v-if="boardModel" v-text="boardModel.name"></v-list-item-title>
+          <v-list-item-title v-if="!isSingleBoardMode && boardModel" v-text="boardModel.name"></v-list-item-title>
+          <v-list-item-title v-else>New list...</v-list-item-title>
         </v-list-item>
 
         <v-divider/>
@@ -88,8 +90,6 @@ import store from "@/store";
 
 export default {
   name: "Board",
-  components: {
-  },
   data: () => ({
     sidebarMenu: true
   }),
@@ -98,6 +98,11 @@ export default {
       get: function() {
         return this.$store.state.board.currentBoard
       },
+    },
+    isSingleBoardMode: {
+      get: function() {
+        return this.$root.isSingleBoardMode
+      }
     },
     lists: {
       get: function () {
@@ -113,12 +118,13 @@ export default {
 
     this.$ws.on('connect', () => {
       if (self.boardModel) {
-        self.$ws.emit('join-board', self.boardModel._id)
         self.$repository.checkSync(self.boardModel)
           .then((isSync) => {
             if (!isSync) {
               self.$repository.sync(self.boardModel)
             }
+            // Only join board AFTER syncing
+            self.$ws.emit('join-board', self.boardModel._id)
           })
       }
     })

@@ -25,8 +25,11 @@ require('./src/healthcheck/routes');
 // Error handling routes
 require('./src/routes');
 
-/*****************************************************************************/
+// ============================================================================
+// START SERVER
+// ============================================================================
 
 const index = http.listen(LISTEN_PORT, () => {
-  console.info(`OSL Server started on ${index.address().address}:${index.address().port}`);
+  console.info(`OSL Server started on [${index.address().address}]:${index.address().port}`);
+  console.info('Current environment:', process.env);
 });

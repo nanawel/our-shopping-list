@@ -60,6 +60,7 @@ export default {
           }
         },
         reset(state) {
+          console.log('board/reset')
           state.currentBoard = null
           state.currentBoardId = null
           state.lastBoard = null

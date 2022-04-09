@@ -31,12 +31,12 @@ export default {
   computed: {
     appVersion: {
       get: function() {
-        return this.$store.state.version.currentVersion
+        return this.$store.state.version.version
       }
     },
     appBuildId: {
       get: function() {
-        return this.$store.state.version.currentBuildId
+        return this.$store.state.version.buildId
       }
     }
   },

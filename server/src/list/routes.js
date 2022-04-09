@@ -1,22 +1,20 @@
-const {router, SINGLEBOARD_MODE} = require('../app');
-const {notifyModelUpdate, notifyModelDelete} = require('../ws');
+const {router} = require('../app');
 
-const BoardModel = require('../board/model');
 const ListModel = require('./model');
 
 router.head('/lists/:id', (req, res) => {
   const id = req.params.id;
 
   ListModel
-    .findOne({
-      _id: id
-    })
+    .findById(id)
     .exec(function (err, doc) {
       if (err) throw err;
       if (doc) {
         console.log('HEAD LIST', doc._id, 'updatedAt =', doc.updatedAt);
         res.status(200)
           .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
+          .set('Osl-Entity-Type', ListModel.modelName)
+          .set('Osl-Entity-Id', doc._id)
           .end();
       } else {
         res.status(404)
@@ -26,7 +24,7 @@ router.head('/lists/:id', (req, res) => {
 });
 
 router.get('/lists', (req, res) => {
-  if (!SINGLEBOARD_MODE && process.env.APP_ENV === 'production') {
+  if (process.env.APP_ENV === 'production') {
     res.status(403)
       .json({
         error: {
@@ -47,9 +45,7 @@ router.get('/lists/:id', (req, res) => {
   const id = req.params.id;
 
   ListModel
-    .findOne({
-      _id: id
-    })
+    .findById(id)
     .populate('items')
     .exec(function (err, doc) {
       if (err) throw err;
@@ -77,24 +73,6 @@ router.post('/lists', (req, res) => {
     if (err) throw err;
     res.status(201)
       .json(list);
-    notifyModelUpdate('List', list);
-
-    if (list.boardId && SINGLEBOARD_MODE) {
-      try {
-        BoardModel.findById(list.boardId, function (err, board) {
-          board.markModified('lists');
-          board.save();
-        });
-      }
-      catch (e) {
-        res.status(500)
-          .json({
-            error: {
-              message: e.message
-            }
-          })
-      }
-    }
   });
 });
 
@@ -102,44 +80,30 @@ router.patch('/lists/:id', (req, res) => {
   const id = req.params.id;
   console.debug('PATCH LIST', id, req.body);
 
-  ListModel.findById(id, function (err, list) {
-    if (err) throw err;
-    if (list) {
-      for (f in req.body) {
-        list[f] = req.body[f];
-      }
-      list.save(function (err) {
-        if (err) throw err;
-        res.status(200)
-          .json(list);
-        notifyModelUpdate('List', list);
-      })
-
-      if (list.boardId && SINGLEBOARD_MODE) {
-        try {
-          BoardModel.findById(list.boardId, function (err, board) {
-            board.markModified('lists');
-            board.save();
+  ListModel
+    .findOne({
+      _id: id
+    })
+    .exec(function (err, list) {
+      if (err) throw err;
+      if (list) {
+        for (f in req.body) {
+          list[f] = req.body[f];
+        }
+        list.save(function (err) {
+          if (err) throw err;
+          res.status(200)
+            .json(list);
+        })
+      } else {
+        res.status(404)
+          .json({
+            error: {
+              message: "List not found"
+            }
           });
-        }
-        catch (e) {
-          res.status(500)
-            .json({
-              error: {
-                message: e.message
-              }
-            })
-        }
       }
-    } else {
-      res.status(404)
-        .json({
-          error: {
-            message: "List not found"
-          }
-        });
-    }
-  });
+    });
 });
 
 router.delete('/lists/:id', (req, res) => {
@@ -154,24 +118,6 @@ router.delete('/lists/:id', (req, res) => {
         if (err) throw err;
         res.status(200)
           .json(list);
-        notifyModelDelete('List', list);
-
-        if (boardId && SINGLEBOARD_MODE) {
-          try {
-            BoardModel.findById(boardId, function (err, board) {
-              board.markModified('lists');
-              board.save();
-            });
-          }
-          catch (e) {
-            res.status(500)
-              .json({
-                error: {
-                  message: e.message
-                }
-              })
-          }
-        }
       })
     } else {
       res.status(404)

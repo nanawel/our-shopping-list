@@ -27,7 +27,6 @@ export default {
     return {
       namespaced: true,
       state: () => ({
-        flag: 1,
         currentList: null,      // *Not* persisted
         currentListId: null,
         lastList: null,         // *Not* persisted
@@ -49,7 +48,6 @@ export default {
             }
             state.currentList = list
             state.currentListId = list ? list._id : null
-            state.flag += 1
           }
 
           if (payload.null === true) {
@@ -73,8 +71,21 @@ export default {
         },
         setDisplayMode (state, payload) {
           state.displayMode = payload.mode
+        },
+        reset(state) {
+          console.log('list/reset')
+          state.currentList = null
+          state.currentListId = null
+          state.lastList = null
+          state.lastListId = null
+          state.displayMode = DISPLAY_MODE_UNCHECKED_ONLY
         }
       },
+      actions: {
+        reset({commit}) {
+          commit('reset')
+        }
+      }
     }
   }
 }

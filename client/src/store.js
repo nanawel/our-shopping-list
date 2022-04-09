@@ -4,7 +4,7 @@ import { VuexPersistence } from 'vuex-persist'
 Vue.use(Vuex)
 
 // ORM/Axios
-import VuexORM from '@vuex-orm/core'
+import VuexORM, {Query} from '@vuex-orm/core'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import axios from 'axios'
 VuexORM.use(VuexORMAxios, { axios })
@@ -68,6 +68,20 @@ eventBus.$on('repository_save::before', function (model) {
     && store.state.board.currentBoardId
   ) {
     model.boardId = store.state.board.currentBoardId
+  }
+})
+
+// Unset board from store on deletion
+Query.on('afterDelete', function (model) {
+  if (model instanceof Board
+    && model._id === store.state.board.currentBoardId
+  ) {
+    store.dispatch('list/reset')
+    if (model._id === store.state.board.lastBoardId) {
+      store.dispatch('board/reset')
+    } else {
+      store.commit('board/setCurrentBoard', null)
+    }
   }
 })
 

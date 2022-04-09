@@ -2,10 +2,9 @@ const MONGODB_HOST = process.env.MONGODB_HOST || 'mongodb';
 const MONGODB_PORT = process.env.MONGODB_PORT || '27017';
 const MONGODB_DB = process.env.MONGODB_DB     || 'osl';
 
-const SINGLEBOARD_MODE = !!parseInt(process.env.SINGLEBOARD_MODE);
-
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const express = require("express");
+const {VUE_APP_SINGLEBOARD_MODE} = require("./config");
 
 const app = express();
 const http = require('http').Server(app);
@@ -28,10 +27,13 @@ if (false) {
   app.use(router)
 }
 
+if (VUE_APP_SINGLEBOARD_MODE) {
+  require('./middleware/singleboard')(router);
+}
+
 module.exports = {
   app,
   http,
   io,
-  router,
-  SINGLEBOARD_MODE
+  router
 };

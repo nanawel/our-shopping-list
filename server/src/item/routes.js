@@ -1,5 +1,4 @@
 const {router} = require('../app');
-const {notifyModelUpdate, notifyModelDelete} = require('../ws');
 
 const ListModel = require('../list/model');
 const ItemModel = require('./model');
@@ -65,23 +64,7 @@ router.post('/items', (req, res) => {
       if (err) throw err;
       res.status(201)
         .json(doc);
-      notifyModelUpdate('Item', doc);
     });
-
-    try {
-      ListModel.findById(doc.listId, function (err, list) {
-        list.markModified('items');
-        list.save();
-      });
-    }
-    catch (e) {
-      res.status(500)
-        .json({
-          error: {
-            message: e.message
-          }
-        })
-    }
   }
 });
 
@@ -99,22 +82,7 @@ router.post('/lists/:listId/items', (req, res) => {
         if (err) throw err;
         res.status(201)
           .json(item);
-        notifyModelUpdate('Item', item);
       });
-
-      try {
-        // Force update list
-        list.markModified('items');
-        list.save();
-      }
-      catch (e) {
-        res.status(500)
-          .json({
-            error: {
-              message: e.message
-            }
-          })
-      }
     } else {
       res.status(404)
         .json({
@@ -138,23 +106,7 @@ router.patch('/items/:id', (req, res) => {
         if (err) throw err;
         res.status(200)
           .json(item);
-        notifyModelUpdate('Item', item);
       });
-
-      try {
-        ListModel.findById(item.listId, function (err, list) {
-          list.markModified('items');
-          list.save();
-        });
-      }
-      catch (e) {
-        res.status(500)
-          .json({
-            error: {
-              message: e.message
-            }
-          })
-      }
     } else {
       res.status(404)
         .json({
@@ -187,23 +139,7 @@ router.delete('/items/:id', (req, res) => {
         if (err) throw err;
         res.status(200)
           .json(item);
-        notifyModelDelete('Item', item);
       });
-
-      try {
-        ListModel.findById(item.listId, function (err, list) {
-          list.markModified('items');
-          list.save();
-        });
-      }
-      catch (e) {
-        res.status(500)
-          .json({
-            error: {
-              message: e.message
-            }
-          })
-      }
     } else {
       res.status(404)
         .json({
