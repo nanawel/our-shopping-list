@@ -61,7 +61,7 @@ module.exports = (router) => {
   // HEAD + GET
   router.all('/boards/:boardId', function(req, res, next) {
     if (req.params.boardId !== VUE_APP_SINGLEBOARD_ID) {
-      res.status(404)
+      res.status(403)
         .set('Osl-Reason', deniedReasonHeader)
         .end();
     } else {
@@ -77,7 +77,7 @@ module.exports = (router) => {
   //
   //  LISTS MIDDLEWARE INTERCEPTORS
   //
-  // HEAD + GET
+  // HEAD + GET + DELETE
   const listRequestMiddleware = (req, res, next) => {
     const listId = req.params.listId;
 
@@ -86,7 +86,7 @@ module.exports = (router) => {
         next();
       })
       .catch((err) => {
-        res.status(404)
+        res.status(403)
           .set('Osl-Reason', err)
           .end();
       });
@@ -116,9 +116,27 @@ module.exports = (router) => {
     }
   });
 
+  // DELETE
+  router.delete('/lists/:listId', listRequestMiddleware);
+
   //
   //  ITEMS MIDDLEWARE INTERCEPTORS
   //
+  // PATCH + DELETE
+  const itemRequestMiddleware = (req, res, next) => {
+    const itemId = req.params.itemId;
+
+    getItem(itemId)
+      .then(() => {
+        next();
+      })
+      .catch((err) => {
+        res.status(403)
+          .set('Osl-Reason', err)
+          .end();
+      });
+  };
+
   // GET
   router.get('/lists/:listId/items', listRequestMiddleware);
 
@@ -134,23 +152,15 @@ module.exports = (router) => {
           res.status(403)
             .set('Osl-Reason', err)
             .end();
-        })
+        });
     } else {
       next();
     }
   });
 
   // PATCH
-  router.patch('/items/:itemId', (req, res, next) => {
-    const itemId = req.params.id;
-    getItem(itemId)
-      .then(() => {
-        next();
-      })
-      .catch((err) => {
-        res.status(403)
-          .set('Osl-Reason', err)
-          .end();
-      });
-  });
+  router.patch('/items/:itemId', itemRequestMiddleware);
+
+  // DELETE
+  router.delete('/items/:itemId', itemRequestMiddleware);
 }

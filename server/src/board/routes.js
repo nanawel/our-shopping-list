@@ -3,8 +3,7 @@ const {router} = require('../app');
 const BoardModel = require('./model');
 require('./ws');
 
-const onHeadRequest = function (req, res, err, doc) {
-  if (err) throw err;
+const onHeadRequest = function (req, res, doc, next) {
   if (doc) {
     console.log('HEAD BOARD', doc._id, 'updatedAt =', doc.updatedAt);
     res.status(200)
@@ -16,31 +15,31 @@ const onHeadRequest = function (req, res, err, doc) {
   }
 }
 
-router.head('/boards/:boardId', (req, res) => {
+router.head('/boards/:boardId', (req, res, next) => {
   BoardModel
-    .findOne({
-      _id: req.params.boardId
-    })
-    .exec((err, doc) => onHeadRequest(req, res, err, doc));
+    .findById(req.params.boardId)
+    .exec()
+    .then((doc) => onHeadRequest(req, res, doc, next))
+    .catch(next);
 });
-router.head('/boards/by-slug/:slug', (req, res) => {
+router.head('/boards/by-slug/:slug', (req, res, next) => {
   BoardModel
     .findOne({
       slug: req.params.slug
     })
-    .exec((err, doc) => onHeadRequest(req, res, err, doc));
+    .exec()
+    .then((doc) => onHeadRequest(req, res, doc, next))
+    .catch(next);
 });
 
-router.get('/boards/:boardId', (req, res) => {
+router.get('/boards/:boardId', (req, res, next) => {
   const boardId = req.params.boardId;
 
   BoardModel
-    .findOne({
-      _id: boardId
-    })
+    .findById(boardId)
     .populate('lists')
-    .exec(function (err, doc) {
-      if (err) throw err;
+    .exec()
+    .then((doc) => {
       if (doc) {
         console.log('GET BOARD', doc);
         res.status(200)
@@ -53,10 +52,11 @@ router.get('/boards/:boardId', (req, res) => {
             }
           });
       }
-    });
+    })
+    .catch(next);
 });
 
-router.get('/boards/by-slug/:slug', (req, res) => {
+router.get('/boards/by-slug/:slug', (req, res, next) => {
   const slug = req.params.slug;
 
   BoardModel
@@ -64,8 +64,8 @@ router.get('/boards/by-slug/:slug', (req, res) => {
       slug: slug
     })
     .populate('lists')
-    .exec(function (err, doc) {
-      if (err) throw err;
+    .exec()
+    .then((doc) => {
       if (doc) {
         console.log('GET BOARD', doc);
         res.status(200)
@@ -73,21 +73,23 @@ router.get('/boards/by-slug/:slug', (req, res) => {
       } else {
         const doc = new BoardModel({slug: slug});
         console.debug('GET BOARD (create new)', doc);
-        doc.save(function (err) {
-          if (err) throw err;
-          res.status(201)
-            .json(doc);
-        });
+        doc.save()
+          .then(() => {
+            res.status(201)
+              .json(doc);
+          })
+          .catch(next);
       }
-    });
+    })
+    .catch(next);
 });
 
-router.get('/boards/:boardId/lists', (req, res) => {
+router.get('/boards/:boardId/lists', (req, res, next) => {
   res.status(501)
     .end();
 });
 
-router.get('/boards/by-slug/:slug/lists', (req, res) => {
+router.get('/boards/by-slug/:slug/lists', (req, res, next) => {
   res.status(501)
     .end();
 });

@@ -84,7 +84,7 @@ router.post('/lists/:listId/items', (req, res, next) => {
         item.listId = list._id;
         console.debug('POST ITEM IN LIST', list, item);
         item.save()
-          .then(() => {
+          .then((item) => {
             res.status(201)
               .json(item);
           })
@@ -111,7 +111,7 @@ router.patch('/items/:id', (req, res, next) => {
       if (item) {
         Object.assign(item, req.body);
         item.save()
-          .then(() => {
+          .then((item) => {
             res.status(200)
               .json(item);
             next();
