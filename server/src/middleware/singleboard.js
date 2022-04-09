@@ -1,6 +1,7 @@
 const {VUE_APP_SINGLEBOARD_ID, VUE_APP_SINGLEBOARD_SLUG} = require('../config');
 const BoardModel = require('../board/model');
 const ListModel = require("../list/model");
+const ItemModel = require("../item/model");
 
 const deniedReasonHeader = 'Not-In-Singleboard-Mode';
 
@@ -29,9 +30,23 @@ const getList = async function (listId) {
     .then((doc) => {
       if (doc && doc.boardId !== VUE_APP_SINGLEBOARD_ID) {
         throw new Error(deniedReasonHeader);
-      } else {
-        return doc;
       }
+      return doc;
+    });
+};
+
+const getItem = async function (itemId) {
+  return await ItemModel
+    .findById(itemId)
+    .exec()
+    .then((doc) => {
+      if (doc) {
+        if (!doc.listId) {
+          throw new Error(deniedReasonHeader);
+        }
+        getList(doc.listId);
+      }
+      return doc;
     });
 };
 
@@ -63,10 +78,10 @@ module.exports = (router) => {
   //  LISTS MIDDLEWARE INTERCEPTORS
   //
   // HEAD + GET
-  const headGetListMiddleware = (req, res, next) => {
-    const id = req.params.id;
+  const listRequestMiddleware = (req, res, next) => {
+    const listId = req.params.listId;
 
-    getList(id)
+    getList(listId)
       .then((list) => {
         next();
       })
@@ -76,8 +91,8 @@ module.exports = (router) => {
           .end();
       });
   };
-  router.head('/lists/:id', headGetListMiddleware);
-  router.get('/lists/:id', headGetListMiddleware);
+  router.head('/lists/:listId', listRequestMiddleware);
+  router.get('/lists/:listId', listRequestMiddleware);
 
   // POST
   router.post('/lists', (req, res, next) => {
@@ -104,5 +119,38 @@ module.exports = (router) => {
   //
   //  ITEMS MIDDLEWARE INTERCEPTORS
   //
-  // TODO
+  // GET
+  router.get('/lists/:listId/items', listRequestMiddleware);
+
+  // POST
+  router.post('/lists/:listId/items', listRequestMiddleware);
+  router.post('/items', (req, res, next) => {
+    if (req.body && req.body.listId) {
+      getList(req.body.listId)
+        .then(() => {
+          next();
+        })
+        .catch((err) => {
+          res.status(403)
+            .set('Osl-Reason', err)
+            .end();
+        })
+    } else {
+      next();
+    }
+  });
+
+  // PATCH
+  router.patch('/items/:itemId', (req, res, next) => {
+    const itemId = req.params.id;
+    getItem(itemId)
+      .then(() => {
+        next();
+      })
+      .catch((err) => {
+        res.status(403)
+          .set('Osl-Reason', err)
+          .end();
+      });
+  });
 }

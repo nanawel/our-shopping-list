@@ -32,7 +32,7 @@ const ItemSchema = new mongoose.Schema({
   },
   lastCheckedAt: {
     type: Date,
-    default: false
+    default: undefined
   }
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
@@ -50,6 +50,11 @@ ItemSchema.pre('save', function() {
     this.updatedAt = this.lastModificationDate;
   }
   this.set('lastModificationDate', undefined, { strict: false });
+});
+ItemSchema.pre('save', function() {
+  if (this.isModified('checked') && this.checked) {
+    this.lastCheckedAt = new Date().toISOString();
+  }
 });
 
 module.exports = ItemSchema;
