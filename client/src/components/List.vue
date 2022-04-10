@@ -317,14 +317,7 @@ export default {
     const self = this
 
     this.$ws.on('connect', () => {
-      if (self.listModelId) {
-        self.$repository.checkSync(self.listModel)
-          .then((isSync) => {
-            if (!isSync) {
-              self.$repository.sync(self.listModel)
-            }
-          })
-      }
+      self.checkSync()
     })
   },
   mounted() {
@@ -333,9 +326,10 @@ export default {
     }
   },
   watch: {
-    'listModel._id': function () {
+    listModelId: function () {
       // Empty search field when switching list
       this.cancelSearch()
+      this.checkSync()
     },
     editionItemModel: function (val) {
       this.showEditItemDialog = !!val
@@ -361,6 +355,18 @@ export default {
           console.error(e)
           self.$snackbar.msg("Could not save list :(")
         })
+    },
+    checkSync() {
+      const self = this
+      if (this.listModelId) {
+        console.log('LIST checkSync()', this.listModelId)
+        this.$repository.checkSync(self.listModel)
+          .then((isSync) => {
+            if (!isSync) {
+              self.$repository.sync(self.listModel)
+            }
+          })
+      }
     },
 
     //

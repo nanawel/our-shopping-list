@@ -117,22 +117,11 @@ export default {
     const self = this
 
     this.$ws.on('connect', () => {
-      if (self.boardModel) {
-        self.$repository.checkSync(self.boardModel)
-          .then((isSync) => {
-            if (!isSync) {
-              self.$repository.sync(self.boardModel)
-            }
-            // Only join board AFTER syncing
-            self.$ws.emit('join-board', self.boardModel._id)
-          })
-      }
+      self.checkSync()
     })
   },
   mounted() {
-    if (this.boardModel) {
-      this.$repository.checkSync(this.boardModel)
-    }
+    this.checkSync()
 
     this.$on('repository_save::before', function (model) {
       console.log('BEFORE beforeCreate', JSON.stringify(model));
@@ -148,7 +137,21 @@ export default {
   methods: {
     onRefreshClick: function() {
       this.$root.forceRefresh()
-    }
+    },
+    checkSync() {
+      const self = this
+      if (this.boardModel) {
+        console.log('BOARD checkSync()', this.boardModel._id)
+        this.$repository.checkSync(self.boardModel)
+          .then((isSync) => {
+            if (!isSync) {
+              self.$repository.sync(self.boardModel)
+            }
+            // Only join board AFTER syncing
+            self.$ws.emit('join-board', self.boardModel._id)
+          })
+      }
+    },
   },
 }
 </script>
