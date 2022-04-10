@@ -17,13 +17,31 @@ export default (router) => {
       name: 'currentBoard',
       beforeEnter: (to, from, next) => {
         if (store.getters['board/currentBoard']) {
-          return {name: 'board', boardSlug: store.getters['board/currentBoard'].slug}
+          return {name: 'board', params: {boardSlug: store.getters['board/currentBoard'].slug}}
         }
         next()
       },
       components: {
         boardNavigation: NavDefault,
         boardContent: BoardHome
+      }
+    },
+    {
+      path: '/list',
+      redirect: {name: 'board'}
+    },
+    {
+      path: '/list/:listId',
+      redirect: (to) => {
+        if (store.getters['board/currentBoard']) {
+          return {
+            name: 'list', params: {
+              boardSlug: store.getters['board/currentBoard'].slug,
+              listId: to.params.listId
+            }
+          }
+        }
+        return {name: 'home'}
       }
     },
     {
@@ -81,7 +99,7 @@ export default (router) => {
           })
           .catch((e) => {
             console.error(e)
-            throw "Could not load board :("
+            router.app.$snackbar.msg("Could not load list :(")
           })
       }
     } else {
@@ -96,8 +114,7 @@ export default (router) => {
       } else {
         const list = ListModel.query()
           .with('items')
-          .where('slug', to.params.listId)
-          .first()
+          .find(to.params.listId)
 
         if (list) {
           store.commit('list/setCurrentList', list)
@@ -111,10 +128,10 @@ export default (router) => {
               if (e.response && e.response.status === 404) {
                 // List seems to be invalid, so remove it from local repository
                 ListModel.delete(to.params.listId)
-                throw "List not found!"
+                router.app.$snackbar.msg("List not found!")
               } else {
                 console.error(e)
-                throw "Could not load list :("
+                router.app.$snackbar.msg("Could not load list :(")
               }
             })
         }

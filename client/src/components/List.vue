@@ -53,7 +53,7 @@
       <div class="list-wrapper">
         <empty-state key="empty-all-checked">
           <template v-slot:icon-name>mdi-check-outline</template>
-          <template v-slot:title>{{ isListReady ? listModel.name : '' }}</template>
+          <template v-slot:title>{{ listModel.name }}</template>
           <template v-slot:subtitle>All items are checked!</template>
         </empty-state>
       </div>
@@ -252,7 +252,8 @@ export default {
     },
     shouldDisplayAllCheckedMessage: {
       get: function() {
-        return !this.searchString
+        return this.listModelId
+          && !this.searchString
           && this.displayMode === DISPLAY_MODE_UNCHECKED_ONLY
           && this.allItems.length !== 0
           && this.uncheckedItems.length === 0
