@@ -6,6 +6,7 @@ services:
     command: sh -c 'cd /app && ${NODE_BIN:-node} index.js'
     ports:
       - '8080:8080'
+      - '9229:9229'   # Debugger
     volumes:
       - ./server:/app
       - ./client:/app/client

@@ -12,7 +12,8 @@
   "license": "AGPL-3.0-or-later",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cli": "./cli.js"
   },
   "keywords": [
     "shared",
@@ -30,6 +31,7 @@
     "sha1": "^1.1.1",
     "slugify": "^1.6.5",
     "socket.io": "^4.4.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yargs": "^17.4.0"
   }
 }
