@@ -47,6 +47,11 @@ build:
 shell:
 	docker-compose exec -u $$(id -u) app bash -c 'cd /app && bash'
 
+.SILENT:
+.PHONY: cli
+cli:
+	@docker-compose exec -u $$(id -u) app bash -c "cd /app && ./cli.js $(cmd)"
+
 .PHONY: ps
 ps:
 	docker-compose ps
