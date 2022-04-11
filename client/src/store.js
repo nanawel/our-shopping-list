@@ -9,6 +9,8 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import axios from 'axios'
 VuexORM.use(VuexORMAxios, {axios})
 
+import {VUE_APP_LOCALSTORAGE_KEY_PREFIX} from '@/config'
+
 // Modules
 import version from '@/store/version'
 import snackbar from '@/store/snackbar'
@@ -27,7 +29,7 @@ database.register(List)
 database.register(Item)
 
 const vuexPersistence = new VuexPersistence({
-  key: process.env.LOCALSTORAGE_KEY || 'OurShoppingList',
+  key: VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'store',
   storage: window.localStorage,
   reducer: (state) => {
     let persistedState = Object.assign({}, state)

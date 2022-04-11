@@ -19,13 +19,15 @@ io.on('connection', (socket) => {
 
   socket.on('hello', (data, callback) => {
     console.log(`New connection from client ${socket.id}`, data)
+    const serverVersion = {
+      version: SERVER_VERSION,
+      buildId: SERVER_BUILD_ID
+    };
+    const serverHash = sha1(JSON.stringify(serverVersion + require('./config')));
     callback({
       serverString: `OSL Server (${SERVER_VERSION}-${SERVER_BUILD_ID})`,
-      serverVersion: {
-        version: SERVER_VERSION,
-        buildId: SERVER_BUILD_ID,
-        configHash: sha1(JSON.stringify(require('./config')))
-      }
+      serverVersion,
+      serverHash
     });
   });
 

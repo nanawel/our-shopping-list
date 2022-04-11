@@ -1,35 +1,28 @@
-import { sock } from '@/service/socket-io'
+import {sock} from '@/service/socket-io'
+import {VUE_APP_LOCALSTORAGE_KEY_PREFIX} from '@/config'
+
+const serverHashKey = VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
 
 export default {
   install: (Vue, { store }) => {
-    sock.on("connect", () => {
-      sock.emit("hello", { connectionDate: new Date().toISOString() }, (data) => {
+    sock.on('connect', () => {
+      sock.emit('hello', { connectionDate: new Date().toISOString() }, (data) => {
         console.info('Reply to Hello from server: ', data)
 
-        let shouldRefresh = false
-        let isStoreInitialized = false
-        for (const k in store.state.version) {
-          if (store.state.version[k] !== null) {
-            isStoreInitialized = true
-            break
+        if (data.serverHash) {
+          let shouldRefresh = false
+          if (!localStorage.getItem(serverHashKey)) {
+            localStorage.setItem(serverHashKey, data.serverHash)
+          } else if (localStorage.getItem(serverHashKey) !== data.serverHash) {
+            shouldRefresh = true
           }
-        }
 
-        if (isStoreInitialized) {
-          Object.keys(data.serverVersion).forEach((k) => {
-            if (data.serverVersion[k]
-              && data.serverVersion[k] !== store.state.version[k]
-            ) {
-              shouldRefresh = true
-            }
-          })
-        }
-
-        if (shouldRefresh) {
-          console.warn('Server version mismatch, reloading app.')
-          alert("The application has been updated.\nThis page will now be reloaded automatically.")
-          store.$app.forceRefresh()
-          return
+          if (shouldRefresh) {
+            console.warn('Server version mismatch, reloading app.')
+            alert("The application has been updated.\nThis page will now be reloaded automatically.")
+            store.$app.forceRefresh()
+            return
+          }
         }
 
         // Set current version / build ID / config hash
