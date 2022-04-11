@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VUE_APP_SINGLEBOARD_MODE from '@/config'
+import {VUE_APP_SINGLEBOARD_MODE} from '@/config'
 
 // Components
 const Home = () => import('@/components/Home.vue')
