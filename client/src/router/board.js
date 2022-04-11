@@ -99,10 +99,6 @@ export default (router) => {
 
       if (board) {
         store.commit('board/setCurrentBoard', board)
-
-        if (board._id) {
-          sock.emit('join-board', board._id)
-        }
       } else {
         BoardModel.api()
           .get(`/boards/by-slug/${to.params.boardSlug}`)

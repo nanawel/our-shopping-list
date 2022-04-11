@@ -16,7 +16,7 @@ const loadBoard = function ({id, slug}) {
       .where('slug', slug)
       .first()
   } else {
-    throw "Invalid board for loading: " + JSON.stringify(arguments[0])
+    throw 'Invalid board for loading: ' + JSON.stringify(arguments[0])
   }
 }
 
@@ -37,6 +37,7 @@ export default {
           }
           const doSet = (board) => {
             const newBoardId = board ? board._id : null
+            const previousBoard = state.currentBoard
             if (board !== null) {
               state.lastBoard = board
               state.lastBoardId = board ? newBoardId : null
@@ -47,7 +48,7 @@ export default {
               state.currentBoard = board
               state.currentBoardId = newBoardId
 
-              eventBus.$emit('board_set::after', board)
+              eventBus.$emit('board_set::after', board, previousBoard)
             }
           }
 

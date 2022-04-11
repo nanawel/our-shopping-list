@@ -108,7 +108,7 @@ export default {
       get: function () {
         return List.query()
           .where('boardId', this.boardModel ? this.boardModel._id : null)
-          .orderBy("name")
+          .orderBy('name')
           .get()
       }
     }
@@ -145,8 +145,6 @@ export default {
             if (!isSync) {
               self.$repository.sync(self.boardModel)
             }
-            // Only join board AFTER syncing
-            self.$ws.emit('join-board', self.boardModel._id)
           })
       }
     },

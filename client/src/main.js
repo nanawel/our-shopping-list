@@ -34,6 +34,8 @@ Vue.use(wsService, {store})
 import router from '@/router'
 
 // Observers
+import boardObserver from '@/observer/board'
+Vue.use(boardObserver)
 import listObserver from '@/observer/list'
 Vue.use(listObserver)
 

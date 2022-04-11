@@ -8,7 +8,7 @@ router.get('/items', (req, res, next) => {
     res.status(403)
       .json({
         error: {
-          message: "Not available in production mode!"
+          message: 'Not available in production mode!'
         }
       });
   } else {
@@ -42,7 +42,7 @@ router.get('/lists/:listId/items', (req, res, next) => {
         res.status(404)
           .json({
             error: {
-              message: "List not found"
+              message: 'List not found'
             }
           });
       }
@@ -59,7 +59,7 @@ router.post('/items', (req, res, next) => {
     res.status(400)
       .json({
         error: {
-          message: "Missing parent list for item"
+          message: 'Missing parent list for item'
         }
       });
   } else {
@@ -93,7 +93,7 @@ router.post('/lists/:listId/items', (req, res, next) => {
         res.status(404)
           .json({
             error: {
-              message: "List not found"
+              message: 'List not found'
             }
           });
       }
@@ -114,14 +114,13 @@ router.patch('/items/:id', (req, res, next) => {
           .then((item) => {
             res.status(200)
               .json(item);
-            next();
           })
           .catch(next);
       } else {
         res.status(404)
           .json({
             error: {
-              message: "Item not found"
+              message: 'Item not found'
             }
           });
       }
@@ -146,7 +145,7 @@ router.delete('/items/:id', (req, res, next) => {
         res.status(404)
           .json({
             error: {
-              message: "Item not found"
+              message: 'Item not found'
             }
           });
       }
