@@ -39,18 +39,15 @@ export default {
             payload = {list: payload}
           }
           const doSet = (list) => {
-            const newListId = list ? list._id : null
             if (list) {
               if (!(list instanceof List)) {
                 throw new Error('Invalid list! ' + JSON.stringify(list))
               }
               state.lastList = list
-              state.lastListId = list ? newListId : null
+              state.lastListId = list ? list._id : null
             }
-            if (state.currentListId !== newListId) {
-              state.currentList = list
-              state.currentListId = list ? newListId : null
-            }
+            state.currentList = list
+            state.currentListId = list ? list._id : null
           }
 
           if (payload.null === true) {

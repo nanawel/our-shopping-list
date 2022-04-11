@@ -16,10 +16,16 @@ export default (router) => {
       path: '/board',
       name: 'currentBoard',
       beforeEnter: (to, from, next) => {
-        if (store.getters['board/currentBoard']) {
-          return {name: 'board', params: {boardSlug: store.getters['board/currentBoard'].slug}}
+        if (store.state.board && store.state.board.currentBoard) {
+          next({
+            name: 'board',
+            params: {
+              boardSlug: store.state.board.currentBoard.slug
+            }
+          })
+        } else {
+          next()
         }
-        next()
       },
       components: {
         boardNavigation: NavDefault,
@@ -33,10 +39,11 @@ export default (router) => {
     {
       path: '/list/:listId',
       redirect: (to) => {
-        if (store.getters['board/currentBoard']) {
+        if (store.state.board && store.state.board.currentBoard) {
           return {
-            name: 'list', params: {
-              boardSlug: store.getters['board/currentBoard'].slug,
+            name: 'list',
+            params: {
+              boardSlug: store.state.board.currentBoard.slug,
               listId: to.params.listId
             }
           }
@@ -120,6 +127,7 @@ export default (router) => {
     if (to.params.listId) {
       if (to.params.listId === 'new') {
         store.commit('list/setCurrentList', new ListModel())
+        console.log(store.state.list.currentList);
       } else {
         const list = ListModel.query()
           .with('items')

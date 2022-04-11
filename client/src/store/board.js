@@ -41,6 +41,8 @@ export default {
               state.lastBoard = board
               state.lastBoardId = board ? newBoardId : null
             }
+            // Here we can use this condition because a Board *always has an ID on the client side*
+            // => The board is necessarily created on the server
             if (state.currentBoardId !== newBoardId) {
               state.currentBoard = board
               state.currentBoardId = newBoardId
