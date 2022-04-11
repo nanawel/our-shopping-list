@@ -20,18 +20,22 @@ Vue.use(VueVirtualScroller)
 
 // Snackbar
 import snackbarPlugin from '@/plugins/snackbar'
-Vue.use(snackbarPlugin, { store })
+Vue.use(snackbarPlugin, {store})
 
 // Repository
 import repositoryPlugin from '@/plugins/repository'
-Vue.use(repositoryPlugin, { store })
+Vue.use(repositoryPlugin, {store})
 
 // ORM Socket Service
 import wsService from '@/service/ws'
-Vue.use(wsService, { store })
+Vue.use(wsService, {store})
 
 // Vue Router
 import router from '@/router'
+
+// Observers
+import listObserver from '@/observer/list'
+Vue.use(listObserver)
 
 // Init app
 const $app = new Vue({

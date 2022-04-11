@@ -10,9 +10,9 @@ class Board extends AbstractModel {
 
   static fields () {
     return {
-      _id: this.attr(null),
-      slug: this.attr(''),
-      name: this.attr(''),
+      _id: this.string(null),
+      slug: this.string(''),
+      name: this.string(''),
       creationDate: this.attr(''),
       createdAt: this.attr(null),
       updatedAt: this.attr(null),

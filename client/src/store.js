@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { VuexPersistence } from 'vuex-persist'
+import {VuexPersistence} from 'vuex-persist'
 Vue.use(Vuex)
 
 // ORM/Axios
 import VuexORM, {Query} from '@vuex-orm/core'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import axios from 'axios'
-VuexORM.use(VuexORMAxios, { axios })
-
-// Event Bus
-import eventBus from '@/service/event-bus'
+VuexORM.use(VuexORMAxios, {axios})
 
 // Modules
 import version from '@/store/version'
@@ -60,15 +57,6 @@ const store = new Vuex.Store({
     VuexORM.install(database),
     vuexPersistence.plugin
   ],
-})
-
-// Assign current board to each newly created list
-eventBus.$on('repository_save::before', function (model) {
-  if (model instanceof List
-    && store.state.board.currentBoardId
-  ) {
-    model.boardId = store.state.board.currentBoardId
-  }
 })
 
 // Unset board from store on deletion

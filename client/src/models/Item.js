@@ -10,15 +10,15 @@ class Item extends AbstractModel {
 
   static fields() {
     return {
-      _id: this.attr(null),
-      name: this.attr(''),
-      details: this.attr(''),
+      _id: this.string(null),
+      name: this.string(''),
+      details: this.string(''),
       qty: this.number(null).nullable(),
       checked: this.boolean(false),
       lastCheckedAt: this.attr(null),
       createdAt: this.attr(null),
       updatedAt: this.attr(null),
-      listId: this.attr(null),
+      listId: this.string(null),
 
       list: this.belongsTo(List, 'listId')
     }

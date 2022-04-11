@@ -1,3 +1,4 @@
+import eventBus from "@/service/event-bus"
 import Board from '@/models/Board'
 
 /**
@@ -35,12 +36,17 @@ export default {
             payload = {board: payload}
           }
           const doSet = (board) => {
+            const newBoardId = board ? board._id : null
             if (board !== null) {
               state.lastBoard = board
-              state.lastBoardId = board ? board._id : null
+              state.lastBoardId = board ? newBoardId : null
             }
-            state.currentBoard = board
-            state.currentBoardId = board ? board._id : null
+            if (state.currentBoardId !== newBoardId) {
+              state.currentBoard = board
+              state.currentBoardId = newBoardId
+
+              eventBus.$emit('board_set::after', board)
+            }
           }
 
           if (payload.board instanceof Board

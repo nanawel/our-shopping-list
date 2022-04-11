@@ -1,5 +1,5 @@
 import store from '@/store'
-import { sock } from '@/service/socket-io'
+import {sock} from '@/service/socket-io'
 
 const Board = () => import('@/components/Board.vue')
 const BoardHome = () => import('@/components/Board/Home.vue')
@@ -77,7 +77,13 @@ export default (router) => {
     },
   ].forEach((r) => router.addRoute(r))
 
+  /**
+   * Global Guards
+   */
   router.beforeResolve((to, from, next) => {
+    /**
+     * Board slug handler
+     */
     if (to.params.boardSlug) {
       const board = BoardModel.query()
         .with('lists')
@@ -98,7 +104,7 @@ export default (router) => {
           })
           .catch((e) => {
             console.error(e)
-            router.app.$snackbar.msg("Could not load list :(")
+            router.app.$snackbar.msg('Could not load board :(')
           })
       }
     } else {
@@ -107,6 +113,10 @@ export default (router) => {
         sock.emit('leave-board', lastBoardId)
       }
     }
+
+    /**
+     * List ID handler
+     */
     if (to.params.listId) {
       if (to.params.listId === 'new') {
         store.commit('list/setCurrentList', new ListModel())
@@ -127,10 +137,10 @@ export default (router) => {
               if (e.response && e.response.status === 404) {
                 // List seems to be invalid, so remove it from local repository
                 ListModel.delete(to.params.listId)
-                router.app.$snackbar.msg("List not found!")
+                router.app.$snackbar.msg('List not found!')
               } else {
                 console.error(e)
-                router.app.$snackbar.msg("Could not load list :(")
+                router.app.$snackbar.msg('Could not load list :(')
               }
             })
         }
@@ -139,6 +149,7 @@ export default (router) => {
       // Clear current list if not used on current route
       store.commit('list/setCurrentList', {null: true})
     }
+
     next()
   })
 }
