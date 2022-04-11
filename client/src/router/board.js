@@ -78,7 +78,6 @@ export default (router) => {
   ].forEach((r) => router.addRoute(r))
 
   router.beforeResolve((to, from, next) => {
-    //console.log('beforeResolve', from, to);
     if (to.params.boardSlug) {
       const board = BoardModel.query()
         .with('lists')

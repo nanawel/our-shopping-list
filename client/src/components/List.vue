@@ -340,12 +340,12 @@ export default {
   },
   methods: {
     newList() {
-      console.log("newList()", this.listModel)
+      console.log("LIST.newList()", this.listModel)
       this.$router.push({name: 'newList'})
         .catch(() => {})  // Hide "Redirected when going from ... to ..." errors
     },
     saveList() {
-      console.log("saveList()", this.listModel)
+      console.log("LIST.saveList()", this.listModel)
       const self = this
       this.$repository.save(this.listModel)
         .then((response) => {
@@ -353,13 +353,13 @@ export default {
         })
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg("Could not save list :(")
+          self.$snackbar.msg('Could not save list :(')
         })
     },
     checkSync() {
       const self = this
       if (this.listModelId) {
-        console.log('LIST checkSync()', this.listModelId)
+        console.log('LIST.checkSync()', this.listModelId)
         this.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
@@ -386,30 +386,30 @@ export default {
       this.editItem(null)
     },
     editItem(item) {
-      console.log("editItem()", item, this.listModel)
+      console.log('LIST.editItem()', item, this.listModel)
       this.editionItemModel = item || new Item()
     },
     saveItem(item, callback) {
       item.listId = this.listModelId
-      console.log("saveItem()", item, this.listModel)
+      console.log('LIST.saveItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
       this.$repository.save(item)
         .then(callback)
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg("Could not save item :(")
+          self.$snackbar.msg('Could not save item :(')
         })
     },
     deleteItem(item, callback) {
-      console.log("deleteItem()", item, this.listModel)
+      console.log('LIST.deleteItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
       this.$repository.delete(item)
         .then(callback)
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg("Could not delete item :(")
+          self.$snackbar.msg('LIST.Could not delete item :(')
         })
     },
     toggleCheckedItem(item) {
@@ -428,14 +428,14 @@ export default {
       this.editItem(item)
     },
     onItemSwipeOutLeft(item) {
-      console.log("LIST.onItemSwipeOutLeft", item)
+      console.log('LIST.onItemSwipeOutLeft()', item)
       this.toggleCheckedItem(item)
       if (this.searchString) {
         this.cancelSearch()
       }
     },
     onItemSwipeOutRight(item) {
-      console.log("LIST.onItemSwipeOutRight", item)
+      console.log('LIST.onItemSwipeOutRight()', item)
       this.toggleCheckedItem(item)
       if (this.searchString) {
         this.cancelSearch()
@@ -444,7 +444,7 @@ export default {
     onTouchHoldItem(item) {
       const self = this
       return function (ev) {
-        console.log("onTouchHoldItem", ev, item)
+        console.log('LIST.onTouchHoldItem()', ev, item)
         self.editItem(item)
       }
     },

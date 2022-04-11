@@ -124,14 +124,12 @@ export default {
     this.checkSync()
 
     this.$on('repository_save::before', function (model) {
-      console.log('BEFORE beforeCreate', JSON.stringify(model));
       if (model instanceof List
         && store.state.board.currentBoardId
       ) {
         // Set current board as list's owner
         model.boardId = store.state.board.currentBoardId
       }
-      console.log('AFTER beforeCreate', JSON.stringify(model));
     })
   },
   methods: {
@@ -141,7 +139,7 @@ export default {
     checkSync() {
       const self = this
       if (this.boardModel) {
-        console.log('BOARD checkSync()', this.boardModel._id)
+        console.log('BOARD.checkSync()', this.boardModel._id)
         this.$repository.checkSync(self.boardModel)
           .then((isSync) => {
             if (!isSync) {
