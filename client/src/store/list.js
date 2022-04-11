@@ -52,20 +52,11 @@ export default {
 
           if (payload.null === true) {
             doSet(null)
-          }
-          else if (payload.list instanceof List
-            && payload.list !== state.currentList
-          ) {
+          } else if (payload.list instanceof List) {
             doSet(payload.list)
-          }
-          else if (payload.id) {
-            if (!state.currentList
-              || state.currentList._id !== payload.id
-            ) {
-              doSet(loadList(payload.id))
-            }
-          }
-          else {
+          } else if (payload.id) {
+            doSet(loadList(payload.id))
+          } else {
             throw "Invalid argument for setCurrentList()!"
           }
         },

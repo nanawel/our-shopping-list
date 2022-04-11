@@ -103,7 +103,9 @@ export default (router) => {
         BoardModel.api()
           .get(`/boards/by-slug/${to.params.boardSlug}`)
           .then((response) => {
-            store.commit('board/setCurrentBoard', response.entities.boards[0])
+            // We cannot pass response.entities.boards[0] directly as it does not contain the linked lists
+            // so we let the board store module do the loading with the ID
+            store.commit('board/setCurrentBoard', {id: response.entities.boards[0]._id})
           })
           .catch((e) => {
             console.error(e)
@@ -135,7 +137,9 @@ export default (router) => {
           ListModel.api()
             .get(`/lists/${to.params.listId}`)
             .then((response) => {
-              store.commit('list/setCurrentList', response.entities.lists[0])
+              // We cannot pass response.entities.lists[0] directly as it does not contain the linked items
+              // so we let the list store module do the loading with the ID
+              store.commit('list/setCurrentList', {id: response.entities.lists[0]._id})
             })
             .catch((e) => {
               if (e.response && e.response.status === 404) {

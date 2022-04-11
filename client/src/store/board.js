@@ -36,6 +36,7 @@ export default {
             payload = {board: payload}
           }
           const doSet = (board) => {
+            //console.log('BOARD doSet()', board)
             const newBoardId = board ? board._id : null
             const previousBoard = state.currentBoard
             if (board !== null) {
@@ -52,20 +53,12 @@ export default {
             }
           }
 
-          if (payload.board instanceof Board
-            && payload.board !== state.currentBoard
-          ) {
+          if (payload.board instanceof Board) {
             doSet(payload.board)
-          }
-          else if (payload.slug) {
-            if (!state.currentBoard
-              || state.currentBoard.slug !== payload.slug
-            ) {
-              doSet(loadBoard(payload))
-            }
-          }
-          else {
-            throw "Invalid argument for setCurrentBoard()!"
+          } else if (payload.id || payload.slug) {
+            doSet(loadBoard(payload))
+          } else {
+            throw 'Invalid argument for setCurrentBoard()!'
           }
         },
         reset(state) {
