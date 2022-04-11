@@ -26,7 +26,7 @@ yargs
       const filter = argv.filter ? JSON.parse(argv.filter) : {};
       await BoardModel.find(filter)
         .then((docs) => {
-          ConsoleUtils.dump(docs);
+          ConsoleUtils.json(docs);
         })
         .catch(function (err) {
           console.error(err);
@@ -49,7 +49,7 @@ yargs
       const filter = argv.filter ? JSON.parse(argv.filter) : {};
       await ListModel.find(filter)
         .then((docs) => {
-          ConsoleUtils.dump(docs);
+          ConsoleUtils.json(docs);
         })
         .catch(function (err) {
           console.error(err);
@@ -72,7 +72,7 @@ yargs
       const filter = argv.filter ? JSON.parse(argv.filter) : {};
       await ItemModel.find(filter)
         .then((docs) => {
-          ConsoleUtils.dump(docs);
+          ConsoleUtils.json(docs);
         })
         .catch(function (err) {
           console.error(err);
