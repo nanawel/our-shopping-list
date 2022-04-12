@@ -21,6 +21,7 @@
     "swiper": "^7.4.1",
     "typeface-roboto": "^1.1.13",
     "vue": "^2.6.11",
+    "vue-i18n": "8",
     "vue-router": "^3.5.1",
     "vue-virtual-scroller": "^1.0.10",
     "vue2-touch-events": "^3.2.1",

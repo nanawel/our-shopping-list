@@ -4,6 +4,9 @@ import App from '@/App.vue'
 
 Vue.config.productionTip = false
 
+// Vue i18n
+import i18n from '@/service/i18n'
+
 // Vuetify
 import vuetify from '@/plugins/vuetify'
 
@@ -43,6 +46,7 @@ Vue.use(listObserver)
 const $app = new Vue({
   el: '#app',
   render: h => h(App),
+  i18n,
   vuetify,
   store,
   router,

@@ -47,7 +47,7 @@
             <v-icon v-else>mdi-playlist-plus</v-icon>
           </v-list-item-icon>
           <v-list-item-title v-if="!isSingleBoardMode && boardModel" v-text="boardModel.name"></v-list-item-title>
-          <v-list-item-title v-else>New list...</v-list-item-title>
+          <v-list-item-title v-else>{{ $t('menu-nav.item.new-list') }}</v-list-item-title>
         </v-list-item>
 
         <v-divider/>
@@ -69,7 +69,7 @@
           <v-list-item-icon>
             <v-icon>mdi-information-variant</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>About</v-list-item-title>
+          <v-list-item-title>{{ $t('menu-nav.item.about') }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

@@ -1,0 +1,41 @@
+{
+  "app-name": "Our Shopping List",
+  "back": "Retour",
+  "errors": {
+    "board": {
+      "invalid-name": "Invalid board name!"
+    }
+  },
+  "menu-nav": {
+    "item": {
+      "new-list": "New list...",
+      "about": "About"
+    }
+  },
+  "home": {
+    "title": "Open Board",
+    "subtitle": "A board holds one to several lists.",
+    "input": {
+      "board-name": "Name"
+    },
+    "button": {
+      "open-board": "Open board"
+    },
+    "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
+  },
+  "board": {
+
+  },
+  "list": {
+
+  },
+  "item": {
+    "empty-qty-label": "(no quantity specified)",
+    "input": {
+      "name": "Name",
+      "qty": "Quantity",
+      "details": "Details"
+    },
+    "last-checked-label": "Last checked: %{date}"
+  }
+}

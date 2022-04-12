@@ -21,13 +21,13 @@
 
     <hr/>
 
-    <v-btn @click="onBackClick">Back</v-btn>
+    <v-btn @click="onBackClick">{{ $t('back') }}</v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: "About",
+  name: 'About',
   computed: {
     appVersion: {
       get: function() {

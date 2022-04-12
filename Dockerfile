@@ -27,6 +27,8 @@ LABEL org.label-schema.build-date="${build_date}"
 ENV APP_ENV=production
 ENV APP_VERSION=${build_version}
 ENV APP_BUILD_ID=${build_id}
+ENV VUE_APP_I18N_LOCALE=en
+ENV VUE_APP_I18N_FALLBACK_LOCALE=en
 
 WORKDIR /app
 EXPOSE 8080
