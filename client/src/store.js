@@ -6,8 +6,9 @@ Vue.use(Vuex)
 // ORM/Axios
 import VuexORM, {Query} from '@vuex-orm/core'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
-import axios from 'axios'
-VuexORM.use(VuexORMAxios, {axios})
+import Axios from 'axios'
+// Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
+VuexORM.use(VuexORMAxios, {axios: Axios.create()})
 
 import {VUE_APP_LOCALSTORAGE_KEY_PREFIX} from '@/config'
 
