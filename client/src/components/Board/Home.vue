@@ -2,11 +2,11 @@
   <div>
     <empty-state>
       <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
-      <template v-slot:title>Create a shopping list</template>
-      <template v-slot:subtitle>You will then be able to share it with relatives and work with it.</template>
+      <template v-slot:title>{{ $t('board-home-nav.title') }}</template>
+      <template v-slot:subtitle>{{ $t('board-home-nav.subtitle') }}</template>
       <template v-slot:buttons>
         <v-btn :to="{name: 'newList'}"
-               color="primary">Create a list</v-btn>
+               color="primary">{{ $t('board-home-nav.button') }}</v-btn>
       </template>
     </empty-state>
   </div>

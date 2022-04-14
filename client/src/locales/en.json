@@ -1,6 +1,7 @@
 {
   "app-name": "Our Shopping List",
   "back": "Retour",
+  "close": "Close",
   "cancel": "Cancel",
   "delete": "Delete",
   "save": "Save",
@@ -37,8 +38,10 @@
     },
     "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
   },
-  "board": {
-
+  "board-home-nav": {
+    "title": "Create a shopping list",
+    "subtitle": "You will then be able to share it with relatives and work with it.",
+    "button": "Create a list"
   },
   "list": {
     "not-found": {
@@ -67,6 +70,9 @@
       "add-button": "Add"
     }
   },
+  "list-nav": {
+
+  },
   "item": {
     "empty-qty-label": "(no quantity specified)",
     "input": {
@@ -78,7 +84,7 @@
   },
   "edit-list-dialog": {
     "existing-title": "Edit List",
-    "new-title": "New List",
+    "new-title": "(New List)",
     "name-input": "Name",
     "creation-date-label": "Creation Date"
   },

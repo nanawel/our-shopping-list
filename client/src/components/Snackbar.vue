@@ -8,7 +8,7 @@
           text
           v-bind="attrs"
           @click="close">
-          Close
+          {{ $t('close') }}
         </v-btn>
       </template>
   </v-snackbar>

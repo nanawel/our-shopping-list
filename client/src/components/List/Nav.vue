@@ -28,7 +28,7 @@
       @keydown.esc="onCancelListForm">
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          <span>Edit List</span>
+          <span>{{ $t('edit-list-dialog.existing-title') }}</span>
         </v-card-title>
 
         <v-card-text>
@@ -47,19 +47,19 @@
             color="red"
             plain
             @click="onDeleteListForm">
-            Delete
+            {{ $t('delete') }}
           </v-btn>
           <v-btn
             color="grey"
             plain
             @click="onCancelListForm">
-            Cancel
+            {{ $t('cancel') }}
           </v-btn>
           <v-btn
             color="primary"
             depressed
             @click="onSaveListForm">
-            Save
+            {{ $t('save') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -88,7 +88,7 @@ export default {
       get: function() {
         return this.listModel && this.listModel.name
           ? this.listModel.name
-          : '(New list)'
+          : self.$t('edit-list-dialog.new-title')
       }
     },
     listModel: {
@@ -127,7 +127,7 @@ export default {
         .then(callback)
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg("Could not save list :(")
+          self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
     deleteList(list, callback) {
@@ -138,7 +138,7 @@ export default {
         .then(callback)
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg("Could not delete list :(")
+          self.$snackbar.msg(self.$t('errors.list.delete'))
         })
     },
 
@@ -156,7 +156,7 @@ export default {
     },
     onDeleteListForm() {
       const self = this
-      if (confirm('Are you sure?')) {
+      if (confirm(self.$t('confirmation-question'))) {
         this.deleteList(this.editionListModel, function() {
           self.closeEditListForm()
         })
