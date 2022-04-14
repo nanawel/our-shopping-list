@@ -28,7 +28,7 @@
     }
   },
   "home": {
-    "title": "Ouvrir le tableau",
+    "title": "Ouvrir un tableau",
     "subtitle": "Un tableau contient une ou plusieurs listes.",
     "input": {
       "board-name": "Nom"
