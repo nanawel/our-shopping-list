@@ -1,9 +1,23 @@
 {
   "app-name": "Our Shopping List",
   "back": "Retour",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "save": "Save",
+  "confirmation-question": "Are you sure?",
   "errors": {
     "board": {
       "invalid-name": "Invalid board name!"
+    },
+    "list": {
+      "load": "Could not load list :(",
+      "save": "Could not save list :(",
+      "delete": "Could not delete list :("
+    },
+    "item": {
+      "load": "Could not load item :(",
+      "save": "Could not save item :(",
+      "delete": "Could not delete item :("
     }
   },
   "menu-nav": {
@@ -27,7 +41,31 @@
 
   },
   "list": {
-
+    "not-found": {
+      "title": "List not found!",
+      "subtitle": "This list does not exist (anymore?).",
+      "button": "Create a list"
+    },
+    "new": {
+      "title": "Name your list",
+      "input-placeholder": "My shopping list...",
+      "button": "Create"
+    },
+    "new-item": {
+      "subtitle": "This list is empty.",
+      "button": "New item"
+    },
+    "all-checked": {
+      "subtitle": "All items are checked!"
+    },
+    "no-results": {
+      "title": "No results",
+      "subtitle": "Click \"Add\" to create a new item."
+    },
+    "search-bar": {
+      "input-label": "Search or add a new item",
+      "add-button": "Add"
+    }
   },
   "item": {
     "empty-qty-label": "(no quantity specified)",
@@ -37,5 +75,12 @@
       "details": "Details"
     },
     "last-checked-label": "Last checked: %{date}"
+  },
+  "edit-item-dialog": {
+    "existing-title": "Edit Item",
+    "new-title": "New Item",
+    "form": {
+      "delete-button": "Delete"
+    }
   }
 }

@@ -4,10 +4,10 @@
     <template v-if="!listModel">
       <empty-state>
         <template v-slot:icon-name>mdi-alert-octagon-outline</template>
-        <template v-slot:title>List not found!</template>
-        <template v-slot:subtitle>This list does not exist (anymore).</template>
+        <template v-slot:title>{{ $t('list.not-found.title') }}</template>
+        <template v-slot:subtitle>{{ $t('list.not-found.subtitle') }}</template>
         <template v-slot:buttons>
-          <v-btn @click="newList" color="primary">Create a list</v-btn>
+          <v-btn @click="newList" color="primary">{{ $t('list.not-found.button') }}</v-btn>
         </template>
       </empty-state>
     </template>
@@ -18,17 +18,17 @@
           <v-col>
             <div v-cloak>
               <v-icon size="8em" color="teal lighten-3">mdi-format-list-bulleted-type</v-icon>
-              <h1>Name your list</h1>
+              <h1>{{ $t('list.new.title') }}</h1>
               <v-text-field
                 ref="newListNameInput"
                 autocapitalize="sentences"
                 v-model="listModel.name"
-                placeholder="My shopping list..."
+                :placeholder="$t('list.new.input-placeholder')"
                 @keydown.enter="saveList"/>
               <div class="btn-wrapper">
                 <v-btn v-if="listModel.name.length > 0"
                        class="md-raised md-primary"
-                       @click="saveList">Create</v-btn>
+                       @click="saveList">{{ $t('list.new.button') }}</v-btn>
               </div>
             </div>
           </v-col>
@@ -41,9 +41,9 @@
         <empty-state>
           <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
           <template v-slot:title>{{ listModel.name }}</template>
-          <template v-slot:subtitle>This list is empty.</template>
+          <template v-slot:subtitle>{{ $t('list.new-item.subtitle') }}</template>
           <template v-slot:buttons>
-            <v-btn @click="newItem" color="primary">New item</v-btn>
+            <v-btn @click="newItem" color="primary">{{ $t('list.new-item.button') }}</v-btn>
           </template>
         </empty-state>
       </div>
@@ -54,7 +54,7 @@
         <empty-state key="empty-all-checked">
           <template v-slot:icon-name>mdi-check-outline</template>
           <template v-slot:title>{{ listModel.name }}</template>
-          <template v-slot:subtitle>All items are checked!</template>
+          <template v-slot:subtitle>{{ $t('list.all-checked.subtitle') }}</template>
         </empty-state>
       </div>
     </template>
@@ -63,9 +63,9 @@
       <div class="list-wrapper">
         <empty-state key="empty-no-results"
                      v-show="items.length === 0 && this.searchString">
-          <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
-          <template v-slot:title>No results</template>
-          <template v-slot:subtitle>Click "Add" to create a new item.</template>
+          <template v-slot:icon-name>mdi-cancel</template>
+          <template v-slot:title>{{ $t('list.no-results.title') }}</template>
+          <template v-slot:subtitle>{{ $t('list.no-results.subtitle') }}</template>
         </empty-state>
 
         <DynamicScroller
@@ -104,7 +104,7 @@
           name="new_item_name"
           id="new_item_name"
           ref="searchInput"
-          label="Search or add a new item"
+          :label="$t('list.search-bar.input-label')"
           autocomplete="off"
           prepend-icon="mdi-magnify"
           clearable
@@ -119,7 +119,7 @@
           :disabled="this.searchString.length === 0"
           @click="submitSearchInput">
           <v-icon>mdi-plus</v-icon>
-          <span>Add</span>
+          <span>{{ $t('list.search-bar.add-button') }}</span>
         </v-btn>
       </v-footer>
     </div>
@@ -131,8 +131,8 @@
       @keydown.esc="onCancelItemForm">
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          <span v-if="editionItemModel && editionItemModel._id">Edit Item</span>
-          <span v-else>New Item</span>
+          <span v-if="editionItemModel && editionItemModel._id">{{ $t('edit-item-dialog.existing-title') }}</span>
+          <span v-else>{{ $t('edit-item-dialog.new-title') }}</span>
         </v-card-title>
 
         <v-card-text>
@@ -152,19 +152,19 @@
             color="red"
             plain
             @click="onDeleteItemForm">
-            Delete
+            {{ $t('delete') }}
           </v-btn>
           <v-btn
             color="grey"
             plain
             @click="onCancelItemForm">
-            Cancel
+            {{ $t('cancel') }}
           </v-btn>
           <v-btn
             color="primary"
             depressed
             @click="onSaveItemForm">
-            Save
+            {{ $t('save') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -353,7 +353,7 @@ export default {
         })
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg('Could not save list :(')
+          self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
     checkSync() {
@@ -398,7 +398,7 @@ export default {
         .then(callback)
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg('Could not save item :(')
+          self.$snackbar.msg(self.$t('errors.item.save'))
         })
     },
     deleteItem(item, callback) {
@@ -409,7 +409,7 @@ export default {
         .then(callback)
         .catch((e) => {
           console.error(e)
-          self.$snackbar.msg('LIST.Could not delete item :(')
+          self.$snackbar.msg(self.$t('errors.item.delete'))
         })
     },
     toggleCheckedItem(item) {
@@ -475,7 +475,7 @@ export default {
     onDeleteItemForm() {
       console.log('onDeleteItemForm()', this.editionItemModel)
       const self = this
-      if (confirm('Are you sure?')) {
+      if (confirm(this.$t('confirmation-question'))) {
         if (this.editionItemModel && this.editionItemModel._id) {
           this.deleteItem(this.editionItemModel, function() {
             self.closeEditItemForm()
