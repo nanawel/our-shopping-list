@@ -88,7 +88,7 @@ export default {
       get: function() {
         return this.listModel && this.listModel.name
           ? this.listModel.name
-          : self.$t('edit-list-dialog.new-title')
+          : this.$t('edit-list-dialog.new-title')
       }
     },
     listModel: {

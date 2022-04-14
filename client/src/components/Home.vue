@@ -28,7 +28,7 @@
       </template>
       <template v-slot:footer v-if="lastBoardModel">
         <router-link :to="{name: 'board', params: {boardSlug: lastBoardModel.slug}}">
-          <span>{{ $t('home.reopen-last-board', {boardName: lastBoardModel.name}) }}</span>
+          <span v-html="$t('home.reopen-last-board', {boardName: lastBoardModel.name})"></span>
         </router-link>
         <v-btn @click="onClearLastBoard"
           icon><v-icon>mdi-close-circle-outline</v-icon></v-btn>

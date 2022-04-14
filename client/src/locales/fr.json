@@ -1,9 +1,95 @@
 {
+  "app-name": "Our Shopping List",
   "back": "Retour",
+  "close": "Fermer",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "save": "Enregistrer",
+  "confirmation-question": "Êtes-vous sûr(e)?",
+  "errors": {
+    "board": {
+      "invalid-name": "Nom de tableau invalide !"
+    },
+    "list": {
+      "load": "Impossible de charger la liste :(",
+      "save": "Impossible d'enregistrer la liste :(",
+      "delete": "Impossible de supprimer la liste :("
+    },
+    "item": {
+      "load": "Impossible de charger l'article :(",
+      "save": "Impossible d'enregistrer l'article :(",
+      "delete": "Impossible de supprimer l'article :("
+    }
+  },
   "menu-nav": {
     "item": {
       "new-list": "Nouvelle liste...",
       "about": "À propos"
     }
+  },
+  "home": {
+    "title": "Ouvrir le tableau",
+    "subtitle": "Un tableau contient une ou plusieurs listes.",
+    "input": {
+      "board-name": "Nom"
+    },
+    "button": {
+      "open-board": "Ouvrir le tableau"
+    },
+    "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
+  },
+  "board-home-nav": {
+    "title": "Créer une liste de courses",
+    "subtitle": "Vous pourrez ensuite la partager avec vos proches et travailler avec.",
+    "button": "Créer une liste"
+  },
+  "list": {
+    "not-found": {
+      "title": "Liste introuvable !",
+      "subtitle": "Cette liste n'existe pas (plus ?)",
+      "button": "Créer une liste"
+    },
+    "new": {
+      "title": "Nommez votre liste",
+      "input-placeholder": "Ma liste de courses...",
+      "button": "Créer"
+    },
+    "new-item": {
+      "subtitle": "Cette liste est vide.",
+      "button": "Nouvel article"
+    },
+    "all-checked": {
+      "subtitle": "Tous les articles sont cochés !"
+    },
+    "no-results": {
+      "title": "Aucun résultat",
+      "subtitle": "Cliquez sur \"Ajouter\" pour créer un nouvel article."
+    },
+    "search-bar": {
+      "input-label": "Recherchez ou ajoutez un article",
+      "add-button": "Ajouter"
+    }
+  },
+  "list-nav": {
+
+  },
+  "item": {
+    "empty-qty-label": "(quantité non précisée)",
+    "input": {
+      "name": "Nom",
+      "qty": "Quantité",
+      "details": "Détails"
+    },
+    "last-checked-label": "Coché la dernière fois : %{date}"
+  },
+  "edit-list-dialog": {
+    "existing-title": "Modifier la liste",
+    "new-title": "(Nouvelle liste)",
+    "name-input": "Nom",
+    "creation-date-label": "Date de création"
+  },
+  "edit-item-dialog": {
+    "existing-title": "Modifier l'article",
+    "new-title": "Nouvel article"
   }
 }
