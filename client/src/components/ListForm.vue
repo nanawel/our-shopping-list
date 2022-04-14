@@ -7,14 +7,14 @@
             <v-text-field
               name="name"
               ref="nameInput"
-              label="Name"
+              :label="$t('edit-list-dialog.name-input')"
               autocapitalize="sentences"
               autocomplete="off"
               v-model="model.name" />
             <v-text-field
               name="creationDate"
-              label="Creation Date"
-              v-model="model.creationDate"
+              :label="$t('edit-list-dialog.creation-date-label')"
+              v-model="model.createdAt"
               :disabled="true" />
           </v-col>
         </v-row>

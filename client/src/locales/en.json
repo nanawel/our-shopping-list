@@ -76,11 +76,14 @@
     },
     "last-checked-label": "Last checked: %{date}"
   },
+  "edit-list-dialog": {
+    "existing-title": "Edit List",
+    "new-title": "New List",
+    "name-input": "Name",
+    "creation-date-label": "Creation Date"
+  },
   "edit-item-dialog": {
     "existing-title": "Edit Item",
-    "new-title": "New Item",
-    "form": {
-      "delete-button": "Delete"
-    }
+    "new-title": "New Item"
   }
 }
