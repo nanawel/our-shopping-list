@@ -5,7 +5,7 @@ import App from '@/App.vue'
 Vue.config.productionTip = false
 
 // Vue i18n
-import i18n from '@/service/i18n'
+import i18n from '@/i18n'
 
 // Vuetify
 import vuetify from '@/plugins/vuetify'
