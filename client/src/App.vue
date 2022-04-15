@@ -15,7 +15,7 @@
       <v-overlay
         :value="showNotConnectedOverlay">
         <v-btn color="error">
-          Not connected
+          {{ $t('errors.overlay.not-connected') }}
         </v-btn>
       </v-overlay>
     </v-app>

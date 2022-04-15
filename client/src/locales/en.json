@@ -19,6 +19,9 @@
       "load": "Could not load item :(",
       "save": "Could not save item :(",
       "delete": "Could not delete item :("
+    },
+    "overlay": {
+      "not-connected": "Not connected"
     }
   },
   "menu-nav": {

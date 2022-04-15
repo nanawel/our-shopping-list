@@ -19,6 +19,9 @@
       "load": "Impossible de charger l'article :(",
       "save": "Impossible d'enregistrer l'article :(",
       "delete": "Impossible de supprimer l'article :("
+    },
+    "overlay": {
+      "not-connected": "Non connecté"
     }
   },
   "menu-nav": {
