@@ -48,6 +48,11 @@
           </v-list-item-icon>
           <v-list-item-title v-if="!isSingleBoardMode && boardModel" v-text="boardModel.name"></v-list-item-title>
           <v-list-item-title v-else>{{ $t('menu-nav.item.new-list') }}</v-list-item-title>
+          <v-btn icon
+            v-if="shouldShowBoardShareButton"
+            @click="onBoardShareButtonClick">
+            <v-icon>mdi-share-variant-outline</v-icon>
+          </v-btn>
         </v-list-item>
 
         <v-divider/>
@@ -111,6 +116,11 @@ export default {
           .orderBy('name')
           .get()
       }
+    },
+    shouldShowBoardShareButton: {
+      get: function () {
+        return typeof window.navigator.share === 'function'
+      }
     }
   },
   created() {
@@ -133,7 +143,7 @@ export default {
     })
   },
   methods: {
-    onRefreshClick: function() {
+    onRefreshClick() {
       this.$root.forceRefresh()
     },
     checkSync() {
@@ -148,6 +158,14 @@ export default {
           })
       }
     },
+    onBoardShareButtonClick() {
+      const boardUrl = this.$router.resolve({name: 'currentBoard'});
+      console.log('Sharing', boardUrl);
+      window.navigator.share({
+        text: this.$store.state.board.currentBoard.name,
+        url: boardUrl
+      });
+    }
   },
 }
 </script>
