@@ -1,4 +1,8 @@
+ifneq ("$(wildcard docker-compose.dev.override.yml)","")
 dev-%: export COMPOSE_FILE = docker-compose.dev.yml:docker-compose.dev.override.yml
+else
+dev-%: export COMPOSE_FILE = docker-compose.dev.yml
+endif
 dev-%: export NODE_BIN = /app/node_modules/nodemon/bin/nodemon.js
 dev-%:
 	$(MAKE) $*
@@ -13,7 +17,7 @@ init:
 		--rm \
 		--name osl_app_install \
 		-u $$(id -u) app \
-		bash -c 'yarn install && cd client && yarn install'
+		sh -c 'yarn install && cd client && yarn install'
 
 .PHONY: config
 config:
@@ -66,4 +70,6 @@ logs-follow:
 
 .PHONY: watch
 watch:
-	docker-compose exec app sh -c 'cd /app/client && yarn serve'
+	docker-compose exec \
+		-u $$(id -u) app \
+		sh -c 'cd /app/client && yarn serve'

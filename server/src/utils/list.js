@@ -10,12 +10,17 @@ module.exports = {
     return ListModel.find(filter);
   },
   /**
-   * @param {Array} listIds
-   * @param {Boolean} force
+   * @param {Array|String} listIds
+   * @param {String} boardSlug
    * @returns {Promise<Query<UpdateResult, any, {}, any>>}
    */
-  async moveToSingleBoard(listIds, force) {
+  async moveToBoard(listIds, boardSlug) {
     const withListFilter = listIds && listIds.length;
+
+    //
+    // TODO
+    //
+
     let targetLists;
     if (withListFilter) {
       targetLists = await ListModel.find({_id: {$in: listIds}});

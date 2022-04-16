@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 const uuid = require('uuid');
 const slugify = require('slugify');
 
@@ -10,6 +11,12 @@ const BoardSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
+    /**
+     * Not a validator here, only used to build an index. See also uniqueValidator plugin.
+     * @see https://mongoosejs.com/docs/validation.html#the-unique-option-is-not-a-validator
+     * @see https://www.npmjs.com/package/mongoose-unique-validator
+     */
+    unique: true,
     immutable: true,
     required: true,
     trim: true
@@ -39,5 +46,6 @@ BoardSchema.pre('validate', function() {
   }
   this.slug = slugify(this.slug, {lower: true});
 });
+BoardSchema.plugin(uniqueValidator);
 
 module.exports = BoardSchema;

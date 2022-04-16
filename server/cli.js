@@ -4,6 +4,7 @@ const yargs = require('yargs');
 require('dotenv').config();
 
 require('./src/app');
+const {VUE_APP_SINGLEBOARD_ID, VUE_APP_SINGLEBOARD_SLUG} = require('./src/config');
 const BoardModel = require('./src/board/model');
 const ListModel = require('./src/list/model');
 const ListUtils = require('./src/utils/list');
@@ -16,6 +17,48 @@ yargs
 
   ///////////////////////////////////////////////
   // BOARDS
+  .command(
+    'board:create [name]',
+    'Create a new board from a name.',
+    (yargs) => {
+      yargs
+        .positional('name', {
+          type: 'string',
+          describe: 'Name of the board (optional if slug is specified)',
+        })
+        .option('slug', {
+          alias: 's',
+          type: 'string',
+          describe: 'Force slug when creating the board (otherwise derived from name).'
+        })
+        .option('singleboard', {
+          alias: 'S',
+          type: 'boolean',
+          describe: 'Create the special board for "singleboard mode".'
+        });
+    }, async function (argv) {
+      console.log(argv);
+      const boardModel = new BoardModel(
+        argv.singleboard
+        ? {
+            _id: VUE_APP_SINGLEBOARD_ID,
+            name: argv.name,
+            slug: VUE_APP_SINGLEBOARD_SLUG
+          }
+        : {
+            name: argv.name,
+            slug: argv.slug || null
+          });
+      await boardModel.save()
+        .then(() => {
+          ConsoleUtils.json(boardModel);
+        })
+        .catch(function (err) {
+          console.error(err);
+          yargs.exit(1);
+        });
+      yargs.exit(0);
+    })
   .command(
     'board:find [filter]',
     'Find and print boards as JSON.',
@@ -62,22 +105,31 @@ yargs
       yargs.exit(0);
     })
   .command(
-    'list:migrate-to-singleboard [lists..]',
-    'Move lists to the special board only available in "singleboard" mode.',
+    'list:move-to-board [lists..]',
+    'Move lists to the specified board.',
     (yargs) => {
       yargs
         .positional('lists', {
           type: 'string',
-          describe: 'Lists ID(s). Leave empty to process all lists with no linked boards.',
+          describe: 'Lists ID(s). Leave empty when using --all.',
         })
-        .option('force', {
-          alias: 'f',
+        .option('board', {
+          type: 'string',
+          describe: 'Target board slug. Leave empty when using --singleboard.'
+        })
+        .option('all', {
           type: 'boolean',
           default: false,
-          describe: '/!\\ DANGEROUS /!\\ Force migration for *all* lists when none provided.'
+          describe: 'Force migration for *all* existing lists when none provided.'
+        })
+        .option('singleboard', {
+          type: 'boolean',
+          default: false,
+          describe: 'Move lists to the special board used in "singleboard" mode.'
         });
     }, async function (argv) {
-      await ListUtils.moveToSingleBoard(argv.lists, argv.force)
+      const boardSlug = argv.singleboard ? VUE_APP_SINGLEBOARD_SLUG : argv.board;
+      await ListUtils.moveToBoard(argv.all ? '*' : argv.lists, boardSlug)
         .then((res) => {
           ConsoleUtils.json(res);
         })

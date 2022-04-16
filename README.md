@@ -42,30 +42,27 @@ the steps below:
 
 ### If you want to keep using one single board on your instance (just like on v1)
 
-> WORK IN PROGRESS
-  
   - Make sure you set the `VUE_APP_SINGLEBOARD_MODE` to `1`
   - Once started, use the CLI to migrate existing lists to the special board
     used as common parent for lists in "singleboard" mode.
     ```shell
     docker-compose exec app node cli.js board:create --singleboard
-    docker-compose exec app node cli.js list:move-to-board --singleboard
-    ... WIP ...
+    docker-compose exec app node cli.js list:move-to-board --all --singleboard
     ```
   - Use the application as usual (you might have to clear your browser's cache
     to make sure there's no invalid data left).
 
 ### If you want to enable the new _boards_ feature and migrate your existing lists to a dedicated board
 
-> WORK IN PROGRESS
-
   - Make sure `VUE_APP_SINGLEBOARD_MODE` is **not set** or set to `0`
   - Create a new board with the name of your choice
     ```shell
-    docker-compose exec app node cli.js board:create "My new board"
-    docker-compose exec app node cli.js list:move-to-board 
-    ... WIP ...
+    # Get the created board's slug from the output and use it in the following command
+    docker-compose exec app node cli.js board:create my-board
+    docker-compose exec app node cli.js list:move-to-board --all --board my-board
     ```
+  - Open the application, and from the home screen open the board you've just created
+    to find your lists.
 
 ## :frame_photo: Screenshots
 
