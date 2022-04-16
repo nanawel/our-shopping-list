@@ -13,7 +13,7 @@ init:
 		--rm \
 		--name osl_app_install \
 		-u $$(id -u) app \
-    	bash -c 'cd /app && yarn install && cd client && yarn install'
+		bash -c 'yarn install && cd client && yarn install'
 
 .PHONY: config
 config:
@@ -45,12 +45,12 @@ build:
 
 .PHONY: shell
 shell:
-	docker-compose exec -u $$(id -u) app bash -c 'cd /app && bash'
+	docker-compose exec -u $$(id -u) app bash
 
 .SILENT:
 .PHONY: cli
 cli:
-	@docker-compose exec -u $$(id -u) app bash -c "cd /app && ./cli.js $(cmd)"
+	@docker-compose exec -u $$(id -u) app node ./cli.js $(cmd)
 
 .PHONY: ps
 ps:

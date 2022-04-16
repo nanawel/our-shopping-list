@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
+require('dotenv').config();
 
 require('./src/app');
 const BoardModel = require('./src/board/model');
 const ListModel = require('./src/list/model');
+const ListUtils = require('./src/utils/list');
 const ItemModel = require('./src/item/model');
 const ItemUtils = require('./src/utils/item');
 const ConsoleUtils = require('./src/utils/console');
@@ -12,6 +14,7 @@ const ConsoleUtils = require('./src/utils/console');
 yargs
   .usage('$0 <cmd> [args]')
 
+  ///////////////////////////////////////////////
   // BOARDS
   .command(
     'board:find [filter]',
@@ -35,6 +38,7 @@ yargs
       yargs.exit(0);
     })
 
+  ///////////////////////////////////////////////
   // LISTS
   .command(
     'list:find [filter]',
@@ -57,7 +61,34 @@ yargs
         });
       yargs.exit(0);
     })
+  .command(
+    'list:migrate-to-singleboard [lists..]',
+    'Move lists to the special board only available in "singleboard" mode.',
+    (yargs) => {
+      yargs
+        .positional('lists', {
+          type: 'string',
+          describe: 'Lists ID(s). Leave empty to process all lists with no linked boards.',
+        })
+        .option('force', {
+          alias: 'f',
+          type: 'boolean',
+          default: false,
+          describe: '/!\\ DANGEROUS /!\\ Force migration for *all* lists when none provided.'
+        });
+    }, async function (argv) {
+      await ListUtils.moveToSingleBoard(argv.lists, argv.force)
+        .then((res) => {
+          ConsoleUtils.json(res);
+        })
+        .catch(function (err) {
+          console.error(err);
+          yargs.exit(1);
+        });
+      yargs.exit(0);
+    })
 
+  ///////////////////////////////////////////////
   // ITEMS
   .command(
     'item:find [filter]',
@@ -117,14 +148,14 @@ yargs
                     console.log('Found "from" list', listTo);
                     ItemUtils.moveToList(listFrom.items, listTo)
                       .then((res) => {
-                        console.log(res);
+                        ConsoleUtils.json(res);
                       });
                   }
                 });
             } else {
               return ItemUtils.moveToList(argv.items, listTo)
                 .then((res) => {
-                  console.log(res);
+                  ConsoleUtils.json(res);
                 });
             }
           }

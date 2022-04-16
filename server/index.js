@@ -2,6 +2,8 @@
  * Our Shopping List Server
  */
 
+require('dotenv').config();
+
 const LISTEN_PORT  = process.env.LISTEN_PORT || 8080;
 
 const {http} = require('./src/app');

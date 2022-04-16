@@ -3,7 +3,8 @@ version: '3.2'
 services:
   app:
     image: node:${node_version}${node_variant_dev}
-    command: sh -c 'cd /app && ${NODE_BIN:-node} index.js'
+    working_dir: /app
+    command: '${NODE_BIN:-node} index.js'
     ports:
       - '8080:8080'
       - '9229:9229'   # Debugger
@@ -12,7 +13,6 @@ services:
       - ./client:/app/client
     environment:
       NODE_ENV: development
-      #VUE_APP_SINGLEBOARD_MODE: 0
     depends_on:
       - mongodb
 
