@@ -30,7 +30,32 @@ The current implementation provides the following features:
 But, at this date it lacks the following:
 - Full PWA support with offline mode and deferred sync
 
-## :point_up: Instructions when migrating from v1 to v2
+## ⭐ New in v2: Boards feature
+
+Before v2, **all of the lists** on an instance were available to **all users**.
+
+Version 2 introduces a new feature called "boards". It's simply a way to group
+lists together under a common name. That name can then be shared so that
+people use the lists from a board collaboratively.
+
+But, you might want to disable that feature and keep using a unique board for
+your whole instance. In that case, just use the provided
+`VUE_APP_SINGLEBOARD_MODE` environment variable.
+
+**But have no fear, you can always:**
+
+- Switch from _singleboard_ mode to multi-board
+  - In that case you'll have to
+    create a new board and choose it as target for existing lists with the
+    provided CLI tool.
+- Switch from multi-board mode to _singleboard_
+  - In that case you can choose which lists to migrate to the special
+    unique board, but you'll lose access to all other lists (they are not
+    deleted, just not accessible anymore)
+
+> See next § for instructions on how to enable one mode or the other.
+
+## ☝ Instructions when migrating from v1 to v2
 
 Version 2 has added the _multiboard_ feature which changes the default mode
 the application runs into.
@@ -38,7 +63,7 @@ the application runs into.
 If you already had a working v1, and would like to upgrade to v2 please follow
 the steps below:
 
-> **Back up your data before proceeding!**
+> ⚠ **Back up your data before proceeding!**
 
 ### If you want to keep using one single board on your instance (just like on v1)
 
@@ -64,11 +89,11 @@ the steps below:
   - Open the application, and from the home screen open the board you've just created
     to find your lists.
 
-## :frame_photo: Screenshots
+## 🖼 Screenshots
 
 ### Mobile
 
-> Screenshots are from v1, but v2 looks mostly the same.
+> ☝ Screenshots are from v1, but v2 looks mostly the same.
 
 <a href="doc/mobile-01.png">
   <img src="doc/mobile-01.png" height="240" />
@@ -89,7 +114,7 @@ the steps below:
 
 ### Desktop
 
-> Screenshots are from v1, but v2 looks mostly the same.
+> ☝ Screenshots are from v1, but v2 looks mostly the same.
 
 <a href="doc/desktop-01.png">
   <img src="doc/desktop-01.png" height="240" />
@@ -108,9 +133,9 @@ the steps below:
   </a>
 </details>
 
-## :package: Installation
+## 📦 Installation
 
-### :whale: With Docker
+### 🐋 With Docker
 
 With a running [MongoDB 4.x](https://hub.docker.com/_/mongo) container as
 `mymongo` on the host:
@@ -123,12 +148,12 @@ docker run --detach \
   nanawel/our-shopping-list
 ```
 
-### :whale: With `docker-compose`
+### 🐋 With `docker-compose`
 
 Use the provided [`docker-compose.yml`](doc/docker-compose.yml) and adapt it to
 your needs.
 
-Then to run:
+Then to start the containers:
 
 ```shell
 docker-compose up -d
@@ -147,7 +172,7 @@ docker-compose up -d
 
 > MongoDB authentication is not supported yet.
 
-### :twisted_rightwards_arrows: Notes for reverse-proxy (SSL offloading)
+### 🗒 Notes for reverse-proxy (SSL offloading)
 
 OSL uses a WebSocket to allow server-to-client communication. So using a
 reverse-proxy to forward the connection implies the presence of the following
@@ -168,12 +193,15 @@ RewriteCond %{HTTP:Upgrade} !=websocket [NC]
 RewriteRule /(.*)           http://127.0.0.1:8080/$1 [P,L]
 ```
 
+Replace `127.0.0.1` and `8080` with the IP of the OSL host if your RP is not
+the host itself and/or if you're using another port.
+
 > Those instructions are given for Apache, but you can easily find the
 > corresponding directives for Nginx with a little search.
 
-## :construction_worker: Developer installation
+## 👷 Developer installation
 
-> :whale: This method also uses Docker, but with the local source files mounted
+> 🐋 This method also uses Docker, but with the local source files mounted
 > into the `node` container.
 
 First of all, clone this project in the directory of your choice. Then from it:
@@ -190,10 +218,11 @@ Now start the Webpack Development Server with
 make dev-watch
 ```
 
-> If you don't, you'll get 504 errors in the console on /sockjs-node/* requests and
-> you won't get hot reloading on changes.
+> If you don't, you'll get 504 errors in the console on `/sockjs-node/*` requests
+> and you won't get hot reloading on changes.
 
 If you want to enter the container, just use
+
 ```shell
 make dev-shell
 ```
