@@ -37,7 +37,6 @@ yargs
           describe: 'Create the special board for "singleboard mode".'
         });
     }, async function (argv) {
-      console.log(argv);
       const boardModel = new BoardModel(
         argv.singleboard
         ? {
@@ -49,6 +48,15 @@ yargs
             name: argv.name,
             slug: argv.slug || null
           });
+
+      // In singleboard mode, check that the board does not already exist and
+      // display a proper message if it does.
+      if (argv.singleboard) {
+        if (await BoardModel.findOne({_id: VUE_APP_SINGLEBOARD_ID, slug: VUE_APP_SINGLEBOARD_SLUG})) {
+          console.info('Nothing to do: the singleboard already exists. Exiting.');
+          yargs.exit(2);
+        }
+      }
       await boardModel.save()
         .then(() => {
           ConsoleUtils.json(boardModel);
@@ -120,7 +128,7 @@ yargs
         .option('all', {
           type: 'boolean',
           default: false,
-          describe: 'Force migration for *all* existing lists when none provided.'
+          describe: '⚠ Force migration for *all* existing lists when none provided.'
         })
         .option('singleboard', {
           type: 'boolean',

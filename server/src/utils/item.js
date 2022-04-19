@@ -2,7 +2,6 @@ const ItemModel = require('../item/model');
 
 module.exports = {
   /**
-   *
    * @param {Item[]|String[]} items
    * @param {List|String} list
    * @returns {Promise<Query<UpdateResult, any, {}, any>>}
