@@ -159,12 +159,16 @@ export default {
       }
     },
     onBoardShareButtonClick() {
-      const boardUrl = this.$router.resolve({name: 'currentBoard'}).href;
-      console.log('Sharing', boardUrl);
-      window.navigator.share({
+      const boardUrl = this.$router.resolve({
+        name: 'board',
+        params: {boardSlug: this.$store.state.board.currentBoard.slug}
+      }).href;
+      const shareArg = {
         text: `${this.$store.state.board.currentBoard.name} | Our Shopping List`,
         url: boardUrl
-      });
+      };
+      console.log('Sharing', shareArg);
+      window.navigator.share(shareArg);
     }
   },
 }
