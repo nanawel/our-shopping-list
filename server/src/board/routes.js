@@ -11,7 +11,8 @@ const onHeadRequest = function (req, res, doc, next) {
       .set('Osl-Entity-Type', BoardModel.modelName)
       .set('Osl-Entity-Id', doc._id);
   } else {
-    res.status(404);
+    res.status(404)
+      .end();
   }
 }
 
