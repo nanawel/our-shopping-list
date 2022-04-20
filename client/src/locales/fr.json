@@ -24,6 +24,9 @@
       "not-connected": "Non connecté"
     }
   },
+  "notice": {
+    "application-updated-alert": "L'application a été mise à jour.\nCette page va être rechargée automatiquement."
+  },
   "menu-nav": {
     "item": {
       "new-list": "Nouvelle liste...",

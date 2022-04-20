@@ -1,4 +1,5 @@
 import {sock} from '@/service/socket-io'
+import i18n from '@/i18n'
 import config from '@/config'
 
 const serverHashKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
@@ -19,7 +20,7 @@ export default {
 
           if (shouldRefresh) {
             console.warn('Server version mismatch, reloading app.')
-            alert("The application has been updated.\nThis page will now be reloaded automatically.")
+            alert(i18n.t('notice.application-updated-alert'))
             store.$app.forceRefresh()
             return
           }
