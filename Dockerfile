@@ -18,18 +18,6 @@ ARG build_version
 ARG build_id
 ARG build_date
 
-LABEL org.label-schema.name="Our Shopping List"
-LABEL org.label-schema.vcs-url="https://github.com/nanawel/our-shopping-list"
-LABEL org.label-schema.vendor="Anaël Ollier <nanawel@gmail.com>"
-LABEL org.label-schema.version="${build_version}#${build_id}"
-LABEL org.label-schema.build-date="${build_date}"
-
-ENV APP_ENV=production
-ENV APP_VERSION=${build_version}
-ENV APP_BUILD_ID=${build_id}
-ENV VUE_APP_I18N_LOCALE=en
-ENV VUE_APP_I18N_FALLBACK_LOCALE=en
-
 WORKDIR /app
 EXPOSE 8080
 
@@ -42,3 +30,16 @@ HEALTHCHECK --interval=1m --timeout=20s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:8080/healthcheck || exit 1
 
 CMD [ "node", "index.js" ]
+
+# LABEL + ENV at the end to optimize layers cache during build
+LABEL org.label-schema.name="Our Shopping List"
+LABEL org.label-schema.vcs-url="https://github.com/nanawel/our-shopping-list"
+LABEL org.label-schema.vendor="Anaël Ollier <nanawel@gmail.com>"
+LABEL org.label-schema.version="${build_version}#${build_id}"
+LABEL org.label-schema.build-date="${build_date}"
+
+ENV APP_ENV=production
+ENV APP_VERSION=${build_version}
+ENV APP_BUILD_ID=${build_id}
+ENV VUE_APP_I18N_LOCALE=en
+ENV VUE_APP_I18N_FALLBACK_LOCALE=en
