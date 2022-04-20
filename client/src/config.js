@@ -1,15 +1,12 @@
-const VUE_APP_I18N_LOCALE = process.env.VUE_APP_I18N_LOCALE || 'en'
-const VUE_APP_I18N_FALLBACK_LOCALE = process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en'
-const VUE_APP_I18N_FORCE_LOCALE = !!parseInt(process.env.VUE_APP_I18N_FORCE_LOCALE)
-const VUE_APP_SINGLEBOARD_MODE = !!parseInt(process.env.VUE_APP_SINGLEBOARD_MODE)
-const VUE_APP_SINGLEBOARD_SLUG = process.env.VUE_APP_SINGLEBOARD_SLUG || '_'
-const VUE_APP_LOCALSTORAGE_KEY_PREFIX = process.env.VUE_APP_LOCALSTORAGE_KEY_PREFIX || 'OurShoppingList_'
+const config = {};
+Object.entries(window)
+  .filter(([k]) => {
+    return k.startsWith('VUE_APP_');
+  })
+  .map(([k, v]) => {
+    config[k] = v;
+  });
 
-export {
-  VUE_APP_I18N_LOCALE,
-  VUE_APP_I18N_FALLBACK_LOCALE,
-  VUE_APP_I18N_FORCE_LOCALE,
-  VUE_APP_LOCALSTORAGE_KEY_PREFIX,
-  VUE_APP_SINGLEBOARD_MODE,
-  VUE_APP_SINGLEBOARD_SLUG,
-}
+console.info('Current configuration', config);
+
+export default config

@@ -10,7 +10,7 @@ import Axios from 'axios'
 // Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
 VuexORM.use(VuexORMAxios, {axios: Axios.create()})
 
-import {VUE_APP_LOCALSTORAGE_KEY_PREFIX} from '@/config'
+import config from '@/config'
 
 // Modules
 import version from '@/store/version'
@@ -30,7 +30,7 @@ database.register(List)
 database.register(Item)
 
 const vuexPersistence = new VuexPersistence({
-  key: VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'store',
+  key: config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'store',
   storage: window.localStorage,
   reducer: (state) => {
     let persistedState = Object.assign({}, state)

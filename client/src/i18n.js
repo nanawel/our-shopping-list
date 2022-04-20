@@ -1,12 +1,7 @@
 import Vue from "vue"
 import VueI18n from "vue-i18n"
 
-
-import {
-  VUE_APP_I18N_LOCALE,
-  VUE_APP_I18N_FALLBACK_LOCALE,
-  VUE_APP_I18N_FORCE_LOCALE
-} from '@/config'
+import config from '@/config'
 
 Vue.use(VueI18n)
 
@@ -32,14 +27,14 @@ function loadLocaleMessages() {
 }
 
 function getLocale() {
-  if (VUE_APP_I18N_FORCE_LOCALE) {
-    return VUE_APP_I18N_LOCALE
+  if (config.VUE_APP_I18N_FORCE_LOCALE) {
+    return config.VUE_APP_I18N_LOCALE
   }
   return navigator.language.split('-')[0]
 }
 
 export default new VueI18n({
   locale: getLocale(),
-  fallbackLocale: VUE_APP_I18N_FALLBACK_LOCALE,
+  fallbackLocale: config.VUE_APP_I18N_FALLBACK_LOCALE,
   messages: loadLocaleMessages()
 })

@@ -1,9 +1,23 @@
 const mongoose = require('mongoose');
 const {app} = require('./app');
+const config = require('./config');
 
+/**
+ * Client config at runtime
+ */
+app.get('/config.js', (req, res) => {
+  res.type('application/javascript')
+    .set('Cache-Control', 'must-revalidate')
+    .send('Object.assign(window, ' + JSON.stringify(config) + ');')
+    .end()
+});
+
+/**
+ * Error handling
+ */
 app.use(function (err, req, res, next) {
-  let httpStatus = err.status || 500;
-  let body = {error: err};
+  let httpStatus = err.code || 500;
+  let body = {error: err.stack};
   switch (true) {
     case err instanceof mongoose.Error.ValidationError:
       httpStatus = 400;

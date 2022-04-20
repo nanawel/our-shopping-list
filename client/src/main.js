@@ -4,6 +4,9 @@ import App from '@/App.vue'
 
 Vue.config.productionTip = false
 
+// App config
+import config from '@/config'
+
 // Vue i18n
 import i18n from '@/i18n'
 
@@ -57,7 +60,7 @@ const $app = new Vue({
   },
   computed: {
     isSingleBoardMode: function () {
-      return !!parseInt(process.env.VUE_APP_SINGLEBOARD_MODE)
+      return config.VUE_APP_SINGLEBOARD_MODE
     }
   },
   watch: {

@@ -1,7 +1,7 @@
 import {sock} from '@/service/socket-io'
-import {VUE_APP_LOCALSTORAGE_KEY_PREFIX} from '@/config'
+import config from '@/config'
 
-const serverHashKey = VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
+const serverHashKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
 
 export default {
   install: (Vue, { store }) => {
