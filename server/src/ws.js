@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
       version: SERVER_VERSION,
       buildId: SERVER_BUILD_ID
     };
-    const serverHash = sha1(JSON.stringify(serverVersion + require('./config')));
+    const serverHash = sha1(JSON.stringify(Object.assign({}, serverVersion, require('./config'))));
 
     if (typeof callback === 'function') {
       callback({
