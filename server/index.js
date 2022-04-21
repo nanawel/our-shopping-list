@@ -24,7 +24,7 @@ require('./src/item/routes');
 
 require('./src/healthcheck/routes');
 
-// Error handling routes
+// General and error handling routes
 require('./src/routes');
 
 // ============================================================================
