@@ -22,8 +22,6 @@
     "@vuex-orm/plugin-axios": "^0.9.4",
     "core-js": "^3.6.5",
     "lodash.debounce": "^4.0.8",
-    "sass": "~1.32.11",
-    "sass-loader": "10.1.1",
     "slugify": "^1.6.5",
     "socket.io-client": "^4.0.1",
     "swiper": "^7.4.1",
@@ -46,6 +44,8 @@
     "deepmerge": "^4.2.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "sass": "~1.32.11",
+    "sass-loader": "10.1.1",
     "vue-cli-plugin-vuetify": "~2.4.8",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^4.5.0"
