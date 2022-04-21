@@ -92,7 +92,6 @@
 <script>
 import List from "@/models/List"
 import store from "@/store"
-import {sock} from "@/service/socket-io";
 
 export default {
   name: "Board",
