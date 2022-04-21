@@ -1,4 +1,4 @@
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   pages: {
@@ -15,6 +15,9 @@ module.exports = {
   //     }),
   //   ]
   // },
+  transpileDependencies: [
+    'vuetify'
+  ],
   devServer: {
       disableHostCheck: true,
       port: 8080,
