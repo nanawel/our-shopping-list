@@ -1,4 +1,20 @@
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
+  pages: {
+    index: {
+      entry: 'src/main.js',
+      title: 'Our Shopping List',
+    },
+  },
+  // configureWebpack: {
+  //   plugins: [
+  //     new BundleAnalyzerPlugin({ /* https://www.npmjs.com/package/webpack-bundle-analyzer */
+  //       analyzerMode: 'static',
+  //       analyzerHost: '0.0.0.0'
+  //     }),
+  //   ]
+  // },
   devServer: {
       disableHostCheck: true,
       port: 8080,

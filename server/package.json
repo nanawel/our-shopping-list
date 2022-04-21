@@ -21,7 +21,6 @@
     "list"
   ],
   "dependencies": {
-    "@vue/cli": "^4.5.17",
     "compression": "^1.7.4",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
