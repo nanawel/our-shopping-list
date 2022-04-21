@@ -4,6 +4,7 @@ const MONGODB_DB = process.env.MONGODB_DB     || 'osl';
 
 const mongoose = require('mongoose');
 const express = require("express");
+const compression = require('compression');
 const {VUE_APP_SINGLEBOARD_MODE} = require("./config");
 
 const app = express();
@@ -11,6 +12,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 app.disable('x-powered-by');
+app.use(compression());
 app.use(express.static('client/dist'));
 app.use(express.json());
 
