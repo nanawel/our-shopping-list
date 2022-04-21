@@ -1,5 +1,5 @@
 import eventBus from '@/service/event-bus'
-import {sock} from "@/service/socket-io";
+import {sock} from "@/service/socket-io"
 
 export default {
   install() {

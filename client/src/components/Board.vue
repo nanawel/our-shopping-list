@@ -91,7 +91,8 @@
 
 <script>
 import List from "@/models/List"
-import store from "@/store";
+import store from "@/store"
+import {sock} from "@/service/socket-io";
 
 export default {
   name: "Board",
@@ -127,11 +128,11 @@ export default {
     const self = this
 
     this.$ws.on('connect', () => {
-      self.checkSync()
+      self.sync()
     })
   },
   mounted() {
-    this.checkSync()
+    this.sync()
 
     this.$on('repository_save::before', function (model) {
       if (model instanceof List
@@ -146,10 +147,12 @@ export default {
     onRefreshClick() {
       this.$root.forceRefresh()
     },
-    checkSync() {
+    sync() {
       const self = this
       if (this.boardModel) {
-        console.log('BOARD.checkSync()', this.boardModel._id)
+        console.log('BOARD.sync()', this.boardModel._id)
+
+        this.$ws.emit('join-board', this.boardModel._id)
         this.$repository.checkSync(self.boardModel)
           .then((isSync) => {
             if (!isSync) {
