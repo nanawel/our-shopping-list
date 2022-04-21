@@ -9,7 +9,8 @@ const onHeadRequest = function (req, res, doc, next) {
     res.status(200)
       .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
       .set('Osl-Entity-Type', BoardModel.modelName)
-      .set('Osl-Entity-Id', doc._id);
+      .set('Osl-Entity-Id', doc._id)
+      .end();
   } else {
     res.status(404)
       .end();
