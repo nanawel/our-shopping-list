@@ -3,9 +3,9 @@ const MONGODB_PORT = process.env.MONGODB_PORT || '27017';
 const MONGODB_DB = process.env.MONGODB_DB     || 'osl';
 
 const mongoose = require('mongoose');
-const express = require("express");
+const express = require('express');
 const compression = require('compression');
-const {VUE_APP_SINGLEBOARD_MODE} = require("./config");
+const {VUE_APP_SINGLEBOARD_MODE} = require('./config');
 
 const app = express();
 const http = require('http').Server(app);
@@ -21,13 +21,8 @@ mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
   useUnifiedTopology: true
 });
 
-const router = express.Router()
-if (false) {
-  // TODO: Handle arbitrary route prefix
-  //app.use('/something', router)
-} else {
-  app.use(router)
-}
+const router = express.Router();
+app.use(router);
 
 if (VUE_APP_SINGLEBOARD_MODE) {
   require('./middleware/singleboard')(router);
