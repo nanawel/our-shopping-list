@@ -74,7 +74,7 @@ const $app = new Vue({
   },
   methods: {
     setTitle: function(title) {
-      this.title = title || process.env.APP_TITLE || 'Our Shopping List'
+      this.title = title || config.VUE_APP_TITLE || 'Our Shopping List'
     },
     updateConnectionStatus: function() {
       this.isOnline = navigator.onLine
@@ -95,10 +95,9 @@ const $app = new Vue({
 })
 store.$app = $app
 
-// DEV ONLY
-if (typeof window.webpackHotUpdate !== 'undefined') {
-  // Prevent context menu from popping when using Chrome DevTools
-  window.addEventListener('contextmenu', function(e) {
-    e.preventDefault()
+if (config.VUE_APP_DISABLE_CONTEXTMENU) {
+  // Prevent context menu from popping when using Chrome DevTools with touch-hold event
+  window.addEventListener('contextmenu', function(ev) {
+    ev.preventDefault()
   }, true)
 }
