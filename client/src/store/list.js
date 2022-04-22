@@ -15,7 +15,8 @@ const loadList = function (listId) {
 }
 
 Query.on('afterDelete', function (model) {
-  if (model instanceof List
+  if (model
+    && model instanceof List
     && store.state.list.currentList._id === model._id
   ) {
     store.commit('list/setCurrentList', {'null': true})

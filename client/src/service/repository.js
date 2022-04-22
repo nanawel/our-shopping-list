@@ -101,14 +101,20 @@ export default new (() => {
         }
       })
     },
-    sync(model) {
+    async sync(model) {
       console.log('$repository::sync', model)
 
       if (model._id) {
         const schema = this.findSchemaByModel(model)
 
-        schema.api()
+        return schema.api()
           .get(`/${schema.entity}/${model._id}`)
+          .catch((e) => {
+            // The model does not seem to exist (anymore) so remove it from local store
+            if (e.response && e.response.status === 404) {
+              schema.delete(model._id)
+            }
+          })
       }
     }
   }
