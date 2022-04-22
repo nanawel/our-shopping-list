@@ -18,7 +18,11 @@ import store from '@/store'
 
 // Vue Touch Events
 import Vue2TouchEvents from 'vue2-touch-events'
-Vue.use(Vue2TouchEvents)
+Vue.use(Vue2TouchEvents, {
+  // Need to override the default namespace "touch" because "v-touch:*" is already used by Vuetify
+  // See https://vuetifyjs.com/en/directives/touch/
+  namespace: 'touch-event'
+})
 
 // Vue Virtual Scroller
 import VueVirtualScroller from 'vue-virtual-scroller'
@@ -90,3 +94,11 @@ const $app = new Vue({
   }
 })
 store.$app = $app
+
+// DEV ONLY
+if (typeof window.webpackHotUpdate !== 'undefined') {
+  // Prevent context menu from popping when using Chrome DevTools
+  window.addEventListener('contextmenu', function(e) {
+    e.preventDefault()
+  }, true)
+}

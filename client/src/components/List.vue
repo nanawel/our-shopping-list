@@ -85,7 +85,7 @@
               <ItemView
                 :key="item._id"
                 :item="item"
-                v-touch:touchhold="onTouchHoldItem(item)"
+                v-touch-event:touchhold="onTouchHoldItem(item)"
                 @click="onClickItem(item)"
                 @editClick="onEditItem(item)"
                 @doubleClick="onDoubleClickItem(item)"
@@ -445,7 +445,9 @@ export default {
       const self = this
       return function (ev) {
         console.log('LIST.onTouchHoldItem()', ev, item)
+        ev.preventDefault()
         self.editItem(item)
+        return false
       }
     },
     onClickItem(item) {
