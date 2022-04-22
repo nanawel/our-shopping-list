@@ -14,6 +14,7 @@
               <v-text-field
                 name="name"
                 :label="$t('home.input.board-name')"
+                autocomplete="osl-board-name"
                 ref="boardNameInput"
                 v-model="boardNameInput"
                 @keydown.enter="onOpenBoard"/>
