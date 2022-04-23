@@ -1,43 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import config from '@/config'
 
 // Components
-// Using closures instead of "import ... from ..." to speed up initial loading
-const Home = () => import('../components/Home.vue')
-const NavDefault = () => import('../components/Nav/Default.vue')
-const List = () => import('../components/List.vue')
-const NavList = () => import('../components/List/Nav.vue')
-const About = () => import('../components/About.vue')
+const Home = () => import('@/components/Home.vue')
+const About = () => import('@/components/About.vue')
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'home',
     components: {
-      navigation: NavDefault,
-      default: Home
-    }
-  },
-  {
-    path: '/list',
-    components: {
-      navigation: NavList,
-      default: List
-    }
-  },
-  {
-    path: '/list/:listId',
-    components: {
-      navigation: NavList,
-      default: List
+      root: Home
+    },
+    beforeEnter: (to, from, next) => {
+      if (config.VUE_APP_SINGLEBOARD_MODE) {
+        // Skip screen and force redirect to the board
+        next({name: 'board', params: {boardSlug: '_'}})
+      } else {
+        next()
+      }
     }
   },
   {
     path: '/about',
+    name: 'about',
     components: {
-      navigation: NavDefault,
-      default: About
+      root: About,
     }
   },
 ]
@@ -45,5 +36,8 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+import boardRoutes from './board'
+boardRoutes(router)
 
 export default router

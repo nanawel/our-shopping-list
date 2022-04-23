@@ -12,7 +12,8 @@
   "license": "AGPL-3.0-or-later",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cli": "./cli.js"
   },
   "keywords": [
     "shared",
@@ -20,13 +21,19 @@
     "list"
   ],
   "dependencies": {
-    "@vue/cli": "^4.5.11",
-    "express": "^4.17.1",
-    "http-proxy-middleware": "^1.0.6",
-    "mongodb": "^3.6.4",
-    "mongoose": "^5.11.18",
+    "compression": "^1.7.4",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "http-proxy-middleware": "^2.0.4",
+    "mongodb": "^4.4.1",
+    "mongoose": "^6.2.9",
+    "mongoose-unique-validator": "^3.0.0",
+    "nanobus": "^4.5.0",
     "nodemon": "^2.0.7",
-    "socket.io": "^3.1.2",
-    "uuid": "^8.3.2"
+    "sha1": "^1.1.1",
+    "slugify": "^1.6.5",
+    "socket.io": "^4.4.1",
+    "uuid": "^8.3.2",
+    "yargs": "^17.4.0"
   }
 }

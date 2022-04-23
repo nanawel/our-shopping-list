@@ -5,10 +5,8 @@
         <v-row>
           <v-col>
             <v-text-field
-              name="name"
-              id="name"
               ref="nameInput"
-              label="Name"
+              :label="$t('item.input.name')"
               autocapitalize="sentences"
               v-model="model.name"
               @keydown.enter="onEnterKey"/>
@@ -18,22 +16,18 @@
           </v-col>
         </v-row>
         <v-text-field
-          name="qty"
-          id="qty"
           type="number"
-          label="Quantity"
+          :label="$t('item.input.qty')"
           v-model="model.qty"
           @keydown.enter="onEnterKey"/>
         <v-textarea
-          name="details"
-          id="details"
-          label="Details"
+          :label="$t('item.input.details')"
           autocapitalize="sentences"
           v-model="model.details"
           :rows="3">
         </v-textarea>
         <div v-if="model.lastCheckedAt">
-          <v-icon>mdi-calendar-check</v-icon> Last checked: {{ new Date(model.lastCheckedAt).toLocaleString() }}
+          <v-icon>mdi-calendar-check</v-icon> {{ $t('item.last-checked-label', {date: new Date(model.lastCheckedAt).toLocaleString()}) }}
         </div>
       </form>
     </template>
@@ -45,10 +39,6 @@ export default {
   name: 'ItemForm',
   props: {
     model: null
-  },
-  data: function() {
-    return {
-    }
   },
   methods: {
     onEnterKey: function() {

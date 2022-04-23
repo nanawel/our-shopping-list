@@ -6,6 +6,12 @@ services:
     restart: always
     ports:
       - '8080:8080'
+    environment:
+      # Default values below
+      VUE_APP_I18N_LOCALE: en
+      VUE_APP_I18N_FALLBACK_LOCALE: en
+      VUE_APP_I18N_FORCE_LOCALE: 0
+      VUE_APP_SINGLEBOARD_MODE: 0
     depends_on:
       - mongodb
 

@@ -3,13 +3,13 @@
     <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
     <h1>Our Shopping List</h1>
     <em>{{ appVersion }}-{{ appBuildId }}</em>
-    <p>Copyright &copy; 2021 Anaël Ollier</p>
+    <p>Copyright &copy; 2021-{{new Date().getFullYear()}} Anaël Ollier</p>
 
     <hr/>
 
     <h2>Source / Issues</h2>
     <p><a href="https://github.com/nanawel/our-shopping-list">https://github.com/nanawel/our-shopping-list</a></p>
-    
+
     <h2>License</h2>
     <p>AGPL-3.0</p>
     <!--
@@ -18,29 +18,38 @@
       TODO: Dump dependencies
     </div>
     -->
+
+    <hr/>
+
+    <v-btn @click="onBackClick">{{ $t('back') }}</v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: "About",
+  name: 'About',
   computed: {
     appVersion: {
       get: function() {
-        return this.$store.state.version.currentVersion
+        return this.$store.state.version.version
       }
     },
     appBuildId: {
       get: function() {
-        return this.$store.state.version.currentBuildId
+        return this.$store.state.version.buildId
       }
     }
   },
+  methods: {
+    onBackClick: function () {
+      history.back()
+    }
+  },
   created() {
-    this.$root.setTitle('About');
+    this.$root.setTitle('About')
   },
   destroyed() {
-    this.$root.setTitle(null);
+    this.$root.setTitle(null)
   }
 }
 </script>
