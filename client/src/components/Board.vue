@@ -90,11 +90,11 @@
 </template>
 
 <script>
-import List from "@/models/List"
-import store from "@/store"
+import List from '@/models/List'
+import store from '@/store'
 
 export default {
-  name: "Board",
+  name: 'Board',
   data: () => ({
     sidebarMenu: true
   }),
@@ -165,8 +165,11 @@ export default {
         name: 'board',
         params: {boardSlug: this.$store.state.board.currentBoard.slug}
       }).href;
+      const prefix = this.$root.isSingleBoardMode()
+        ? ''
+        : this.$store.state.board.currentBoard.name + ' | '
       const shareArg = {
-        text: `${this.$store.state.board.currentBoard.name} | Our Shopping List`,
+        text: `${prefix}Our Shopping List`,
         url: boardUrl
       };
       console.log('Sharing', shareArg);
