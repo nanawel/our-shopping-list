@@ -40,6 +40,12 @@ const ItemSchema = new mongoose.Schema({
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
 });
+ItemSchema.virtual('list', {
+  ref: 'List',
+  localField: 'listId',
+  foreignField: '_id',
+  justOne: true
+});
 ItemSchema.pre('save', function() {
   // < v1.0.2 format compatibility hook
   if (!this.createdAt && this.creationDate) {

@@ -22,6 +22,12 @@ const ListSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 // https://mongoosejs.com/docs/tutorials/virtuals.html
+ListSchema.virtual('board', {
+  ref: 'Board',
+  localField: 'boardId',
+  foreignField: '_id',
+  justOne: true
+});
 ListSchema.virtual('items', {
   ref: 'Item',
   localField: '_id',
