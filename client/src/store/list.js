@@ -2,6 +2,7 @@ import {Query} from '@vuex-orm/core';
 
 import {DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 import List from '@/models/List'
+import eventBus from '@/service/event-bus'
 import store from '@/store'
 
 /**
@@ -40,6 +41,7 @@ export default {
             payload = {list: payload}
           }
           const doSet = (list) => {
+            const previousList = state.currentList
             if (list) {
               if (!(list instanceof List)) {
                 throw new Error('Invalid list! ' + JSON.stringify(list))
@@ -49,6 +51,8 @@ export default {
             }
             state.currentList = list
             state.currentListId = list ? list._id : null
+
+            eventBus.$emit('list_set::after', list, previousList)
           }
 
           if (payload.null === true) {

@@ -48,6 +48,8 @@ import boardObserver from '@/observer/board'
 Vue.use(boardObserver)
 import listObserver from '@/observer/list'
 Vue.use(listObserver)
+import restoreStateObserver from '@/observer/restorestate'
+Vue.use(restoreStateObserver)
 
 // Init app
 const $app = new Vue({
@@ -79,7 +81,12 @@ const $app = new Vue({
     updateConnectionStatus: function() {
       this.isOnline = navigator.onLine
     },
-    forceRefresh: function() {
+    softRefresh: function() {
+      this.isReloading = true
+      this.$store.replaceState({})
+      window.location.reload()
+    },
+    hardRefresh: function() {
       this.isReloading = true
       this.$store.replaceState({})
       window.localStorage.clear()

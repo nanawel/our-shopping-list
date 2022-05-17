@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     onRefreshClick() {
-      this.$root.forceRefresh()
+      this.$root.hardRefresh()
     },
     sync() {
       const self = this

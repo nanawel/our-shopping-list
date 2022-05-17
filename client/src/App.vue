@@ -24,6 +24,7 @@
 
 <script>
 import Snackbar from '@/components/Snackbar.vue'
+import eventBus from '@/service/event-bus'
 
 export default {
   name: "App",
@@ -32,6 +33,9 @@ export default {
   },
   data: () => ({
   }),
+  created() {
+    eventBus.$emit('app-created')
+  },
   computed: {
     showNotConnectedOverlay: {
       get: function() {

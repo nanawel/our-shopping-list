@@ -21,7 +21,8 @@ export default {
           if (shouldRefresh) {
             console.warn('Server version mismatch, reloading app.')
             alert(i18n.t('notice.application-updated-alert'))
-            store.$app.forceRefresh()
+            localStorage.removeItem(serverHashKey)
+            store.$app.softRefresh()
             return
           }
         }
