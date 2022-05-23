@@ -4,7 +4,7 @@ const {VUE_APP_DISABLE_AGRESSIVE_ASSETS_CACHING} = require('../../config');
 module.exports = function (app) {
   let opts = {};
 
-  if (process.env.NODE_ENV === 'production'
+  if (process.env.APP_ENV === 'production'
     && !VUE_APP_DISABLE_AGRESSIVE_ASSETS_CACHING
   ) {
     /** @see https://expressjs.com/en/4x/api.html#express.static */
