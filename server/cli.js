@@ -16,6 +16,19 @@ yargs
   .usage('$0 <cmd> [args]')
 
   ///////////////////////////////////////////////
+  // CONFIG
+  .command(
+    'config:show',
+    'Dump config as JSON.',
+    (yargs) => {}, async function () {
+      ConsoleUtils.json({
+        env: process.env,
+        config: require('./src/config'),
+    });
+      yargs.exit(0);
+    })
+
+  ///////////////////////////////////////////////
   // BOARDS
   .command(
     'board:create [name]',
