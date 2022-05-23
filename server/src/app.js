@@ -13,8 +13,8 @@ const io = require('socket.io')(http);
 
 app.disable('x-powered-by');
 app.use(compression());
-app.use(express.static('client/dist'));
-app.use(express.json());
+require('./middleware/app/static')(app);
+require('./middleware/app/json')(app);
 
 mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
   useNewUrlParser: true,
@@ -25,7 +25,7 @@ const router = express.Router();
 app.use(router);
 
 if (VUE_APP_SINGLEBOARD_MODE) {
-  require('./middleware/singleboard')(router);
+  require('./middleware/router/singleboard')(router);
 }
 
 module.exports = {
