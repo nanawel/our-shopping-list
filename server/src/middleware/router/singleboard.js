@@ -1,7 +1,7 @@
-const {VUE_APP_SINGLEBOARD_ID, VUE_APP_SINGLEBOARD_SLUG} = require('../config');
-const BoardModel = require('../board/model');
-const ListModel = require("../list/model");
-const ItemModel = require("../item/model");
+const {VUE_APP_SINGLEBOARD_ID, VUE_APP_SINGLEBOARD_SLUG} = require('../../config');
+const BoardModel = require('../../board/model');
+const ListModel = require("../../list/model");
+const ItemModel = require("../../item/model");
 
 const deniedReasonHeader = 'Not-In-Singleboard-Mode';
 
