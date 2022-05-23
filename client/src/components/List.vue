@@ -59,6 +59,16 @@
       </div>
     </template>
 
+    <template v-else-if="shouldDisplayNoneCheckedMessage">
+      <div class="list-wrapper">
+        <empty-state key="empty-none-checked">
+          <template v-slot:icon-name>mdi-cancel</template>
+          <template v-slot:title>{{ listModel.name }}</template>
+          <template v-slot:subtitle>{{ $t('list.none-checked.subtitle') }}</template>
+        </empty-state>
+      </div>
+    </template>
+
     <template v-else>
       <div class="list-wrapper">
         <empty-state key="empty-no-results"
@@ -259,6 +269,15 @@ export default {
           && this.uncheckedItems.length === 0
       }
     },
+    shouldDisplayNoneCheckedMessage: {
+      get: function() {
+        return this.listModelId
+          && !this.searchString
+          && this.displayMode === DISPLAY_MODE_CHECKED_HISTORY
+          && this.allItems.length !== 0
+          && this.checkedItems.length === 0
+      }
+    },
     items: {
       get: function() {
         const self = this
@@ -291,6 +310,15 @@ export default {
       get: function() {
         if (this.listModel) {
           return this.itemQuery().get()
+        } else {
+          return []
+        }
+      },
+    },
+    checkedItems: {
+      get: function() {
+        if (this.listModel) {
+          return this.itemQuery().where('checked', true).get()
         } else {
           return []
         }

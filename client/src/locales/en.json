@@ -67,6 +67,9 @@
     "all-checked": {
       "subtitle": "All items are checked!"
     },
+    "none-checked": {
+      "subtitle": "No item here (yet)..."
+    },
     "no-results": {
       "title": "No results",
       "subtitle": "Click \"Add\" to create a new item."
