@@ -43,7 +43,7 @@ module.exports = {
         },
         {
           urlPattern: new RegExp('\\.(?:css|ico|js|png|svg|woff|woff2)$'),
-          handler: 'StaleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
             cacheName: 'osl-assets'
           }
@@ -55,7 +55,7 @@ module.exports = {
       favicon32: 'img/icons/favicon-32x32.png',
       favicon16: 'img/icons/favicon-16x16.png',
       appleTouchIcon: 'img/icons/apple-touch-icon.png',
-      maskIcon: 'img/icons/safari-pinned-tab.svg',
+      maskIcon: null,
       msTileImage: 'img/icons/mstile-144x144.png'
     }
   }
