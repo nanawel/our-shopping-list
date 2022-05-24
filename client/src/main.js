@@ -4,6 +4,9 @@ import App from '@/App.vue'
 
 Vue.config.productionTip = false
 
+// PWA
+import '@/registerServiceWorker'
+
 // App config
 import config from '@/config'
 

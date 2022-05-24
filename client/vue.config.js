@@ -32,7 +32,24 @@ module.exports = {
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     workboxPluginMode: 'GenerateSW',
-    workboxOptions: {},
+    workboxOptions: {
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('config\\.js$'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'osl-runtime-config'
+          }
+        },
+        {
+          urlPattern: new RegExp('\\.(?:css|ico|js|png|svg|woff|woff2)$'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'osl-assets'
+          }
+        }
+      ]
+    },
     iconPaths: {
       faviconSVG: null,
       favicon32: 'img/icons/favicon-32x32.png',

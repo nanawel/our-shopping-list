@@ -10,7 +10,7 @@ COPY ./client/ /app/client
 
 RUN cd /app/client \
   && yarn install \
-  && yarn build
+  && NODE_ENV=production yarn build
 
 FROM node:${node_version}${node_variant}
 
