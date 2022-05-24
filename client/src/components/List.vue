@@ -349,6 +349,8 @@ export default {
     })
   },
   mounted() {
+    this.checkSync()
+
     if (this.isNewList && this.$refs.newListNameInput) {
       this.$refs.newListNameInput.focus()
     }
@@ -384,14 +386,15 @@ export default {
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
-    checkSync() {
+    async checkSync() {
       const self = this
       if (this.listModelId) {
         console.log('LIST.checkSync()', this.listModelId)
-        this.$repository.checkSync(self.listModel)
+
+        return this.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
-              self.$repository.sync(self.listModel)
+              return self.$repository.sync(self.listModel)
             }
           })
       }

@@ -146,16 +146,16 @@ export default {
     onRefreshClick() {
       this.$root.hardRefresh()
     },
-    sync() {
+    async sync() {
       const self = this
       if (this.boardModel) {
         console.log('BOARD.sync()', this.boardModel._id)
-
         this.$ws.emit('join-board', this.boardModel._id)
-        this.$repository.checkSync(self.boardModel)
+
+        return this.$repository.checkSync(self.boardModel)
           .then((isSync) => {
             if (!isSync) {
-              self.$repository.sync(self.boardModel)
+              return self.$repository.sync(self.boardModel)
             }
           })
       }

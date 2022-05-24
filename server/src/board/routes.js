@@ -39,7 +39,7 @@ router.get('/boards/:boardId', (req, res, next) => {
 
   BoardModel
     .findById(boardId)
-    .populate('lists')
+    .populate('lists', '-updatedAt')  // Exclude "updatedAt" to allow syncing lists afterwards if needed
     .exec()
     .then((doc) => {
       if (doc) {
@@ -65,7 +65,7 @@ router.get('/boards/by-slug/:slug', (req, res, next) => {
     .findOne({
       slug: slug
     })
-    .populate('lists')
+    .populate('lists', '-updatedAt')  // Exclude "updatedAt" to allow syncing lists afterwards if needed
     .exec()
     .then((doc) => {
       if (doc) {
