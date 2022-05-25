@@ -96,7 +96,7 @@ import store from '@/store'
 export default {
   name: 'Board',
   data: () => ({
-    sidebarMenu: true
+    sidebarMenu: false
   }),
   computed: {
     boardModel: {
