@@ -33,6 +33,7 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'black',
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
+      exclude: ['index.html'],
       runtimeCaching: [
         {
           urlPattern: new RegExp('config\\.js$'),
