@@ -95,9 +95,12 @@ import store from '@/store'
 
 export default {
   name: 'Board',
-  data: () => ({
-    sidebarMenu: false
-  }),
+  data: function() {
+    return {
+      // Default display policy for sidebar menu: shown on large, hidden on small
+      sidebarMenu: this.$vuetify.breakpoint.mdAndUp
+    }
+  },
   computed: {
     boardModel: {
       get: function() {
