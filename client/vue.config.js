@@ -1,6 +1,7 @@
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
+  productionSourceMap: process.env.NODE_ENV !== 'production',
   pages: {
     index: {
       entry: 'src/main.js',
