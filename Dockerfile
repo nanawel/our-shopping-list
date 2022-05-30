@@ -6,6 +6,9 @@ ARG build_date
 
 FROM node:${node_version}${node_variant} as client-builder
 
+RUN apk update \
+ && apk add git
+
 COPY ./client/ /app/client
 
 RUN cd /app/client \
