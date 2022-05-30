@@ -4,7 +4,10 @@
       app
       color="teal lighten-3"
       hide-on-scroll>
-      <v-app-bar-nav-icon @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="sidebarMenu = !sidebarMenu"
+        :aria-label="$t('menu-nav.open')">
+      </v-app-bar-nav-icon>
       <router-view name="boardNavigation"></router-view>
     </v-app-bar>
 

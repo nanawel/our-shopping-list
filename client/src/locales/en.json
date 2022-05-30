@@ -30,6 +30,7 @@
     "application-updated-alert": "The application has been updated.\nThis page will now be reloaded automatically."
   },
   "menu-nav": {
+    "open": "Open the menu",
     "item": {
       "new-list": "New list...",
       "about": "About"
