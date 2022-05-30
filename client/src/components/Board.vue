@@ -50,7 +50,8 @@
           <v-list-item-title v-else>{{ $t('menu-nav.item.new-list') }}</v-list-item-title>
           <v-btn icon
             v-if="shouldShowBoardShareButton"
-            @click="onBoardShareButtonClick">
+            @click="onBoardShareButtonClick"
+            :aria-label="$t('share')">
             <v-icon>mdi-share-variant-outline</v-icon>
           </v-btn>
         </v-list-item>

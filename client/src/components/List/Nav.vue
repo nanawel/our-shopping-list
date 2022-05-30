@@ -6,7 +6,9 @@
       </template>
       <template v-slot:main-title-after v-if="listModel && listModel._id">
         <div class="list-title-after">
-          <v-btn @click="onEditClick" icon>
+          <v-btn @click="onEditClick"
+                 icon
+                 :aria-label="$t('edit')">
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
         </div>
@@ -17,7 +19,8 @@
         id="btn-toggle-history-mode"
         @click="onToggleHistoryMode"
         :class="showHistory ? 'active' : 'inactive'"
-        icon>
+        icon
+        :aria-label="$t('list.toggle-history-mode')">
       <v-icon>mdi-history</v-icon>
     </v-btn>
 

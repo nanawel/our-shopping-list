@@ -25,7 +25,9 @@
         </v-list-item-content>
 
         <v-list-item-action class="d-none d-sm-flex">
-          <v-btn @click="onEditClick" icon>
+          <v-btn @click="onEditClick"
+                 icon
+                 :aria-label="$t('edit')">
             <v-icon color="primary">mdi-pencil</v-icon>
           </v-btn>
         </v-list-item-action>

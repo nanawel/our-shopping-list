@@ -32,7 +32,10 @@
           <span v-html="$t('home.reopen-last-board', {boardName: lastBoardModel.name})"></span>
         </router-link>
         <v-btn @click="onClearLastBoard"
-          icon><v-icon>mdi-close-circle-outline</v-icon></v-btn>
+               icon
+               :aria-label="$t('close')">
+          <v-icon>mdi-close-circle-outline</v-icon>
+        </v-btn>
       </template>
     </empty-state>
   </div>

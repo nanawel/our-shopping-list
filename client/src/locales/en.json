@@ -4,7 +4,9 @@
   "close": "Close",
   "cancel": "Cancel",
   "delete": "Delete",
+  "edit": "Edit",
   "save": "Save",
+  "share": "Share",
   "confirmation-question": "Are you sure?",
   "errors": {
     "board": {
@@ -50,6 +52,7 @@
     "button": "Create a list"
   },
   "list": {
+    "toggle-history-mode": "Toggle history mode",
     "not-found": {
       "title": "List not found!",
       "subtitle": "This list does not exist (anymore?).",
