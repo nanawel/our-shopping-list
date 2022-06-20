@@ -113,6 +113,7 @@ export default {
     },
     isSingleBoardMode: {
       get: function() {
+        console.log(this.$root, this.$root.isSingleBoardMode);
         return this.$root.isSingleBoardMode
       }
     },
@@ -172,7 +173,7 @@ export default {
         name: 'board',
         params: {boardSlug: this.$store.state.board.currentBoard.slug}
       }).href;
-      const prefix = this.$root.isSingleBoardMode()
+      const prefix = this.$root.isSingleBoardMode
         ? ''
         : this.$store.state.board.currentBoard.name + ' | '
       const shareArg = {
