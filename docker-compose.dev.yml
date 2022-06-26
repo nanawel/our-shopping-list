@@ -14,6 +14,7 @@ services:
       - ./client:/app/client
     environment:
       NODE_ENV: development
+      ENABLE_TLS: 1
     depends_on:
       - mongodb
 

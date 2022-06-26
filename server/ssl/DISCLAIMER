@@ -1,0 +1,3 @@
+This key is NOT SECURED and is only intended to be used for DEVELOPMENT.
+When running the app via Docker, mount the _real_ key files at the
+same location.

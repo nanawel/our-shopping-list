@@ -226,3 +226,22 @@ If you want to enter the container, just use
 ```shell
 make dev-shell
 ```
+
+### Special cases
+
+In development mode, the service worker is not enabled.
+To workaround this limitation, you may want to ponctually build the JS bundle
+in "production" mode.
+
+Here's how:
+
+```shell
+make dev-shell
+
+cd client/
+NODE_ENV=production yarn build
+```
+
+Then reload the page in your browser and the SW should be activated.
+You have to make sure you are running the app **with TLS enabled**. Use the
+`ENABLE_TLS` variable to use the embedded TLS proxy if needed.
