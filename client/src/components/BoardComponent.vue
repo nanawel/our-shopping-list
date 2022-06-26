@@ -98,7 +98,7 @@ import List from '@/models/List'
 import store from '@/store'
 
 export default {
-  name: 'Board',
+  name: 'BoardComponent',
   data: function() {
     return {
       // Default display policy for sidebar menu: shown on large, hidden on small

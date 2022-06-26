@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'About',
+  name: 'AboutComponent',
   computed: {
     appVersion: {
       get: function() {

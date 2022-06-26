@@ -4,7 +4,7 @@ import Board from '@/models/Board'
 import Item from '@/models/Item'
 import List from '@/models/List'
 
-export default new (() => {
+const Repository = function() {
   const schemaMapping = {
     Board,
     Item,
@@ -118,4 +118,7 @@ export default new (() => {
       }
     }
   }
-})
+}
+
+
+export default new Repository

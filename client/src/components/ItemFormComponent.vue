@@ -36,9 +36,13 @@
 
 <script>
 export default {
-  name: 'ItemForm',
-  props: {
-    model: null
+  name: 'ItemFormComponent',
+  props: [
+    'item'
+  ],
+  model: {
+    item: 'item',
+    event: 'itemchange'
   },
   methods: {
     onEnterKey: function() {

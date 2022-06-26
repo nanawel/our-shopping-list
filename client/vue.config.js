@@ -20,11 +20,18 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
-      disableHostCheck: true,
-      port: 8080,
-      public: '0.0.0.0:8080',
+    allowedHosts: 'all',
+    client: {
+      webSocketURL: {
+        hostname: "0.0.0.0",
+        pathname: "/socket-io",
+        port: 8080,
+      },
+    },
+    devMiddleware: {
       publicPath: '/dist/',
-      writeToDisk: true,
+      writeToDisk: true
+    }
   },
   pwa: {
     name: 'Our Shopping List',

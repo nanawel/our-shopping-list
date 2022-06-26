@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import 'swiper/swiper.min.css'
-import { Swiper } from 'swiper/swiper.esm'
+import 'swiper/css'
+import { Swiper } from 'swiper/core'
 
 export default {
-  name: "Item",
+  name: 'ItemComponent',
   components: {
   },
   props: [

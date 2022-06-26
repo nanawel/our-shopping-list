@@ -25,9 +25,13 @@
 
 <script>
 export default {
-  name: 'ListForm',
-  props: {
-    model: null,
+  name: 'ListFormComponent',
+  props: [
+    'list'
+  ],
+  model: {
+    item: 'list',
+    event: 'listchange'
   },
 }
 </script>

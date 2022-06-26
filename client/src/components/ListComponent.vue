@@ -2,14 +2,14 @@
   <div id="list-panel">
 
     <template v-if="!listModel">
-      <empty-state>
+      <EmptyStateComponente>
         <template v-slot:icon-name>mdi-alert-octagon-outline</template>
         <template v-slot:title>{{ $t('list.not-found.title') }}</template>
         <template v-slot:subtitle>{{ $t('list.not-found.subtitle') }}</template>
         <template v-slot:buttons>
           <v-btn @click="newList" color="primary">{{ $t('list.not-found.button') }}</v-btn>
         </template>
-      </empty-state>
+      </EmptyStateComponente>
     </template>
 
     <template v-else-if="isNewList">
@@ -38,45 +38,45 @@
 
     <template v-else-if="shouldDisplayNewItemPrompt">
       <div class="list-wrapper">
-        <empty-state>
+        <EmptyStateComponent>
           <template v-slot:icon-name>mdi-format-list-bulleted-type</template>
           <template v-slot:title>{{ listModel.name }}</template>
           <template v-slot:subtitle>{{ $t('list.new-item.subtitle') }}</template>
           <template v-slot:buttons>
             <v-btn @click="newItem" color="primary">{{ $t('list.new-item.button') }}</v-btn>
           </template>
-        </empty-state>
+        </EmptyStateComponent>
       </div>
     </template>
 
     <template v-else-if="shouldDisplayAllCheckedMessage">
       <div class="list-wrapper">
-        <empty-state key="empty-all-checked">
+        <EmptyStateComponent key="empty-all-checked">
           <template v-slot:icon-name>mdi-check-outline</template>
           <template v-slot:title>{{ listModel.name }}</template>
           <template v-slot:subtitle>{{ $t('list.all-checked.subtitle') }}</template>
-        </empty-state>
+        </EmptyStateComponent>
       </div>
     </template>
 
     <template v-else-if="shouldDisplayNoneCheckedMessage">
       <div class="list-wrapper">
-        <empty-state key="empty-none-checked">
+        <EmptyStateComponent key="empty-none-checked">
           <template v-slot:icon-name>mdi-cancel</template>
           <template v-slot:title>{{ listModel.name }}</template>
           <template v-slot:subtitle>{{ $t('list.none-checked.subtitle') }}</template>
-        </empty-state>
+        </EmptyStateComponent>
       </div>
     </template>
 
     <template v-else>
       <div class="list-wrapper">
-        <empty-state key="empty-no-results"
+        <EmptyStateComponent key="empty-no-results"
                      v-show="items.length === 0 && this.searchString">
           <template v-slot:icon-name>mdi-cancel</template>
           <template v-slot:title>{{ $t('list.no-results.title') }}</template>
           <template v-slot:subtitle>{{ $t('list.no-results.subtitle') }}</template>
-        </empty-state>
+        </EmptyStateComponent>
 
         <DynamicScroller
           :items="items"
@@ -92,7 +92,7 @@
               :active="active"
               :data-index="index"
             >
-              <ItemView
+              <ItemComponent
                 :key="item._id"
                 :item="item"
                 v-touch-event:touchhold="onTouchHoldItem(item)"
@@ -146,7 +146,7 @@
         </v-card-title>
 
         <v-card-text>
-          <ItemForm
+          <ItemFormComponent
             :model="editionItemModel"
             v-on:cancel="onCancelItemForm"
             v-on:save="onSaveItemForm"
@@ -194,9 +194,9 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 import debounce from 'lodash.debounce'
 import { DynamicScroller } from 'vue-virtual-scroller'
-import EmptyState from "./EmptyState"
-import ItemForm from "./ItemForm"
-import ItemView from "./Item"
+import EmptyStateComponent from "./EmptyStateComponent"
+import ItemFormComponent from "./ItemFormComponent"
+import ItemComponent from "./ItemComponent"
 import Item from "@/models/Item"
 
 import {containsIgnoreCase} from "@/libs/compare-strings"
@@ -204,12 +204,12 @@ import {containsIgnoreCase} from "@/libs/compare-strings"
 import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 
 export default {
-  name: "List",
+  name: 'ListComponent',
   components: {
     DynamicScroller,
-    ItemForm,
-    EmptyState,
-    ItemView,
+    ItemFormComponent,
+    EmptyStateComponent,
+    ItemComponent,
   },
   data: function() {
     return {

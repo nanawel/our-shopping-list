@@ -4,7 +4,7 @@
       <h1>{{ $t('app-name') }}</h1>
       <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
     </div>
-    <empty-state>
+    <EmptyStateComponent>
       <template v-slot:title>{{ $t('home.title') }}</template>
       <template v-slot:subtitle>{{ $t('home.subtitle') }}</template>
       <template v-slot:content>
@@ -37,19 +37,19 @@
           <v-icon>mdi-close-circle-outline</v-icon>
         </v-btn>
       </template>
-    </empty-state>
+    </EmptyStateComponent>
   </div>
 </template>
 
 <script>
-import EmptyState from './EmptyState.vue'
+import EmptyStateComponent from './EmptyStateComponent.vue'
 
 import Board from '@/models/Board'
 
 export default {
-  name: 'Home',
+  name: 'HomeComponent',
   components: {
-    EmptyState
+    EmptyStateComponent
   },
   data() {
     return {

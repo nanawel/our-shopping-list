@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Snackbar from '@/components/Snackbar.vue'
+import Snackbar from '@/components/SnackbarComponent.vue'
 import eventBus from '@/service/event-bus'
 
 export default {

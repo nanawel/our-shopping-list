@@ -1,11 +1,11 @@
 import store from '@/store'
 import {sock} from '@/service/socket-io'
 
-const Board = () => import('@/components/Board.vue')
-const BoardHome = () => import('@/components/Board/Home.vue')
-const List = () => import('@/components/List.vue')
-const NavDefault = () => import('@/components/Nav/Default.vue')
-const NavList = () => import('@/components/List/Nav.vue')
+const BoardComponent = () => import('@/components/BoardComponent.vue')
+const BoardHomeComponent = () => import('@/components/Board/HomeComponent.vue')
+const ListComponent = () => import('@/components/ListComponent.vue')
+const NavDefaultComponent = () => import('@/components/Nav/DefaultComponent.vue')
+const NavListComponent = () => import('@/components/List/NavComponent.vue')
 
 import BoardModel from '@/models/Board'
 import ListModel from '@/models/List'
@@ -28,8 +28,8 @@ export default (router) => {
         }
       },
       components: {
-        boardNavigation: NavDefault,
-        boardContent: BoardHome
+        boardNavigation: NavDefaultComponent,
+        boardContent: BoardHomeComponent
       }
     },
     {
@@ -54,15 +54,15 @@ export default (router) => {
     {
       path: '/board/:boardSlug',
       components: {
-        root: Board,
+        root: BoardComponent,
       },
       children: [
         {
           path: '',
           name: 'board',
           components: {
-            boardNavigation: NavDefault,
-            boardContent: BoardHome
+            boardNavigation: NavDefaultComponent,
+            boardContent: BoardHomeComponent
           }
         },
         {
@@ -76,8 +76,8 @@ export default (router) => {
           path: 'list/:listId',
           name: 'list',
           components: {
-            boardNavigation: NavList,
-            boardContent: List
+            boardNavigation: NavListComponent,
+            boardContent: ListComponent
           }
         }
       ]

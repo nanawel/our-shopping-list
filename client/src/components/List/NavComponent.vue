@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <nav-default>
+    <NavDefaultComponent>
       <template v-slot:main-title>
         {{ title }}
       </template>
@@ -13,7 +13,7 @@
           </v-btn>
         </div>
       </template>
-    </nav-default>
+    </NavDefaultComponent>
 
     <v-btn
         id="btn-toggle-history-mode"
@@ -35,7 +35,7 @@
         </v-card-title>
 
         <v-card-text>
-          <ListForm
+          <ListFormComponent
             :model="editionListModel"
             v-on:cancel="onCancelListForm"
             v-on:save="onSaveListForm"
@@ -73,14 +73,14 @@
 <script>
 import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '@/constants'
 
-import NavDefault from '@/components/Nav/Default'
-import ListForm from "@/components/ListForm"
+import NavDefaultComponent from '@/components/Nav/DefaultComponent'
+import ListFormComponent from "@/components/ListFormComponent"
 
 export default {
   name: "List-Nav",
   components: {
-    NavDefault,
-    ListForm
+    NavDefaultComponent,
+    ListFormComponent
   },
   data: () => ({
     editionListModel: null,

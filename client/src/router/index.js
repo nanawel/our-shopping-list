@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import config from '@/config'
 
 // Components
-const Home = () => import('@/components/Home.vue')
-const About = () => import('@/components/About.vue')
+const HomeComponent = () => import('@/components/HomeComponent.vue')
+const AboutComponent = () => import('@/components/AboutComponent.vue')
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const routes = [
     path: '/',
     name: 'home',
     components: {
-      root: Home
+      root: HomeComponent
     },
     beforeEnter: (to, from, next) => {
       if (config.VUE_APP_SINGLEBOARD_MODE) {
@@ -28,7 +28,7 @@ const routes = [
     path: '/about',
     name: 'about',
     components: {
-      root: About,
+      root: AboutComponent,
     }
   },
 ]
