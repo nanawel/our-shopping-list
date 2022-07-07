@@ -4,8 +4,10 @@ const SERVER_BUILD_ID = process.env.APP_BUILD_ID || '(unknown)';
 const {createProxyMiddleware} = require('http-proxy-middleware');
 const sha1 = require('sha1');
 
-const {app, io} = require('./app');
-const {type} = require("nanobus");
+const {app, httpServer} = require('./app');
+
+const {Server} = require('socket.io');
+const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
@@ -48,11 +50,15 @@ io.on('connection', (socket) => {
 
 // Proxify Node WS to Webpack server in developer mode
 if (process.env.NODE_ENV === 'development') {
-  app.use('/sockjs-node', createProxyMiddleware(
-    '/sockjs-node', {
-      target: 'ws://localhost:8081',
-      ws: true,
+  app.use(createProxyMiddleware('/webpack-ws', {
+      target: 'http://localhost:8081',
+      changeOrigin: true,
+      ws: true
     }
   ));
-  console.log('Created proxy middleware for /sockjs-node (development mode)');
+  console.log('Created proxy middleware for /webpack-ws (development mode)');
+}
+
+module.exports = {
+  io
 }

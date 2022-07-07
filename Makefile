@@ -51,6 +51,10 @@ build:
 shell:
 	docker-compose exec -u $$(id -u) app bash
 
+.PHONY: shell-root
+shell-root:
+	docker-compose exec app bash
+
 .SILENT:
 .PHONY: cli
 cli:

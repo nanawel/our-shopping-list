@@ -24,7 +24,7 @@ module.exports = {
     client: {
       webSocketURL: {
         hostname: "0.0.0.0",
-        pathname: "/socket-io",
+        pathname: "/webpack-ws",
         port: 8080,
       },
     },

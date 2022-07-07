@@ -12,7 +12,6 @@ const {VUE_APP_SINGLEBOARD_MODE} = require('./config');
 const app = express();
 
 const http = ENABLE_TLS ? require('https') : require('http');
-const io = require('socket.io')(http);
 
 let options = {};
 if (ENABLE_TLS) {
@@ -22,7 +21,7 @@ if (ENABLE_TLS) {
   };
 }
 
-const server = http.createServer(options, app);
+const httpServer = http.createServer(options, app);
 
 app.disable('x-powered-by');
 app.use(compression());
@@ -43,8 +42,6 @@ if (VUE_APP_SINGLEBOARD_MODE) {
 
 module.exports = {
   app,
-  http,
-  server,
-  io,
+  httpServer,
   router
 };

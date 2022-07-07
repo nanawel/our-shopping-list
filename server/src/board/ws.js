@@ -1,4 +1,4 @@
-const {io} = require('../app');
+const {io} = require('../ws');
 const bus = require('../bus');
 
 const BoardModel = require('./model');
