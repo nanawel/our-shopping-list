@@ -1,10 +1,9 @@
 const SERVER_VERSION = process.env.APP_VERSION   || 'dev';
 const SERVER_BUILD_ID = process.env.APP_BUILD_ID || '(unknown)';
 
-const {createProxyMiddleware} = require('http-proxy-middleware');
 const sha1 = require('sha1');
 
-const {app, httpServer} = require('./app');
+const {httpServer} = require('./app');
 
 const {Server} = require('socket.io');
 const io = new Server(httpServer);
@@ -47,17 +46,6 @@ io.on('connection', (socket) => {
     console.log(`Client disconnected: ${socket.id}`);
   });
 });
-
-// Proxify Node WS to Webpack server in developer mode
-if (process.env.NODE_ENV === 'development') {
-  app.use(createProxyMiddleware('/webpack-ws', {
-      target: 'http://localhost:8081',
-      changeOrigin: true,
-      ws: true
-    }
-  ));
-  console.log('Created proxy middleware for /webpack-ws (development mode)');
-}
 
 module.exports = {
   io

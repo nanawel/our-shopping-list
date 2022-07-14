@@ -27,6 +27,7 @@ app.disable('x-powered-by');
 app.use(compression());
 require('./middleware/app/static')(app);
 require('./middleware/app/json')(app);
+require('./middleware/app/dev')(app);
 
 mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
   useNewUrlParser: true,
