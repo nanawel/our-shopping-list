@@ -7,8 +7,9 @@ Vue.use(Vuex)
 import VuexORM, {Query} from '@vuex-orm/core'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import Axios from 'axios'
+const axios = Axios.create()
 // Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
-VuexORM.use(VuexORMAxios, {axios: Axios.create()})
+VuexORM.use(VuexORMAxios, {axios: axios})
 
 import config from '@/config'
 
@@ -54,7 +55,7 @@ const store = new Vuex.Store({
     snackbar,
     board: board.module(),
     list: list.module(),
-    loadingProgress
+    loadingProgress: loadingProgress.module(axios)
   },
   plugins: [
     VuexORM.install(database),
