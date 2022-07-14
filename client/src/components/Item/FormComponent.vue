@@ -36,18 +36,14 @@
 
 <script>
 export default {
-  name: 'ItemFormComponent',
+  name: 'FormComponent',
   props: [
-    'item'
+    'model'
   ],
-  model: {
-    item: 'item',
-    event: 'itemchange'
-  },
   methods: {
     onEnterKey: function() {
       this.$emit('enterKey')
-    }
+    },
   }
 }
 </script>

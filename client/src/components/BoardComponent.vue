@@ -113,7 +113,6 @@ export default {
     },
     isSingleBoardMode: {
       get: function() {
-        console.log(this.$root, this.$root.isSingleBoardMode);
         return this.$root.isSingleBoardMode
       }
     },

@@ -134,51 +134,13 @@
       </v-footer>
     </div>
 
-    <v-dialog
-      v-model="showEditItemDialog"
-      persistent
-      max-width="500"
-      @keydown.esc="onCancelItemForm">
-      <v-card>
-        <v-card-title class="headline grey lighten-2">
-          <span v-if="editionItemModel && editionItemModel._id">{{ $t('edit-item-dialog.existing-title') }}</span>
-          <span v-else>{{ $t('edit-item-dialog.new-title') }}</span>
-        </v-card-title>
-
-        <v-card-text>
-          <ItemFormComponent
-            :model="editionItemModel"
-            v-on:cancel="onCancelItemForm"
-            v-on:save="onSaveItemForm"
-            v-on:delete="onDeleteItemForm"
-            v-on:enterKey="onSaveItemForm"/>
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red"
-            plain
-            @click="onDeleteItemForm">
-            {{ $t('delete') }}
-          </v-btn>
-          <v-btn
-            color="grey"
-            plain
-            @click="onCancelItemForm">
-            {{ $t('cancel') }}
-          </v-btn>
-          <v-btn
-            color="primary"
-            depressed
-            @click="onSaveItemForm">
-            {{ $t('save') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <!-- WORK IN PROGRESS -->
+    <ItemEditDialogComponent
+      v-model="shouldShowEditItemDialog"
+      :item="editionItemModel"
+      v-on:onSave="onSaveItemForm"
+      v-on:onCancel="onCancelItemForm"
+      v-on:onDelete="onDeleteItemForm"/>
 
     <v-overlay
       :value="loadingOverlay">
@@ -195,7 +157,7 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import debounce from 'lodash.debounce'
 import { DynamicScroller } from 'vue-virtual-scroller'
 import EmptyStateComponent from "./EmptyStateComponent"
-import ItemFormComponent from "./ItemFormComponent"
+import ItemEditDialogComponent from "./Item/EditDialogComponent"
 import ItemComponent from "./ItemComponent"
 import Item from "@/models/Item"
 
@@ -207,7 +169,7 @@ export default {
   name: 'ListComponent',
   components: {
     DynamicScroller,
-    ItemFormComponent,
+    ItemEditDialogComponent,
     EmptyStateComponent,
     ItemComponent,
   },
@@ -215,7 +177,6 @@ export default {
     return {
       listContainerId: 'list-container',
       editionItemModel: null,
-      showEditItemDialog: false,
       snack: {
         show: false,
         duration: 3000,
@@ -248,6 +209,11 @@ export default {
     displayMode: {
       get: function() {
         return this.$store.state.list.displayMode
+      }
+    },
+    shouldShowEditItemDialog: {
+      get: function() {
+        return !!this.editionItemModel
       }
     },
     shouldShowBottomSearchBar: {
@@ -361,9 +327,6 @@ export default {
       this.cancelSearch()
       this.checkSync()
     },
-    editionItemModel: function (val) {
-      this.showEditItemDialog = !!val
-    },
     searchInputValue: debounce(function (val) {
       this.debouncedSearchString = val
     }, 400, {trailing: true}),
@@ -418,10 +381,16 @@ export default {
     },
     editItem(item) {
       console.log('LIST.editItem()', item, this.listModel)
-      this.editionItemModel = item || new Item()
+      // Pass a clone to the form so that modifications are only applied upon validation
+      this.editionItemModel = JSON.parse(JSON.stringify(item ? item : new Item()))
     },
-    saveItem(item, callback) {
-      item.listId = this.listModelId
+    saveItem(itemData, callback) {
+      console.log(this.listModelId, itemData);
+      const item = Object.assign(
+        new Item(),
+        itemData,
+        {listId: this.listModelId}  // Force current list
+      );
       console.log('LIST.saveItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
@@ -432,7 +401,11 @@ export default {
           self.$snackbar.msg(self.$t('errors.item.save'))
         })
     },
-    deleteItem(item, callback) {
+    deleteItem(itemData, callback) {
+      const item = Object.assign(
+        new Item(),
+        itemData
+      );
       console.log('LIST.deleteItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
@@ -496,21 +469,21 @@ export default {
     //
     // ITEM FORM
     onCancelItemForm() {
-      console.log('onCancelItemForm()', this.editionItemModel)
+      console.log('onCancelItemForm()')
       this.closeEditItemForm()
     },
-    onSaveItemForm() {
-      console.log('onSaveItemForm()', this.editionItemModel)
-      this.saveItem(this.editionItemModel, function() {
+    onSaveItemForm(item) {
+      console.log('onSaveItemForm()', item)
+      this.saveItem(item, function() {
         this.closeEditItemForm()
       }.bind(this))
     },
-    onDeleteItemForm() {
-      console.log('onDeleteItemForm()', this.editionItemModel)
+    onDeleteItemForm(item) {
+      console.log('onDeleteItemForm()', item)
       const self = this
       if (confirm(this.$t('confirmation-question'))) {
-        if (this.editionItemModel && this.editionItemModel._id) {
-          this.deleteItem(this.editionItemModel, function() {
+        if (item && item._id) {
+          this.deleteItem(item, function() {
             self.closeEditItemForm()
           })
         } else {
