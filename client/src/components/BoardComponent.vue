@@ -171,16 +171,16 @@ export default {
       const boardUrl = this.$router.resolve({
         name: 'board',
         params: {boardSlug: this.$store.state.board.currentBoard.slug}
-      }).href;
+      }).href
       const prefix = this.$root.isSingleBoardMode
         ? ''
         : this.$store.state.board.currentBoard.name + ' | '
       const shareArg = {
         text: `${prefix}Our Shopping List`,
         url: boardUrl
-      };
-      console.log('Sharing', shareArg);
-      window.navigator.share(shareArg);
+      }
+      console.log('Sharing', shareArg)
+      window.navigator.share(shareArg)
     }
   },
 }

@@ -9,6 +9,7 @@ class List extends AbstractModel {
 
   static fields () {
     return {
+      ...super.fields(),
       _id: this.string(null),
       name: this.string(''),
       creationDate: this.attr(''),

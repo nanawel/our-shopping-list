@@ -93,7 +93,9 @@
       "qty": "Quantité",
       "details": "Détails"
     },
-    "last-checked-label": "Coché la dernière fois : %{date}"
+    "last-checked-label": "Coché la dernière fois : %{date}",
+    "help-onclick-checked": "\uD83D\uDCA1 Faites glisser vers la gauche pour décocher \uD83E\uDC28",
+    "help-onclick-unchecked": "\uD83D\uDCA1 Faites glisser vers la droite pour cocher \uD83E\uDC2A"
   },
   "edit-list-dialog": {
     "existing-title": "Modifier la liste",

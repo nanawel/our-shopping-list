@@ -24,49 +24,11 @@
       <v-icon>mdi-history</v-icon>
     </v-btn>
 
-    <v-dialog
-      v-model="showEditListDialog"
-      persistent
-      max-width="500"
-      @keydown.esc="onCancelListForm">
-      <v-card>
-        <v-card-title class="headline grey lighten-2">
-          <span>{{ $t('edit-list-dialog.existing-title') }}</span>
-        </v-card-title>
-
-        <v-card-text>
-          <ListFormComponent
-            :model="editionListModel"
-            v-on:cancel="onCancelListForm"
-            v-on:save="onSaveListForm"
-            v-on:delete="onDeleteListForm"/>
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red"
-            plain
-            @click="onDeleteListForm">
-            {{ $t('delete') }}
-          </v-btn>
-          <v-btn
-            color="grey"
-            plain
-            @click="onCancelListForm">
-            {{ $t('cancel') }}
-          </v-btn>
-          <v-btn
-            color="primary"
-            depressed
-            @click="onSaveListForm">
-            {{ $t('save') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <EditDialogComponent
+      :list="editionListModel"
+      v-on:cancel="onCancelListForm"
+      v-on:save="onSaveListForm"
+      v-on:delete="onDeleteListForm"/>
   </div>
 </template>
 
@@ -74,17 +36,17 @@
 import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '@/constants'
 
 import NavDefaultComponent from '@/components/Nav/DefaultComponent'
-import ListFormComponent from "@/components/ListFormComponent"
+import EditDialogComponent from "@/components/List/EditDialogComponent"
+import List from "@/models/List"
 
 export default {
   name: "List-Nav",
   components: {
     NavDefaultComponent,
-    ListFormComponent
+    EditDialogComponent
   },
   data: () => ({
     editionListModel: null,
-    showEditListDialog: false,
   }),
   computed: {
     title: {
@@ -112,18 +74,22 @@ export default {
       }
     }
   },
-  watch: {
-    editionListModel: function (val) {
-      this.showEditListDialog = !!val
-    }
-  },
   methods: {
     onToggleHistoryMode: function() {
       this.showHistory = !this.showHistory
     },
 
-    saveList(list, callback) {
-      console.log("saveList()", list)
+    editList(list) {
+      console.log('NAV.editList()', list)
+      // Pass a clone to the form so that modifications are only applied upon validation
+      this.editionListModel = {...(list ? list : new List())}
+    },
+    saveList(listData, callback) {
+      const list = Object.assign(
+        new List(),
+        listData
+      )
+      console.log('NAV.saveList()', list)
       callback = callback || function() {}
       const self = this
       this.$repository.save(list)
@@ -133,8 +99,12 @@ export default {
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
-    deleteList(list, callback) {
-      console.log("deleteList()", list)
+    deleteList(listData, callback) {
+      const list = Object.assign(
+        new List(),
+        listData
+      )
+      console.log('NAV.deleteList()', list)
       callback = callback || function() {}
       const self = this
       this.$repository.delete(list)
@@ -146,21 +116,24 @@ export default {
     },
 
     onEditClick() {
-      this.editionListModel = this.listModel
+      this.editList(this.listModel)
     },
     onCancelListForm() {
-      this.editionListModel = null
+      console.log('onCancelListForm()')
+      this.closeEditListForm()
     },
-    onSaveListForm() {
+    onSaveListForm(listData) {
       const self = this
-      this.saveList(this.editionListModel, function() {
+      console.log('onSaveListForm()', listData)
+      this.saveList(listData, function() {
         self.closeEditListForm()
       })
     },
-    onDeleteListForm() {
+    onDeleteListForm(listData) {
       const self = this
+      console.log('onDeleteListForm()', listData)
       if (confirm(self.$t('confirmation-question'))) {
-        this.deleteList(this.editionListModel, function() {
+        this.deleteList(listData, function() {
           self.closeEditListForm()
         })
       }

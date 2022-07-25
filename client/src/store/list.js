@@ -15,6 +15,16 @@ const loadList = function (listId) {
     .find(listId)
 }
 
+Query.on('afterUpdate', function (model) {
+  if (model
+    && model instanceof List
+    && store.state.list.currentList._id === model._id
+  ) {
+    // Force propagating changes on the model to all places it's used
+    store.commit('list/setCurrentList', model)
+  }
+})
+
 Query.on('afterDelete', function (model) {
   if (model
     && model instanceof List

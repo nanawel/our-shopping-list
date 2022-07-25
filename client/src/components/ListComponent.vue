@@ -136,11 +136,10 @@
 
     <!-- WORK IN PROGRESS -->
     <ItemEditDialogComponent
-      v-model="shouldShowEditItemDialog"
       :item="editionItemModel"
-      v-on:onSave="onSaveItemForm"
-      v-on:onCancel="onCancelItemForm"
-      v-on:onDelete="onDeleteItemForm"/>
+      v-on:save="onSaveItemForm"
+      v-on:cancel="onCancelItemForm"
+      v-on:delete="onDeleteItemForm"/>
 
     <v-overlay
       :value="loadingOverlay">
@@ -209,11 +208,6 @@ export default {
     displayMode: {
       get: function() {
         return this.$store.state.list.displayMode
-      }
-    },
-    shouldShowEditItemDialog: {
-      get: function() {
-        return !!this.editionItemModel
       }
     },
     shouldShowBottomSearchBar: {
@@ -333,12 +327,12 @@ export default {
   },
   methods: {
     newList() {
-      console.log("LIST.newList()", this.listModel)
+      console.log('LIST.newList()', this.listModel)
       this.$router.push({name: 'newList'})
         .catch(() => {})  // Hide "Redirected when going from ... to ..." errors
     },
     saveList() {
-      console.log("LIST.saveList()", this.listModel)
+      console.log('LIST.saveList()', this.listModel)
       const self = this
       this.$repository.save(this.listModel)
         .then((response) => {
@@ -382,15 +376,14 @@ export default {
     editItem(item) {
       console.log('LIST.editItem()', item, this.listModel)
       // Pass a clone to the form so that modifications are only applied upon validation
-      this.editionItemModel = JSON.parse(JSON.stringify(item ? item : new Item()))
+      this.editionItemModel = {...(item ? item : new Item())}
     },
     saveItem(itemData, callback) {
-      console.log(this.listModelId, itemData);
       const item = Object.assign(
         new Item(),
         itemData,
         {listId: this.listModelId}  // Force current list
-      );
+      )
       console.log('LIST.saveItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
@@ -405,7 +398,7 @@ export default {
       const item = Object.assign(
         new Item(),
         itemData
-      );
+      )
       console.log('LIST.deleteItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
@@ -460,6 +453,11 @@ export default {
         if (this.searchString) {
           this.cancelSearch()
         }
+      } else {
+        this.$snackbar.msg(item.checked
+          ? this.$t('item.help-onclick-checked')
+          : this.$t('item.help-onclick-unchecked')
+        )
       }
     },
     onDoubleClickItem(item) {
@@ -472,18 +470,19 @@ export default {
       console.log('onCancelItemForm()')
       this.closeEditItemForm()
     },
-    onSaveItemForm(item) {
-      console.log('onSaveItemForm()', item)
-      this.saveItem(item, function() {
-        this.closeEditItemForm()
-      }.bind(this))
+    onSaveItemForm(itemData) {
+      const self = this
+      console.log('onSaveItemForm()', itemData)
+      this.saveItem(itemData, function() {
+        self.closeEditItemForm()
+      })
     },
-    onDeleteItemForm(item) {
-      console.log('onDeleteItemForm()', item)
+    onDeleteItemForm(itemData) {
+      console.log('onDeleteItemForm()', itemData)
       const self = this
       if (confirm(this.$t('confirmation-question'))) {
-        if (item && item._id) {
-          this.deleteItem(item, function() {
+        if (itemData && itemData._id) {
+          this.deleteItem(itemData, function() {
             self.closeEditItemForm()
           })
         } else {

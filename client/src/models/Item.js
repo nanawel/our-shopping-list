@@ -10,6 +10,7 @@ class Item extends AbstractModel {
 
   static fields() {
     return {
+      ...super.fields(),
       _id: this.string(null),
       name: this.string(''),
       details: this.string(''),
