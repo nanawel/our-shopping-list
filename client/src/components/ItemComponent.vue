@@ -131,6 +131,10 @@ export default {
 .swiper-container {
   overflow-x: hidden;
 }
+.swiper-slide {
+  /* This one made me lose a huge amount of time... */
+  flex-shrink: 0 !important;
+}
 .swiper-slide-left,
 .swiper-slide-right {
   padding: 0;
