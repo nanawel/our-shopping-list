@@ -94,8 +94,8 @@
       "details": "Details"
     },
     "last-checked-label": "Last checked: %{date}",
-    "help-onclick-checked": "\uD83D\uDCA1 Swipe left to uncheck an item \uD83E\uDC28",
-    "help-onclick-unchecked": "\uD83D\uDCA1 Swipe right to check an item \uD83E\uDC2A"
+    "help-onclick-checked": "💡 ⬅ Swipe left to uncheck an item",
+    "help-onclick-unchecked": "💡 Swipe right to check an item ➡"
   },
   "edit-list-dialog": {
     "existing-title": "Edit List",
