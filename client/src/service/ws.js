@@ -22,7 +22,7 @@ export default {
             console.warn('Server version mismatch, reloading app.')
             alert(i18n.t('notice.application-updated-alert'))
             localStorage.removeItem(serverHashKey)
-            store.$app.softRefresh()
+            store.$app.hardRefresh()
             return
           }
         }
