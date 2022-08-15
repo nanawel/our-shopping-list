@@ -6,7 +6,7 @@ require('./ws');
 const onHeadRequest = function (req, res, doc, next) {
   if (doc) {
     console.log('HEAD BOARD', doc._id, 'updatedAt =', doc.updatedAt);
-    res.status(200)
+    res.status(204)
       .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
       .set('Osl-Entity-Type', BoardModel.modelName)
       .set('Osl-Entity-Id', doc._id)

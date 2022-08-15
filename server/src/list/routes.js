@@ -11,7 +11,7 @@ router.head('/lists/:id', (req, res, next) => {
     .then((doc) => {
       if (doc) {
         console.log('HEAD LIST', doc._id, 'updatedAt =', doc.updatedAt);
-        res.status(200)
+        res.status(204)
           .set('Last-Modified-Iso', doc.updatedAt ? doc.updatedAt.toISOString() : (new Date(0)).toISOString())
           .set('Osl-Entity-Type', ListModel.modelName)
           .set('Osl-Entity-Id', doc._id)
