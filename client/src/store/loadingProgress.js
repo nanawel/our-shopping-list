@@ -9,8 +9,9 @@ export default {
         init(context) {
           context.commit('reset')
 
-          // See https://axios-http.com/docs/interceptors
 
+          // 1. Observe AXIOS requests
+          // See https://axios-http.com/docs/interceptors
           axios.interceptors.request.use(function (config) {
             context.commit('notifyRequest')
             return config
@@ -21,6 +22,17 @@ export default {
             return response
           }
           axios.interceptors.response.use(onComplete, onComplete)
+
+          // 2. Observe FETCH requests
+          // FIXME Not exactly a clean method, try and find a better one
+          const nativeFetch = window.fetch
+          window.fetch = function(...args) {
+            context.commit('notifyRequest')
+            return nativeFetch.apply(window, args)
+              .finally(() => {
+                context.commit('notifyResponse')
+              })
+          }
         }
       },
       mutations: {

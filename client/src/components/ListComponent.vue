@@ -126,7 +126,7 @@
           depressed
           small
           color="primary"
-          :disabled="this.searchString.length === 0"
+          :disabled="searchString.length === 0"
           @click="submitSearchInput">
           <v-icon>mdi-plus</v-icon>
           <span>{{ $t('list.search-bar.add-button') }}</span>
@@ -134,7 +134,6 @@
       </v-footer>
     </div>
 
-    <!-- WORK IN PROGRESS -->
     <ItemEditDialogComponent
       :item="editionItemModel"
       v-on:save="onSaveItemForm"
@@ -143,9 +142,7 @@
 
     <v-overlay
       :value="loadingOverlay">
-      <v-progress-circular
-        indeterminate
-        size="64"/>
+      <v-icon size="10em">mdi-cloud-sync-outline</v-icon>
     </v-overlay>
   </div>
 </template>
@@ -347,12 +344,15 @@ export default {
       const self = this
       if (this.listModelId) {
         console.log('LIST.checkSync()', this.listModelId)
-
+        self.loadingOverlay = true
         return this.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
               return self.$repository.sync(self.listModel)
             }
+          })
+          .finally(() => {
+            self.loadingOverlay = false
           })
       }
     },
