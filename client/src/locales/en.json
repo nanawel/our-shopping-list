@@ -7,6 +7,8 @@
   "edit": "Edit",
   "save": "Save",
   "share": "Share",
+  "ok": "OK",
+  "ok-thanks": "OK, thanks",
   "confirmation-question": "Are you sure?",
   "errors": {
     "board": {
@@ -27,7 +29,9 @@
     }
   },
   "notice": {
-    "application-updated-alert": "The application has been updated.\nThis page will now be reloaded automatically."
+    "application-updated-alert": "The application has been updated.\nThis page will now be reloaded automatically.",
+    "force-refresh-hint-title": "Did you know?",
+    "force-refresh-hint-message": "If you experience sync or update issues, use the refresh button in the left menu to force a full reload."
   },
   "menu-nav": {
     "open": "Open the menu",

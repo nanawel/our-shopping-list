@@ -10,7 +10,9 @@
 
       <router-view name="root"></router-view>
 
-      <Snackbar></Snackbar>
+      <DialogComponent></DialogComponent>
+
+      <SnackbarComponent></SnackbarComponent>
 
       <v-overlay
         :value="showNotConnectedOverlay">
@@ -23,18 +25,23 @@
 </template>
 
 <script>
-import Snackbar from '@/components/SnackbarComponent.vue'
+import DialogComponent from '@/components/DialogComponent.vue'
+import SnackbarComponent from '@/components/SnackbarComponent.vue'
 import eventBus from '@/service/event-bus'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    Snackbar
+    DialogComponent,
+    SnackbarComponent
   },
   data: () => ({
   }),
   created() {
     eventBus.$emit('app-created')
+  },
+  mounted() {
+    eventBus.$emit('app-mounted')
   },
   computed: {
     showNotConnectedOverlay: {

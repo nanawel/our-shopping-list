@@ -7,6 +7,8 @@
   "edit": "Modifier",
   "save": "Enregistrer",
   "share": "Partager",
+  "ok": "OK",
+  "ok-thanks": "OK, merci",
   "confirmation-question": "Êtes-vous sûr(e)?",
   "errors": {
     "board": {
@@ -27,7 +29,9 @@
     }
   },
   "notice": {
-    "application-updated-alert": "L'application a été mise à jour.\nCette page va être rechargée automatiquement."
+    "application-updated-alert": "L'application a été mise à jour.\nCette page va être rechargée automatiquement.",
+    "force-refresh-hint-title": "Conseil",
+    "force-refresh-hint-message": "Si vous constatez des problèmes de mise à jour ou de synchronisation, utilisez le bouton de rechargement dans le menu de gauche."
   },
   "menu-nav": {
     "open": "Ouvrir le menu",

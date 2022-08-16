@@ -53,6 +53,8 @@ import listObserver from '@/observer/list'
 Vue.use(listObserver)
 import restoreStateObserver from '@/observer/restorestate'
 Vue.use(restoreStateObserver)
+import showForceRefreshHint from '@/observer/showForceRefreshHint'
+Vue.use(showForceRefreshHint)
 
 // Init app
 const $app = new Vue({

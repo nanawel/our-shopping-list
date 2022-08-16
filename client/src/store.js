@@ -16,6 +16,7 @@ import config from '@/config'
 // Modules
 import version from '@/store/version'
 import snackbar from '@/store/snackbar'
+import dialog from '@/store/dialog'
 import board from '@/store/board'
 import list from '@/store/list'
 import loadingProgress from '@/store/loadingProgress'
@@ -53,6 +54,7 @@ const store = new Vuex.Store({
   modules: {
     version,
     snackbar,
+    dialog,
     board: board.module(),
     list: list.module(),
     loadingProgress: loadingProgress.module(axios)
