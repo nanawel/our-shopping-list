@@ -344,7 +344,13 @@ export default {
       const self = this
       if (this.listModelId) {
         console.log('LIST.checkSync()', this.listModelId)
-        self.loadingOverlay = true
+
+        // Display the loading overlay with a 500ms delay to avoid flashes
+        const debouncedOverlayTriggerFunc = debounce(() => {
+          self.loadingOverlay = true
+        }, 500)
+        debouncedOverlayTriggerFunc()
+
         return this.$repository.checkSync(self.listModel)
           .then((isSync) => {
             if (!isSync) {
@@ -352,6 +358,7 @@ export default {
             }
           })
           .finally(() => {
+            debouncedOverlayTriggerFunc.cancel()
             self.loadingOverlay = false
           })
       }
