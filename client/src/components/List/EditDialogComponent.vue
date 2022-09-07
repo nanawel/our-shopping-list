@@ -35,13 +35,14 @@
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-spacer></v-spacer>
         <v-btn
+          icon
           color="red"
           plain
           @click="onDeleteListForm">
-          {{ $t('delete') }}
+          <v-icon>mdi-trash-can</v-icon>
         </v-btn>
+        <v-spacer></v-spacer>
         <v-btn
           color="grey"
           plain
