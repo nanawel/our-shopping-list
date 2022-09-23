@@ -95,7 +95,7 @@
               <ItemComponent
                 :key="item._id"
                 :item="item"
-                v-touch-event:touchhold="onTouchHoldItem(item)"
+                v-touch-event:touchhold="onTouchHoldItem(item._id)"
                 @click="onClickItem(item)"
                 @editClick="onEditItem(item)"
                 @doubleClick="onDoubleClickItem(item)"
@@ -445,9 +445,15 @@ export default {
         this.cancelSearch()
       }
     },
-    onTouchHoldItem(item) {
+    onTouchHoldItem(itemId) {
       const self = this
+      // v-touch:* are not like v-on but custom directives so we need a little
+      // workaround here to declare the handler.
+      // This is also why we must pass the ID instead of the instance, and load the model
+      // on trigger (bug #49).
+      // See https://github.com/jerrybendy/vue-touch-events#how-to-add-extra-parameters
       return function (ev) {
+        const item = Item.find(itemId)
         console.log('LIST.onTouchHoldItem()', ev, item)
         ev.preventDefault()
         self.editItem(item)
