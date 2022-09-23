@@ -1,6 +1,6 @@
 variables:
-  APP_IMAGE: "osl_app"
   COMPOSE_FILE: "docker-compose.build.yml"
+  CONTAINER_BUILD_IMAGE: "osl-build-app"
   CONTAINER_RELEASE_IMAGE: "nanawel/our-shopping-list"
   CONTAINER_PUBLIC_IMAGE: "nanawel/our-shopping-list"
 
@@ -20,7 +20,7 @@ build_image:
     - time make config
     - export buildVersion=$([ -z "${CI_COMMIT_TAG}" ] && echo ${CI_COMMIT_REF_SLUG} || echo ${CI_COMMIT_TAG})
       && time make build args="--build-arg build_version=${buildVersion} --build-arg build_id=${CI_COMMIT_SHORT_SHA} --build-arg build_date=$(date -Is)"
-    - time docker tag ${APP_IMAGE}:${APP_VERSION:-latest} ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
+    - time docker tag ${CONTAINER_BUILD_IMAGE}:${APP_VERSION:-latest} ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker push ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
   tags:
     - shell

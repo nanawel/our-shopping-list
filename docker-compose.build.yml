@@ -2,6 +2,7 @@ version: '3.2'
 
 services:
   app:
+    image: ${CONTAINER_BUILD_IMAGE}:latest
     build:
       context: './'
       args:
