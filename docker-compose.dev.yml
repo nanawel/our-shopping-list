@@ -7,6 +7,7 @@ services:
     command: '${NODE_BIN:-node} index.js'
     ports:
       - '8080:8080'
+      - '8081:8081'
       - '8888:8888'   # Webpack Bundle Analyzer
       - '9229:9229'   # Debugger
     volumes:

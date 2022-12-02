@@ -1,3 +1,4 @@
+const fs = require('fs');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -20,12 +21,20 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
+    port: 8081,
     allowedHosts: 'all',
+    webSocketServer: 'ws',
+    hot: true,
+    server: {
+      type: 'https',
+      options: {
+        key: '../ssl/key.pem',
+        cert: '../ssl/cert.pem',
+      }
+    },
     client: {
       webSocketURL: {
-        hostname: "0.0.0.0",
-        pathname: "/webpack-ws",
-        port: 8080,
+        hostname: '0.0.0.0',
       },
     },
     devMiddleware: {
