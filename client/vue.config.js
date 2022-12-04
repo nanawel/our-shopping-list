@@ -46,6 +46,9 @@ module.exports = {
     name: 'Our Shopping List',
     themeColor: '#80cbc4',
     msTileColor: '#ffffff',
+    manifestOptions: {
+      short_name: 'OSL'
+    },
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     workboxPluginMode: 'GenerateSW',

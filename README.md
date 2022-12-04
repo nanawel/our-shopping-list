@@ -169,6 +169,8 @@ docker-compose up -d
 - `VUE_APP_I18N_FALLBACK_LOCALE` (default : `en`)
 - `VUE_APP_I18N_FORCE_LOCALE` (default : `0`)
 - `VUE_APP_SINGLEBOARD_MODE` (default : `0`)
+- `VUE_APP_TITLE` (default : `Our Shopping List`)
+- `VUE_APP_SHORT_TITLE` (default : `OSL`)
 
 > MongoDB authentication is not supported yet.
 

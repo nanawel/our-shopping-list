@@ -25,6 +25,7 @@ const httpServer = http.createServer(options, app);
 
 app.disable('x-powered-by');
 app.use(compression());
+require('./middleware/app/pwa')(app);
 require('./middleware/app/static')(app);
 require('./middleware/app/json')(app);
 
