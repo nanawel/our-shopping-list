@@ -531,8 +531,8 @@ export default {
 }
 .list-wrapper {
   overflow-y: auto;
-  min-height: calc(100vh - (64px + 80px));
-  max-height: calc(100vh - (64px + 80px));
+  min-height: calc(100svh - (64px + 80px));
+  max-height: calc(100svh - (64px + 80px));
 }
 .scroller {
   height: 100%;
