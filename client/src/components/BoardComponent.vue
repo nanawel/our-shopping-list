@@ -187,5 +187,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#router-view-container {
+  padding: 0 !important;
+}
 </style>

@@ -108,8 +108,8 @@
       </div>
     </template>
 
-    <div class="list-footer align-end" v-if="shouldShowBottomSearchBar">
-      <v-footer class="px-6 px-md-20">
+    <div class="list-footer" v-if="shouldShowBottomSearchBar">
+      <v-footer>
         <v-text-field
           name="new_item_name"
           id="new_item_name"
@@ -531,22 +531,15 @@ export default {
 }
 .list-wrapper {
   overflow-y: auto;
-  min-height: calc(100svh - (64px + 80px));
-  max-height: calc(100svh - (64px + 80px));
+  padding-top: 6px;
+  min-height: calc(100svh - (56px + 80px));
+  max-height: calc(100svh - (56px + 80px));
 }
 .scroller {
   height: 100%;
 }
-.list-footer {
-  position: relative;
-  bottom: 0;
-  margin-left: -12px;
-  margin-right: -12px;
-}
 .v-footer {
   height: 80px;
-  z-index: 5;
-  flex-wrap: nowrap;
 
   .v-btn__content {
     @media #{map-get($display-breakpoints, 'md-and-down')} {
