@@ -110,9 +110,11 @@
 
     <div class="list-footer" v-if="shouldShowBottomSearchBar">
       <v-footer>
+        <!-- See https://stackoverflow.com/a/73466347/5431347 to see why type="search" is required -->
         <v-text-field
           name="new_item_name"
           id="new_item_name"
+          type="search"
           ref="searchInput"
           :label="$t('list.search-bar.input-label')"
           autocomplete="off"
