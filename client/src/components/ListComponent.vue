@@ -115,6 +115,7 @@
           name="new_item_name"
           id="new_item_name"
           type="search"
+          aria-autocomplete="both" aria-haspopup="false"
           ref="searchInput"
           :label="$t('list.search-bar.input-label')"
           autocomplete="off"
