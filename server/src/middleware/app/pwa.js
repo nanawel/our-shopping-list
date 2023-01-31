@@ -15,8 +15,8 @@ module.exports = function (app) {
         if (config.VUE_APP_SHORT_TITLE) {
           manifestContent.short_name = config.VUE_APP_SHORT_TITLE;
         }
-        res.json(manifestContent)
-          .set('Cache-Control', 'max-age=86400')
+        res.set('Cache-Control', 'max-age=86400')
+          .json(manifestContent)
           .end();
       } catch (e) {
         console.error('PWA MIDDLEWARE ERROR:', e);
