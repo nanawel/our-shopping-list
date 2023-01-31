@@ -74,4 +74,16 @@ export default {
 html, body {
   overflow: hidden;
 }
+
+.v-application--wrap {
+  // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers
+  @supports (min-height: 100svh) {
+    // Vuetify sets min-height to 100vh by default which is not what we want here (we want 100svh instead)
+    min-height: 100svh !important;
+  }
+  @supports not (min-height: 100svh) {
+    min-height: var(--x-vh) !important;
+  }
+  // GITHUB#9 END ## Fix for svh compatibility with old mobile browsers
+}
 </style>

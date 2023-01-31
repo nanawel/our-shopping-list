@@ -2,8 +2,7 @@
   <div class="board">
     <v-app-bar
       app
-      color="teal lighten-3"
-      hide-on-scroll>
+      color="teal lighten-3">
       <v-app-bar-nav-icon
         @click.stop="sidebarMenu = !sidebarMenu"
         :aria-label="$t('menu-nav.open')">

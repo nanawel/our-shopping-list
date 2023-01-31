@@ -109,32 +109,30 @@
     </template>
 
     <div class="list-footer" v-if="shouldShowBottomSearchBar">
-      <v-footer>
-        <!-- See https://stackoverflow.com/a/73466347/5431347 to see why type="search" is required -->
-        <v-text-field
-          name="new_item_name"
-          id="new_item_name"
-          type="search"
-          aria-autocomplete="both" aria-haspopup="false"
-          ref="searchInput"
-          :label="$t('list.search-bar.input-label')"
-          autocomplete="off"
-          prepend-icon="mdi-magnify"
-          clearable
-          v-model="searchInputValue"
-          autocapitalize="sentences"
-          class="pr-4"
-          @keydown.enter="submitSearchInput"/>
-        <v-btn
-          depressed
-          small
-          color="primary"
-          :disabled="searchString.length === 0"
-          @click="submitSearchInput">
-          <v-icon>mdi-plus</v-icon>
-          <span>{{ $t('list.search-bar.add-button') }}</span>
-        </v-btn>
-      </v-footer>
+      <!-- See https://stackoverflow.com/a/73466347/5431347 to see why type="search" is required -->
+      <v-text-field
+        name="new_item_name"
+        id="new_item_name"
+        type="search"
+        aria-autocomplete="both" aria-haspopup="false"
+        ref="searchInput"
+        :label="$t('list.search-bar.input-label')"
+        autocomplete="off"
+        prepend-icon="mdi-magnify"
+        clearable
+        v-model="searchInputValue"
+        autocapitalize="sentences"
+        class="pr-4"
+        @keydown.enter="submitSearchInput"/>
+      <v-btn
+        depressed
+        small
+        color="primary"
+        :disabled="searchString.length === 0"
+        @click="submitSearchInput">
+        <v-icon>mdi-plus</v-icon>
+        <span>{{ $t('list.search-bar.add-button') }}</span>
+      </v-btn>
     </div>
 
     <ItemEditDialogComponent
@@ -534,15 +532,32 @@ export default {
 }
 .list-wrapper {
   overflow-y: auto;
-  padding-top: 6px;
-  min-height: calc(100svh - (56px + 80px));
-  max-height: calc(100svh - (56px + 80px));
+
+  // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers
+  @supports (min-height: 100svh) {
+    min-height: calc(100svh - (56px + 80px));
+    max-height: calc(100svh - (56px + 80px));
+  }
+  @supports not (min-height: 100svh) {
+    min-height: calc(var(--x-vh) - (56px + 80px));
+    max-height: calc(var(--x-vh) - (56px + 80px));
+  }
+  // GITHUB#9 END ## Fix for svh compatibility with old mobile browsers
 }
 .scroller {
   height: 100%;
 }
-.v-footer {
+.list-footer {
   height: 80px;
+  background-color: #f5f5f5;
+  display: flex;
+  padding: 6px 16px;
+  align-items: center;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+
+  position: relative;
+  bottom: 0;
 
   .v-btn__content {
     @media #{map-get($display-breakpoints, 'md-and-down')} {

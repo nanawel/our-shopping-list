@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+    <meta name="x-viewport-height" content="">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <script type="application/javascript" src="<%= BASE_URL %>config.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
@@ -12,6 +13,25 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <script>
+      // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers
+      function _setVh(vh) {
+        console.debug('[Compat] New vh: ', vh);
+        let viewportHeightMeta = document.querySelector('meta[name=x-viewport-height]');
+        viewportHeightMeta.setAttribute('content', vh);
+
+        let root = document.querySelector(':root');
+        root.style.setProperty('--x-vh', vh + 'px');
+      }
+      if (window.visualViewport && window.visualViewport.height) {
+        _setVh(window.visualViewport.height);
+        window.visualViewport.addEventListener('resize', (ev) => {
+          let vh = parseInt(ev.currentTarget.height);
+          _setVh(vh);
+        })
+      }
+      // GITHUB#9 END ## Fix for svh compatibility with old mobile browsers
+    </script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
