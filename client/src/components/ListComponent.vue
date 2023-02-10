@@ -544,6 +544,9 @@ export default {
   }
   // GITHUB#9 END ## Fix for svh compatibility with old mobile browsers
 }
+#list-scroller {
+  padding-top: 6px;
+}
 .scroller {
   height: 100%;
 }
