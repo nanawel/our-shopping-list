@@ -9,7 +9,6 @@ export default {
   install() {
     eventBus.$on('app-mounted', function () {
       if (!window.localStorage.getItem(forceRefreshHintShownKey)) {
-        console.log(i18n.t('ok-thanks'));
         store.commit('dialog/showMessage', {
           title: i18n.t('notice.force-refresh-hint-title'),
           message: i18n.t('notice.force-refresh-hint-message'),

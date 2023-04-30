@@ -1,3 +1,4 @@
+import logger from '@/service/logger'
 import eventBus from '@/service/event-bus'
 import Board from '@/models/Board'
 
@@ -36,7 +37,7 @@ export default {
             payload = {board: payload}
           }
           const doSet = (board) => {
-            //console.log('BOARD doSet()', board)
+            logger.debug('BOARD doSet()', board)
             const newBoardId = board ? board._id : null
             const previousBoard = state.currentBoard
             if (board !== null) {
@@ -48,6 +49,7 @@ export default {
             if (state.currentBoardId !== newBoardId) {
               state.currentBoard = board
               state.currentBoardId = newBoardId
+
 
               eventBus.$emit('board_set::after', board, previousBoard)
             }
@@ -62,7 +64,7 @@ export default {
           }
         },
         reset(state) {
-          console.log('board/reset')
+          logger.debug('board/reset')
           state.currentBoard = null
           state.currentBoardId = null
           state.lastBoard = null

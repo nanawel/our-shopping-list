@@ -1,4 +1,5 @@
 import store from '@/store'
+import logger from '@/service/logger'
 import {sock} from '@/service/socket-io'
 
 const BoardComponent = () => import('@/components/BoardComponent.vue')
@@ -108,7 +109,7 @@ export default (router) => {
             store.commit('board/setCurrentBoard', {id: response.entities.boards[0]._id})
           })
           .catch((e) => {
-            console.error(e)
+            logger.error(e)
             router.app.$snackbar.msg('Could not load board :(')
           })
       }
@@ -125,7 +126,7 @@ export default (router) => {
     if (to.params.listId) {
       if (to.params.listId === 'new') {
         store.commit('list/setCurrentList', new ListModel())
-        console.log(store.state.list.currentList);
+        logger.log(store.state.list.currentList);
       } else {
         const list = ListModel.query()
           .with('items')
@@ -147,7 +148,7 @@ export default (router) => {
                 ListModel.delete(to.params.listId)
                 router.app.$snackbar.msg('List not found!')
               } else {
-                console.error(e)
+                logger.error(e)
                 router.app.$snackbar.msg('Could not load list :(')
               }
             })

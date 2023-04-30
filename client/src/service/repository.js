@@ -1,3 +1,4 @@
+import logger from '@/service/logger'
 import eventBus from '@/service/event-bus'
 
 import Board from '@/models/Board'
@@ -31,7 +32,7 @@ const Repository = function() {
       return schemas[0]
     },
     save(model) {
-      console.log('$repository::save', model)
+      logger.debug('$repository::save', model)
       const schema = this.findSchemaByModel(model)
 
       eventBus.$emit('repository_save::before', model, schema)
@@ -46,7 +47,7 @@ const Repository = function() {
     },
 
     delete(model) {
-      console.log('$repository::delete', model)
+      logger.debug('$repository::delete', model)
       const schema = this.findSchemaByModel(model)
 
       eventBus.$emit('repository_delete::before', model, schema)
@@ -63,7 +64,7 @@ const Repository = function() {
       }
     },
     checkSync(model) {
-      console.log('$repository::checkSync', model, model.constructor.name)
+      logger.debug('$repository::checkSync', model, model.constructor.name)
       const schema = this.findSchemaByModel(model)
 
       return new Promise((resolve, reject) => {
@@ -76,11 +77,11 @@ const Repository = function() {
                 switch (res.status) {
                   case 404:
                     // Model does not exist (anymore) on server: it should not exist either on client
-                    console.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
+                    logger.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
                     model.$delete()
                     break
                 }
-                console.error(`[${res.status}] ${res.statusText}`)
+                logger.error(`[${res.status}] ${res.statusText}`)
               } else {
                 const lastModified = new Date(res.headers.get('last-modified-iso'))
                 const modelUpdatedAt = new Date(model.updatedAt)
@@ -102,7 +103,7 @@ const Repository = function() {
       })
     },
     async sync(model) {
-      console.log('$repository::sync', model)
+      logger.debug('$repository::sync', model)
 
       if (model._id) {
         const schema = this.findSchemaByModel(model)

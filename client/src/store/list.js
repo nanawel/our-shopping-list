@@ -2,6 +2,7 @@ import {Query} from '@vuex-orm/core';
 
 import {DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 import List from '@/models/List'
+import logger from '@/service/logger'
 import eventBus from '@/service/event-bus'
 import store from '@/store'
 
@@ -51,6 +52,7 @@ export default {
             payload = {list: payload}
           }
           const doSet = (list) => {
+            logger.debug('LIST doSet()', list)
             const previousList = state.currentList
             if (list) {
               if (!(list instanceof List)) {
@@ -59,6 +61,7 @@ export default {
               state.lastList = list
               state.lastListId = list ? list._id : null
             }
+            logger.debug('setCurrentList', list)
             state.currentList = list
             state.currentListId = list ? list._id : null
 
@@ -79,7 +82,7 @@ export default {
           state.displayMode = payload.mode
         },
         reset(state) {
-          console.log('list/reset')
+          logger.debug('list/reset')
           state.currentList = null
           state.currentListId = null
           state.lastList = null

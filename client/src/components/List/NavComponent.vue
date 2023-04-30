@@ -80,7 +80,7 @@ export default {
     },
 
     editList(list) {
-      console.log('NAV.editList()', list)
+      this.$logger.debug('NAV.editList()', list)
       // Pass a clone to the form so that modifications are only applied upon validation
       this.editionListModel = {...(list ? list : new List())}
     },
@@ -89,13 +89,13 @@ export default {
         new List(),
         listData
       )
-      console.log('NAV.saveList()', list)
+      this.$logger.debug('NAV.saveList()', list)
       callback = callback || function() {}
       const self = this
       this.$repository.save(list)
         .then(callback)
         .catch((e) => {
-          console.error(e)
+          this.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
@@ -104,13 +104,13 @@ export default {
         new List(),
         listData
       )
-      console.log('NAV.deleteList()', list)
+      this.$logger.debug('NAV.deleteList()', list)
       callback = callback || function() {}
       const self = this
       this.$repository.delete(list)
         .then(callback)
         .catch((e) => {
-          console.error(e)
+          this.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.list.delete'))
         })
     },
@@ -119,19 +119,19 @@ export default {
       this.editList(this.listModel)
     },
     onCancelListForm() {
-      console.log('onCancelListForm()')
+      this.$logger.debug('onCancelListForm()')
       this.closeEditListForm()
     },
     onSaveListForm(listData) {
       const self = this
-      console.log('onSaveListForm()', listData)
+      this.$logger.debug('onSaveListForm()', listData)
       this.saveList(listData, function() {
         self.closeEditListForm()
       })
     },
     onDeleteListForm(listData) {
       const self = this
-      console.log('onDeleteListForm()', listData)
+      this.$logger.debug('onDeleteListForm()', listData)
       if (confirm(self.$t('confirmation-question'))) {
         this.deleteList(listData, function() {
           self.closeEditListForm()

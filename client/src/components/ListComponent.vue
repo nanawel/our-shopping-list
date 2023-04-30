@@ -325,26 +325,26 @@ export default {
   },
   methods: {
     newList() {
-      console.log('LIST.newList()', this.listModel)
+      this.$logger.debug('LIST.newList()', this.listModel)
       this.$router.push({name: 'newList'})
         .catch(() => {})  // Hide "Redirected when going from ... to ..." errors
     },
     saveList() {
-      console.log('LIST.saveList()', this.listModel)
+      this.$logger.debug('LIST.saveList()', this.listModel)
       const self = this
       this.$repository.save(this.listModel)
         .then((response) => {
           self.$router.push({name: 'list', params: {listId: response.entities.lists[0]._id}})
         })
         .catch((e) => {
-          console.error(e)
+          this.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
     async checkSync() {
       const self = this
       if (this.listModelId) {
-        console.log('LIST.checkSync()', this.listModelId)
+        this.$logger.debug('LIST.checkSync()', this.listModelId)
 
         // Display the loading overlay with a 500ms delay to avoid flashes
         const debouncedOverlayTriggerFunc = debounce(() => {
@@ -382,7 +382,7 @@ export default {
       this.editItem(null)
     },
     editItem(item) {
-      console.log('LIST.editItem()', item, this.listModel)
+      this.$logger.debug('LIST.editItem()', item, this.listModel)
       // Pass a clone to the form so that modifications are only applied upon validation
       this.editionItemModel = {...(item ? item : new Item())}
     },
@@ -392,13 +392,13 @@ export default {
         itemData,
         {listId: this.listModelId}  // Force current list
       )
-      console.log('LIST.saveItem()', item, this.listModel)
+      this.$logger.debug('LIST.saveItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
       this.$repository.save(item)
         .then(callback)
         .catch((e) => {
-          console.error(e)
+          this.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.item.save'))
         })
     },
@@ -407,13 +407,13 @@ export default {
         new Item(),
         itemData
       )
-      console.log('LIST.deleteItem()', item, this.listModel)
+      this.$logger.debug('LIST.deleteItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
       this.$repository.delete(item)
         .then(callback)
         .catch((e) => {
-          console.error(e)
+          this.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.item.delete'))
         })
     },
@@ -433,14 +433,14 @@ export default {
       this.editItem(item)
     },
     onItemSwipeOutLeft(item) {
-      console.log('LIST.onItemSwipeOutLeft()', item)
+      this.$logger.debug('LIST.onItemSwipeOutLeft()', item)
       this.toggleCheckedItem(item)
       if (this.searchString) {
         this.cancelSearch()
       }
     },
     onItemSwipeOutRight(item) {
-      console.log('LIST.onItemSwipeOutRight()', item)
+      this.$logger.debug('LIST.onItemSwipeOutRight()', item)
       this.toggleCheckedItem(item)
       if (this.searchString) {
         this.cancelSearch()
@@ -455,7 +455,7 @@ export default {
       // See https://github.com/jerrybendy/vue-touch-events#how-to-add-extra-parameters
       return function (ev) {
         const item = Item.find(itemId)
-        console.log('LIST.onTouchHoldItem()', ev, item)
+        this.$logger.debug('LIST.onTouchHoldItem()', ev, item)
         ev.preventDefault()
         self.editItem(item)
         return false
@@ -481,18 +481,18 @@ export default {
     //
     // ITEM FORM
     onCancelItemForm() {
-      console.log('onCancelItemForm()')
+      this.$logger.debug('onCancelItemForm()')
       this.closeEditItemForm()
     },
     onSaveItemForm(itemData) {
       const self = this
-      console.log('onSaveItemForm()', itemData)
+      this.$logger.debug('onSaveItemForm()', itemData)
       this.saveItem(itemData, function() {
         self.closeEditItemForm()
       })
     },
     onDeleteItemForm(itemData) {
-      console.log('onDeleteItemForm()', itemData)
+      this.$logger.debug('onDeleteItemForm()', itemData)
       const self = this
       if (confirm(this.$t('confirmation-question'))) {
         if (itemData && itemData._id) {

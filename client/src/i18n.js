@@ -1,7 +1,8 @@
-import Vue from "vue"
-import VueI18n from "vue-i18n"
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
 
 import config from '@/config'
+import logger from '@/service/logger'
 
 Vue.use(VueI18n)
 
@@ -19,7 +20,7 @@ function loadLocaleMessages() {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i)
     if (matched && matched.length > 1) {
       const locale = matched[1]
-      console.log('[i18n] Found locale: ', locale)
+      logger.info('[i18n] Found locale: ', locale)
       messages[locale] = locales(key)
     }
   })

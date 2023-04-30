@@ -4,6 +4,10 @@ import App from '@/App.vue'
 
 Vue.config.productionTip = false
 
+// Logger
+import VueLogger from '@/service/logger'
+Vue.use(VueLogger)
+
 // PWA
 import '@/registerServiceWorker'
 

@@ -8986,6 +8986,11 @@ vue-loader@^17.0.0:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
+vue-logger-plugin@^1.2:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/vue-logger-plugin/-/vue-logger-plugin-1.2.3.tgz#95976caefa6e6545252161280811305f55b8b09e"
+  integrity sha512-xolZPxLlr3n9CobfIdPtc1i5k607Yav1DmKk29mQCkfxnFMPCiCO9akhF0+A84YEeZUQFtN1Z/j3ShlRXubSpQ==
+
 vue-observe-visibility@^0.4.4:
   version "0.4.6"
   resolved "https://registry.yarnpkg.com/vue-observe-visibility/-/vue-observe-visibility-0.4.6.tgz#878cb8ebcf3078e40807af29774e97105ebd519e"

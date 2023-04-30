@@ -155,7 +155,7 @@ export default {
     async sync() {
       const self = this
       if (this.boardModel) {
-        console.log('BOARD.sync()', this.boardModel._id)
+        this.$logger.debug('BOARD.sync()', this.boardModel._id)
         this.$ws.emit('join-board', this.boardModel._id)
 
         return this.$repository.checkSync(self.boardModel)
@@ -178,7 +178,7 @@ export default {
         text: `${prefix}Our Shopping List`,
         url: boardUrl
       }
-      console.log('Sharing', shareArg)
+      this.$logger.debug('Sharing', shareArg)
       window.navigator.share(shareArg)
     }
   },

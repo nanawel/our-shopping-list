@@ -1,6 +1,7 @@
 import {sock} from '@/service/socket-io'
 import i18n from '@/i18n'
 import config from '@/config'
+import logger from '@/service/logger'
 
 const serverHashKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
 
@@ -8,7 +9,7 @@ export default {
   install: (Vue, { store }) => {
     sock.on('connect', () => {
       sock.emit('hello', { connectionDate: new Date().toISOString() }, (data) => {
-        console.info('Reply to Hello from server: ', data)
+        logger.info('Reply to Hello from server: ', data)
 
         if (data.serverHash) {
           let shouldRefresh = false
@@ -19,7 +20,7 @@ export default {
           }
 
           if (shouldRefresh) {
-            console.warn('Server version mismatch, reloading app.')
+            logger.warn('Server version mismatch, reloading app.')
             alert(i18n.t('notice.application-updated-alert'))
             localStorage.removeItem(serverHashKey)
             store.$app.hardRefresh()
@@ -35,10 +36,10 @@ export default {
     //
     // ORM SYNC
     sock.on("model-update", (data) => {
-      console.log('ORM WS :: MODEL UPDATE', data)
+      logger.debug('ORM WS :: MODEL UPDATE', data)
       const schema = Vue.$repository.findSchemaByClassName(data.type)
       if (!schema) {
-        console.warn('Unknown model type: ', data.type)
+        logger.warn('Unknown model type: ', data.type)
         return
       }
       const model = data.model
@@ -56,10 +57,10 @@ export default {
     })
 
     sock.on("model-delete", (data) => {
-      console.log('ORM WS :: MODEL DELETE', data)
+      logger.debug('ORM WS :: MODEL DELETE', data)
       const schema = Vue.$repository.findSchemaByClassName(data.type)
       if (!schema) {
-        console.warn('Unknown model type: ', data.type)
+        logger.warn('Unknown model type: ', data.type)
         return
       }
       const model = data.model

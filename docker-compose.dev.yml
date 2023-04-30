@@ -16,6 +16,9 @@ services:
     environment:
       NODE_ENV: development
       ENABLE_TLS: 1
+      VUE_APP_CLIENT_LOG_ENABLED: 1
+      VUE_APP_CLIENT_LOG_CONSOLE_ENABLED: 1
+      VUE_APP_CLIENT_LOG_LEVEL: debug
     depends_on:
       - mongodb
 

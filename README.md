@@ -171,6 +171,9 @@ docker-compose up -d
 - `VUE_APP_SINGLEBOARD_MODE` (default : `0`)
 - `VUE_APP_TITLE` (default : `Our Shopping List`)
 - `VUE_APP_SHORT_TITLE` (default : `OSL`)
+- `VUE_APP_CLIENT_LOG_ENABLED` (default : `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
+- `VUE_APP_CLIENT_LOG_CONSOLE_ENABLED` (default : `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
+- `VUE_APP_CLIENT_LOG_LEVEL` (default : `debug`)
 
 > MongoDB authentication is not supported yet.
 
