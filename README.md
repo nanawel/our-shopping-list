@@ -161,21 +161,27 @@ docker-compose up -d
 
 **Available environment variables for the `app` container**
 
-- `LISTEN_PORT` (default : `8080`)
-- `MONGODB_HOST` (default : `mongodb`)
-- `MONGODB_PORT` (default : `27017`)
-- `MONGODB_DB` (default : `osl`)
-- `VUE_APP_I18N_LOCALE` (default : `en`)
-- `VUE_APP_I18N_FALLBACK_LOCALE` (default : `en`)
-- `VUE_APP_I18N_FORCE_LOCALE` (default : `0`)
-- `VUE_APP_SINGLEBOARD_MODE` (default : `0`)
-- `VUE_APP_TITLE` (default : `Our Shopping List`)
-- `VUE_APP_SHORT_TITLE` (default : `OSL`)
-- `VUE_APP_CLIENT_LOG_ENABLED` (default : `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
-- `VUE_APP_CLIENT_LOG_CONSOLE_ENABLED` (default : `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
-- `VUE_APP_CLIENT_LOG_LEVEL` (default : `debug`)
+- **System keys**
+  - `LISTEN_PORT` (default: `8080`)
+  - `MONGODB_HOST` (default: `mongodb`)
+  - `MONGODB_PORT` (default: `27017`)
+  - `MONGODB_DB` (default: `osl`)
 
-> MongoDB authentication is not supported yet.
+  > MongoDB authentication is not supported yet.
+
+- **Application keys**
+  - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD` (default: `lastCheckedAt`, see available fields [here](./client/src/models/Item.js))
+  - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER` (default: `desc`)
+  - `VUE_APP_CLIENT_LOG_CONSOLE_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
+  - `VUE_APP_CLIENT_LOG_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
+  - `VUE_APP_CLIENT_LOG_LEVEL` (default: `debug`)
+  - `VUE_APP_I18N_FALLBACK_LOCALE` (default: `en`)
+  - `VUE_APP_I18N_FORCE_LOCALE` (default: `0`)
+  - `VUE_APP_I18N_LOCALE` (default: `en`)
+  - `VUE_APP_SHORT_TITLE` (default: `OSL`)
+  - `VUE_APP_SINGLEBOARD_MODE` (default: `0`)
+  - `VUE_APP_TITLE` (default: `Our Shopping List`)
+
 
 ### 🗒 Notes for reverse-proxy (SSL offloading)
 

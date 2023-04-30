@@ -161,6 +161,7 @@ import Item from "@/models/Item"
 import {containsIgnoreCase} from "@/libs/compare-strings"
 
 import {DISPLAY_MODE_CHECKED_HISTORY, DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
+import config from '@/config'
 
 export default {
   name: 'ListComponent',
@@ -244,7 +245,10 @@ export default {
 
           if (this.displayMode === DISPLAY_MODE_CHECKED_HISTORY) {
               q.where('checked', true)
-                .orderBy(item => item.lastCheckedAt || 0, 'desc') // Need to handle specifically undefined values as 0
+                .orderBy(item =>
+                  item[config.VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD || 'lastCheckedAt'] || 0,  // Need to handle specifically undefined values as 0
+                  String(config.VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER).toLowerCase() === 'asc' ? 'asc' : 'desc'
+                )
           } else {
               q.orderBy('checked')
           }
