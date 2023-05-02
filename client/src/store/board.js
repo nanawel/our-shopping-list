@@ -50,12 +50,13 @@ export default {
               state.currentBoard = board
               state.currentBoardId = newBoardId
 
-
               eventBus.$emit('board_set::after', board, previousBoard)
             }
           }
 
-          if (payload.board instanceof Board) {
+          if (payload.null === true) {
+            doSet(null)
+          } else if (payload.board instanceof Board) {
             doSet(payload.board)
           } else if (payload.id || payload.slug) {
             doSet(loadBoard(payload))

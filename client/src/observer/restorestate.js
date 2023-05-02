@@ -8,7 +8,7 @@ const currentListSlugKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'currentList
 export default {
   install() {
     eventBus.$on('app-created', function () {
-      const lsBboardSlug = window.localStorage.getItem(currentBoardSlugKey)
+      const lsBoardSlug = window.localStorage.getItem(currentBoardSlugKey)
       const lsListId = window.localStorage.getItem(currentListSlugKey)
 
       const currentRouteParams = router.history.current.params
@@ -17,11 +17,11 @@ export default {
         return
       }
 
-      if (lsBboardSlug) {
+      if (lsBoardSlug) {
         if (lsListId) {
-          router.push({name: 'list', params: {boardSlug: lsBboardSlug, listId: lsListId}})
+          router.push({name: 'list', params: {boardSlug: lsBoardSlug, listId: lsListId}})
         } else {
-          router.push({name: 'board', params: {boardSlug: lsBboardSlug}})
+          router.push({name: 'board', params: {boardSlug: lsBoardSlug}})
         }
       }
     })

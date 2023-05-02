@@ -35,12 +35,12 @@
           </template>
           <template v-slot:footer>
             <v-container>
-              <v-row v-if="allBoardsEnabled"
+              <v-row v-if="allBoardsEnabled && allBoards.length"
                      align="center"
                      justify="center">
                 <v-col md="4">
                   <v-subheader class="all-boards-title d-flex">
-                    <span>{{ $t('home.boards.all-title')}}</span>
+                    <span>{{ $t('home.boards.all-title', {count: allBoards.length})}}</span>
                     <v-icon @click="refreshAllBoards"
                             class="ml-auto">mdi-refresh-circle</v-icon>
                   </v-subheader>
@@ -56,6 +56,9 @@
                         </v-list-item-avatar>
                         <v-list-item-content class="text-left">
                           <v-list-item-title v-text="item.name"></v-list-item-title>
+                          <v-list-item-subtitle>
+                            {{ $tc('home.boards.item.lists-count', item.lists.length, {count: item.lists.length})}}
+                          </v-list-item-subtitle>
                         </v-list-item-content>
                       </v-list-item>
                     </template>
@@ -118,6 +121,7 @@ export default {
     allBoards: {
       get: function () {
         return Board.query()
+          .with('lists')
           .orderBy('name')
           .get()
       }

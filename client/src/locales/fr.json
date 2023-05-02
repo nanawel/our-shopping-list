@@ -48,8 +48,11 @@
       "open-board": "Ouvrir le tableau"
     },
     "boards": {
-      "all-title": "Tous les tableaux",
-      "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux."
+      "all-title": "Tous les tableaux (%{count})",
+      "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux.",
+      "item": {
+        "lists-count": "(aucune liste) | 1 liste | %{count} listes"
+      }
     },
     "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
   },

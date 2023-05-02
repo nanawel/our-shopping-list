@@ -114,8 +114,9 @@ export default (router) => {
           })
       }
     } else {
-      const lastBoardId = store.state.board.currentBoardId || store.state.board.lastBoardId
+      const lastBoardId = store.state.board?.currentBoardId || store.state.board?.lastBoardId
       if (lastBoardId) {
+        store.commit('board/setCurrentBoard', {null: true})
         sock.emit('leave-board', lastBoardId)
       }
     }

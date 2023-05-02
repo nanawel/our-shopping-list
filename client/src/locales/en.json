@@ -48,8 +48,11 @@
       "open-board": "Open board"
     },
     "boards": {
-      "all-title": "All boards",
-      "default-retrieval-error-message": "Sorry, could not fetch boards."
+      "all-title": "All boards (%{count})",
+      "default-retrieval-error-message": "Sorry, could not fetch boards.",
+      "item": {
+        "lists-count": "(no list yet) | 1 list | %{count} lists"
+      }
     },
     "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
   },

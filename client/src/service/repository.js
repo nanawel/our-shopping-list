@@ -39,6 +39,7 @@ const Repository = function() {
     syncAll(schema) {
       logger.debug('$repository::syncAll', schema.name)
 
+      schema.deleteAll()
       return schema.api()
         .get(`/${schema.entity}`)
         .catch((e) => {
@@ -59,7 +60,6 @@ const Repository = function() {
           .post(`/${schema.entity}`, model)
       }
     },
-
     delete(model) {
       logger.debug('$repository::delete', model)
       const schema = this.findSchemaByModel(model)

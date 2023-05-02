@@ -29,6 +29,8 @@ router.get('/boards', (req, res, next) => {
   } else {
     BoardModel
       .find({})
+      .populate('lists', 'name')  // Minimal data here only
+      .exec()
       .then((docs) => {
         console.log('GET BOARDS', docs)
         res.status(200)
