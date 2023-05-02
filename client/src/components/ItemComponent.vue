@@ -18,10 +18,12 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{ item.name }}</v-list-item-title>
-          <v-list-item-subtitle v-if="item.qty">{{ item.qty }}</v-list-item-subtitle>
-          <v-list-item-subtitle v-else class="empty-qty">{{ $t('item.empty-qty-label') }}</v-list-item-subtitle>
-          <v-list-item-subtitle>{{ item.details }}</v-list-item-subtitle>
+          <v-list-item-title v-text="item.name"></v-list-item-title>
+          <v-list-item-subtitle v-if="item.qty"
+                                v-text="item.qty"></v-list-item-subtitle>
+          <v-list-item-subtitle v-else
+                                class="empty-qty">{{ $t('item.empty-qty-label') }}</v-list-item-subtitle>
+          <v-list-item-subtitle v-text="item.details"></v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-action class="d-none d-sm-flex">

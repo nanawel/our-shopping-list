@@ -31,6 +31,20 @@ const Repository = function() {
 
       return schemas[0]
     },
+    getAll(schema) {
+      logger.debug('$repository::getAll', schema.name)
+
+      return schema.all()
+    },
+    syncAll(schema) {
+      logger.debug('$repository::syncAll', schema.name)
+
+      return schema.api()
+        .get(`/${schema.entity}`)
+        .catch((e) => {
+          logger.error(e)
+        })
+    },
     save(model) {
       logger.debug('$repository::save', model)
       const schema = this.findSchemaByModel(model)

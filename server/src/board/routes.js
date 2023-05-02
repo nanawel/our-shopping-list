@@ -1,4 +1,5 @@
 const {router} = require('../app');
+const config = require('../config');
 
 const BoardModel = require('./model');
 require('./ws');
@@ -16,6 +17,26 @@ const onHeadRequest = function (req, res, doc, next) {
       .end();
   }
 }
+
+router.get('/boards', (req, res, next) => {
+  if (!config.VUE_APP_LIST_ALL_BOARDS_ENABLED) {
+    res.status(403)
+      .json({
+        error: {
+          message: "Not available! See VUE_APP_LIST_ALL_BOARDS_ENABLED."
+        }
+      });
+  } else {
+    BoardModel
+      .find({})
+      .then((docs) => {
+        console.log('GET BOARDS', docs)
+        res.status(200)
+          .json(docs);
+      })
+      .catch(next);
+  }
+});
 
 router.head('/boards/:boardId', (req, res, next) => {
   BoardModel
@@ -39,7 +60,7 @@ router.get('/boards/:boardId', (req, res, next) => {
 
   BoardModel
     .findById(boardId)
-    .populate('lists', '-updatedAt')  // Exclude "updatedAt" to allow syncing lists afterwards if needed
+    .populate('lists', '-updatedAt')  // Exclude "updatedAt" to allow syncing lists afterward if needed
     .exec()
     .then((doc) => {
       if (doc) {
@@ -65,7 +86,7 @@ router.get('/boards/by-slug/:slug', (req, res, next) => {
     .findOne({
       slug: slug
     })
-    .populate('lists', '-updatedAt')  // Exclude "updatedAt" to allow syncing lists afterwards if needed
+    .populate('lists', '-updatedAt')  // Exclude "updatedAt" to allow syncing lists afterward if needed
     .exec()
     .then((doc) => {
       if (doc) {

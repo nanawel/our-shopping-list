@@ -41,13 +41,15 @@
     }
   },
   "home": {
-    "title": "Ouvrir un tableau",
-    "subtitle": "Un tableau contient une ou plusieurs listes.",
     "input": {
-      "board-name": "Nom"
+      "board-name": "Ouvrir un tableau..."
     },
     "button": {
       "open-board": "Ouvrir le tableau"
+    },
+    "boards": {
+      "all-title": "Tous les tableaux",
+      "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux."
     },
     "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
   },

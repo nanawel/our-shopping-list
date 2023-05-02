@@ -41,13 +41,15 @@
     }
   },
   "home": {
-    "title": "Open Board",
-    "subtitle": "A board holds one to several lists.",
     "input": {
-      "board-name": "Name"
+      "board-name": "Open Board..."
     },
     "button": {
       "open-board": "Open board"
+    },
+    "boards": {
+      "all-title": "All boards",
+      "default-retrieval-error-message": "Sorry, could not fetch boards."
     },
     "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
   },

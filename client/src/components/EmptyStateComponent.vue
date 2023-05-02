@@ -4,10 +4,10 @@
       <slot name="icon-name"></slot>
     </v-icon>
     <h1>
-      <slot name="title">TITLE</slot>
+      <slot name="title"></slot>
     </h1>
     <div class="subtitle text--secondary">
-      <slot name="subtitle">Subtitle</slot>
+      <slot name="subtitle"></slot>
     </div>
     <div class="content">
       <slot name="content"></slot>
@@ -31,10 +31,10 @@
 .empty-state {
   text-align: center;
 }
-.subtitle {
+.subtitle:last-child {
   margin-bottom: 2rem;
 }
-.btn-wrapper {
+.btn-wrapper:last-child {
   margin-bottom: 1em;
 }
 </style>

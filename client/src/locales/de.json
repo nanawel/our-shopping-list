@@ -41,10 +41,8 @@
     }
   },
   "home": {
-    "title": "Board öffnen",
-    "subtitle": "Ein Board beinhaltet eine oder mehrere Listen.",
     "input": {
-      "board-name": "Name"
+      "board-name": "Board öffnen..."
     },
     "button": {
       "open-board": "Board öffnen"

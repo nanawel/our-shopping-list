@@ -41,10 +41,8 @@
     }
   },
   "home": {
-    "title": "打开面板",
-    "subtitle": "一个面板拥有一个或多个列表。",
     "input": {
-      "board-name": "名称"
+      "board-name": "打开面板..."
     },
     "button": {
       "open-board": "打开面板"

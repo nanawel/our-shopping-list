@@ -71,10 +71,6 @@ export default {
 <style lang="scss">
 @import '~typeface-roboto/index.css';
 
-html, body {
-  overflow: hidden;
-}
-
 .v-application--wrap {
   // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers
   @supports (min-height: 100svh) {

@@ -1,43 +1,87 @@
 <template>
   <div>
-    <div class="wrapper">
-      <h1>{{ $t('app-name') }}</h1>
-      <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
-    </div>
-    <EmptyStateComponent>
-      <template v-slot:title>{{ $t('home.title') }}</template>
-      <template v-slot:subtitle>{{ $t('home.subtitle') }}</template>
-      <template v-slot:content>
-        <v-container fill-height>
-          <v-row align="center" justify="center">
-            <v-col md="4">
-              <v-text-field
-                name="name"
-                :label="$t('home.input.board-name')"
-                autocomplete="osl-board-name"
-                ref="boardNameInput"
-                v-model="boardNameInput"
-                @keydown.enter="onOpenBoard"/>
-            </v-col>
-          </v-row>
-        </v-container>
-      </template>
-      <template v-slot:buttons>
-        <v-btn v-if="boardNameInput.length > 0"
-               @click="onOpenBoard"
-               color="primary">{{ $t('home.button.open-board') }}</v-btn>
-      </template>
-      <template v-slot:footer v-if="lastBoardModel">
-        <router-link :to="{name: 'board', params: {boardSlug: lastBoardModel.slug}}">
-          <span v-html="$t('home.reopen-last-board', {boardName: lastBoardModel.name})"></span>
-        </router-link>
-        <v-btn @click="onClearLastBoard"
-               icon
-               :aria-label="$t('close')">
-          <v-icon>mdi-close-circle-outline</v-icon>
-        </v-btn>
-      </template>
-    </EmptyStateComponent>
+    <v-main>
+      <v-container>
+        <div class="title-wrapper">
+          <h1>{{ title }}</h1>
+          <img src="@/assets/logo.svg" width="120" height="120" alt="OSL logo">
+        </div>
+        <EmptyStateComponent>
+          <template v-slot:content>
+            <v-container>
+              <v-row align="center" justify="center">
+                <v-col md="4">
+                  <v-text-field
+                    dense
+                    name="name"
+                    :label="$t('home.input.board-name')"
+                    autocomplete="osl-board-name"
+                    ref="boardNameInput"
+                    v-model="boardNameInput"
+                    @keydown.enter="onOpenBoard"/>
+                  </v-col>
+              </v-row>
+            </v-container>
+          </template>
+          <template v-slot:buttons>
+            <v-container v-if="boardNameInput.length > 0">
+              <v-row align="center" justify="center">
+                <v-col md="4">
+                  <v-btn @click="onOpenBoard"
+                         color="primary">{{ $t('home.button.open-board') }}</v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
+          <template v-slot:footer>
+            <v-container>
+              <v-row v-if="allBoardsEnabled"
+                     align="center"
+                     justify="center">
+                <v-col md="4">
+                  <v-subheader class="all-boards-title d-flex">
+                    <span>{{ $t('home.boards.all-title')}}</span>
+                    <v-icon @click="refreshAllBoards"
+                            class="ml-auto">mdi-refresh-circle</v-icon>
+                  </v-subheader>
+                  <v-virtual-scroll :items="allBoards"
+                                    item-height="56"
+                                    max-height="30vh"
+                                    class="elevation-4">
+                    <template v-slot:default="{ item }">
+                      <v-list-item :key="item._id"
+                                   :to="{ name: 'board', params: { boardSlug: item.slug } }">
+                        <v-list-item-avatar>
+                          <v-icon>mdi-clipboard-list-outline</v-icon>
+                        </v-list-item-avatar>
+                        <v-list-item-content class="text-left">
+                          <v-list-item-title v-text="item.name"></v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </template>
+                  </v-virtual-scroll>
+                </v-col>
+              </v-row>
+
+              <v-row v-if="lastBoardModel"
+                     align="center"
+                     justify="center">
+                <v-col md="4">
+                  <router-link :to="{name: 'board', params: {boardSlug: lastBoardModel.slug}}">
+                    <span v-html="$t('home.reopen-last-board', {boardName: lastBoardModel.name})"></span>
+                  </router-link>
+                  <v-btn @click="onClearLastBoard"
+                         icon
+                         :aria-label="$t('close')">
+                    <v-icon>mdi-close-circle-outline</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
+        </EmptyStateComponent>
+      </v-container>
+    </v-main>
   </div>
 </template>
 
@@ -45,6 +89,7 @@
 import EmptyStateComponent from './EmptyStateComponent.vue'
 
 import Board from '@/models/Board'
+import config from '@/config'
 
 export default {
   name: 'HomeComponent',
@@ -53,7 +98,9 @@ export default {
   },
   data() {
     return {
-      boardNameInput: ''
+      title: config.VUE_APP_TITLE || 'Our Shopping List',
+      boardNameInput: '',
+      boardsRetrievalErrorMessage: null
     }
   },
   computed: {
@@ -62,9 +109,23 @@ export default {
         return this.$store.state.board.lastBoard
       },
     },
+    allBoardsEnabled: {
+      get: function () {
+        return !config.VUE_APP_SINGLEBOARD_MODE
+          && config.VUE_APP_LIST_ALL_BOARDS_ENABLED
+      }
+    },
+    allBoards: {
+      get: function () {
+        return Board.query()
+          .orderBy('name')
+          .get()
+      }
+    }
   },
   mounted() {
     this.$refs.boardNameInput.focus()
+    this.refreshAllBoards()
   },
   methods: {
     onOpenBoard: function() {
@@ -78,13 +139,25 @@ export default {
     },
     onClearLastBoard: function() {
       this.$store.dispatch('board/reset')
+    },
+    refreshAllBoards: function () {
+      const self = this
+      if (this.allBoardsEnabled) {
+        this.$repository.syncAll(Board)
+          .then(() => {
+            self.$logger.debug('ALL BOARDS', self.allBoards)
+          })
+          .catch((e) => {
+            self.$logger.error(e)
+          })
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+.title-wrapper {
   text-align: center;
   margin-top: 2rem;
 }

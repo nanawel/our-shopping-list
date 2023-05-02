@@ -178,6 +178,7 @@ docker-compose up -d
   - `VUE_APP_I18N_FALLBACK_LOCALE` (default: `en`)
   - `VUE_APP_I18N_FORCE_LOCALE` (default: `0`)
   - `VUE_APP_I18N_LOCALE` (default: `en`)
+  - `VUE_APP_LIST_ALL_BOARDS_ENABLED` (default: `0`, has no effect in _singleboard_ mode)
   - `VUE_APP_SHORT_TITLE` (default: `OSL`)
   - `VUE_APP_SINGLEBOARD_MODE` (default: `0`)
   - `VUE_APP_TITLE` (default: `Our Shopping List`)
