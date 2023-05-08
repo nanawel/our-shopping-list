@@ -184,6 +184,17 @@ docker-compose up -d
   - `VUE_APP_TITLE` (default: `Our Shopping List`)
 
 
+### Robots.txt
+
+By default, the embedded `robots.txt` prevents search engines from browsing the application:
+
+```
+User-agent: *
+Disallow: /
+```
+
+You can change this behavior by mounting the `robots.txt` of your choice at `/app/robots.txt` in the container.
+
 ### 🗒 Notes for reverse-proxy (SSL offloading)
 
 OSL uses a WebSocket to allow server-to-client communication. So using a

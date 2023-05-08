@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {app} = require('./app');
 const config = require('./config');
+const fs = require('fs');
 
 /**
  * Client config at runtime
@@ -9,7 +10,23 @@ app.get('/config.js', (req, res) => {
   res.type('application/javascript')
     .set('Cache-Control', 'must-revalidate')
     .send('Object.assign(window, ' + JSON.stringify(config) + ');')
-    .end()
+    .end();
+});
+
+/**
+ * Default robots.txt handler
+ */
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain')
+    .set('Cache-Control', 'must-revalidate');
+
+  if (fs.existsSync('./robots.txt')) {
+    res.send(fs.readFileSync('./robots.txt'));
+  } else {
+    res.send('User-agent: *\n'
+      + 'Disallow: /');
+  }
+  res.end();
 });
 
 /**
