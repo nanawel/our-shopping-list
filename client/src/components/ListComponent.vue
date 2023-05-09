@@ -341,7 +341,7 @@ export default {
           self.$router.push({name: 'list', params: {listId: response.entities.lists[0]._id}})
         })
         .catch((e) => {
-          this.$logger.error(e)
+          self.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
@@ -402,7 +402,7 @@ export default {
       this.$repository.save(item)
         .then(callback)
         .catch((e) => {
-          this.$logger.error(e)
+          self.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.item.save'))
         })
     },
@@ -417,7 +417,7 @@ export default {
       this.$repository.delete(item)
         .then(callback)
         .catch((e) => {
-          this.$logger.error(e)
+          self.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.item.delete'))
         })
     },
@@ -459,7 +459,7 @@ export default {
       // See https://github.com/jerrybendy/vue-touch-events#how-to-add-extra-parameters
       return function (ev) {
         const item = Item.find(itemId)
-        this.$logger.debug('LIST.onTouchHoldItem()', ev, item)
+        self.$logger.debug('LIST.onTouchHoldItem()', ev, item)
         ev.preventDefault()
         self.editItem(item)
         return false

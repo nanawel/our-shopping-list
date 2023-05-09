@@ -95,7 +95,7 @@ export default {
       this.$repository.save(list)
         .then(callback)
         .catch((e) => {
-          this.$logger.error(e)
+          self.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
@@ -110,7 +110,7 @@ export default {
       this.$repository.delete(list)
         .then(callback)
         .catch((e) => {
-          this.$logger.error(e)
+          self.$logger.error(e)
           self.$snackbar.msg(self.$t('errors.list.delete'))
         })
     },
