@@ -561,7 +561,6 @@ export default {
   padding: 6px 16px;
   align-items: center;
   flex: 0 1 auto;
-  flex-wrap: wrap;
 
   position: relative;
   bottom: 0;
