@@ -537,14 +537,24 @@ export default {
 .list-wrapper {
   overflow-y: auto;
 
+  // Workaround to keep search bar at the bottom
+  // (see node_modules/vuetify/src/components/VToolbar/VToolbar.ts -> computed.computedContentHeight)
+  // 56 or 64px: nav header's height
+  // 80px: footer's height
+  --header-height: 64px;
+  @media #{map-get($display-breakpoints, 'md-and-down')} {
+    --header-height: 56px;
+  }
+
   // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers
+  // 100svh: 100% of viewport's height
   @supports (min-height: 100svh) {
-    min-height: calc(100svh - (56px + 80px));
-    max-height: calc(100svh - (56px + 80px));
+    min-height: calc(100svh - (var(--header-height) + 80px));
+    max-height: calc(100svh - (var(--header-height) + 80px));
   }
   @supports not (min-height: 100svh) {
-    min-height: calc(var(--x-vh) - (56px + 80px));
-    max-height: calc(var(--x-vh) - (56px + 80px));
+    min-height: calc(var(--x-vh) - (var(--header-height) + 80px));
+    max-height: calc(var(--x-vh) - (var(--header-height) + 80px));
   }
   // GITHUB#9 END ## Fix for svh compatibility with old mobile browsers
 }
