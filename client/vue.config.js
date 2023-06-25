@@ -2,6 +2,7 @@ const fs = require('fs');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
+  publicPath: process.env.NODE_WEB_ROOT || '/',
   productionSourceMap: process.env.NODE_ENV !== 'production',
   pages: {
     index: {
