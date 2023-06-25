@@ -60,6 +60,12 @@ Vue.use(restoreStateObserver)
 import showForceRefreshHint from '@/observer/showForceRefreshHint'
 Vue.use(showForceRefreshHint)
 
+// #58/GITHUB#18
+// Redirect to base path if needed
+if (!window.location.pathname.startsWith(config.BASE_URL)) {
+  window.location.pathname = config.BASE_URL
+}
+
 // Init app
 const $app = new Vue({
   el: '#app',

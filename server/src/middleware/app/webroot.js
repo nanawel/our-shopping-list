@@ -1,7 +1,10 @@
+// Handle custom BASE_URL transparently
+// #58/GITHUB#18
+
 const rewrite = require('express-urlrewrite');
 const config = require('../../config');
 
-const cleanedWebRoot = config.NODE_WEB_ROOT
+const cleanedWebRoot = config.BASE_URL
   .replace(/^(\/|\s)+/, '')
   .replace(/(\/|\s)+$/, '');
 if (cleanedWebRoot !== '') {
@@ -10,6 +13,6 @@ if (cleanedWebRoot !== '') {
 
 module.exports = function (app) {
   if (cleanedWebRoot !== '') {
-    app.use(rewrite(`/${cleanedWebRoot}/*`, '/$1'));
+    app.use(rewrite(new RegExp(`^/+${cleanedWebRoot}/+(.*)`), '/$1'));
   }
 };

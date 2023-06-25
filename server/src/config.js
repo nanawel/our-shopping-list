@@ -1,4 +1,7 @@
-const NODE_WEB_ROOT = process.env.NODE_WEB_ROOT || '';
+const BASE_URL = (process.env.BASE_URL || '')  // #58/GITHUB#18
+  .replace(/^(\/|\s)+/, '')
+  .replace(/(\/|\s)+$/, '')
+  .concat('/');
 const VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD = process.env.VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD || 'lastCheckedAt';
 const VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER = process.env.VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER || 'desc';
 const VUE_APP_CLIENT_LOG_CONSOLE_ENABLED = !!parseInt(process.env.VUE_APP_CLIENT_LOG_CONSOLE_ENABLED);
@@ -18,7 +21,7 @@ const VUE_APP_SINGLEBOARD_SLUG = process.env.VUE_APP_SINGLEBOARD_SLUG || '_';
 const VUE_APP_TITLE = process.env.VUE_APP_TITLE || 'Our Shopping List';
 
 module.exports = {
-  NODE_WEB_ROOT,
+  BASE_URL,
   VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD,
   VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER,
   VUE_APP_CLIENT_LOG_CONSOLE_ENABLED,

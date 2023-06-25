@@ -166,6 +166,7 @@ docker-compose up -d
   - `MONGODB_HOST` (default: `mongodb`)
   - `MONGODB_PORT` (default: `27017`)
   - `MONGODB_DB` (default: `osl`)
+  - `BASE_URL` (default: _empty_) Set to base path if your web root is not `/` (ex: `/my-osl/`)
 
   > MongoDB authentication is not supported yet.
 
