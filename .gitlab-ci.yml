@@ -26,6 +26,18 @@ build_image:
     - shell
     - docker
 
+push_image_dev_latest:
+  stage: release
+  script:
+    - time docker pull ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
+    - time docker tag ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA} ${CONTAINER_RELEASE_IMAGE}:latest-dev
+    - time docker push ${CONTAINER_RELEASE_IMAGE}:latest-dev
+  tags:
+    - shell
+    - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^feature\//'
+
 push_image_latest:
   stage: release
   script:
