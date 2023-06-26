@@ -2,14 +2,14 @@
   <div id="list-panel">
 
     <template v-if="!listModel">
-      <EmptyStateComponente>
+      <EmptyStateComponent>
         <template v-slot:icon-name>mdi-alert-octagon-outline</template>
         <template v-slot:title>{{ $t('list.not-found.title') }}</template>
         <template v-slot:subtitle>{{ $t('list.not-found.subtitle') }}</template>
         <template v-slot:buttons>
           <v-btn @click="newList" color="primary">{{ $t('list.not-found.button') }}</v-btn>
         </template>
-      </EmptyStateComponente>
+      </EmptyStateComponent>
     </template>
 
     <template v-else-if="isNewList">
