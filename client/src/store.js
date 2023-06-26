@@ -1,3 +1,6 @@
+import config from '@/config'
+import path from 'path-browserify'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {VuexPersistence} from 'vuex-persist'
@@ -8,10 +11,12 @@ import VuexORM, {Query} from '@vuex-orm/core'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import Axios from 'axios'
 const axios = Axios.create()
-// Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
-VuexORM.use(VuexORMAxios, {axios: axios})
+console.warn(config.BASE_URL);
+VuexORM.use(VuexORMAxios, {
+  axios: axios,   // Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
+  baseURL: path.normalize(`/${config.BASE_URL}`)  // Custom web root support (#58/GITHUB#18)
+})
 
-import config from '@/config'
 
 // Modules
 import version from '@/store/version'

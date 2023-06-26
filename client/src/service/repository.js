@@ -83,7 +83,7 @@ const Repository = function() {
 
       return new Promise((resolve, reject) => {
         if (model._id) {
-          fetch(`/${schema.entity}/${model._id}`, {
+          fetch(`./${schema.entity}/${model._id}`, {
               method: 'HEAD'
             })
             .then(function(res) {

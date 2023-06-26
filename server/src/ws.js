@@ -1,3 +1,4 @@
+const path = require('path');
 const config = require('./config');
 
 const SERVER_VERSION = process.env.APP_VERSION   || 'dev';
@@ -9,7 +10,7 @@ const {httpServer} = require('./app');
 
 const {Server} = require('socket.io');
 const io = new Server(httpServer, {
-  path: `/${config.BASE_URL}socket.io/`  // #58/GITHUB#18
+  path: path.normalize(`/${config.BASE_URL}/socket.io/`)  // #58/GITHUB#18
 });
 
 console.info(`Serving socket-io on ${io.engine.opts.path}`);
