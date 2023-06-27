@@ -56,6 +56,7 @@ module.exports = (router) => {
   //
   // HEAD + GET
   router.all('/boards/by-slug/:slug', function(req, res, next) {
+    console.log('REDIRECT', '/boards/by-slug/:slug');
     res.redirect(307, `/boards/${VUE_APP_SINGLEBOARD_ID}`);
   });
   // HEAD + GET

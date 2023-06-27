@@ -1,4 +1,6 @@
-const BASE_URL = (process.env.BASE_URL || '')  // #58/GITHUB#18
+const path = require('path');
+
+const BASE_URL = path.normalize(process.env.BASE_URL || '')  // #58/GITHUB#18
   .replace(/^(\/|\s)+/, '')
   .replace(/(\/|\s)+$/, '')
   .concat('/');

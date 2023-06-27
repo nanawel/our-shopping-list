@@ -25,10 +25,15 @@ const httpServer = http.createServer(options, app);
 
 app.disable('x-powered-by');
 app.use(compression());
+
+// #58/GITHUB#18 Add support for custom web root
+// Must be the first app middleware registered
 require('./middleware/app/webroot')(app);
+
 require('./middleware/app/pwa')(app);
 require('./middleware/app/static')(app);
 require('./middleware/app/json')(app);
+
 
 mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
   useNewUrlParser: true,

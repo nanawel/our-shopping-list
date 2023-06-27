@@ -12,9 +12,9 @@ export default {
 
           // 1. Observe AXIOS requests
           // See https://axios-http.com/docs/interceptors
-          axios.interceptors.request.use(function (config) {
+          axios.interceptors.request.use(function (request) {
             context.commit('notifyRequest')
-            return config
+            return request
           })
 
           const onComplete = function (response) {

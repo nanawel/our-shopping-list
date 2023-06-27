@@ -10,13 +10,12 @@ Vue.use(Vuex)
 import VuexORM, {Query} from '@vuex-orm/core'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import Axios from 'axios'
-const axios = Axios.create()
-console.warn(config.BASE_URL);
-VuexORM.use(VuexORMAxios, {
-  axios: axios,   // Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
+const axios = Axios.create({
   baseURL: path.normalize(`/${config.BASE_URL}`)  // Custom web root support (#58/GITHUB#18)
 })
-
+VuexORM.use(VuexORMAxios, {
+  axios: axios,   // Must use this syntax otherwise validateStatus() won't work (on 404 for instance)
+})
 
 // Modules
 import version from '@/store/version'
