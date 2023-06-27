@@ -30,10 +30,13 @@
 <style lang="scss" scoped>
 .empty-state {
   text-align: center;
-  padding: 1em;
+  padding: 1rem;
 }
 .subtitle:last-child {
   margin-bottom: 2rem;
+}
+.content {
+  padding: .5rem;
 }
 .btn-wrapper:last-child {
   margin-bottom: 1em;
