@@ -180,10 +180,10 @@ docker-compose up -d
   - `VUE_APP_I18N_FORCE_LOCALE` (default: `0`)
   - `VUE_APP_I18N_LOCALE` (default: `en`)
   - `VUE_APP_LIST_ALL_BOARDS_ENABLED` (default: `0`, has no effect in _singleboard_ mode)
+  - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` (default: `OurShoppingList_`)
   - `VUE_APP_SHORT_TITLE` (default: `OSL`)
   - `VUE_APP_SINGLEBOARD_MODE` (default: `0`)
   - `VUE_APP_TITLE` (default: `Our Shopping List`)
-
 
 ### Robots.txt
 
@@ -222,6 +222,23 @@ the host itself and/or if you're using another port.
 
 > Those instructions are given for Apache, but you can easily find the
 > corresponding directives for Nginx with a little search.
+
+### ⚠ Notes when serving multiple instances on different web roots
+
+Remember to set the `BASE_URL` variable to the matching web root on each instance.
+
+Make sure you set `VUE_APP_LOCALSTORAGE_KEY_PREFIX` to a unique value too, otherwise clients switching from
+one instance to another might corrupt the internal cache in their browser.
+
+Example:
+
+- 1st instance on https://my.host/public-osl
+  - `BASE_URL` = `public-osl/`
+  - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` = `OSL1_`
+- 2nd instance on https://my.host/private-osl
+  - `BASE_URL` = `private-osl/`
+  - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` = `OSL2_`
+- etc.
 
 ## 👷 Developer installation
 

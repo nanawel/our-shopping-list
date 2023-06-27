@@ -30,6 +30,7 @@
 <style lang="scss" scoped>
 .empty-state {
   text-align: center;
+  padding: 1em;
 }
 .subtitle:last-child {
   margin-bottom: 2rem;

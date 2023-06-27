@@ -35,7 +35,7 @@ export default {
 
     //
     // ORM SYNC
-    sock.on("model-update", (data) => {
+    sock.on('model-update', (data) => {
       logger.debug('ORM WS :: MODEL UPDATE', data)
       const schema = Vue.$repository.findSchemaByClassName(data.type)
       if (!schema) {
@@ -56,7 +56,7 @@ export default {
       }
     })
 
-    sock.on("model-delete", (data) => {
+    sock.on('model-delete', (data) => {
       logger.debug('ORM WS :: MODEL DELETE', data)
       const schema = Vue.$repository.findSchemaByClassName(data.type)
       if (!schema) {
