@@ -240,6 +240,24 @@ Example:
   - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` = `OSL2_`
 - etc.
 
+### Debugging on server side
+
+You can use the [standard `DEBUG`](https://dev.to/aderchox/what-is-the-debug-environment-variable-in-nodejs-and-how-to-use-it-3fal)
+environment variable to enable the verbose mode of the server:
+
+Example to log all operations related to **socket-io** (WebSocket) and the **URL rewrite** process
+(when using a custom `BASE_URL`):
+
+```
+DEBUG=socket.io:server,express-urlrewrite
+```
+
+Or if you need to log everything:
+
+```
+DEBUG=*
+```
+
 ## 👷 Developer installation
 
 > 🐋 This method also uses Docker, but with the local source files mounted

@@ -14,11 +14,13 @@ services:
       - ./server:/app
       - ./client:/app/client
     environment:
+      # NOTICE: devDependencies won't be installed by yarn if you use "production"
       NODE_ENV: development
       ENABLE_TLS: 1
       VUE_APP_CLIENT_LOG_ENABLED: 1
       VUE_APP_CLIENT_LOG_CONSOLE_ENABLED: 1
       VUE_APP_CLIENT_LOG_LEVEL: debug
+      # For more config variables, see server/src/config.js
     depends_on:
       - mongodb
 
