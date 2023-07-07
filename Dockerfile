@@ -25,7 +25,7 @@ WORKDIR /app
 EXPOSE 8080
 
 HEALTHCHECK --interval=1m --timeout=20s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/healthcheck || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${LISTEN_PORT:-8080}${BASE_URL:-/}healthcheck || exit 1
 
 CMD [ "node", "index.js" ]
 
