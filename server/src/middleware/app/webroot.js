@@ -10,10 +10,9 @@ console.info(`Using web root: ${trimedWebRoot}`);
 
 module.exports = function (app) {
   if (trimedWebRoot !== '') {
-
     // Prevent access to any URL not starting with the configured BASE_URL
     app.use(function (req, res, next) {
-      if (!req.path.startsWith(`${trimedWebRoot}`)) {
+      if (!req.path.replace(new RegExp('^/+'), '/').startsWith(`${trimedWebRoot}`)) {
         console.error('[400]', 'Invalid incoming request URL:', `${req.method} ${req.path}`);
         res.status(400)
           .json({
@@ -28,7 +27,7 @@ module.exports = function (app) {
     });
 
     // Load express-urlrewrite
-    app.use(rewrite(new RegExp(`^/?${trimedWebRoot}+(.*)`), '/$1'));
+    app.use(rewrite(new RegExp(`^/*${trimedWebRoot}+(.*)`), '/$1'));
 
     // Override response.redirect() to preprend BASE_URL
     app.use(function (req, res, next) {
