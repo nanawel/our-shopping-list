@@ -1,4 +1,4 @@
-ARG node_version="16"
+ARG node_version="18"
 ARG node_variant="-alpine"
 ARG build_version
 ARG build_id
