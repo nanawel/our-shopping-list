@@ -1,5 +1,6 @@
 import logger from '@/service/logger'
 import eventBus from '@/service/event-bus'
+import {Mutex, withTimeout} from 'async-mutex';
 
 import Board from '@/models/Board'
 import Item from '@/models/Item'
@@ -11,6 +12,7 @@ const Repository = function() {
     Item,
     List,
   }
+  const syncMutex = withTimeout(new Mutex(), 5000)
 
   return {
     findSchemaByClassName(className) {
@@ -117,20 +119,24 @@ const Repository = function() {
       })
     },
     async sync(model) {
-      logger.debug('$repository::sync', model)
+      const self = this
 
-      if (model._id) {
-        const schema = this.findSchemaByModel(model)
+      await syncMutex.runExclusive(function() {
+          logger.debug('$repository::sync', model)
+          if (model._id) {
+            const schema = self.findSchemaByModel(model)
 
-        return schema.api()
-          .get(`/${schema.entity}/${model._id}`)
-          .catch((e) => {
-            // The model does not seem to exist (anymore) so remove it from local store
-            if (e.response && e.response.status === 404) {
-              schema.delete(model._id)
-            }
-          })
-      }
+            return schema.api()
+              .get(`/${schema.entity}/${model._id}`)
+              .catch((e) => {
+                // The model does not seem to exist (anymore) so remove it from local store
+                if (e.response && e.response.status === 404) {
+                  schema.delete(model._id)
+                }
+              })
+          }
+        })
+
     }
   }
 }
