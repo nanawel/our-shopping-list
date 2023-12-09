@@ -200,7 +200,12 @@ You can change this behavior by mounting the `robots.txt` of your choice at `/ap
 
 OSL uses a WebSocket to allow server-to-client communication. So using a
 reverse-proxy to forward the connection implies the presence of the following
-sections in the corresponding VirtualHost:
+sections below in the corresponding virtual host.
+
+Replace `127.0.0.1` and `8080` with the IP of the OSL host if your RP is not
+the host itself and/or if you're using another port.
+
+#### Apache
 
 ```
 <Proxy *>
@@ -217,11 +222,23 @@ RewriteCond %{HTTP:Upgrade} !=websocket [NC]
 RewriteRule /(.*)           http://127.0.0.1:8080/$1 [P,L]
 ```
 
-Replace `127.0.0.1` and `8080` with the IP of the OSL host if your RP is not
-the host itself and/or if you're using another port.
+#### Nginx
 
-> Those instructions are given for Apache, but you can easily find the
-> corresponding directives for Nginx with a little search.
+```
+location / {
+    proxy_set_header    Host $host;
+    proxy_set_header    X-Real-IP $remote_addr;
+    proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header    X-Forwarded-Proto $scheme;
+    proxy_pass          http://localhost:8080;
+
+    proxy_http_version  1.1;
+    proxy_set_header    Upgrade $http_upgrade;
+    proxy_set_header    Connection "Upgrade";
+    
+    proxy_redirect      http://localhost:8080 https://ourshoppinglist.myhost;
+}
+```
 
 ### ⚠ Notes when serving multiple instances on different web roots
 
