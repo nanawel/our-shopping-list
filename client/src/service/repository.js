@@ -66,7 +66,6 @@ const Repository = function() {
           return schema.api()
             .post(`/${schema.entity}`, model)
             .then((response) => {
-              console.log(response);
               resolve(response.entities[schema.entity][0])
             })
             .catch(reject)

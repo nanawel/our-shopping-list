@@ -22,6 +22,7 @@ const VUE_APP_SINGLEBOARD_ID = process.env.VUE_APP_SINGLEBOARD_ID || '00000000-0
 const VUE_APP_SINGLEBOARD_MODE = !!parseInt(process.env.VUE_APP_SINGLEBOARD_MODE);
 const VUE_APP_SINGLEBOARD_SLUG = process.env.VUE_APP_SINGLEBOARD_SLUG || '_';
 const VUE_APP_TITLE = process.env.VUE_APP_TITLE || 'Our Shopping List';
+const VUE_APP_USE_ITEM_QUICK_SYNTAX = !!parseInt(process.env.VUE_APP_USE_ITEM_QUICK_SYNTAX);
 
 module.exports = {
   BASE_URL,
@@ -43,4 +44,5 @@ module.exports = {
   VUE_APP_SINGLEBOARD_MODE,
   VUE_APP_SINGLEBOARD_SLUG,
   VUE_APP_TITLE,
+  VUE_APP_USE_ITEM_QUICK_SYNTAX,
 };

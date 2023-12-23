@@ -428,13 +428,27 @@ export default {
     submitSearchInput() {
       const self = this
       var item = new Item()
-      item.name = this.searchString
+      this.populateNewItemFromSearchString(item, this.searchString)
       this.saveItem(item, function(newItem) {
         self.cancelSearch()
         if (config.VUE_APP_EDIT_ITEM_ON_CREATE) {
           self.editItem(newItem)
         }
       })
+    },
+    populateNewItemFromSearchString(item, searchString) {
+      if (config.VUE_APP_USE_ITEM_QUICK_SYNTAX) {
+        const re = new RegExp('^(\\d+)x (.*)$')
+        const m = searchString.match(re)
+        if (!m || !m.length) {
+          item.name = this.searchString
+        } else {
+          item.name = m[2]
+          item.qty = m[1]
+        }
+      } else {
+        item.name = this.searchString
+      }
     },
     onEditItem(item) {
       this.editItem(item)
