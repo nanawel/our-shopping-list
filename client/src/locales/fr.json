@@ -52,7 +52,9 @@
       "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux.",
       "item": {
         "lists-count": "(aucune liste) | 1 liste | %{count} listes"
-      }
+      },
+      "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
+      "deletion-disabled": "La suppression de tableaux est désactivée."
     },
     "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
   },

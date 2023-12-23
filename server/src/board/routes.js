@@ -118,3 +118,41 @@ router.get('/boards/by-slug/:slug/lists', (req, res, next) => {
   res.status(501)
     .end();
 });
+
+router.delete('/boards/:id', (req, res, next) => {
+  if (!config.VUE_APP_BOARD_DELETION_ENABLED) {
+    res.status(403)
+      .json({
+        error: {
+          message: "Not available! See VUE_APP_BOARD_DELETION_ENABLED."
+        }
+      });
+  } else {
+    const id = req.params.id;
+    console.debug('DELETE BOARD', id, req.body);
+
+    // TODO Be able to cascade delete linked lists
+    //      or add a dedicated prune command in CLI.
+
+    BoardModel
+      .findById(id)
+      .then((board) => {
+        if (board) {
+          board.delete()
+            .then(() => {
+              res.status(200)
+                .json(board);
+            })
+            .catch(next);
+        } else {
+          res.status(404)
+            .json({
+              error: {
+                message: "Board not found"
+              }
+            });
+        }
+      })
+      .catch(next);
+  }
+});

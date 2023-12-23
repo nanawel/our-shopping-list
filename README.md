@@ -171,6 +171,7 @@ docker-compose up -d
   > MongoDB authentication is not supported yet.
 
 - **Application keys**
+  - `VUE_APP_BOARD_DELETION_ENABLED` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/17)
   - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD` (default: `lastCheckedAt`, see available fields [here](./client/src/models/Item.js))
   - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER` (default: `desc`)
   - `VUE_APP_CLIENT_LOG_CONSOLE_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))

@@ -50,7 +50,8 @@
                                     class="elevation-4">
                     <template v-slot:default="{ item }">
                       <v-list-item :key="item._id"
-                                   :to="{ name: 'board', params: { boardSlug: item.slug } }">
+                                   :to="{ name: 'board', params: { boardSlug: item.slug } }"
+                                   v-touch-event:touchhold="() => onTouchHoldBoard(item)">
                         <v-list-item-avatar>
                           <v-icon>mdi-clipboard-list-outline</v-icon>
                         </v-list-item-avatar>
@@ -143,6 +144,16 @@ export default {
     },
     onClearLastBoard: function() {
       this.$store.dispatch('board/reset')
+    },
+    onTouchHoldBoard: function(board) {
+      if (config.VUE_APP_BOARD_DELETION_ENABLED) {
+        if (confirm(this.$t('home.boards.confirm-deletion'))) {
+          this.$repository.delete(board)
+        }
+      } else {
+        this.$snackbar.msg(this.$t('home.boards.deletion-disabled'))
+      }
+      return false
     },
     refreshAllBoards: function () {
       const self = this
