@@ -50,8 +50,7 @@
                                     class="elevation-4">
                     <template v-slot:default="{ item }">
                       <v-list-item :key="item._id"
-                                   :to="{ name: 'board', params: { boardSlug: item.slug } }"
-                                   v-touch-event:touchhold="(ev) => onTouchHoldBoard(ev, item)">
+                                   :to="{ name: 'board', params: { boardSlug: item.slug } }">
                         <v-list-item-avatar>
                           <v-icon>mdi-clipboard-list-outline</v-icon>
                         </v-list-item-avatar>
@@ -61,6 +60,12 @@
                             {{ $tc('home.boards.item.lists-count', item.lists.length, {count: item.lists.length})}}
                           </v-list-item-subtitle>
                         </v-list-item-content>
+                        <v-list-item-action v-if="boardDeletionEnabled"
+                                            @click="(ev) => onDeleteBoard(ev, item)">
+                          <v-icon>
+                            mdi-delete
+                          </v-icon>
+                        </v-list-item-action>
                       </v-list-item>
                     </template>
                   </v-virtual-scroll>
@@ -119,6 +124,11 @@ export default {
           && config.VUE_APP_LIST_ALL_BOARDS_ENABLED
       }
     },
+    boardDeletionEnabled: {
+      get: function () {
+        return !!config.VUE_APP_BOARD_DELETION_ENABLED
+      }
+    },
     allBoards: {
       get: function () {
         return Board.query()
@@ -145,15 +155,21 @@ export default {
     onClearLastBoard: function() {
       this.$store.dispatch('board/reset')
     },
-    onTouchHoldBoard: function(ev, board) {
+    onDeleteBoard: function(ev, board) {
       ev.stopPropagation()
       ev.preventDefault()
-      if (config.VUE_APP_BOARD_DELETION_ENABLED) {
-        if (confirm(this.$t('home.boards.confirm-deletion'))) {
-          this.$repository.delete(board)
-        }
+      this.$logger.debug('About to delete', board)
+      if (confirm(this.$t('home.boards.confirm-deletion'))) {
+        this.$repository.delete(board)
+          . then(() => {
+            this.$snackbar.msg(this.$t('home.boards.deleted-successfully'))
+          })
+          .catch((e) => {
+            this.$logger.error(e)
+            this.$snackbar.msg(this.$t('errors.board.delete'))
+          })
       } else {
-        this.$snackbar.msg(this.$t('home.boards.deletion-disabled'))
+        this.$logger.debug('Deletion has been canceled.')
       }
     },
     refreshAllBoards: function () {

@@ -12,7 +12,8 @@
   "confirmation-question": "Are you sure?",
   "errors": {
     "board": {
-      "invalid-name": "Invalid board name!"
+      "invalid-name": "Invalid board name!",
+      "delete": "Could not delete board :("
     },
     "list": {
       "load": "Could not load list :(",
@@ -54,7 +55,7 @@
         "lists-count": "(no list yet) | 1 list | %{count} lists"
       },
       "confirm-deletion": "Are you sure you want to delete this board?",
-      "deletion-disabled": "Board deletion is not enabled."
+      "deleted-successfully": "Board deleted successfully."
     },
     "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
   },

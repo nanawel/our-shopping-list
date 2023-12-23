@@ -12,7 +12,8 @@
   "confirmation-question": "Êtes-vous sûr(e)?",
   "errors": {
     "board": {
-      "invalid-name": "Nom de tableau invalide !"
+      "invalid-name": "Nom de tableau invalide !",
+      "delete": "Impossible de supprimer le tableau :("
     },
     "list": {
       "load": "Impossible de charger la liste :(",
@@ -54,7 +55,7 @@
         "lists-count": "(aucune liste) | 1 liste | %{count} listes"
       },
       "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
-      "deletion-disabled": "La suppression de tableaux est désactivée."
+      "deleted-successfully": "Tableau supprimé avec succès."
     },
     "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
   },
