@@ -54,13 +54,24 @@ const Repository = function() {
 
       eventBus.$emit('repository_save::before', model, schema)
 
-      if (model._id) {
-        return schema.api()
-          .patch(`/${schema.entity}/${model._id}`, model)
-      } else {
-        return schema.api()
-          .post(`/${schema.entity}`, model)
-      }
+      return new Promise((resolve, reject) => {
+        if (model._id) {
+          schema.api()
+            .patch(`/${schema.entity}/${model._id}`, model)
+            .then((response) => {
+              resolve(response.entities[schema.entity][0])
+            })
+            .catch(reject)
+        } else {
+          return schema.api()
+            .post(`/${schema.entity}`, model)
+            .then((response) => {
+              console.log(response);
+              resolve(response.entities[schema.entity][0])
+            })
+            .catch(reject)
+        }
+      })
     },
     delete(model) {
       logger.debug('$repository::delete', model)

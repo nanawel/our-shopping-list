@@ -337,8 +337,8 @@ export default {
       this.$logger.debug('LIST.saveList()', this.listModel)
       const self = this
       this.$repository.save(this.listModel)
-        .then((response) => {
-          self.$router.push({name: 'list', params: {listId: response.entities.lists[0]._id}})
+        .then((list) => {
+          self.$router.push({name: 'list', params: {listId: list._id}})
         })
         .catch((e) => {
           self.$logger.error(e)
@@ -429,8 +429,11 @@ export default {
       const self = this
       var item = new Item()
       item.name = this.searchString
-      this.saveItem(item, function() {
+      this.saveItem(item, function(newItem) {
         self.cancelSearch()
+        if (config.VUE_APP_EDIT_ITEM_ON_CREATE) {
+          self.editItem(newItem)
+        }
       })
     },
     onEditItem(item) {
