@@ -1,1 +1,119 @@
-{}
+{
+    "cancel": "Avbryt",
+    "delete": "Slett",
+    "edit": "Rediger",
+    "ok-thanks": "OK, takk",
+    "confirmation-question": "Er du sikker?",
+    "errors": {
+        "list": {
+            "load": "Kunne ikke laste inn liste :(",
+            "save": "Kunne ikke lagre liste :(",
+            "delete": "Kunne ikke slette liste :("
+        },
+        "item": {
+            "load": "Kunne ikke laste inn element :(",
+            "save": "Kunne ikke lagre element :(",
+            "delete": "Kunne ikke slette element :("
+        },
+        "overlay": {
+            "not-connected": "Ikke tilkoblet"
+        },
+        "board": {
+            "invalid-name": "Ugyldig listesamlingsnavn.",
+            "delete": "Kunne ikke slette listesamling :("
+        }
+    },
+    "notice": {
+        "force-refresh-hint-title": "Visste du?",
+        "force-refresh-hint-message": "Bruk gjenoppfriskingsknappen i menyen til venstre for å fikse synkronisering eller oppgradering.",
+        "application-updated-alert": "Programmet har blitt oppgradert.\nDenne siden vil lastes inn igjen automatisk."
+    },
+    "menu-nav": {
+        "item": {
+            "new-list": "Ny liste …",
+            "about": "Om"
+        },
+        "open": "Åpne menyen"
+    },
+    "home": {
+        "button": {
+            "open-board": "Åpne listesamling"
+        },
+        "boards": {
+            "all-title": "Alle listesamlinger (%{count})",
+            "item": {
+                "lists-count": "(ingen listesamlinger enda) | 1 liste | %{count} lister"
+            },
+            "confirm-deletion": "Slett denne listesamlingen?",
+            "default-retrieval-error-message": "Kunne ikke hente listesamlinger.",
+            "deleted-successfully": "Listesamling slettet."
+        },
+        "reopen-last-board": "Åpne <strong>%{boardName}</strong> igjen istedenfor?",
+        "input": {
+            "board-name": "Åpne listesamling …"
+        }
+    },
+    "board-home-nav": {
+        "title": "Opprett en handleliste",
+        "button": "Opprett en liste",
+        "subtitle": "Du vil kunne dele den med slektninger og arbeide med den."
+    },
+    "list": {
+        "toggle-history-mode": "Veksle historikkmodus",
+        "not-found": {
+            "title": "Fant ikke listen.",
+            "button": "Opprett en liste",
+            "subtitle": "Denne listen finnes ikke."
+        },
+        "new": {
+            "title": "Gi listen et navn",
+            "input-placeholder": "Min handleliste …",
+            "button": "Opprett"
+        },
+        "search-bar": {
+            "add-button": "Legg til",
+            "input-label": "Søk eller legg til et nytt element"
+        },
+        "new-item": {
+            "subtitle": "Listen er tom.",
+            "button": "Nytt element"
+        },
+        "none-checked": {
+            "subtitle": "Ingen elementer her (enda) …"
+        },
+        "all-checked": {
+            "subtitle": "Alle elementer valgt."
+        },
+        "no-results": {
+            "title": "Resultatløst",
+            "subtitle": "Klikk «Legg til» for å opprette et nytt element."
+        }
+    },
+    "ok": "OK",
+    "item": {
+        "empty-qty-label": "(ingen mengde angitt)",
+        "input": {
+            "name": "Navn",
+            "qty": "Mengde",
+            "details": "Detaljer"
+        },
+        "last-checked-label": "Sist sjekket: %{date}",
+        "help-onclick-checked": "💡 ⬅ Dra til venstre for å fravelge et element",
+        "help-onclick-unchecked": "💡 Dra til høyre for å velge et element ➡"
+    },
+    "edit-list-dialog": {
+        "existing-title": "Rediger liste",
+        "new-title": "(Ny liste)",
+        "name-input": "Navn",
+        "creation-date-label": "Opprettelsesdato"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Rediger element",
+        "new-title": "Nytt element"
+    },
+    "app-name": "Vår handleliste",
+    "back": "Tilbake",
+    "close": "Lukk",
+    "share": "Del",
+    "save": "Lagre"
+}
