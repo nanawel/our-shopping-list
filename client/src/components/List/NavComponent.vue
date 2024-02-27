@@ -1,26 +1,23 @@
 <template>
   <div class="wrapper">
-    <NavDefaultComponent>
-      <template v-slot:main-title>
-        {{ title }}
+    <v-toolbar-title>
+      <span>{{ title }}</span>
+      <template v-if="listModel?._id">
+        <v-btn @click="onEditClick"
+               icon
+               :aria-label="$t('edit')"
+               class="text-grey-darken-2">
+          <v-icon size="small">mdi-pencil</v-icon>
+        </v-btn>
       </template>
-      <template v-slot:main-title-after v-if="listModel && listModel._id">
-        <div class="list-title-after">
-          <v-btn @click="onEditClick"
-                 icon
-                 :aria-label="$t('edit')">
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-        </div>
-      </template>
-    </NavDefaultComponent>
+    </v-toolbar-title>
 
-    <v-btn
-        id="btn-toggle-history-mode"
-        @click="onToggleHistoryMode"
-        :class="showHistory ? 'active' : 'inactive'"
-        icon
-        :aria-label="$t('list.toggle-history-mode')">
+    <v-btn id="btn-toggle-history-mode"
+           @click="onToggleHistoryMode"
+           :active="showHistory"
+           icon
+           :aria-label="$t('list.toggle-history-mode')"
+           class="text-grey-darken-2">
       <v-icon>mdi-history</v-icon>
     </v-btn>
 
@@ -35,14 +32,12 @@
 <script>
 import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '@/constants'
 
-import NavDefaultComponent from '@/components/Nav/DefaultComponent'
 import EditDialogComponent from "@/components/List/EditDialogComponent"
 import List from "@/models/List"
 
 export default {
   name: "List-Nav",
   components: {
-    NavDefaultComponent,
     EditDialogComponent
   },
   data: () => ({
@@ -51,19 +46,19 @@ export default {
   computed: {
     title: {
       get: function() {
-        return this.listModel && this.listModel.name
+        return this.listModel?.name
           ? this.listModel.name
           : this.$t('edit-list-dialog.new-title')
       }
     },
     listModel: {
       get: function() {
-        return this.$store.state.list.currentList
+        return this.$store.state?.list?.currentList
       }
     },
     showHistory: {
       get: function() {
-        return this.$store.state.list.displayMode === DISPLAY_MODE_CHECKED_HISTORY
+        return this.$store.state?.list?.displayMode === DISPLAY_MODE_CHECKED_HISTORY
       },
       set: function(val) {
         this.$store.commit(
@@ -75,10 +70,6 @@ export default {
     }
   },
   methods: {
-    onToggleHistoryMode: function() {
-      this.showHistory = !this.showHistory
-    },
-
     editList(list) {
       this.$logger.debug('NAV.editList()', list)
       // Pass a clone to the form so that modifications are only applied upon validation
@@ -115,6 +106,9 @@ export default {
         })
     },
 
+    onToggleHistoryMode: function() {
+      this.showHistory = !this.showHistory
+    },
     onEditClick() {
       this.editList(this.listModel)
     },
@@ -146,15 +140,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~vuetify/src/styles/styles';
-
 .wrapper {
-  display: contents;  // Fix appbar display by forcing ignore
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  position: relative;
+  flex-grow: 1;
 }
-
+// Fix ".v-toolbar__content > .v-toolbar-title" rule which got ignored because of the <wrapper> node in between
+.wrapper > .v-toolbar-title {
+  margin-inline-start: 16px;
+}
 #btn-toggle-history-mode {
-  &.active {
-    background-color: map-get($material-theme, "background");
+  margin-right: 1rem;
+  &.v-btn--active {
+    background-color: rgb(var(--v-theme-background));
   }
 }
 </style>

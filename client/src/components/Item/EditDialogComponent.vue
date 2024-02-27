@@ -1,6 +1,6 @@
 <template>
     <v-dialog
-      :value="showDialog"
+      v-model="showDialog"
       persistent
       max-width="500"
       @keydown.esc="onCancelItemForm">
@@ -36,7 +36,7 @@
               v-model="formItem.details"
               :rows="3">
             </v-textarea>
-            <div v-if="formItem.lastCheckedAt">
+            <div class="last-checked-label" v-if="formItem.lastCheckedAt">
               <v-icon>mdi-calendar-check</v-icon> {{ $t('item.last-checked-label', {date: new Date(formItem.lastCheckedAt).toLocaleString()}) }}
             </div>
           </form>
@@ -71,7 +71,6 @@
 </template>
 
 <script>
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import Item from "@/models/Item";
 
 export default {
@@ -117,3 +116,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.last-checked-label {
+  opacity: var(--v-medium-emphasis-opacity);
+  font-size: small;
+}
+</style>

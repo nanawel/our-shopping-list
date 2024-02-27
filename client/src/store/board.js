@@ -1,4 +1,4 @@
-import logger from '@/service/logger'
+import {logger} from '@/service/logger'
 import eventBus from '@/service/event-bus'
 import Board from '@/models/Board'
 

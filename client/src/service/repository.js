@@ -1,5 +1,6 @@
-import logger from '@/service/logger'
+import {logger} from '@/service/logger'
 import eventBus from '@/service/event-bus'
+import {apm} from '@/service/apm'
 import {Mutex, withTimeout} from 'async-mutex';
 
 import Board from '@/models/Board'
@@ -40,6 +41,8 @@ const Repository = function() {
     },
     syncAll(schema) {
       logger.debug('$repository::syncAll', schema.name)
+      const apmSpan = apm.startSpan('$repository::syncAll')
+      apmSpan.addLabels([schema])
 
       schema.deleteAll()
       return schema.api()
@@ -47,9 +50,15 @@ const Repository = function() {
         .catch((e) => {
           logger.error(e)
         })
+        .finally(() => {
+          apmSpan.end()
+        })
     },
     save(model) {
       logger.debug('$repository::save', model)
+      const apmSpan = apm.startSpan('$repository::save')
+      apmSpan.addLabels([model.constructor.name])
+
       const schema = this.findSchemaByModel(model)
 
       eventBus.$emit('repository_save::before', model, schema)
@@ -62,6 +71,9 @@ const Repository = function() {
               resolve(response.entities[schema.entity][0])
             })
             .catch(reject)
+            .finally(() => {
+              apmSpan.end()
+            })
         } else {
           return schema.api()
             .post(`/${schema.entity}`, model)
@@ -69,11 +81,17 @@ const Repository = function() {
               resolve(response.entities[schema.entity][0])
             })
             .catch(reject)
+            .finally(() => {
+              apmSpan.end()
+            })
         }
       })
     },
     delete(model) {
       logger.debug('$repository::delete', model)
+      const apmSpan = apm.startSpan('$repository::delete')
+      apmSpan.addLabels([model.constructor.name])
+
       const schema = this.findSchemaByModel(model)
 
       eventBus.$emit('repository_delete::before', model, schema)
@@ -83,14 +101,25 @@ const Repository = function() {
           .delete(`/${schema.entity}/${model._id}`, { delete: 1 })
           .then(() => {
             // https://vuex-orm.github.io/plugin-axios/guide/usage.html#delete-requests
-            return model.$delete()
+            return model
+              .$delete()
+              .finally(() => {
+                apmSpan.end()
+              })
           })
       } else {
-          return model.$delete()
+          return model
+            .$delete()
+            .finally(() => {
+              apmSpan.end()
+            })
       }
     },
     checkSync(model) {
       logger.debug('$repository::checkSync', model, model.constructor.name)
+      const apmSpan = apm.startSpan('$repository::checkSync')
+      apmSpan.addLabels([model.constructor.name])
+
       const schema = this.findSchemaByModel(model)
 
       return new Promise((resolve, reject) => {
@@ -126,30 +155,49 @@ const Repository = function() {
             reason: 'Model has no ID'
           })
         }
+      }).finally(() => {
+        apmSpan.end()
       })
     },
     async sync(model) {
       const self = this
 
       await syncMutex.runExclusive(function() {
-          logger.debug('$repository::sync', model)
-          if (model._id) {
-            const schema = self.findSchemaByModel(model)
+        logger.debug('$repository::sync', model)
 
-            return schema.api()
-              .get(`/${schema.entity}/${model._id}`)
-              .catch((e) => {
-                // The model does not seem to exist (anymore) so remove it from local store
-                if (e.response && e.response.status === 404) {
-                  schema.delete(model._id)
-                }
-              })
-          }
-        })
+        if (model._id) {
+          const apmSpan = apm.startSpan('$repository::sync')
+          apmSpan.addLabels([model.constructor.name])
 
+          const schema = self.findSchemaByModel(model)
+
+          return schema.api()
+            .get(`/${schema.entity}/${model._id}`)
+            .catch((e) => {
+              // The model does not seem to exist (anymore) so remove it from local store
+              if (e.response && e.response.status === 404) {
+                schema.delete(model._id)
+              }
+            })
+            .finally(() => {
+              apmSpan.end()
+            })
+        }
+      })
     }
   }
 }
 
+const repository = new Repository()
 
-export default new Repository
+const repositoryPlugin = {
+  install(app) {
+    app.config.globalProperties.$repository = repository
+  }
+}
+
+export {
+  repositoryPlugin,
+  repository
+}
+

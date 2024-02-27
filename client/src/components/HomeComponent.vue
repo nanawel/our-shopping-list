@@ -9,6 +9,16 @@
         <EmptyStateComponent>
           <template v-slot:content>
             <v-container>
+              <v-row v-if="homeMessage" align="center" justify="center">
+                <v-col md="4">
+                  <v-alert icon="mdi-hand-wave-outline"
+                           border="start"
+                           border-color="teal-lighten-3"
+                           elevation="1">
+                    {{homeMessage}}
+                  </v-alert>
+                </v-col>
+              </v-row>
               <v-row align="center" justify="center">
                 <v-col md="4">
                   <v-text-field
@@ -35,37 +45,38 @@
           </template>
           <template v-slot:footer>
             <v-container>
-              <v-row v-if="allBoardsEnabled && allBoards.length"
+              <v-row id="boards-list"
+                     v-if="allBoardsEnabled && allBoards.length"
                      align="center"
                      justify="center">
                 <v-col md="4">
-                  <v-subheader class="all-boards-title d-flex">
+                  <div class="text-subtitle-2 text-medium-emphasis pb-2 d-flex">
                     <span>{{ $t('home.boards.all-title', {count: allBoards.length})}}</span>
                     <v-icon @click="refreshAllBoards"
                             class="ml-auto">mdi-refresh-circle</v-icon>
-                  </v-subheader>
+                  </div>
                   <v-virtual-scroll :items="allBoards"
                                     item-height="56"
                                     max-height="30vh"
                                     class="elevation-4">
                     <template v-slot:default="{ item }">
                       <v-list-item :key="item._id"
-                                   :to="{ name: 'board', params: { boardSlug: item.slug } }">
-                        <v-list-item-avatar>
-                          <v-icon>mdi-clipboard-list-outline</v-icon>
-                        </v-list-item-avatar>
-                        <v-list-item-content class="text-left">
-                          <v-list-item-title v-text="item.name"></v-list-item-title>
-                          <v-list-item-subtitle>
-                            {{ $tc('home.boards.item.lists-count', item.lists.length, {count: item.lists.length})}}
-                          </v-list-item-subtitle>
-                        </v-list-item-content>
-                        <v-list-item-action v-if="boardDeletionEnabled"
-                                            @click="(ev) => onDeleteBoard(ev, item)">
-                          <v-icon>
-                            mdi-delete
-                          </v-icon>
-                        </v-list-item-action>
+                                   :to="{ name: 'board', params: { boardSlug: item.slug } }"
+                                   :title="item.name"
+                                   :subtitle="$tc('home.boards.item.lists-count', item.lists?.length, {count: item.lists?.length})">
+                        <template v-slot:prepend>
+                          <v-avatar color="teal-lighten-2">
+                            <v-icon color="white">mdi-clipboard-list-outline</v-icon>
+                          </v-avatar>
+                        </template>
+                        <template v-slot:append>
+                          <v-btn v-if="boardDeletionEnabled"
+                                 @click="(ev) => onDeleteBoard(ev, item)"
+                                 color="grey-lighten-1"
+                                 icon="mdi-delete"
+                                 variant="text"
+                          ></v-btn>
+                        </template>
                       </v-list-item>
                     </template>
                   </v-virtual-scroll>
@@ -75,15 +86,15 @@
               <v-row v-if="lastBoardModel"
                      align="center"
                      justify="center">
-                <v-col md="4">
+                <v-col id="reopen-last-board-row"
+                       class="d-flex justify-center"
+                       md="4">
                   <router-link :to="{name: 'board', params: {boardSlug: lastBoardModel.slug}}">
                     <span v-html="$t('home.reopen-last-board', {boardName: lastBoardModel.name})"></span>
                   </router-link>
-                  <v-btn @click="onClearLastBoard"
-                         icon
-                         :aria-label="$t('close')">
-                    <v-icon>mdi-close-circle-outline</v-icon>
-                  </v-btn>
+                  <v-icon @click="onClearLastBoard"
+                          color="grey-darken-2"
+                          :aria-label="$t('close')">mdi-close-circle-outline</v-icon>
                 </v-col>
               </v-row>
             </v-container>
@@ -97,6 +108,8 @@
 <script>
 import EmptyStateComponent from './EmptyStateComponent.vue'
 
+import {isSingleBoardMode} from '@/service/board-mode'
+
 import Board from '@/models/Board'
 import config from '@/config'
 
@@ -109,18 +122,19 @@ export default {
     return {
       title: config.VUE_APP_TITLE || 'Our Shopping List',
       boardNameInput: '',
-      boardsRetrievalErrorMessage: null
+      boardsRetrievalErrorMessage: null,
+      homeMessage: config.VUE_APP_HOME_MESSAGE,
     }
   },
   computed: {
     lastBoardModel: {
       get: function () {
-        return this.$store.state.board.lastBoard
+        return this.$store.state?.board.lastBoard
       },
     },
     allBoardsEnabled: {
       get: function () {
-        return !config.VUE_APP_SINGLEBOARD_MODE
+        return !isSingleBoardMode()
           && config.VUE_APP_LIST_ALL_BOARDS_ENABLED
       }
     },
@@ -192,5 +206,11 @@ export default {
 .title-wrapper {
   text-align: center;
   margin-top: 2rem;
+}
+#boards-list {
+  text-align: left;
+}
+#reopen-last-board-row > i {
+  padding: 0 1.5rem;
 }
 </style>

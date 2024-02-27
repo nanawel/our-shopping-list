@@ -1,7 +1,7 @@
 import eventBus from '@/service/event-bus'
-import store from '@/store'
+import {store} from '@/service/store'
 import config from '@/config'
-import i18n from '@/i18n'
+import {i18n} from '@/service/i18n'
 
 const forceRefreshHintShownKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'forceRefreshHintShown'
 

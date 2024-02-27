@@ -171,6 +171,11 @@ docker-compose up -d
   > MongoDB authentication is not supported yet.
 
 - **Application keys**
+  - `VUE_APP_APM_ENABLED` (default: `0`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/intro.html)
+  - `VUE_APP_APM_LOGLEVEL` (default: `warn`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#log-level)
+  - `VUE_APP_APM_SERVERURL` (default: `http://localhost:8200`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#server-url)
+  - `VUE_APP_APM_SERVERURLPREFIX` (default: `/intake/v${apiVersion}/rum/events`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#server-url-prefix)
+  - `VUE_APP_APM_SERVICENAME` [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#service-name)
   - `VUE_APP_BOARD_DELETION_ENABLED` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/17)
   - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD` (default: `lastCheckedAt`, see available fields [here](./client/src/models/Item.js))
   - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER` (default: `desc`)
@@ -178,6 +183,7 @@ docker-compose up -d
   - `VUE_APP_CLIENT_LOG_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
   - `VUE_APP_CLIENT_LOG_LEVEL` (default: `debug`)
   - `VUE_APP_EDIT_ITEM_ON_CREATE` (default: `0`)
+  - `VUE_APP_HOME_MESSAGE` (default: _empty_)
   - `VUE_APP_I18N_FALLBACK_LOCALE` (default: `en`)
   - `VUE_APP_I18N_FORCE_LOCALE` (default: `0`)
   - `VUE_APP_I18N_LOCALE` (default: `en`)

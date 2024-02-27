@@ -15,7 +15,9 @@
       <SnackbarComponent></SnackbarComponent>
 
       <v-overlay
-        :value="showNotConnectedOverlay">
+        v-model="showNotConnectedOverlay"
+        class="align-center justify-center"
+        persistent>
         <v-btn color="error">
           {{ $t('errors.overlay.not-connected') }}
         </v-btn>
@@ -27,7 +29,10 @@
 <script>
 import DialogComponent from '@/components/DialogComponent.vue'
 import SnackbarComponent from '@/components/SnackbarComponent.vue'
+
 import eventBus from '@/service/event-bus'
+import isOnline from '@/service/isonline'
+import {store} from '@/service/store'
 
 export default {
   name: 'App',
@@ -35,8 +40,11 @@ export default {
     DialogComponent,
     SnackbarComponent
   },
-  data: () => ({
-  }),
+  data() {
+    return {
+      isReloading: false
+    }
+  },
   created() {
     eventBus.$emit('app-created')
   },
@@ -46,19 +54,20 @@ export default {
   computed: {
     showNotConnectedOverlay: {
       get: function() {
-        return !this.$root.isOnline
+        return !isOnline.value
       }
     },
     showGlobalProgressBar: {
       get: function() {
         // Must use this syntax here because the module may not be available yet at startup
-        return this.$store.getters['loadingProgress/isLoadingInProgress']
+        return store.getters['loadingProgress/isLoadingInProgress']
       }
     }
   }
 }
 </script>
 
+<!-- SCOPED STYLE -->
 <style lang="scss" scoped>
 #global-top-progress-bar {
   z-index: 100;
@@ -68,6 +77,7 @@ export default {
 }
 </style>
 
+<!-- GLOBAL STYLE -->
 <style lang="scss">
 @import '~typeface-roboto/index.css';
 

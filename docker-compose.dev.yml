@@ -20,6 +20,7 @@ services:
       VUE_APP_CLIENT_LOG_ENABLED: 1
       VUE_APP_CLIENT_LOG_CONSOLE_ENABLED: 1
       VUE_APP_CLIENT_LOG_LEVEL: debug
+      VUE_APP_ENV: development
       # For more config variables, see server/src/config.js
     depends_on:
       - mongodb

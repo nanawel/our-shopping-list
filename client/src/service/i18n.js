@@ -1,10 +1,7 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+import { createI18n } from 'vue-i18n'
 
 import config from '@/config'
-import logger from '@/service/logger'
-
-Vue.use(VueI18n)
+import {logger} from '@/service/logger'
 
 /**
  * @see https://phrase.com/blog/posts/ultimate-guide-to-vue-localization-with-vue-i18n/
@@ -34,8 +31,23 @@ function getLocale() {
   return navigator.language.split('-')[0]
 }
 
-export default new VueI18n({
+const i18n = createI18n({
+  legacy: true,
   locale: getLocale(),
   fallbackLocale: config.VUE_APP_I18N_FALLBACK_LOCALE,
   messages: loadLocaleMessages()
 })
+
+const legacyI18n = i18n.global
+
+const i18nPlugin = {
+  install(app) {
+    app.use(i18n)
+  }
+}
+
+
+export {
+  i18nPlugin,
+  legacyI18n as i18n
+}

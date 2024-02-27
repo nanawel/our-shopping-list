@@ -41,7 +41,11 @@
       "about": "À propos"
     }
   },
+  "about": {
+    "page-title": "À propos"
+  },
   "home": {
+    "page-title": "Accueil",
     "input": {
       "board-name": "Ouvrir un tableau..."
     },

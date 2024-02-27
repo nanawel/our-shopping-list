@@ -22,6 +22,7 @@ build_image:
       && time make build args="--build-arg build_version=${buildVersion} --build-arg build_id=${CI_COMMIT_SHORT_SHA} --build-arg build_date=$(date -Is)"
     - time docker tag ${CONTAINER_BUILD_IMAGE}:${APP_VERSION:-latest} ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker push ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
+    - "echo Pushed image: ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}"
   tags:
     - shell
     - docker
@@ -32,11 +33,10 @@ push_image_dev_latest:
     - time docker pull ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker tag ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA} ${CONTAINER_RELEASE_IMAGE}:latest-dev
     - time docker push ${CONTAINER_RELEASE_IMAGE}:latest-dev
+    - "echo Pushed image: ${CONTAINER_RELEASE_IMAGE}:latest-dev"
   tags:
     - shell
     - docker
-  rules:
-    - if: '$CI_COMMIT_BRANCH =~ /^feature\//'
 
 push_image_latest:
   stage: release
@@ -44,6 +44,7 @@ push_image_latest:
     - time docker pull ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker tag ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA} ${CONTAINER_RELEASE_IMAGE}:latest
     - time docker push ${CONTAINER_RELEASE_IMAGE}:latest
+    - "echo Pushed image: ${CONTAINER_RELEASE_IMAGE}:latest"
   tags:
     - shell
     - docker
@@ -57,6 +58,7 @@ push_image_tagged:
     - time docker pull ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker tag ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA} ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_TAG}
     - time docker push ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_TAG}
+    - "echo Pushed image: ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_TAG}"
   tags:
     - shell
     - docker

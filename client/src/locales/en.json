@@ -41,7 +41,11 @@
       "about": "About"
     }
   },
+  "about": {
+    "page-title": "About"
+  },
   "home": {
+    "page-title": "Home",
     "input": {
       "board-name": "Open Board..."
     },

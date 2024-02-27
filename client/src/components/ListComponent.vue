@@ -2,22 +2,26 @@
   <div id="list-panel">
 
     <template v-if="!listModel">
-      <EmptyStateComponent>
-        <template v-slot:icon-name>mdi-alert-octagon-outline</template>
-        <template v-slot:title>{{ $t('list.not-found.title') }}</template>
-        <template v-slot:subtitle>{{ $t('list.not-found.subtitle') }}</template>
-        <template v-slot:buttons>
-          <v-btn @click="newList" color="primary">{{ $t('list.not-found.button') }}</v-btn>
-        </template>
-      </EmptyStateComponent>
+      <div class="list-wrapper">
+        <EmptyStateComponent>
+          <template v-slot:icon-name>mdi-alert-octagon-outline</template>
+          <template v-slot:title>{{ $t('list.not-found.title') }}</template>
+          <template v-slot:subtitle>{{ $t('list.not-found.subtitle') }}</template>
+          <template v-slot:buttons>
+            <v-btn @click="newList" color="primary">{{ $t('list.not-found.button') }}</v-btn>
+          </template>
+        </EmptyStateComponent>
+      </div>
     </template>
 
     <template v-else-if="isNewList">
-      <v-container class="col-md-4 offset-md-4 text-center">
+      <v-container class="v-col-md-4 text-center">
         <v-row>
           <v-col>
             <div v-cloak>
-              <v-icon size="8em" color="teal lighten-3">mdi-format-list-bulleted-type</v-icon>
+              <v-icon size="8em"
+                      color="teal-lighten-3"
+                      style="height: auto !important; width: auto !important;">mdi-format-list-bulleted-type</v-icon>
               <h1>{{ $t('list.new.title') }}</h1>
               <v-text-field
                 ref="newListNameInput"
@@ -95,12 +99,12 @@
               <ItemComponent
                 :key="item._id"
                 :item="item"
-                v-touch-event:touchhold="onTouchHoldItem(item._id)"
-                @click="onClickItem(item)"
-                @editClick="onEditItem(item)"
-                @doubleClick="onDoubleClickItem(item)"
-                @swipeOutLeft="onItemSwipeOutLeft(item)"
-                @swipeOutRight="onItemSwipeOutRight(item)"/>
+                v-touch:hold="onTouchHoldItem(item._id)"
+                @click="onClickItem"
+                @editClick="onEditItem"
+                @doubleClick="onDoubleClickItem"
+                @swipeOutLeft="onItemSwipeOutLeft"
+                @swipeOutRight="onItemSwipeOutRight"/>
               <v-divider :key="index"/>
             </DynamicScrollerItem>
           </template>
@@ -123,7 +127,8 @@
         v-model="searchInputValue"
         autocapitalize="sentences"
         class="pr-4"
-        @keydown.enter="submitSearchInput"/>
+        @keydown.enter="submitSearchInput"
+        bg-color="transparent"/>
       <v-btn
         depressed
         small
@@ -141,9 +146,13 @@
       v-on:cancel="onCancelItemForm"
       v-on:delete="onDeleteItemForm"/>
 
-    <v-overlay
-      :value="loadingOverlay">
-      <v-icon size="10em">mdi-cloud-sync-outline</v-icon>
+    <v-overlay v-model="loadingOverlay"
+               class="align-center justify-center"
+               contained
+               persistent>
+      <v-icon size="10em"
+              color="white"
+              style="height: auto !important; width: auto !important;">mdi-cloud-sync-outline</v-icon>
     </v-overlay>
   </div>
 </template>
@@ -152,7 +161,7 @@
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 import debounce from 'lodash.debounce'
-import { DynamicScroller } from 'vue-virtual-scroller'
+import {DynamicScroller, DynamicScrollerItem} from 'vue-virtual-scroller'
 import EmptyStateComponent from "./EmptyStateComponent"
 import ItemEditDialogComponent from "./Item/EditDialogComponent"
 import ItemComponent from "./ItemComponent"
@@ -167,6 +176,7 @@ export default {
   name: 'ListComponent',
   components: {
     DynamicScroller,
+    DynamicScrollerItem,
     ItemEditDialogComponent,
     EmptyStateComponent,
     ItemComponent,
@@ -191,7 +201,7 @@ export default {
   computed: {
     listModel: {
       get: function() {
-        return this.$store.state.list.currentList
+        return this.$store.state?.list.currentList
       }
     },
     listModelId: {
@@ -206,7 +216,7 @@ export default {
     },
     displayMode: {
       get: function() {
-        return this.$store.state.list.displayMode
+        return this.$store.state?.list.displayMode
       }
     },
     shouldShowBottomSearchBar: {
@@ -469,11 +479,11 @@ export default {
     },
     onTouchHoldItem(itemId) {
       const self = this
-      // v-touch:* are not like v-on but custom directives so we need a little
-      // workaround here to declare the handler.
-      // This is also why we must pass the ID instead of the instance, and load the model
-      // on trigger (bug #49).
-      // See https://github.com/jerrybendy/vue-touch-events#how-to-add-extra-parameters
+      // // v-touch:* are not like v-on but custom directives so we need a little
+      // // workaround here to declare the handler.
+      // // This is also why we must pass the ID instead of the instance, and load the model
+      // // on trigger (bug #49).
+      // // See https://github.com/robinrodricks/vue3-touch-events?tab=readme-ov-file#passing-parameters-to-the-event-handler
       return function (ev) {
         const item = Item.find(itemId)
         self.$logger.debug('LIST.onTouchHoldItem()', ev, item)
@@ -482,7 +492,8 @@ export default {
         return false
       }
     },
-    onClickItem(item) {
+    onClickItem(ev, item) {
+      this.$logger.debug('LIST.onClickItem()', ev, item)
       if (this.searchString) {
         this.toggleCheckedItem(item)
         if (this.searchString) {
@@ -495,7 +506,8 @@ export default {
         )
       }
     },
-    onDoubleClickItem(item) {
+    onDoubleClickItem(ev, item) {
+      this.$logger.debug('LIST.onDoubleClickItem()', item)
       this.editItem(item)
     },
 
@@ -540,7 +552,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~vuetify/src/styles/settings/_variables';
+@import 'vuetify/settings';
 
 [v-cloak] {
   display: none;
@@ -574,6 +586,10 @@ export default {
     max-height: calc(var(--x-vh) - (var(--header-height) + 80px));
   }
   // GITHUB#9 END ## Fix for svh compatibility with old mobile browsers
+
+  > .empty-state {
+    padding: 1rem;
+  }
 }
 #list-scroller {
   padding-top: 6px;

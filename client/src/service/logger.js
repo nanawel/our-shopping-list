@@ -1,4 +1,4 @@
-import VueLogger from 'vue-logger-plugin'
+import { createLogger } from 'vue-logger-plugin'
 import config from "@/config";
 
 const options = {
@@ -12,4 +12,15 @@ if (options.level === 'debug') {
   )
 }
 
-export default new VueLogger(options)
+const logger = createLogger(options)
+
+const loggerPlugin = {
+  install(app) {
+    app.use(logger)
+  }
+}
+
+export {
+  loggerPlugin,
+  logger
+}

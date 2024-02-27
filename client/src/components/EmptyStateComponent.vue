@@ -1,6 +1,9 @@
 <template>
   <div class="empty-state">
-    <v-icon class="icon" size="8em" color="teal lighten-3">
+    <v-icon class="icon"
+            size="8em"
+            color="teal-lighten-3"
+            style="height: auto !important; width: auto !important;">
       <slot name="icon-name"></slot>
     </v-icon>
     <h1>
@@ -30,7 +33,6 @@
 <style lang="scss" scoped>
 .empty-state {
   text-align: center;
-  padding: 1rem;
 }
 .subtitle:last-child {
   margin-bottom: 2rem;

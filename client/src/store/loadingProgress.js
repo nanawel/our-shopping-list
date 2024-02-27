@@ -9,7 +9,6 @@ export default {
         init(context) {
           context.commit('reset')
 
-
           // 1. Observe AXIOS requests
           // See https://axios-http.com/docs/interceptors
           axios.interceptors.request.use(function (request) {
@@ -48,7 +47,7 @@ export default {
       },
       getters: {
         isLoadingInProgress: (state) => {
-          return state.requestsInProgress > 0
+          return !state || state.requestsInProgress > 0
         }
       }
     }

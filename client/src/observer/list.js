@@ -1,6 +1,5 @@
 import eventBus from '@/service/event-bus'
-import store from '@/store'
-// import repository from '@/service/repository'
+import {store} from '@/service/store'
 
 import ListModel from '@/models/List'
 

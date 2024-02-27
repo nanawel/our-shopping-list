@@ -1,5 +1,7 @@
-import store from '@/store'
-import logger from '@/service/logger'
+import {store} from '@/service/store'
+import {logger} from '@/service/logger'
+import {setPageTitle} from '@/service/page-title'
+import {isSingleBoardMode} from '@/service/board-mode'
 import {sock} from '@/service/socket-io'
 
 const BoardComponent = () => import('@/components/BoardComponent.vue')
@@ -16,7 +18,7 @@ export default (router) => {
     {
       path: '/board',
       name: 'currentBoard',
-      beforeEnter: (to, from, next) => {
+      beforeEnter(to, from, next) {
         if (store.state.board && store.state.board.currentBoard) {
           next({
             name: 'board',
@@ -39,7 +41,7 @@ export default (router) => {
     },
     {
       path: '/list/:listId',
-      redirect: (to) => {
+      redirect (to) {
         if (store.state.board && store.state.board.currentBoard) {
           return {
             name: 'list',
@@ -69,7 +71,7 @@ export default (router) => {
         {
           path: 'list',
           name: 'newList',
-          beforeEnter: (to, from, next) => {
+          beforeEnter(to, from, next) {
             next({name: 'list', params: {listId: 'new'}})
           },
         },
@@ -161,5 +163,26 @@ export default (router) => {
     }
 
     next()
+  })
+
+  router.afterEach((to) => {
+    switch (to.name) {
+      case 'currentBoard':
+      case 'board':
+      case 'newList':
+      case 'list': {
+          let title = ''
+          if (store.state?.list?.currentList) {
+            title += store.state.list.currentList.name
+          }
+          if (!isSingleBoardMode() && store.state?.board?.currentBoard) {
+            if (title) {
+              title += ' :: '
+            }
+            title += store.state.board.currentBoard.name
+          }
+          setPageTitle(title)
+      }
+    }
   })
 }

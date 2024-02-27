@@ -1,5 +1,5 @@
 import eventBus from '@/service/event-bus'
-import router from '@/router'
+import {router, useRoute} from '@/router'
 import config from '@/config'
 
 const currentBoardSlugKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'currentBoardSlug'
@@ -11,7 +11,7 @@ export default {
       const lsBoardSlug = window.localStorage.getItem(currentBoardSlugKey)
       const lsListId = window.localStorage.getItem(currentListSlugKey)
 
-      const currentRouteParams = router.history.current.params
+      const currentRouteParams = useRoute().params
       if (currentRouteParams.boardSlug || currentRouteParams.listId) {
         // Route params have a higher priority, so don't force any redirection if any is present
         return

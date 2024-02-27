@@ -3,7 +3,7 @@
 import { register } from 'register-service-worker'
 
 import config from '@/config'
-import logger from '@/service/logger'
+import {logger} from '@/service/logger'
 
 if (process.env.NODE_ENV === 'production') {
   register(`/${config.BASE_URL}service-worker.js`, {

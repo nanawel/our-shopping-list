@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import {router} from '@/router'
 import config from '@/config'
 
 export default {
@@ -76,12 +77,12 @@ export default {
   computed: {
     appVersion: {
       get: function() {
-        return this.$store.state.version.version
+        return this.$store.state?.version.version
       }
     },
     appBuildId: {
       get: function() {
-        return this.$store.state.version.buildId
+        return this.$store.state?.version.buildId
       }
     },
     configHeaders: {
@@ -112,14 +113,8 @@ export default {
   },
   methods: {
     onBackClick: function () {
-      history.back()
+      router.back()
     }
-  },
-  created() {
-    this.$root.setTitle('About')
-  },
-  destroyed() {
-    this.$root.setTitle(null)
   }
 }
 </script>

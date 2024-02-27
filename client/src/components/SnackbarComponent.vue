@@ -3,10 +3,10 @@
     {{ message }}
     <template v-slot:action="{ attrs }">
         <v-btn
+          v-bind="attrs"
           v-if="closeable"
           color="primary"
           text
-          v-bind="attrs"
           @click="close">
           {{ $t('close') }}
         </v-btn>

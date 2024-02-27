@@ -10,26 +10,24 @@
       </v-card-title>
 
       <v-card-text v-if="formList">
-        <template>
-          <form novalidate>
-            <v-row>
-              <v-col>
-                <v-text-field
-                  name="name"
-                  ref="nameInput"
-                  :label="$t('edit-list-dialog.name-input')"
-                  autocapitalize="sentences"
-                  autocomplete="off"
-                  v-model="formList.name" />
-                <v-text-field
-                  name="creationDate"
-                  :label="$t('edit-list-dialog.creation-date-label')"
-                  v-model="formList.createdAt"
-                  :disabled="true" />
-              </v-col>
-            </v-row>
-          </form>
-        </template>
+        <form novalidate>
+          <v-row>
+            <v-col>
+              <v-text-field
+                name="name"
+                ref="nameInput"
+                :label="$t('edit-list-dialog.name-input')"
+                autocapitalize="sentences"
+                autocomplete="off"
+                v-model="formList.name" />
+              <v-text-field
+                name="creationDate"
+                :label="$t('edit-list-dialog.creation-date-label')"
+                v-model="formList.createdAt"
+                :disabled="true" />
+            </v-col>
+          </v-row>
+        </form>
       </v-card-text>
 
       <v-divider></v-divider>

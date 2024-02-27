@@ -2,9 +2,9 @@ import {Query} from '@vuex-orm/core';
 
 import {DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 import List from '@/models/List'
-import logger from '@/service/logger'
+import {logger} from '@/service/logger'
 import eventBus from '@/service/event-bus'
-import store from '@/store'
+import {store} from '@/service/store'
 
 /**
  * @param {String} listId
@@ -59,11 +59,11 @@ export default {
                 throw new Error('Invalid list! ' + JSON.stringify(list))
               }
               state.lastList = list
-              state.lastListId = list ? list._id : null
+              state.lastListId = list?._id
             }
             logger.debug('setCurrentList', list)
             state.currentList = list
-            state.currentListId = list ? list._id : null
+            state.currentListId = list?._id
 
             eventBus.$emit('list_set::after', list, previousList)
           }

@@ -1,25 +1,15 @@
 <template>
   <div class="board">
-    <v-app-bar
-      app
-      color="teal lighten-3">
-      <v-app-bar-nav-icon
-        @click.stop="sidebarMenu = !sidebarMenu"
-        :aria-label="$t('menu-nav.open')">
-      </v-app-bar-nav-icon>
-      <router-view name="boardNavigation"></router-view>
-    </v-app-bar>
-
     <v-navigation-drawer
       app
       v-model="sidebarMenu"
-      color="grey lighten-4">
+      color="grey-lighten-4">
       <v-list dense>
         <v-list-item>
-          <v-list-item-action>
+          <template v-slot:prepend>
             <v-icon @click.stop="sidebarMenu = !sidebarMenu">mdi-chevron-left</v-icon>
-          </v-list-item-action>
-          <v-list-item-content class="text-right align-self-start">
+          </template>
+          <div class="text-right align-self-start">
             <v-list-item-title>
               <v-row>
                 <v-col class="col-sm-6">
@@ -33,54 +23,77 @@
                 </v-col>
                 <v-col class="col-sm-6">
                   <v-icon class="force-refresh-btn"
+                          color="grey-darken-1"
                           @click="onRefreshClick"
                           size="40">mdi-refresh</v-icon>
                 </v-col>
               </v-row>
             </v-list-item-title>
-          </v-list-item-content>
+          </div>
         </v-list-item>
       </v-list>
       <v-list>
         <v-list-item :to="{ name: 'board' }"
-                     exact-path>
-          <v-list-item-icon>
-            <v-icon v-if="!isSingleBoardMode && boardModel" >mdi-clipboard-list-outline</v-icon>
-            <v-icon v-else>mdi-playlist-plus</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title v-if="!isSingleBoardMode && boardModel" v-text="boardModel.name"></v-list-item-title>
-          <v-list-item-title v-else>{{ $t('menu-nav.item.new-list') }}</v-list-item-title>
-          <v-btn icon
-            v-if="shouldShowBoardShareButton"
-            @click="onBoardShareButtonClick"
-            :aria-label="$t('share')">
-            <v-icon>mdi-share-variant-outline</v-icon>
-          </v-btn>
+                     :title="!isSingleBoardMode && boardModel ? boardModel.name : $t('menu-nav.item.new-list')"
+                     exact>
+          <template v-slot:prepend>
+            <v-avatar>
+              <v-icon v-if="!isSingleBoardMode && boardModel" >mdi-clipboard-list-outline</v-icon>
+              <v-icon v-else>mdi-playlist-plus</v-icon>
+            </v-avatar>
+          </template>
+          <template v-slot:append>
+            <v-icon v-if="shouldShowBoardShareButton"
+                    @click="onBoardShareButtonClick"
+                    color="grey-darken-1"
+                    size="small"
+                    :aria-label="$t('share')">
+              <v-icon>mdi-share-variant-outline</v-icon>
+            </v-icon>
+          </template>
         </v-list-item>
 
         <v-divider/>
 
-        <template v-for="list in lists">
+        <div>
           <v-list-item
+            v-for="list in lists"
             :key="list._id"
-            :to="{ name: 'list', params: { listId: list._id } }">
-            <v-list-item-icon>
-              <v-icon>mdi-format-list-bulleted-type</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title v-text="list.name"></v-list-item-title>
+            :to="{ name: 'list', params: { listId: list._id } }"
+            :title="list.name">
+            <template v-slot:prepend>
+              <v-avatar>
+                <v-icon>mdi-format-list-bulleted-type</v-icon>
+              </v-avatar>
+            </template>
           </v-list-item>
-        </template>
+        </div>
 
         <v-divider v-if="lists.length"/>
 
-        <v-list-item to="/about">
-          <v-list-item-icon>
-            <v-icon>mdi-information-variant</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>{{ $t('menu-nav.item.about') }}</v-list-item-title>
+        <v-list-item :to="{ name: 'about' }"
+                     :title="$t('menu-nav.item.about')"
+                     class="about-item">
+            <template v-slot:prepend>
+              <v-avatar>
+                <v-icon>mdi-information-variant</v-icon>
+              </v-avatar>
+            </template>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <v-app-bar
+      app
+      color="teal-lighten-3">
+      <v-app-bar-nav-icon
+        @click.stop="sidebarMenu = !sidebarMenu"
+        :aria-label="$t('menu-nav.open')">
+      </v-app-bar-nav-icon>
+      <router-view name="boardNavigation" v-slot="{ Component }">
+        <component :is="Component" :title="navTitle"/>
+      </router-view>
+    </v-app-bar>
 
     <v-main>
       <v-container
@@ -93,26 +106,40 @@
 </template>
 
 <script>
+import {useDisplay} from 'vuetify'
+
+import config from '@/config'
+
 import List from '@/models/List'
-import store from '@/store'
+import {hardRefresh} from '@/service/refresh'
+import {store} from '@/service/store'
+import eventBus from '@/service/event-bus'
+import {isSingleBoardMode} from '@/service/board-mode'
 
 export default {
   name: 'BoardComponent',
   data: function() {
     return {
       // Default display policy for sidebar menu: shown on large, hidden on small
-      sidebarMenu: this.$vuetify.breakpoint.mdAndUp
+      sidebarMenu: useDisplay.mdAndUp
     }
   },
   computed: {
+    navTitle: {
+      get: function() {
+        return this.$store.state?.list?.currentList
+          ? false
+          : (config.VUE_APP_TITLE || 'Our Shopping List')
+      },
+    },
     boardModel: {
       get: function() {
-        return this.$store.state.board.currentBoard
+        return this.$store.state?.board?.currentBoard
       },
     },
     isSingleBoardMode: {
       get: function() {
-        return this.$root.isSingleBoardMode
+        return isSingleBoardMode()
       }
     },
     lists: {
@@ -126,6 +153,7 @@ export default {
     shouldShowBoardShareButton: {
       get: function () {
         return typeof window.navigator.share === 'function'
+          || config.VUE_APP_ENV === 'development'
       }
     }
   },
@@ -139,9 +167,9 @@ export default {
   mounted() {
     this.sync()
 
-    this.$on('repository_save::before', function (model) {
+    eventBus.$on('repository_save::before', function (model) {
       if (model instanceof List
-        && store.state.board.currentBoardId
+        && store.state?.board?.currentBoardId
       ) {
         // Set current board as list's owner
         model.boardId = store.state.board.currentBoardId
@@ -150,7 +178,7 @@ export default {
   },
   methods: {
     onRefreshClick() {
-      this.$root.hardRefresh()
+      hardRefresh()
     },
     async sync() {
       const self = this
@@ -167,13 +195,17 @@ export default {
       }
     },
     onBoardShareButtonClick() {
+      if (typeof window.navigator.share !== 'function') {
+        alert('The share feature is not supported in this browser.')
+        return
+      }
       const boardUrl = this.$router.resolve({
         name: 'board',
-        params: {boardSlug: this.$store.state.board.currentBoard.slug}
+        params: {boardSlug: this.$store.state?.board?.currentBoard.slug}
       }).href
       const prefix = this.$root.isSingleBoardMode
         ? ''
-        : this.$store.state.board.currentBoard.name + ' | '
+        : this.$store.state?.board?.currentBoard.name + ' | '
       const shareArg = {
         text: `${prefix}Our Shopping List`,
         url: boardUrl
@@ -188,5 +220,8 @@ export default {
 <style lang="scss" scoped>
 #router-view-container {
   padding: 0 !important;
+}
+.about-item {
+  opacity: var(--v-medium-emphasis-opacity);
 }
 </style>

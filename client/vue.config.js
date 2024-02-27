@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -10,6 +10,21 @@ module.exports = {
       title: 'Our Shopping List',
     },
   },
+  chainWebpack: config => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => {
+        return {
+          ...options,
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2
+            }
+          }
+        }
+      })
+  },
   // configureWebpack: {
   //   plugins: [
   //     new BundleAnalyzerPlugin({ /* https://www.npmjs.com/package/webpack-bundle-analyzer */
@@ -18,9 +33,9 @@ module.exports = {
   //     }),
   //   ]
   // },
-  transpileDependencies: [
-    'vuetify'
-  ],
+  // transpileDependencies: [
+  //   'vuetify'
+  // ],
   devServer: {
     port: 8081,
     allowedHosts: 'all',

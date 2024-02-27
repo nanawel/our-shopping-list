@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import i18n from '@/i18n'
+import {i18n} from '@/service/i18n'
 
 const defaultData = () => ({
   show: false,
