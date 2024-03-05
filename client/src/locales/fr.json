@@ -1,122 +1,119 @@
 {
-  "app-name": "Our Shopping List",
-  "back": "Retour",
-  "close": "Fermer",
-  "cancel": "Annuler",
-  "delete": "Supprimer",
-  "edit": "Modifier",
-  "save": "Enregistrer",
-  "share": "Partager",
-  "ok": "OK",
-  "ok-thanks": "Compris, merci",
-  "confirmation-question": "Êtes-vous sûr(e)?",
-  "errors": {
-    "board": {
-      "invalid-name": "Nom de tableau invalide !",
-      "delete": "Impossible de supprimer le tableau :("
+    "app-name": "Our Shopping List",
+    "back": "Retour",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "save": "Enregistrer",
+    "share": "Partager",
+    "ok": "OK",
+    "ok-thanks": "Compris, merci",
+    "confirmation-question": "Êtes-vous sûr(e)?",
+    "errors": {
+        "board": {
+            "invalid-name": "Nom de tableau invalide !",
+            "delete": "Impossible de supprimer le tableau :("
+        },
+        "list": {
+            "load": "Impossible de charger la liste :(",
+            "save": "Impossible d'enregistrer la liste :(",
+            "delete": "Impossible de supprimer la liste :("
+        },
+        "item": {
+            "load": "Impossible de charger l'article :(",
+            "save": "Impossible d'enregistrer l'article :(",
+            "delete": "Impossible de supprimer l'article :("
+        },
+        "overlay": {
+            "not-connected": "Non connecté"
+        }
+    },
+    "notice": {
+        "application-updated-alert": "L'application a été mise à jour.\nCette page va être rechargée automatiquement.",
+        "force-refresh-hint-title": "Conseil",
+        "force-refresh-hint-message": "Si vous constatez des problèmes de mise à jour ou de synchronisation, utilisez le bouton de rechargement dans le menu de gauche."
+    },
+    "menu-nav": {
+        "open": "Ouvrir le menu",
+        "item": {
+            "new-list": "Nouvelle liste…",
+            "about": "À propos"
+        }
+    },
+    "home": {
+        "input": {
+            "board-name": "Ouvrir un tableau…"
+        },
+        "button": {
+            "open-board": "Ouvrir le tableau"
+        },
+        "boards": {
+            "all-title": "Tous les tableaux (%{count})",
+            "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux.",
+            "item": {
+                "lists-count": "(aucune liste) | 1 liste | %{count} listes"
+            },
+            "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
+            "deleted-successfully": "Tableau supprimé avec succès."
+        },
+        "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
+    },
+    "board-home-nav": {
+        "title": "Créer une liste de courses",
+        "subtitle": "Vous pourrez ensuite la partager avec vos proches et travailler avec.",
+        "button": "Créer une liste"
     },
     "list": {
-      "load": "Impossible de charger la liste :(",
-      "save": "Impossible d'enregistrer la liste :(",
-      "delete": "Impossible de supprimer la liste :("
+        "toggle-history-mode": "Basculer en mode historique",
+        "not-found": {
+            "title": "Liste introuvable !",
+            "subtitle": "Cette liste n'existe pas (plus ?)",
+            "button": "Créer une liste"
+        },
+        "new": {
+            "title": "Nommez votre liste",
+            "input-placeholder": "Ma liste de courses…",
+            "button": "Créer"
+        },
+        "new-item": {
+            "subtitle": "Cette liste est vide.",
+            "button": "Nouvel article"
+        },
+        "all-checked": {
+            "subtitle": "Tous les articles sont cochés !"
+        },
+        "none-checked": {
+            "subtitle": "Aucun article ici (pour l'instant)…"
+        },
+        "no-results": {
+            "title": "Aucun résultat",
+            "subtitle": "Cliquez sur \"Ajouter\" pour créer un nouvel article."
+        },
+        "search-bar": {
+            "input-label": "Recherchez ou ajoutez un article",
+            "add-button": "Ajouter"
+        }
     },
     "item": {
-      "load": "Impossible de charger l'article :(",
-      "save": "Impossible d'enregistrer l'article :(",
-      "delete": "Impossible de supprimer l'article :("
+        "empty-qty-label": "(quantité non précisée)",
+        "input": {
+            "name": "Nom",
+            "qty": "Quantité",
+            "details": "Détails"
+        },
+        "last-checked-label": "Coché la dernière fois : %{date}",
+        "help-onclick-checked": "💡 ⬅ Faites glisser vers la gauche pour décocher",
+        "help-onclick-unchecked": "💡 Faites glisser vers la droite pour cocher ➡"
     },
-    "overlay": {
-      "not-connected": "Non connecté"
+    "edit-list-dialog": {
+        "existing-title": "Modifier la liste",
+        "new-title": "(Nouvelle liste)",
+        "name-input": "Nom",
+        "creation-date-label": "Date de création"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Modifier l'article",
+        "new-title": "Nouvel article"
     }
-  },
-  "notice": {
-    "application-updated-alert": "L'application a été mise à jour.\nCette page va être rechargée automatiquement.",
-    "force-refresh-hint-title": "Conseil",
-    "force-refresh-hint-message": "Si vous constatez des problèmes de mise à jour ou de synchronisation, utilisez le bouton de rechargement dans le menu de gauche."
-  },
-  "menu-nav": {
-    "open": "Ouvrir le menu",
-    "item": {
-      "new-list": "Nouvelle liste...",
-      "about": "À propos"
-    }
-  },
-  "home": {
-    "input": {
-      "board-name": "Ouvrir un tableau..."
-    },
-    "button": {
-      "open-board": "Ouvrir le tableau"
-    },
-    "boards": {
-      "all-title": "Tous les tableaux (%{count})",
-      "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux.",
-      "item": {
-        "lists-count": "(aucune liste) | 1 liste | %{count} listes"
-      },
-      "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
-      "deleted-successfully": "Tableau supprimé avec succès."
-    },
-    "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
-  },
-  "board-home-nav": {
-    "title": "Créer une liste de courses",
-    "subtitle": "Vous pourrez ensuite la partager avec vos proches et travailler avec.",
-    "button": "Créer une liste"
-  },
-  "list": {
-    "toggle-history-mode": "Basculer en mode historique",
-    "not-found": {
-      "title": "Liste introuvable !",
-      "subtitle": "Cette liste n'existe pas (plus ?)",
-      "button": "Créer une liste"
-    },
-    "new": {
-      "title": "Nommez votre liste",
-      "input-placeholder": "Ma liste de courses...",
-      "button": "Créer"
-    },
-    "new-item": {
-      "subtitle": "Cette liste est vide.",
-      "button": "Nouvel article"
-    },
-    "all-checked": {
-      "subtitle": "Tous les articles sont cochés !"
-    },
-    "none-checked": {
-      "subtitle": "Aucun article ici (pour l'instant)..."
-    },
-    "no-results": {
-      "title": "Aucun résultat",
-      "subtitle": "Cliquez sur \"Ajouter\" pour créer un nouvel article."
-    },
-    "search-bar": {
-      "input-label": "Recherchez ou ajoutez un article",
-      "add-button": "Ajouter"
-    }
-  },
-  "list-nav": {
-
-  },
-  "item": {
-    "empty-qty-label": "(quantité non précisée)",
-    "input": {
-      "name": "Nom",
-      "qty": "Quantité",
-      "details": "Détails"
-    },
-    "last-checked-label": "Coché la dernière fois : %{date}",
-    "help-onclick-checked": "💡 ⬅ Faites glisser vers la gauche pour décocher",
-    "help-onclick-unchecked": "💡 Faites glisser vers la droite pour cocher ➡"
-  },
-  "edit-list-dialog": {
-    "existing-title": "Modifier la liste",
-    "new-title": "(Nouvelle liste)",
-    "name-input": "Nom",
-    "creation-date-label": "Date de création"
-  },
-  "edit-item-dialog": {
-    "existing-title": "Modifier l'article",
-    "new-title": "Nouvel article"
-  }
 }
