@@ -1,112 +1,109 @@
 {
-  "app-name": "Unsere Einkaufsliste",
-  "back": "Zurück",
-  "close": "Schließen",
-  "cancel": "Abbrechen",
-  "delete": "Löschen",
-  "edit": "Bearbeiten",
-  "save": "Speichern",
-  "share": "Teilen",
-  "ok": "OK",
-  "ok-thanks": "OK, danke",
-  "confirmation-question": "Bist du sicher?",
-  "errors": {
-    "board": {
-      "invalid-name": "Ungültiger Boardname!"
+    "app-name": "Unsere Einkaufsliste",
+    "back": "Zurück",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "share": "Teilen",
+    "ok": "OK",
+    "ok-thanks": "OK, danke",
+    "confirmation-question": "Bist du sicher?",
+    "errors": {
+        "board": {
+            "invalid-name": "Ungültiger Boardname!"
+        },
+        "list": {
+            "load": "Liste konnte nicht geladen werden :(",
+            "save": "Liste konnte nicht gespeichert werden :(",
+            "delete": "Liste konnte nicht gelöscht werden :("
+        },
+        "item": {
+            "load": "Eintrag konnte nicht geladen werden :(",
+            "save": "Eintrag konnte nicht gespeichert werden :(",
+            "delete": "Eintrag konnte nicht gelöscht werden :("
+        },
+        "overlay": {
+            "not-connected": "Keine Verbindung"
+        }
+    },
+    "notice": {
+        "application-updated-alert": "Die Anwendung wurde aktualisiert.\nDiese Seite wird jetzt automatisch neugeladen.",
+        "force-refresh-hint-title": "Wusstest du schon?",
+        "force-refresh-hint-message": "Wenn du Synchronisations- oder Updateprobleme hast, klicke auf den Aktualiseren-Knopf im linken Menü, um ein komplettes Neuladen zu erzwingen."
+    },
+    "menu-nav": {
+        "open": "Menü öffnen",
+        "item": {
+            "new-list": "Neue Liste…",
+            "about": "Über"
+        }
+    },
+    "home": {
+        "input": {
+            "board-name": "Board öffnen…"
+        },
+        "button": {
+            "open-board": "Board öffnen"
+        },
+        "reopen-last-board": "Möchtest du stattdessen <strong>%{boardName}</strong> wieder öffnen?"
+    },
+    "board-home-nav": {
+        "title": "Einkaufsliste erstellen",
+        "subtitle": "Du kannst sie dann mit Bekannten teilen und damit arbeiten.",
+        "button": "Einkaufsliste erstellen"
     },
     "list": {
-      "load": "Liste konnte nicht geladen werden :(",
-      "save": "Liste konnte nicht gespeichert werden :(",
-      "delete": "Liste konnte nicht gelöscht werden :("
+        "toggle-history-mode": "Verlaufsmodus umschalten",
+        "not-found": {
+            "title": "Liste nicht gefunden!",
+            "subtitle": "Diese Liste existiert nicht (mehr?).",
+            "button": "Liste erstellen"
+        },
+        "new": {
+            "title": "Namen für die Liste vergeben",
+            "input-placeholder": "Meine Einkaufsliste…",
+            "button": "Erstellen"
+        },
+        "new-item": {
+            "subtitle": "Die Liste ist leer.",
+            "button": "Neuer Eintrag"
+        },
+        "all-checked": {
+            "subtitle": "Alle Einträge sind abgehakt!"
+        },
+        "none-checked": {
+            "subtitle": "(Noch) kein Eintrag…"
+        },
+        "no-results": {
+            "title": "Keine Ergebnisse",
+            "subtitle": "Klicke auf \"Hinzufügen\" um einen neuen Eintrag zu erstellen."
+        },
+        "search-bar": {
+            "input-label": "Eintrag suchen oder hinzufügen",
+            "add-button": "Hinzufügen"
+        }
     },
     "item": {
-      "load": "Eintrag konnte nicht geladen werden :(",
-      "save": "Eintrag konnte nicht gespeichert werden :(",
-      "delete": "Eintrag konnte nicht gelöscht werden :("
+        "empty-qty-label": "(keine Menge angegeben)",
+        "input": {
+            "name": "Name",
+            "qty": "Menge",
+            "details": "Details"
+        },
+        "last-checked-label": "Zuletzt abgehakt: %{date}",
+        "help-onclick-checked": "💡 ⬅ Nach links wischen, um ein Element wiederherzustellen",
+        "help-onclick-unchecked": "💡 Nach rechts wischen, um ein Element abzuhaken ➡"
     },
-    "overlay": {
-      "not-connected": "Keine Verbindung"
+    "edit-list-dialog": {
+        "existing-title": "Liste bearbeiten",
+        "new-title": "(Neue Liste)",
+        "name-input": "Name",
+        "creation-date-label": "Erstellungsdatum"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Eintrag bearbeiten",
+        "new-title": "Neuer Eintrag"
     }
-  },
-  "notice": {
-    "application-updated-alert": "Die Anwendung wurde aktualisiert.\nDiese Seite wird jetzt automatisch neugeladen.",
-    "force-refresh-hint-title": "Wusstest du schon?",
-    "force-refresh-hint-message": "Wenn du Synchronisations- oder Updateprobleme hast, klicke auf den Aktualiseren-Knopf im linken Menü, um ein komplettes Neuladen zu erzwingen."
-  },
-  "menu-nav": {
-    "open": "Menü öffnen",
-    "item": {
-      "new-list": "Neue Liste...",
-      "about": "Über"
-    }
-  },
-  "home": {
-    "input": {
-      "board-name": "Board öffnen..."
-    },
-    "button": {
-      "open-board": "Board öffnen"
-    },
-    "reopen-last-board": "Möchtest du stattdessen <strong>%{boardName}</strong> wieder öffnen?"
-  },
-  "board-home-nav": {
-    "title": "Einkaufsliste erstellen",
-    "subtitle": "Du kannst sie dann mit Bekannten teilen und damit arbeiten.",
-    "button": "Einkaufsliste erstellen"
-  },
-  "list": {
-    "toggle-history-mode": "Verlaufsmodus umschalten",
-    "not-found": {
-      "title": "Liste nicht gefunden!",
-      "subtitle": "Diese Liste existiert nicht (mehr?).",
-      "button": "Liste erstellen"
-    },
-    "new": {
-      "title": "Namen für die Liste vergeben",
-      "input-placeholder": "Meine Einkaufsliste...",
-      "button": "Erstellen"
-    },
-    "new-item": {
-      "subtitle": "Die Liste ist leer.",
-      "button": "Neuer Eintrag"
-    },
-    "all-checked": {
-      "subtitle": "Alle Einträge sind abgehakt!"
-    },
-    "none-checked": {
-      "subtitle": "(Noch) kein Eintrag..."
-    },
-    "no-results": {
-      "title": "Keine Ergebnisse",
-      "subtitle": "Klicke auf \"Hinzufügen\" um einen neuen Eintrag zu erstellen."
-    },
-    "search-bar": {
-      "input-label": "Eintrag suchen oder hinzufügen",
-      "add-button": "Hinzufügen"
-    }
-  },
-  "list-nav": {
-
-  },
-  "item": {
-    "empty-qty-label": "(keine Menge angegeben)",
-    "input": {
-      "name": "Name",
-      "qty": "Menge",
-      "details": "Details"
-    },
-    "last-checked-label": "Zuletzt abgehakt: %{date}",
-    "help-onclick-checked": "💡 ⬅ Nach links wischen, um ein Element wiederherzustellen",
-    "help-onclick-unchecked": "💡 Nach rechts wischen, um ein Element abzuhaken ➡"
-  },
-  "edit-list-dialog": {
-    "existing-title": "Liste bearbeiten",
-    "new-title": "(Neue Liste)",
-    "name-input": "Name",
-    "creation-date-label": "Erstellungsdatum"
-  },
-  "edit-item-dialog": {
-    "existing-title": "Eintrag bearbeiten",
-    "new-title": "Neuer Eintrag"
-  }
 }
