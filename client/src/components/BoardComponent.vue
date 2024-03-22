@@ -157,15 +157,9 @@ export default {
       }
     }
   },
-  created() {
-    const self = this
-
-    this.$ws.on('connect', () => {
-      self.sync()
-    })
-  },
   mounted() {
-    this.sync()
+    this.$ws.on('connect', this.checkSync)
+    this.$logger.debug('[BOARD] Listeners for WS.connect', this.$ws.listeners('connect'))
 
     eventBus.$on('repository_save::before', function (model) {
       if (model instanceof List
@@ -176,11 +170,15 @@ export default {
       }
     })
   },
+  unmounted() {
+    this.$ws.off('connect', this.checkSync)
+    this.$logger.debug('[BOARD] Listeners for WS.connect', this.$ws.listeners('connect'))
+  },
   methods: {
     onRefreshClick() {
       hardRefresh()
     },
-    async sync() {
+    async checkSync() {
       const self = this
       if (this.boardModel) {
         this.$logger.debug('BOARD.sync()', this.boardModel._id)

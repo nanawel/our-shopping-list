@@ -21,7 +21,7 @@ Query.on('afterUpdate', function (model) {
     && model instanceof List
     && store.state.list?.currentList?._id === model._id
   ) {
-    // Force propagating changes on the model to all places it's used
+    // Force propagating changes on the model wherever it's used
     store.commit('list/setCurrentList', model)
   }
 })
