@@ -158,8 +158,13 @@ export default {
     }
   },
   mounted() {
+    this.checkSync()
     this.$ws.on('connect', this.checkSync)
     this.$logger.debug('[BOARD] Listeners for WS.connect', this.$ws.listeners('connect'))
+
+    if (this.boardModel) {
+      this.$ws.emit('join-board', this.boardModel._id)
+    }
 
     eventBus.$on('repository_save::before', function (model) {
       if (model instanceof List
@@ -181,15 +186,9 @@ export default {
     async checkSync() {
       const self = this
       if (this.boardModel) {
-        this.$logger.debug('BOARD.sync()', this.boardModel._id)
-        this.$ws.emit('join-board', this.boardModel._id)
+        this.$logger.debug('BOARD.checkSync()', this.boardModel._id)
 
         return this.$repository.checkSync(self.boardModel)
-          .then((isSync) => {
-            if (!isSync) {
-              return self.$repository.sync(self.boardModel)
-            }
-          })
       }
     },
     onBoardShareButtonClick() {

@@ -365,12 +365,7 @@ export default {
         }, 500)
         debouncedOverlayTriggerFunc()
 
-        return this.$repository.checkSync(self.listModel)
-          .then((isSync) => {
-            if (!isSync) {
-              return self.$repository.sync(self.listModel)
-            }
-          })
+        this.$repository.checkSync(self.listModel)
           .finally(() => {
             debouncedOverlayTriggerFunc.cancel()
             self.loadingOverlay = false

@@ -115,8 +115,11 @@ const Repository = function() {
             })
       }
     },
-    checkSync(model) {
-      logger.debug('$repository::checkSync', model, model.constructor.name)
+    checkSync(model, autoSync) {
+      const self = this
+
+      autoSync = typeof autoSync === 'undefined' ? true : autoSync
+      logger.debug('$repository::checkSync', model, model.constructor.name, autoSync)
       const apmSpan = apm.startSpan('$repository::checkSync')
       apmSpan.addLabels([model.constructor.name])
 
@@ -131,7 +134,7 @@ const Repository = function() {
               if (!res.ok) {
                 switch (res.status) {
                   case 404:
-                    // Model does not exist (anymore) on server: it should not exist either on client
+                    // Model does not exist (anymore) on server: it should not exist on client either
                     logger.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
                     model.$delete()
                     break
@@ -140,7 +143,13 @@ const Repository = function() {
               } else {
                 const lastModified = new Date(res.headers.get('last-modified-iso'))
                 const modelUpdatedAt = new Date(model.updatedAt)
-                resolve(lastModified.getTime() === modelUpdatedAt.getTime())
+                const isUpToDate = lastModified.getTime() === modelUpdatedAt.getTime()
+
+                if (!isUpToDate && autoSync) {
+                  return resolve(self.sync(model))
+                }
+
+                return resolve(isUpToDate)
               }
             })
             .catch(function(error) {
