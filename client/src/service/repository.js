@@ -1,7 +1,7 @@
 import {logger} from '@/service/logger'
 import eventBus from '@/service/event-bus'
 import {apm} from '@/service/apm'
-import {Mutex, withTimeout} from 'async-mutex';
+import {Mutex, withTimeout} from 'async-mutex'
 
 import Board from '@/models/Board'
 import Item from '@/models/Item'
@@ -26,7 +26,7 @@ const Repository = function() {
     findSchemaByModel(model) {
       const schemas = Object.values(schemaMapping).filter((s) => {
         return model instanceof s
-      });
+      })
 
       if (schemas.length === 0) {
         throw ('Invalid model: ' + JSON.stringify(model))
@@ -117,8 +117,8 @@ const Repository = function() {
     },
     checkSync(model, autoSync) {
       const self = this
-
       autoSync = typeof autoSync === 'undefined' ? true : autoSync
+
       logger.debug('$repository::checkSync', model, model.constructor.name, autoSync)
       const apmSpan = apm.startSpan('$repository::checkSync')
       apmSpan.addLabels([model.constructor.name])
@@ -146,10 +146,10 @@ const Repository = function() {
                 const isUpToDate = lastModified.getTime() === modelUpdatedAt.getTime()
 
                 if (!isUpToDate && autoSync) {
-                  return resolve(self.sync(model))
+                  resolve(self.sync(model))
+                } else {
+                  resolve(isUpToDate)
                 }
-
-                return resolve(isUpToDate)
               }
             })
             .catch(function(error) {
