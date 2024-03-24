@@ -14,6 +14,10 @@ const Repository = function() {
     List,
   }
   const syncMutex = withTimeout(new Mutex(), 5000)
+  const modelSyncInProgress = new Map()
+  const syncing = (schema, id) => modelSyncInProgress.set(`${schema}/${id}`, Date.now())
+  const syncComplete = (schema, id) => modelSyncInProgress.delete(`${schema}/${id}`)
+  const isSyncInProgress = (schema, id) => modelSyncInProgress.get(`${schema}/${id}`) > Date.now() - 60000
 
   return {
     findSchemaByClassName(className) {
@@ -115,7 +119,7 @@ const Repository = function() {
             })
       }
     },
-    checkSync(model, autoSync) {
+    async checkSync(model, autoSync) {
       const self = this
       autoSync = typeof autoSync === 'undefined' ? true : autoSync
 
@@ -125,48 +129,65 @@ const Repository = function() {
 
       const schema = this.findSchemaByModel(model)
 
-      return new Promise((resolve, reject) => {
+      const origId = model._id
+      if (isSyncInProgress(schema, origId)) {
+        logger.warn(`Cancelling sync for model ${schema.entity}/${model._id}: already in progress.`)
+        return
+      }
+      if (autoSync) {
+        syncing(schema, origId)
+      }
+
+      try {
         if (model._id) {
-          fetch(`./${schema.entity}/${model._id}`, {
+          await fetch(`./${schema.entity}/${model._id}`, {
               method: 'HEAD'
             })
-            .then(function(res) {
+            .then(async function(res) {
               if (!res.ok) {
                 switch (res.status) {
                   case 404:
                     // Model does not exist (anymore) on server: it should not exist on client either
                     logger.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
                     model.$delete()
-                    break
+                    return true
                 }
                 logger.error(`[${res.status}] ${res.statusText}`)
+                throw {
+                  reason: res.statusText,
+                  originalError: res
+                }
               } else {
                 const lastModified = new Date(res.headers.get('last-modified-iso'))
                 const modelUpdatedAt = new Date(model.updatedAt)
                 const isUpToDate = lastModified.getTime() === modelUpdatedAt.getTime()
 
                 if (!isUpToDate && autoSync) {
-                  resolve(self.sync(model))
-                } else {
-                  resolve(isUpToDate)
+                  return await self.sync(model)
                 }
+                return isUpToDate
               }
             })
             .catch(function(error) {
-              reject({
+              throw {
                 reason: 'Network error',
                 originalError: error
-              })
+              }
             })
         }
         else {
-          reject({
+          throw {
             reason: 'Model has no ID'
-          })
+          }
         }
-      }).finally(() => {
+      }
+      finally {
+        logger.debug('$repository::checkSync complete', model, model.constructor.name, autoSync)
+        if (autoSync) {
+          syncComplete(schema, origId)
+        }
         apmSpan.end()
-      })
+      }
     },
     async sync(model) {
       const self = this
