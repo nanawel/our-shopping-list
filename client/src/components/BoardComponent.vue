@@ -85,7 +85,8 @@
 
     <v-app-bar
       app
-      color="teal-lighten-3">
+      color="teal-lighten-3"
+      density="comfortable">
       <v-app-bar-nav-icon
         @click.stop="sidebarMenu = !sidebarMenu"
         :aria-label="$t('menu-nav.open')">
