@@ -1,8 +1,8 @@
 variables:
   COMPOSE_FILE: "docker-compose.build.yml"
   CONTAINER_BUILD_IMAGE: "osl-build-app"
-  CONTAINER_RELEASE_IMAGE: "nanawel/our-shopping-list"
-  CONTAINER_PUBLIC_IMAGE: "nanawel/our-shopping-list"
+  CONTAINER_RELEASE_IMAGE: "ourshoppinglist/our-shopping-list"
+  CONTAINER_PUBLIC_IMAGE: "ourshoppinglist/our-shopping-list"
 
 stages:
   - check
