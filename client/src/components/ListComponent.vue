@@ -128,7 +128,8 @@
         autocapitalize="sentences"
         class="pr-4"
         @keydown.enter="submitSearchInput"
-        bg-color="transparent"/>
+        bg-color="transparent"
+        hide-details="auto"/>
       <v-btn
         depressed
         small
