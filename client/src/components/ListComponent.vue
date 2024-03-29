@@ -562,13 +562,10 @@ export default {
   overflow-y: auto;
 
   // Workaround to keep search bar at the bottom
-  // (see node_modules/vuetify/src/components/VToolbar/VToolbar.ts -> computed.computedContentHeight)
-  // 56 or 64px: nav header's height
+  // (see node_modules/vuetify/lib/components/VToolbar/VToolbar.mjs -> contentHeight)
+  // 56px: nav header's height (=64-8 as we're using the "comfortable" density)
   // 80px: footer's height
-  --header-height: 64px;
-  @media #{map-get($display-breakpoints, 'md-and-down')} {
-    --header-height: 56px;
-  }
+  --header-height: 56px;
 
   // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers
   // 100svh: 100% of viewport's height
