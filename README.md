@@ -145,7 +145,7 @@ docker run --detach \
   --name our-shopping-list \
   --link mymongo:mongodb \
   --publish 80:8080 \
-  nanawel/our-shopping-list
+  ourshoppinglist/our-shopping-list
 ```
 
 ### 🐋 With `docker-compose`

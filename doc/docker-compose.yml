@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   app:
-    image: nanawel/our-shopping-list:latest
+    image: ourshoppinglist/our-shopping-list:latest
     restart: always
     ports:
       - '8080:8080'
