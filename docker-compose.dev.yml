@@ -1,5 +1,3 @@
-version: '3.2'
-
 services:
   app:
     image: node:${node_version}${node_variant_dev}
