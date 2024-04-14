@@ -16,14 +16,17 @@ const io = new Server(httpServer, {
 console.info(`Serving socket-io on ${io.engine.opts.path}`);
 
 io.on('connection', (socket) => {
-  console.log(`Client connected: ${socket.id}`);
+  console.log(`Client connected: ${socket.id} using transport:`, socket.conn.transport.name);
+
+  // https://socket.io/docs/v4/performance-tuning/#discard-the-initial-http-request
+  socket.request = null;
 
   socket.conn.once('upgrade', () => {
     console.log(`Client ${socket.id} upgraded transport:`, socket.conn.transport.name);
   });
 
   socket.conn.on('close', (reason) => {
-    console.log(`Client ${socket.id} closed connection |`, reason);
+    console.log(`Client ${socket.id} closed connection:`, reason);
   });
 
   socket.on('hello', (data, callback) => {

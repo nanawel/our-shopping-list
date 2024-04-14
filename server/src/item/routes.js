@@ -14,7 +14,6 @@ router.get('/items', (req, res, next) => {
   } else {
     ItemModel.find({})
       .then((docs) => {
-        console.log(docs)
         res.status(200)
           .json(docs);
       })

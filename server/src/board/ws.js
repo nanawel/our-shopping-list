@@ -62,7 +62,8 @@ const findParentBoardId = async function(model) {
 const notifyBoard = function(boardId, eventName, eventData) {
   console.log('notifyBoard', ...arguments);
   if (boardId) {
-    io.to(`board/${boardId}`).emit(eventName, eventData);
+    io.to(`board/${boardId}`)
+      .emit(eventName, eventData);
   }
 }
 
