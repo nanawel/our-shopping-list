@@ -5,12 +5,11 @@ const ItemModel = require("../../item/model");
 
 const deniedReasonHeader = 'Not-In-Singleboard-Mode';
 
-const ensureSingleBoardExists = async function () {
-  return await BoardModel
+const ensureSingleBoardExists = function () {
+  return BoardModel
     .findById(VUE_APP_SINGLEBOARD_ID)
     .exec()
-    .then(function (err, doc) {
-      if (err) throw err;
+    .then((doc) => {
       if (!doc) {
         console.info('Singleboard does not exist. Force creation.');
 
@@ -69,9 +68,10 @@ module.exports = (router) => {
       ensureSingleBoardExists()
         .then(() => next())
         .catch((err) => {
-          console.error(err);
+          res.status(500)
+            .set('Osl-Reason', err)
+            .end();
         });
-      next();
     }
   });
 

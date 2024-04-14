@@ -5,6 +5,7 @@ const ENABLE_TLS = process.env.ENABLE_TLS     || 0;
 
 const fs = require('fs');
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const express = require('express');
 const compression = require('compression');
 const {VUE_APP_SINGLEBOARD_MODE} = require('./config');
