@@ -4465,9 +4465,9 @@ eslint-plugin-vue@^8.0.3:
     vue-eslint-parser "^8.0.1"
 
 eslint-plugin-vue@^9.6.0:
-  version "9.24.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-9.24.1.tgz#0d90330c939f9dd2f4c759da5a2ad91dc1c8bac4"
-  integrity sha512-wk3SuwmS1pZdcuJlokGYEi/buDOwD6KltvhIZyOnpJ/378dcQ4zchu9PAMbbLAaydCz1iYc5AozszcOOgZIIOg==
+  version "9.25.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-9.25.0.tgz#615cb7bb6d0e2140d21840b9aa51dce69e803e7a"
+  integrity sha512-tDWlx14bVe6Bs+Nnh3IGrD+hb11kf2nukfm6jLsmJIhmiRQ1SUaksvwY9U5MvPB0pcrg0QK0xapQkfITs3RKOA==
   dependencies:
     "@eslint-community/eslint-utils" "^4.4.0"
     globals "^13.24.0"
@@ -4479,9 +4479,9 @@ eslint-plugin-vue@^9.6.0:
     xml-name-validator "^4.0.0"
 
 eslint-plugin-vuetify@^2.1.1:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vuetify/-/eslint-plugin-vuetify-2.3.0.tgz#222624dfe9d18474f20d53f4bb2b85f2a88ed36d"
-  integrity sha512-3cQJ401LW89meE0m3HdhUAQhe2ukVJ84fYcPbr0179lm4GjaTNsv83zPvnGvUE2dli65f4/hzj9YqU+1bFYdCA==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vuetify/-/eslint-plugin-vuetify-2.4.0.tgz#ed1b9767df07184e19af972f4c4da3734ebc60fe"
+  integrity sha512-WAZjnGXPrxqHBzYjxxUT8jf30O69Hitmj+wYhTIEG/XgqfvnPwqVtqrU2FGLsDtfFskKva0vuZemfbiq8yA/fQ==
   dependencies:
     eslint-plugin-vue "^9.6.0"
     requireindex "^1.2.0"
