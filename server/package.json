@@ -30,7 +30,7 @@
     "mongoose": "^6.2.9",
     "mongoose-unique-validator": "^3.0.0",
     "nanobus": "^4.5.0",
-    "nodemon": "^2.0.7",
+    "nodemon": "^3.0.0",
     "sha1": "^1.1.1",
     "slugify": "^1.6.5",
     "socket.io": "^4.4.1",
