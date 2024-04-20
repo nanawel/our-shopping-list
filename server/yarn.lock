@@ -1606,10 +1606,10 @@ mongodb@4.17.2, mongodb@^4.4.1:
     "@aws-sdk/credential-providers" "^3.186.0"
     "@mongodb-js/saslprep" "^1.1.0"
 
-mongoose-unique-validator@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-3.1.0.tgz#10d6fa10ccf5515461e3b5693f193d227546d60b"
-  integrity sha512-UsBBlFapip8gc8x1h+nLWnkOy+GTy9Z+zmTyZ35icLV3EoLIVz180vJzepfMM9yBy2AJh+maeuoM8CWtqejGUg==
+mongoose-unique-validator@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-5.0.0.tgz#c8ecd32510eedb2ee2dff9fff5f156aea2b478a6"
+  integrity sha512-PhJfzP4fww0lhynIXqHU2FuTTqbv8ILL9AqVcz8BB3AlQQirvvqGlhhKn39wURH6u5GssJziN2qALiu//EQiLg==
   dependencies:
     lodash.foreach "^4.1.0"
     lodash.get "^4.0.2"
