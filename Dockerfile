@@ -13,7 +13,8 @@ COPY ./client/ /app/client
 
 RUN cd /app/client \
   && yarn install \
-  && NODE_ENV=production yarn build
+  && NODE_ENV=production yarn build \
+  && rm -rf /app/client/node_modules
 
 FROM node:${node_version}${node_variant}
 
