@@ -1,122 +1,123 @@
 {
-  "app-name": "Onze boodschappenlijst",
-  "back": "Back",
-  "close": "Sluiten",
-  "cancel": "Annuleren",
-  "delete": "Verwijderen",
-  "edit": "Bewerken",
-  "save": "Opslaan",
-  "share": "Delen",
-  "ok": "OK",
-  "ok-thanks": "OK, bedankt",
-  "confirmation-question": "Ben je zeker?",
-  "errors": {
-    "board": {
-      "invalid-name": "Ongeldige bordnaam!",
-      "delete": "Kon bord niet verwijderen :("
+    "app-name": "Onze boodschappenlijst",
+    "back": "Back",
+    "close": "Sluiten",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "save": "Opslaan",
+    "share": "Delen",
+    "ok": "OK",
+    "ok-thanks": "OK, bedankt",
+    "confirmation-question": "Ben je zeker?",
+    "errors": {
+        "board": {
+            "invalid-name": "Ongeldige bordnaam!",
+            "delete": "Kon bord niet verwijderen :("
+        },
+        "list": {
+            "load": "Kon lijst niet laden :(",
+            "save": "Kon lijst niet opslaan :(",
+            "delete": "Kon lijst niet verwijderen :("
+        },
+        "item": {
+            "load": "Kon item niet laden :(",
+            "save": "Kon item niet opslaan :(",
+            "delete": "Kon item niet verwijderen :("
+        },
+        "overlay": {
+            "not-connected": "Niet verbonden"
+        }
+    },
+    "notice": {
+        "application-updated-alert": "De applicatie is bijgewerkt.\nDeze pagina wordt nu automatisch opnieuw geladen.",
+        "force-refresh-hint-title": "Wist je dat?",
+        "force-refresh-hint-message": "Als je synchronisatie- of updateproblemen ondervindt, gebruik dan de knop Bijwerken in het linkermenu om een volledige reload te forceren."
+    },
+    "menu-nav": {
+        "open": "Menu openen",
+        "item": {
+            "new-list": "Nieuwe lijst...",
+            "about": "Over"
+        }
+    },
+    "home": {
+        "input": {
+            "board-name": "Open Bord..."
+        },
+        "button": {
+            "open-board": "Open bord"
+        },
+        "boards": {
+            "all-title": "Alle borden (%{count})",
+            "default-retrieval-error-message": "Sorry, kon borden niet ophalen.",
+            "item": {
+                "lists-count": "(nog geen lijst) | 1 lijst | %{count} lijsten"
+            },
+            "confirm-deletion": "Weet je zeker dat je dit bord wilt verwijderen?",
+            "deleted-successfully": "Bord succesvol verwijderd."
+        },
+        "reopen-last-board": "Wil je in plaats daarvan <strong>%{boardName}</strong> openen?",
+        "page-title": "Start"
+    },
+    "board-home-nav": {
+        "title": "Maak een boodschappenlijst",
+        "subtitle": "Je kan het vervolgens delen met familieleden en ermee werken.",
+        "button": "Maak een lijst"
     },
     "list": {
-      "load": "Kon lijst niet laden :(",
-      "save": "Kon lijst niet opslaan :(",
-      "delete": "Kon lijst niet verwijderen :("
+        "toggle-history-mode": "Geschiedenismodus inschakelen",
+        "not-found": {
+            "title": "Lijst niet gevonden!",
+            "subtitle": "Deze lijst bestaat niet (meer?).",
+            "button": "Maak een lijst"
+        },
+        "new": {
+            "title": "Geef je lijst een naam",
+            "input-placeholder": "Mijn boodschappenlijst...",
+            "button": "Aanmaken"
+        },
+        "new-item": {
+            "subtitle": "Deze lijst is leeg.",
+            "button": "Nieuw item"
+        },
+        "all-checked": {
+            "subtitle": "Alle items zijn afgevinkt!"
+        },
+        "none-checked": {
+            "subtitle": "(Nog) geen item hier..."
+        },
+        "no-results": {
+            "title": "Geen resultaten",
+            "subtitle": "Klik \"Toevoegen\" om een nieuw item te maken."
+        },
+        "search-bar": {
+            "input-label": "Zoek of voeg een nieuw item toe",
+            "add-button": "Toevoegen"
+        }
     },
     "item": {
-      "load": "Kon item niet laden :(",
-      "save": "Kon item niet opslaan :(",
-      "delete": "Kon item niet verwijderen :("
+        "empty-qty-label": "(geen hoeveelheid opgegeven)",
+        "input": {
+            "name": "Naam",
+            "qty": "Hoeveelheid",
+            "details": "Details"
+        },
+        "last-checked-label": "Laatst gecontroleerd: %{date}",
+        "help-onclick-checked": "💡 ⬅ Veeg naar links om een item uit te vinken",
+        "help-onclick-unchecked": "💡 Veeg naar rechts om een item aan te vinken ➡"
     },
-    "overlay": {
-      "not-connected": "Niet verbonden"
+    "edit-list-dialog": {
+        "existing-title": "Lijst bewerken",
+        "new-title": "(Nieuwe Lijst)",
+        "name-input": "Naam",
+        "creation-date-label": "Datum aanmaak"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Bewerk item",
+        "new-title": "Nieuw Item"
+    },
+    "about": {
+        "page-title": "Over"
     }
-  },
-  "notice": {
-    "application-updated-alert": "De applicatie is bijgewerkt.\nDeze pagina wordt nu automatisch opnieuw geladen.",
-    "force-refresh-hint-title": "Wist je dat?",
-    "force-refresh-hint-message": "Als je synchronisatie- of updateproblemen ondervindt, gebruik dan de knop Bijwerken in het linkermenu om een volledige reload te forceren."
-  },
-  "menu-nav": {
-    "open": "Menu openen",
-    "item": {
-      "new-list": "Nieuwe lijst...",
-      "about": "Over"
-    }
-  },
-  "home": {
-    "input": {
-      "board-name": "Open Bord..."
-    },
-    "button": {
-      "open-board": "Open bord"
-    },
-    "boards": {
-      "all-title": "Alle borden (%{count})",
-      "default-retrieval-error-message": "Sorry, kon borden niet ophalen.",
-      "item": {
-        "lists-count": "(nog geen lijst) | 1 lijst | %{count} lijsten"
-      },
-      "confirm-deletion": "Weet je zeker dat je dit bord wilt verwijderen?",
-      "deleted-successfully": "Bord succesvol verwijderd."
-    },
-    "reopen-last-board": "Wil je in plaats daarvan <strong>%{boardName}</strong> openen?"
-  },
-  "board-home-nav": {
-    "title": "Maak een boodschappenlijst",
-    "subtitle": "Je kan het vervolgens delen met familieleden en ermee werken.",
-    "button": "Maak een lijst"
-  },
-  "list": {
-    "toggle-history-mode": "Geschiedenismodus inschakelen",
-    "not-found": {
-      "title": "Lijst niet gevonden!",
-      "subtitle": "Deze lijst bestaat niet (meer?).",
-      "button": "Maak een lijst"
-    },
-    "new": {
-      "title": "Geef je lijst een naam",
-      "input-placeholder": "Mijn boodschappenlijst...",
-      "button": "Aanmaken"
-    },
-    "new-item": {
-      "subtitle": "Deze lijst is leeg.",
-      "button": "Nieuw item"
-    },
-    "all-checked": {
-      "subtitle": "Alle items zijn afgevinkt!"
-    },
-    "none-checked": {
-      "subtitle": "(Nog) geen item hier..."
-    },
-    "no-results": {
-      "title": "Geen resultaten",
-      "subtitle": "Klik \"Toevoegen\" om een nieuw item te maken."
-    },
-    "search-bar": {
-      "input-label": "Zoek of voeg een nieuw item toe",
-      "add-button": "Toevoegen"
-    }
-  },
-  "list-nav": {
-
-  },
-  "item": {
-    "empty-qty-label": "(geen hoeveelheid opgegeven)",
-    "input": {
-      "name": "Naam",
-      "qty": "Hoeveelheid",
-      "details": "Details"
-    },
-    "last-checked-label": "Laatst gecontroleerd: %{date}",
-    "help-onclick-checked": "💡 ⬅ Veeg naar links om een item uit te vinken",
-    "help-onclick-unchecked": "💡 Veeg naar rechts om een item aan te vinken ➡"
-  },
-  "edit-list-dialog": {
-    "existing-title": "Lijst bewerken",
-    "new-title": "(Nieuwe Lijst)",
-    "name-input": "Naam",
-    "creation-date-label": "Datum aanmaak"
-  },
-  "edit-item-dialog": {
-    "existing-title": "Bewerk item",
-    "new-title": "Nieuw Item"
-  }
 }
