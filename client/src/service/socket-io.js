@@ -6,6 +6,9 @@ import {logger} from '@/service/logger'
 
 const sock = io({
   path: path.normalize(`/${config.BASE_URL}socket.io/`),  // Custom web root support (#58/GITHUB#18)
+  closeOnBeforeunload: true,
+  reconnectionDelayMax: 2000,
+  timeout: 4000,
 
   // https://socket.io/docs/v4/client-options/#transports
   //transports: ['polling', 'websocket', 'webtransport'], // Keep default
