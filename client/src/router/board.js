@@ -2,7 +2,7 @@ import {store} from '@/service/store'
 import {logger} from '@/service/logger'
 import {setPageTitle} from '@/service/page-title'
 import {isSingleBoardMode} from '@/service/board-mode'
-import {sock} from '@/service/socket-io'
+import {socket} from '@/service/socket-io'
 
 const BoardComponent = () => import('@/components/BoardComponent.vue')
 const BoardHomeComponent = () => import('@/components/Board/HomeComponent.vue')
@@ -119,7 +119,7 @@ export default (router) => {
       const lastBoardId = store.state.board?.currentBoardId || store.state.board?.lastBoardId
       if (lastBoardId) {
         store.commit('board/setCurrentBoard', {null: true})
-        sock.emit('leave-board', lastBoardId)
+        socket.emit('leave-board', lastBoardId)
       }
     }
 

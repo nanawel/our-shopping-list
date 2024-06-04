@@ -31,7 +31,6 @@ const routes = [
       root: AboutComponent,
     },
     beforeEnter: (to, from, next) => {
-      console.log('ABOUT beforeEnter', to);
       next()
     }
   },

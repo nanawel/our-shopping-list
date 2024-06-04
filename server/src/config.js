@@ -4,6 +4,7 @@ const BASE_URL = path.normalize(process.env.BASE_URL || '')  // #58/GITHUB#18
   .replace(/^(\/|\s)+/, '')
   .replace(/(\/|\s)+$/, '')
   .concat('/');
+const DEBUG = process.env.DEBUG || '';
 const VUE_APP_APM_ENABLED = !!parseInt(process.env.VUE_APP_APM_ENABLED);
 const VUE_APP_APM_LOGLEVEL = process.env.VUE_APP_APM_LOGLEVEL || 'warn';
 const VUE_APP_APM_SERVERURL = process.env.VUE_APP_APM_SERVERURL || '';
@@ -29,11 +30,17 @@ const VUE_APP_SHORT_TITLE = process.env.VUE_APP_SHORT_TITLE || 'OSL';
 const VUE_APP_SINGLEBOARD_ID = process.env.VUE_APP_SINGLEBOARD_ID || '00000000-0000-0000-0000-000000000000';
 const VUE_APP_SINGLEBOARD_MODE = !!parseInt(process.env.VUE_APP_SINGLEBOARD_MODE);
 const VUE_APP_SINGLEBOARD_SLUG = process.env.VUE_APP_SINGLEBOARD_SLUG || '_';
+/** @see https://socket.io/docs/v4/server-options/#pinginterval */
+const VUE_APP_SOCKETIO_PING_INTERVAL = process.env.VUE_APP_SOCKETIO_PING_INTERVAL || 25000;
+/** @see https://socket.io/docs/v4/server-options/#pingtimeout */
+const VUE_APP_SOCKETIO_PING_TIMEOUT = process.env.VUE_APP_SOCKETIO_PING_TIMEOUT || 20000;
+const VUE_APP_SOCKETIO_TRANSPORTS = process.env.VUE_APP_SOCKETIO_TRANSPORTS || 'websocket';
 const VUE_APP_TITLE = process.env.VUE_APP_TITLE || 'Our Shopping List';
 const VUE_APP_USE_ITEM_QUICK_SYNTAX = !!parseInt(process.env.VUE_APP_USE_ITEM_QUICK_SYNTAX);
 
 module.exports = {
   BASE_URL,
+  DEBUG,
   VUE_APP_APM_ENABLED,
   VUE_APP_APM_LOGLEVEL,
   VUE_APP_APM_SERVERURL,
@@ -59,6 +66,9 @@ module.exports = {
   VUE_APP_SINGLEBOARD_ID,
   VUE_APP_SINGLEBOARD_MODE,
   VUE_APP_SINGLEBOARD_SLUG,
+  VUE_APP_SOCKETIO_PING_INTERVAL,
+  VUE_APP_SOCKETIO_PING_TIMEOUT,
+  VUE_APP_SOCKETIO_TRANSPORTS,
   VUE_APP_TITLE,
   VUE_APP_USE_ITEM_QUICK_SYNTAX,
 };

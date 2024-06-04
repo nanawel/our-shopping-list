@@ -113,8 +113,6 @@ import config from '@/config'
 
 import List from '@/models/List'
 import {hardRefresh} from '@/service/refresh'
-import {store} from '@/service/store'
-import eventBus from '@/service/event-bus'
 import {isSingleBoardMode} from '@/service/board-mode'
 
 export default {
@@ -166,15 +164,6 @@ export default {
     if (this.boardModel) {
       this.$ws.emit('join-board', this.boardModel._id)
     }
-
-    eventBus.$on('repository_save::before', function (model) {
-      if (model instanceof List
-        && store.state?.board?.currentBoardId
-      ) {
-        // Set current board as list's owner
-        model.boardId = store.state.board.currentBoardId
-      }
-    })
   },
   unmounted() {
     this.$ws.off('connect', this.checkSync)
@@ -221,5 +210,14 @@ export default {
 }
 .about-item {
   opacity: var(--v-medium-emphasis-opacity);
+}
+#ws-connection-status-indicator {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 9999;
+  width: .5rem;
+  height: .5em;
+  background-color: grey;
 }
 </style>
