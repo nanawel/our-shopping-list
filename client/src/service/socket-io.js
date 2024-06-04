@@ -6,6 +6,9 @@ import {logger} from '@/service/logger'
 
 const manager = new Manager({
   path: path.normalize(`/${config.BASE_URL}socket.io/`),  // Custom web root support (#58/GITHUB#18)
+  closeOnBeforeunload: true,
+  reconnectionDelayMax: 2000,
+  timeout: 4000,
 
   // https://socket.io/docs/v4/client-options/#transports
   transports: config.VUE_APP_SOCKETIO_TRANSPORTS.split(',') || ['websocket'],
