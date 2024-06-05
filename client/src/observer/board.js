@@ -1,5 +1,7 @@
 import {socket} from '@/service/socket-io'
 import {store} from '@/service/store'
+import {repository} from '@/service/repository'
+import {snackbar} from '@/service/snackbar'
 import {logger} from '@/service/logger'
 
 export default {
@@ -13,6 +15,19 @@ export default {
         }
         if (newValue) {
           socket.emit('join-board', newValue)
+
+        }
+      }
+    )
+
+    store.watch(
+      (state) => state.board?.currentBoard,
+      (newValue) => {
+        if (newValue) {
+          repository.checkSync(newValue)
+            .catch((e) => {
+              snackbar.showMessage(e.reason || `Sync error: ${e}`)
+            })
         }
       }
     )

@@ -160,14 +160,6 @@ export default {
     onRefreshClick() {
       hardRefresh()
     },
-    async checkSync() {
-      const self = this
-      if (this.boardModel) {
-        this.$logger.debug('BOARD.checkSync()', this.boardModel._id)
-
-        return this.$repository.checkSync(self.boardModel)
-      }
-    },
     onBoardShareButtonClick() {
       if (typeof window.navigator.share !== 'function') {
         alert('The share feature is not supported in this browser.')

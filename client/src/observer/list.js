@@ -1,5 +1,7 @@
 import eventBus from '@/service/event-bus'
 import {store} from '@/service/store'
+import {repository} from '@/service/repository'
+import {snackbar} from '@/service/snackbar'
 
 import ListModel from '@/models/List'
 
@@ -13,6 +15,18 @@ export default {
         model.boardId = store.state.board.currentBoardId
       }
     })
+
+    store.watch(
+      (state) => state.list?.currentList,
+      (newValue) => {
+        if (newValue) {
+          repository.checkSync(newValue)
+            .catch((e) => {
+              snackbar.showMessage(e.reason || `Sync error: ${e}`)
+            })
+        }
+      }
+    )
 
     // == DISABLED == Much too resource intensive with lots of lists/items!
     //                Might be interesting to look into Web Workers to handle that instead.

@@ -323,7 +323,6 @@ export default {
     listModelId: function () {
       // Empty search field when switching list
       this.cancelSearch()
-      this.checkSync()
     },
     searchInputValue: debounce(function (val) {
       this.debouncedSearchString = val
@@ -347,24 +346,24 @@ export default {
           self.$snackbar.msg(self.$t('errors.list.save'))
         })
     },
-    async checkSync() {
-      const self = this
-      if (this.listModelId) {
-        this.$logger.debug('LIST.checkSync()', this.listModelId)
-
-        // Display the loading overlay with a 500ms delay to avoid flashes
-        const debouncedOverlayTriggerFunc = debounce(() => {
-          self.loadingOverlay = true
-        }, 500)
-        debouncedOverlayTriggerFunc()
-
-        this.$repository.checkSync(self.listModel)
-          .finally(() => {
-            debouncedOverlayTriggerFunc.cancel()
-            self.loadingOverlay = false
-          })
-      }
-    },
+    // async checkSync() {
+    //   const self = this
+    //   if (this.listModelId) {
+    //     this.$logger.debug('LIST.checkSync()', this.listModelId)
+    //
+    //     // Display the loading overlay with a 500ms delay to avoid flashes
+    //     const debouncedOverlayTriggerFunc = debounce(() => {
+    //       self.loadingOverlay = true
+    //     }, 500)
+    //     debouncedOverlayTriggerFunc()
+    //
+    //     this.$repository.checkSync(self.listModel)
+    //       .finally(() => {
+    //         debouncedOverlayTriggerFunc.cancel()
+    //         self.loadingOverlay = false
+    //       })
+    //   }
+    // },
 
     //
     // ITEMS
