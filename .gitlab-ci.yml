@@ -34,6 +34,9 @@ push_image_dev_latest:
     - time docker tag ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA} ${CONTAINER_RELEASE_IMAGE}:latest-dev
     - time docker push ${CONTAINER_RELEASE_IMAGE}:latest-dev
     - "echo Pushed image: ${CONTAINER_RELEASE_IMAGE}:latest-dev"
+  rules:
+    # Exclude renovate branches when building latest-dev
+    - if: '$CI_COMMIT_BRANCH !~ /^renovate\//'
   tags:
     - shell
     - docker
