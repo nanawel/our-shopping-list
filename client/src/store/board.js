@@ -1,5 +1,4 @@
 import {logger} from '@/service/logger'
-import eventBus from '@/service/event-bus'
 import Board from '@/models/Board'
 
 /**
@@ -39,7 +38,7 @@ export default {
           const doSet = (board) => {
             logger.debug('BOARD doSet()', board)
             const newBoardId = board ? board._id : null
-            const previousBoard = state.currentBoard
+            //const previousBoard = state.currentBoard
             if (board !== null) {
               state.lastBoard = board
               state.lastBoardId = board ? newBoardId : null
@@ -49,8 +48,6 @@ export default {
             if (state.currentBoardId !== newBoardId) {
               state.currentBoard = board
               state.currentBoardId = newBoardId
-
-              eventBus.$emit('board_set::after', board, previousBoard)
             }
           }
 

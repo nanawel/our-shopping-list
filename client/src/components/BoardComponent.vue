@@ -156,19 +156,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.checkSync()
-    this.$ws.on('connect', this.checkSync)
-    this.$logger.debug('[BOARD] Listeners for WS.connect', this.$ws.listeners('connect'))
-
-    if (this.boardModel) {
-      this.$ws.emit('join-board', this.boardModel._id)
-    }
-  },
-  unmounted() {
-    this.$ws.off('connect', this.checkSync)
-    this.$logger.debug('[BOARD] Listeners for WS.connect', this.$ws.listeners('connect'))
-  },
   methods: {
     onRefreshClick() {
       hardRefresh()

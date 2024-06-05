@@ -1,5 +1,7 @@
 import eventBus from '@/service/event-bus'
 import {router, useRoute} from '@/router'
+import {store} from '@/service/store'
+import {logger} from '@/service/logger'
 import config from '@/config'
 
 const currentBoardSlugKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'currentBoardSlug'
@@ -26,20 +28,30 @@ export default {
       }
     })
 
-    eventBus.$on('board_set::after', function (board) {
-      if (board && board._id) {
-        window.localStorage.setItem(currentBoardSlugKey, board.slug)
-      } else {
-        window.localStorage.removeItem(currentBoardSlugKey)
+    store.watch(
+      (state) => state.board?.currentBoard?.slug,
+      (newValue, oldValue) => {
+        logger.debug(`observer/restorestate (board) :: Updating from ${oldValue} to ${newValue}`);
+        if (oldValue) {
+          window.localStorage.removeItem(currentBoardSlugKey)
+        }
+        if (newValue) {
+          window.localStorage.setItem(currentBoardSlugKey, newValue)
+        }
       }
-    })
+    )
 
-    eventBus.$on('list_set::after', function (list) {
-      if (list && list._id) {
-        window.localStorage.setItem(currentListSlugKey, list._id)
-      } else {
-        window.localStorage.removeItem(currentListSlugKey)
+    store.watch(
+      (state) => state.list?.currentListId,
+      (newValue, oldValue) => {
+        logger.debug(`observer/restorestate (list) :: Updating from ${oldValue} to ${newValue}`);
+        if (oldValue) {
+          window.localStorage.removeItem(currentListSlugKey)
+        }
+        if (newValue) {
+          window.localStorage.setItem(currentListSlugKey, newValue)
+        }
       }
-    })
+    )
   }
 }

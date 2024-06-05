@@ -315,17 +315,9 @@ export default {
     }
   },
   mounted() {
-    this.checkSync()
-    this.$ws.on('connect', this.checkSync)
-    this.$logger.debug('[LIST] Listeners for WS.connect', this.$ws.listeners('connect'))
-
     if (this.isNewList && this.$refs.newListNameInput) {
       this.$refs.newListNameInput.focus()
     }
-  },
-  unmounted() {
-    this.$ws.off('connect', this.checkSync)
-    this.$logger.debug('[LIST] Listeners for WS.connect', this.$ws.listeners('connect'))
   },
   watch: {
     listModelId: function () {

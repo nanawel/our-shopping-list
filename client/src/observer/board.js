@@ -1,14 +1,20 @@
-import eventBus from '@/service/event-bus'
-import {socket} from "@/service/socket-io"
+import {socket} from '@/service/socket-io'
+import {store} from '@/service/store'
+import {logger} from '@/service/logger'
 
 export default {
   install() {
-    eventBus.$on('board_set::after', function (board, previousBoard) {
-      if (board && board._id) {
-        socket.emit('join-board', board._id)
-      } else if (previousBoard && previousBoard._id) {
-        socket.emit('leave-board', previousBoard._id)
+    store.watch(
+      (state) => state.board?.currentBoardId,
+      (newValue, oldValue) => {
+        logger.debug(`observer/board :: Updating from ${oldValue} to ${newValue}`);
+        if (oldValue) {
+          socket.emit('leave-board', oldValue)
+        }
+        if (newValue) {
+          socket.emit('join-board', newValue)
+        }
       }
-    })
+    )
   }
 }

@@ -8,7 +8,7 @@ export default {
     // Assign current board to each newly created list
     eventBus.$on('repository_save::before', function (model) {
       if (model instanceof ListModel
-        && store.state.board.currentBoardId
+        && store.state.board?.currentBoardId
       ) {
         model.boardId = store.state.board.currentBoardId
       }
