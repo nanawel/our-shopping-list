@@ -22,6 +22,9 @@ const io = new Server(httpServer, {
 console.info(`Serving socket-io on ${io.engine.opts.path}`);
 
 io.on('connection', (socket) => {
+  // https://socket.io/docs/v4/connection-state-recovery#how-it-works-under-the-hood
+  socket.emit('connected', new Date().toISOString());
+
   if (socket.recovered) {
     console.info(`Client connection recovered: ${socket.id}`);
   } else {
@@ -29,9 +32,6 @@ io.on('connection', (socket) => {
 
     // https://socket.io/docs/v4/performance-tuning/#discard-the-initial-http-request
     socket.request = null;
-
-    // https://socket.io/docs/v4/connection-state-recovery#how-it-works-under-the-hood
-    socket.emit('connected', new Date().toISOString());
 
     socket.conn.once('upgrade', () => {
       console.info(`Client ${socket.id} upgraded transport:`, socket.conn.transport.name);
