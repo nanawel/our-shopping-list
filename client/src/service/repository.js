@@ -119,11 +119,10 @@ const Repository = function() {
             })
       }
     },
-    async checkSync(model, autoSync) {
+    async checkSync(model) {
       const self = this
-      autoSync = typeof autoSync === 'undefined' ? true : autoSync
 
-      logger.debug('$repository::checkSync', model, model.constructor.name, autoSync)
+      logger.debug('$repository::checkSync', model, model.constructor.name)
       const apmSpan = apm.startSpan('$repository::checkSync')
       apmSpan.addLabels([model.constructor.name])
 
@@ -134,9 +133,7 @@ const Repository = function() {
         logger.warn(`Cancelling sync for model ${schema.entity}/${model._id}: already in progress.`)
         return
       }
-      if (autoSync) {
-        syncing(schema, origId)
-      }
+      syncing(schema, origId)
 
       try {
         if (model._id) {
@@ -162,7 +159,7 @@ const Repository = function() {
                 const modelUpdatedAt = new Date(model.updatedAt)
                 const isUpToDate = lastModified.getTime() === modelUpdatedAt.getTime()
 
-                if (!isUpToDate && autoSync) {
+                if (!isUpToDate) {
                   return await self.sync(model)
                 }
                 return isUpToDate
@@ -182,10 +179,8 @@ const Repository = function() {
         }
       }
       finally {
-        logger.debug('$repository::checkSync complete', model, model.constructor.name, autoSync)
-        if (autoSync) {
-          syncComplete(schema, origId)
-        }
+        logger.debug('$repository::checkSync complete', model, model.constructor.name)
+        syncComplete(schema, origId)
         apmSpan.end()
       }
     },

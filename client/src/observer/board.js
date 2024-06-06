@@ -1,3 +1,4 @@
+import eventBus from '@/service/event-bus'
 import {socket} from '@/service/socket-io'
 import {store} from '@/service/store'
 import {repository} from '@/service/repository'
