@@ -7,6 +7,10 @@ const app = createApp(App)
 import {loggerPlugin} from '@/service/logger'
 app.use(loggerPlugin)
 
+// APM
+import {apmPlugin} from '@/service/apm'
+app.use(apmPlugin)
+
 // PWA
 import '@/registerServiceWorker'
 
@@ -46,10 +50,6 @@ app.use(wsService)
 // Vue Router
 import {routerPlugin} from '@/router'
 app.use(routerPlugin)
-
-// APM
-import {apmPlugin} from '@/service/apm'
-app.use(apmPlugin)
 
 // Observers
 import boardObserver from '@/observer/board'

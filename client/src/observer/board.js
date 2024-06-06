@@ -27,7 +27,8 @@ export default {
         if (newValue) {
           repository.checkSync(newValue)
             .catch((e) => {
-              snackbar.showMessage(e.reason || `Sync error: ${e}`)
+              logger.error(e)
+              snackbar.showMessage('❌ ' + (e.reason || `Sync error: ${e}`))
             })
         }
       }
@@ -37,7 +38,8 @@ export default {
       if (store.state.board?.currentBoard) {
         repository.checkSync(store.state.board.currentBoard)
           .catch((e) => {
-            snackbar.showMessage(e.reason || `Sync error: ${e}`)
+            logger.error(e)
+            snackbar.showMessage('❌ ' + (e.reason || `Sync error: ${e}`))
           })
       }
     })

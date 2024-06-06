@@ -1,10 +1,13 @@
-import {store} from '@/service/store';
+import {store} from '@/service/store'
 
 const snackbar = {
   msg: function (content) {
     return this.showMessage({content})
   },
   showMessage: function ({ content = '', color = '', timeout = null, closeable = true}) {
+    if (arguments.length === 1 && typeof arguments[0] === 'string') {
+      content = arguments[0]
+    }
     store.commit(
       'snackbar/showMessage',
       { content, color, timeout, closeable },

@@ -2,6 +2,7 @@ import eventBus from '@/service/event-bus'
 import {store} from '@/service/store'
 import {repository} from '@/service/repository'
 import {snackbar} from '@/service/snackbar'
+import {logger} from '@/service/logger'
 
 import ListModel from '@/models/List'
 
@@ -22,7 +23,8 @@ export default {
         if (newValue) {
           repository.checkSync(newValue)
             .catch((e) => {
-              snackbar.showMessage(e.reason || `Sync error: ${e}`)
+              logger.error(e)
+              snackbar.showMessage('❌ ' + (e.reason || `Sync error: ${e}`))
             })
         }
       }
@@ -32,7 +34,8 @@ export default {
       if (store.state.list?.currentList) {
         repository.checkSync(store.state.list.currentList)
           .catch((e) => {
-            snackbar.showMessage(e.reason || `Sync error: ${e}`)
+            logger.error(e)
+            snackbar.showMessage('❌ ' + (e.reason || `Sync error: ${e}`))
           })
       }
     })

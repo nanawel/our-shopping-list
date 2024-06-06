@@ -25,9 +25,9 @@ export default {
     return {
       namespaced: true,
       state: () => ({
-        currentBoard: null,     // *Not* persisted
+        currentBoard: null,     // *Not* persisted, see client/src/service/store.js
         currentBoardId: null,
-        lastBoard: null,        // *Not* persisted
+        lastBoard: null,        // *Not* persisted, see client/src/service/store.js
         lastBoardId: null,
       }),
       mutations: {
