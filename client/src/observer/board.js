@@ -31,5 +31,14 @@ export default {
         }
       }
     )
+
+    eventBus.$on('ws::connected', function () {
+      if (store.state.board?.currentBoard) {
+        repository.checkSync(store.state.board.currentBoard)
+          .catch((e) => {
+            snackbar.showMessage(e.reason || `Sync error: ${e}`)
+          })
+      }
+    })
   }
 }

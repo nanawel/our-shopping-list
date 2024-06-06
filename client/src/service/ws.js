@@ -5,6 +5,7 @@ import {i18n} from '@/service/i18n'
 import {hardRefresh} from '@/service/refresh'
 import {store} from '@/service/store'
 import {repository} from '@/service/repository'
+import eventBus from '@/service/event-bus'
 import {logger} from '@/service/logger'
 
 const serverHashKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
@@ -15,6 +16,7 @@ export default {
       logger.debug('Socket connected', socket)
       if (socket.recovered) {
         logger.info('Socket connection recovered.')
+        //eventBus.$emit('ws::recovered')
       } else {
         socket.emit('hello', { connectionDate: new Date().toISOString() }, (data) => {
           logger.info('Reply to Hello from server: ', data)
@@ -38,6 +40,8 @@ export default {
 
           // Set current version / build ID / config hash
           store.commit('version/setCurrentVersion', data.serverVersion)
+
+          eventBus.$emit('ws::connected')
         })
       }
     })

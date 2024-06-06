@@ -28,13 +28,13 @@ export default {
       }
     )
 
-    // == DISABLED == Much too resource intensive with lots of lists/items!
-    //                Might be interesting to look into Web Workers to handle that instead.
-    // (Pre-)Load lists' items when setting current board
-    // eventBus.$on('board_set::after', function (board) {
-    //   board.lists.forEach((list) => {
-    //     repository.sync(list)
-    //   })
-    // })
+    eventBus.$on('ws::connected', function () {
+      if (store.state.list?.currentList) {
+        repository.checkSync(store.state.list.currentList)
+          .catch((e) => {
+            snackbar.showMessage(e.reason || `Sync error: ${e}`)
+          })
+      }
+    })
   }
 }
