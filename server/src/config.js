@@ -30,6 +30,8 @@ const VUE_APP_SHORT_TITLE = process.env.VUE_APP_SHORT_TITLE || 'OSL';
 const VUE_APP_SINGLEBOARD_ID = process.env.VUE_APP_SINGLEBOARD_ID || '00000000-0000-0000-0000-000000000000';
 const VUE_APP_SINGLEBOARD_MODE = !!parseInt(process.env.VUE_APP_SINGLEBOARD_MODE);
 const VUE_APP_SINGLEBOARD_SLUG = process.env.VUE_APP_SINGLEBOARD_SLUG || '_';
+/** @see https://socket.io/docs/v4/server-options/#connectionstaterecovery */
+const VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION = process.env.VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION || (30 * 60 * 1000);
 /** @see https://socket.io/docs/v4/server-options/#pinginterval */
 const VUE_APP_SOCKETIO_PING_INTERVAL = process.env.VUE_APP_SOCKETIO_PING_INTERVAL || 25000;
 /** @see https://socket.io/docs/v4/server-options/#pingtimeout */
@@ -66,6 +68,7 @@ module.exports = {
   VUE_APP_SINGLEBOARD_ID,
   VUE_APP_SINGLEBOARD_MODE,
   VUE_APP_SINGLEBOARD_SLUG,
+  VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION,
   VUE_APP_SOCKETIO_PING_INTERVAL,
   VUE_APP_SOCKETIO_PING_TIMEOUT,
   VUE_APP_SOCKETIO_TRANSPORTS,

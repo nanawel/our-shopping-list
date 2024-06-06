@@ -191,6 +191,9 @@ docker-compose up -d
   - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` (default: `OurShoppingList_`)
   - `VUE_APP_SHORT_TITLE` (default: `OSL`)
   - `VUE_APP_SINGLEBOARD_MODE` (default: `0`)
+  - `VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION` (default: `1800000` = 30mn)
+  - `VUE_APP_SOCKETIO_PING_INTERVAL` (default: `25000` = 25sec.)
+  - `VUE_APP_SOCKETIO_PING_TIMEOUT` (default: `20000` = 20sec.)
   - `VUE_APP_TITLE` (default: `Our Shopping List`)
   - `VUE_APP_USE_ITEM_QUICK_SYNTAX` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/20)
 

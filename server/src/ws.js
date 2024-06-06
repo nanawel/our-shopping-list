@@ -14,7 +14,7 @@ const io = new Server(httpServer, {
   pingInterval: config.VUE_APP_SOCKETIO_PING_INTERVAL,
   pingTimeout: config.VUE_APP_SOCKETIO_PING_TIMEOUT,
   connectionStateRecovery: {
-    maxDisconnectionDuration: 2 * 60 * 1000,
+    maxDisconnectionDuration: config.VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION,
     skipMiddlewares: true,
   }
 });
