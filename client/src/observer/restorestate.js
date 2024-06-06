@@ -31,7 +31,7 @@ export default {
     store.watch(
       (state) => state.board?.currentBoard?.slug,
       (newValue, oldValue) => {
-        logger.debug(`observer/restorestate (board) :: Updating from ${oldValue} to ${newValue}`);
+        logger.debug(`observer/restorestate (board) :: Updating from ${oldValue} to ${newValue}`)
         if (oldValue) {
           window.localStorage.removeItem(currentBoardSlugKey)
         }
@@ -44,7 +44,7 @@ export default {
     store.watch(
       (state) => state.list?.currentListId,
       (newValue, oldValue) => {
-        logger.debug(`observer/restorestate (list) :: Updating from ${oldValue} to ${newValue}`);
+        logger.debug(`observer/restorestate (list) :: Updating from ${oldValue} to ${newValue}`)
         if (oldValue) {
           window.localStorage.removeItem(currentListSlugKey)
         }

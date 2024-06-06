@@ -1,4 +1,4 @@
-import {removeDiacritics} from "@/libs/compare-strings";
+import {removeDiacritics} from '@/libs/compare-strings'
 
 import AbstractModel from './AbstractModel'
 import List from './List'

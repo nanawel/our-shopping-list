@@ -127,7 +127,6 @@ export default (router) => {
     if (to.params.listId) {
       if (to.params.listId === 'new') {
         store.commit('list/setCurrentList', new ListModel())
-        logger.log(store.state.list.currentList);
       } else {
         const list = ListModel.query()
           .with('items')

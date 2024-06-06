@@ -1,5 +1,5 @@
 import { createLogger } from 'vue-logger-plugin'
-import config from "@/config";
+import config from '@/config'
 
 const options = {
   enabled: config.VUE_APP_CLIENT_LOG_ENABLED,

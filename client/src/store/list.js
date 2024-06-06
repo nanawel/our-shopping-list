@@ -1,4 +1,4 @@
-import {Query} from '@vuex-orm/core';
+import {Query} from '@vuex-orm/core'
 
 import {DISPLAY_MODE_UNCHECKED_ONLY} from '@/constants'
 import List from '@/models/List'

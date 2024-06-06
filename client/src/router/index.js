@@ -46,10 +46,10 @@ router.afterEach((to) => {
   switch (to.name) {
     case 'home':
       setPageTitle(i18n.t('home.page-title'))
-      break;
+      break
     case 'about':
       setPageTitle(i18n.t('about.page-title'))
-      break;
+      break
   }
 })
 

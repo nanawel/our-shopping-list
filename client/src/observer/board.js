@@ -10,7 +10,7 @@ export default {
     store.watch(
       (state) => state.board?.currentBoardId,
       (newValue, oldValue) => {
-        logger.debug(`observer/board :: Updating from ${oldValue} to ${newValue}`);
+        logger.debug(`observer/board :: Updating from ${oldValue} to ${newValue}`)
         if (oldValue) {
           socket.emit('leave-board', oldValue)
         }

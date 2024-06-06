@@ -39,12 +39,12 @@ const apmProxy = new Proxy(apmBase, {
         switch (prop) {
           case 'startSpan':
             result = fakeObject
-            break;
+            break
         }
       }
       return result
-    };
-  },
+    }
+  }
 })
 
 export {

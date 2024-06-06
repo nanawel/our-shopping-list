@@ -14,7 +14,7 @@ Object.entries(window)
        * ///my/path//  =>  my/path/
        */
       v = path.normalize(v)
-        .replace(/^\/+/, '');
+        .replace(/^\/+/, '')
     }
     config[k] = v
   })
