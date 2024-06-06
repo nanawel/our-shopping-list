@@ -166,7 +166,8 @@ import {DynamicScroller, DynamicScrollerItem} from 'vue-virtual-scroller'
 import EmptyStateComponent from "./EmptyStateComponent"
 import ItemEditDialogComponent from "./Item/EditDialogComponent"
 import ItemComponent from "./ItemComponent"
-import Item from "@/models/Item"
+import List from '@/models/List'
+import Item from '@/models/Item'
 
 import {containsIgnoreCase} from "@/libs/compare-strings"
 
@@ -314,6 +315,18 @@ export default {
       }
     }
   },
+  created() {
+    this.unwatchLoadingOverlay = this.$store.watch(
+      (state, getters) => getters['modelSync/isSyncInProgress'](List, this.listModelId),
+      debounce(
+        (newValue) => {
+        this.loadingOverlay = newValue
+      }, 500)
+    )
+  },
+  beforeDestroy() {
+    this.unwatchLoadingOverlay()
+  },
   mounted() {
     if (this.isNewList && this.$refs.newListNameInput) {
       this.$refs.newListNameInput.focus()
@@ -324,9 +337,9 @@ export default {
       // Empty search field when switching list
       this.cancelSearch()
     },
-    searchInputValue: debounce(function (val) {
+    searchInputValueDebouncer: debounce(function (val) {
       this.debouncedSearchString = val
-    }, 400, {trailing: true}),
+    }, 400),
   },
   methods: {
     newList() {
