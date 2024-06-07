@@ -337,7 +337,7 @@ export default {
       // Empty search field when switching list
       this.cancelSearch()
     },
-    searchInputValueDebouncer: debounce(function (val) {
+    searchInputValue: debounce(function (val) {
       this.debouncedSearchString = val
     }, 400),
   },
