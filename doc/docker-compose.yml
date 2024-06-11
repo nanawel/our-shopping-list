@@ -21,7 +21,10 @@ services:
       - mongodb
 
   mongodb:
-    image: mongo:4
+    # *Caution*: Before 2024-06-11 the version used was mongo:4. You *cannot* upgrade directly to mongo:7.
+    # Use the automated script update-mongo7.sh to upgrade your stack to mongo:5, mongo:6 then mongo:7
+    # Refer to README.md for more information
+    image: mongo:7
     volumes:
       - dbdata:/data/db
 

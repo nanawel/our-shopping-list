@@ -287,6 +287,20 @@ Or if you need to log everything:
 DEBUG=*
 ```
 
+## Upgrade MongoDB to 7.x
+
+From the original release until june 2024, the stack was shipped with `mongo:4` but this version
+of MongoDB is deprecated and you can safely upgrade to MongoDB 7 while keeping your existing data.
+
+Use the provided automated script as follows:
+
+```shell
+# Make a backup with mongodump first!
+docker-compose exec -T mongodb mongodump -d osl --archive > osl-backup.archive
+
+bash doc/update-mongo7.sh
+```
+
 ## 👷 Developer installation
 
 > 🐋 This method also uses Docker, but with the local source files mounted
@@ -333,3 +347,13 @@ NODE_ENV=production yarn build
 Then reload the page in your browser and the SW should be activated.
 You have to make sure you are running the app **with TLS enabled**. Use the
 `ENABLE_TLS` variable to use the embedded TLS proxy if needed.
+
+### Upgrade MongoDB to 7.x
+
+Use the provided automated script as follows:
+
+```shell
+export COMPOSE_FILE=docker-compose.dev.yml
+export DOCKER_COMPOSE_FILE=docker-compose.dev.yml
+bash doc/update-mongo7.sh
+```
