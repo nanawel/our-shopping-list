@@ -137,7 +137,7 @@ the steps below:
 
 ### 🐋 With Docker
 
-With a running [MongoDB 4.x](https://hub.docker.com/_/mongo) container as
+With a running [MongoDB](https://hub.docker.com/_/mongo) container as
 `mymongo` on the host:
 
 ```shell
