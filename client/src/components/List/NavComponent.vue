@@ -73,7 +73,9 @@ export default {
     editList(list) {
       this.$logger.debug('NAV.editList()', list)
       // Pass a clone to the form so that modifications are only applied upon validation
-      this.editionListModel = {...(list ? list : new List())}
+      this.editionListModel = list
+        ? Object.assign(new List(), list)
+        : new List()
     },
     saveList(listData, callback) {
       const list = Object.assign(

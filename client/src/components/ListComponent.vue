@@ -379,7 +379,10 @@ export default {
     editItem(item) {
       this.$logger.debug('LIST.editItem()', item, this.listModel)
       // Pass a clone to the form so that modifications are only applied upon validation
-      this.editionItemModel = {...(item ? item : new Item())}
+      this.editionItemModel = item
+        ? Object.assign(new Item(), item)
+        : new Item()
+      this.$logger.debug('LIST.editItem() clone', this.editionItemModel)
     },
     saveItem(itemData, callback) {
       const item = Object.assign(

@@ -34,11 +34,17 @@
               :label="$t('item.input.details')"
               autocapitalize="sentences"
               v-model="formItem.details"
-              :rows="3">
+              :rows="2">
             </v-textarea>
             <div class="last-checked-label" v-if="formItem.lastCheckedAt">
               <v-icon>mdi-calendar-check</v-icon> {{ $t('item.last-checked-label', {date: new Date(formItem.lastCheckedAt).toLocaleString()}) }}
             </div>
+            <v-select label="Move to list"
+                      density="compact"
+                      :items="lists"
+                      item-title="name"
+                      item-value="_id"
+                      v-model="formItem.listId"/>
           </form>
         </v-card-text>
 
@@ -71,18 +77,19 @@
 </template>
 
 <script>
-import Item from "@/models/Item";
+import Item from "@/models/Item"
+import List from "@/models/List"
 
 export default {
   name: 'EditDialogComponent',
   components: {
   },
   props: {
-    item: Item
+    item: Item,
   },
   data: function() {
     return {
-      formItem: null
+      formItem: null,
     }
   },
   watch: {
@@ -96,6 +103,14 @@ export default {
         return !!this.formItem
       }
     },
+    lists: {
+      get: function () {
+        return List.query()
+          .where('boardId', this.$store.state?.board?.currentBoardId)
+          .orderBy('name')
+          .get()
+      }
+    }
   },
   methods: {
     onCancelItemForm() {
