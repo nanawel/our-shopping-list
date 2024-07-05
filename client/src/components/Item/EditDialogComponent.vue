@@ -36,9 +36,6 @@
               v-model="formItem.details"
               :rows="2">
             </v-textarea>
-            <div class="last-checked-label" v-if="formItem.lastCheckedAt">
-              <v-icon>mdi-calendar-check</v-icon> {{ $t('item.last-checked-label', {date: new Date(formItem.lastCheckedAt).toLocaleString()}) }}
-            </div>
             <div class="list-selector" :style="{display: formItem._id ? 'inherit' : 'none'}">
               <v-select :label="$t('item.input.list')"
                         density="compact"
@@ -46,6 +43,9 @@
                         item-title="name"
                         item-value="_id"
                         v-model="formItem.listId"/>
+            </div>
+            <div class="last-checked-label" v-if="formItem.lastCheckedAt">
+              <v-icon>mdi-calendar-check</v-icon> {{ $t('item.last-checked-label', {date: new Date(formItem.lastCheckedAt).toLocaleString()}) }}
             </div>
           </form>
         </v-card-text>
