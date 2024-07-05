@@ -58,7 +58,7 @@
             "item": {
                 "lists-count": "(aucune liste) | 1 liste | %{count} listes"
             },
-            "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
+            "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
             "deleted-successfully": "Tableau supprimé avec succès."
         },
         "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
