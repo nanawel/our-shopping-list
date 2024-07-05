@@ -329,6 +329,15 @@ If you want to enter the container, just use
 make dev-shell
 ```
 
+###  Translation
+
+Translations can be very easily added and improved using the files from the `client/src/locales/`
+directory.
+
+If you want to translate OSL in a new language, feel free to add your contribution using
+[Weblate](https://weblate.org/).  
+Register on Weblate and go to https://hosted.weblate.org/projects/our-shopping-list/client-src-locales/
+
 ### Special cases
 
 In development mode, the service worker is not enabled.
