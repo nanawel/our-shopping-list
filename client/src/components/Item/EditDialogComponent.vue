@@ -36,7 +36,7 @@
               v-model="formItem.details"
               :rows="2">
             </v-textarea>
-            <div class="list-selector" :style="{display: formItem._id ? 'inherit' : 'none'}">
+            <div class="list-selector">
               <v-select :label="$t('item.input.list')"
                         density="compact"
                         :items="lists"

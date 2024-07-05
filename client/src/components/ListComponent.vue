@@ -385,11 +385,10 @@ export default {
       this.$logger.debug('LIST.editItem() clone', this.editionItemModel)
     },
     saveItem(itemData, callback) {
-      const item = Object.assign(
-        new Item(),
-        {listId: this.listModelId},  // Set current list if empty
-        itemData
-      )
+      const item = Object.assign(new Item(), itemData)
+      if (!item.listId) {
+        item.listId = this.listModelId
+      }
       this.$logger.debug('LIST.saveItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
@@ -401,10 +400,7 @@ export default {
         })
     },
     deleteItem(itemData, callback) {
-      const item = Object.assign(
-        new Item(),
-        itemData
-      )
+      const item = Object.assign(new Item(), itemData)
       this.$logger.debug('LIST.deleteItem()', item, this.listModel)
       callback = callback || function() {}
       const self = this
