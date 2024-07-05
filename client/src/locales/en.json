@@ -104,7 +104,8 @@
         "input": {
             "name": "Name",
             "qty": "Quantity",
-            "details": "Details"
+            "details": "Details",
+            "list": "Move to list..."
         },
         "last-checked-label": "Last checked: %{date}",
         "help-onclick-checked": "💡 ⬅ Swipe left to uncheck an item",

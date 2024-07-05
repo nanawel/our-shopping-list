@@ -39,12 +39,14 @@
             <div class="last-checked-label" v-if="formItem.lastCheckedAt">
               <v-icon>mdi-calendar-check</v-icon> {{ $t('item.last-checked-label', {date: new Date(formItem.lastCheckedAt).toLocaleString()}) }}
             </div>
-            <v-select label="Move to list"
-                      density="compact"
-                      :items="lists"
-                      item-title="name"
-                      item-value="_id"
-                      v-model="formItem.listId"/>
+            <div class="list-selector" :style="{display: formItem._id ? 'inherit' : 'none'}">
+              <v-select :label="$t('item.input.list')"
+                        density="compact"
+                        :items="lists"
+                        item-title="name"
+                        item-value="_id"
+                        v-model="formItem.listId"/>
+            </div>
           </form>
         </v-card-text>
 

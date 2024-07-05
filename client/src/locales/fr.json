@@ -104,7 +104,8 @@
         "input": {
             "name": "Nom",
             "qty": "Quantité",
-            "details": "Détails"
+            "details": "Détails",
+            "list": "Déplacer vers..."
         },
         "last-checked-label": "Coché la dernière fois : %{date}",
         "help-onclick-checked": "💡 ⬅ Faites glisser vers la gauche pour décocher",

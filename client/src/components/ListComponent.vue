@@ -387,8 +387,8 @@ export default {
     saveItem(itemData, callback) {
       const item = Object.assign(
         new Item(),
-        itemData,
-        {listId: this.listModelId}  // Force current list
+        {listId: this.listModelId},  // Set current list if empty
+        itemData
       )
       this.$logger.debug('LIST.saveItem()', item, this.listModel)
       callback = callback || function() {}
