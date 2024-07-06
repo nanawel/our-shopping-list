@@ -46,7 +46,7 @@ class Repository {
 
   syncAll(schema) {
     logger.debug('$repository::syncAll', schema.name)
-    const apmSpan = apm.startSpan('$repository::syncAll')
+    const apmSpan = apm.startSpan('service/repository::syncAll')
     apmSpan.addLabels([schema])
 
     schema.deleteAll()
@@ -62,7 +62,7 @@ class Repository {
 
   save(model) {
     logger.debug('$repository::save', model)
-    const apmSpan = apm.startSpan('$repository::save')
+    const apmSpan = apm.startSpan('service/repository::save')
     apmSpan.addLabels([model.constructor.name])
 
     const schema = this.findSchemaByModel(model)
@@ -96,7 +96,7 @@ class Repository {
 
   delete(model) {
     logger.debug('$repository::delete', model)
-    const apmSpan = apm.startSpan('$repository::delete')
+    const apmSpan = apm.startSpan('service/repository::delete')
     apmSpan.addLabels([model.constructor.name])
 
     const schema = this.findSchemaByModel(model)
@@ -127,7 +127,7 @@ class Repository {
     const self = this
 
     logger.debug('$repository::checkSync', model, model.constructor.name)
-    const apmSpan = apm.startSpan('$repository::checkSync')
+    const apmSpan = apm.startSpan('service/repository::checkSync')
     apmSpan.addLabels([model.constructor.name])
 
     const schema = this.findSchemaByModel(model)
@@ -196,7 +196,7 @@ class Repository {
       logger.debug('$repository::sync', model)
 
       if (model._id) {
-        const apmSpan = apm.startSpan('$repository::sync')
+        const apmSpan = apm.startSpan('service/repository::sync')
         apmSpan.addLabels([model.constructor.name])
 
         const schema = self.findSchemaByModel(model)

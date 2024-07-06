@@ -198,6 +198,7 @@ export default {
       debouncedSearchString: '',
       sock: null,
       loadingOverlay: false,
+      apmSpan: null
     }
   },
   computed: {
@@ -316,6 +317,7 @@ export default {
     }
   },
   created() {
+    this.apmSpan = this.$apm.startSpan('components/ListComponent::create-mount')
     this.unwatchLoadingOverlay = this.$store.watch(
       (state, getters) => getters['modelSync/isSyncInProgress'](List, this.listModelId),
       debounce(
@@ -331,6 +333,7 @@ export default {
     if (this.isNewList && this.$refs.newListNameInput) {
       this.$refs.newListNameInput.focus()
     }
+    this.apmSpan && this.apmSpan.end()
   },
   watch: {
     listModelId: function () {
