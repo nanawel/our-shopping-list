@@ -5,7 +5,8 @@
       <template v-slot:title>{{ $t('board-home-nav.title') }}</template>
       <template v-slot:subtitle>{{ $t('board-home-nav.subtitle') }}</template>
       <template v-slot:buttons>
-        <v-btn :to="{name: 'newList'}"
+        <v-btn name="Board/HomeComponent.new.button"
+               :to="{name: 'newList'}"
                color="primary">{{ $t('board-home-nav.button') }}</v-btn>
       </template>
     </empty-state-component>

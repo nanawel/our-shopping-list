@@ -22,7 +22,8 @@
                   </router-link>
                 </v-col>
                 <v-col class="col-sm-6">
-                  <v-icon class="force-refresh-btn"
+                  <v-icon name="BoardComponent.force-refresh.button"
+                          class="force-refresh-btn"
                           color="grey-darken-1"
                           @click="onRefreshClick"
                           size="40">mdi-refresh</v-icon>

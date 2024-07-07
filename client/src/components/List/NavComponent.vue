@@ -3,7 +3,8 @@
     <v-toolbar-title>
       <span>{{ title }}</span>
       <template v-if="listModel?._id">
-        <v-btn @click="onEditClick"
+        <v-btn name="List/NavComponent.edit.button"
+               @click="onEditClick"
                icon
                :aria-label="$t('edit')"
                class="text-grey-darken-2">
@@ -12,7 +13,8 @@
       </template>
     </v-toolbar-title>
 
-    <v-btn id="btn-toggle-history-mode"
+    <v-btn name="List/NavComponent.toggle-history-mode.button"
+           id="btn-toggle-history-mode"
            @click="onToggleHistoryMode"
            :active="showHistory"
            icon

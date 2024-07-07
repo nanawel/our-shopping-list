@@ -16,6 +16,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
+          name="DialogComponent.close.button"
           color="primary"
           text
           @click="show = false"

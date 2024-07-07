@@ -14,14 +14,14 @@
           <v-row>
             <v-col>
               <v-text-field
-                name="name"
+                name="List/EditDialogComponent.name.textfield"
                 ref="nameInput"
                 :label="$t('edit-list-dialog.name-input')"
                 autocapitalize="sentences"
                 autocomplete="off"
                 v-model="formList.name" />
               <v-text-field
-                name="creationDate"
+                name="List/EditDialogComponent.creation_date.textfield"
                 :label="$t('edit-list-dialog.creation-date-label')"
                 v-model="formList.createdAt"
                 :disabled="true" />
@@ -34,6 +34,7 @@
 
       <v-card-actions>
         <v-btn
+          name="List/EditDialogComponent.delete.button"
           icon
           color="red"
           plain
@@ -42,12 +43,14 @@
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn
+          name="List/EditDialogComponent.cancel.button"
           color="grey"
           plain
           @click="onCancelListForm">
           {{ $t('cancel') }}
         </v-btn>
         <v-btn
+          name="List/EditDialogComponent.save.button"
           color="primary"
           depressed
           @click="onSaveListForm">

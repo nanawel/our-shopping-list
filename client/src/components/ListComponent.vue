@@ -24,6 +24,7 @@
                       style="height: auto !important; width: auto !important;">mdi-format-list-bulleted-type</v-icon>
               <h1>{{ $t('list.new.title') }}</h1>
               <v-text-field
+                name="ListComponent.list-name.textfield"
                 ref="newListNameInput"
                 autocapitalize="sentences"
                 v-model="listModel.name"
@@ -115,8 +116,7 @@
     <div class="list-footer" v-if="shouldShowBottomSearchBar">
       <!-- See https://stackoverflow.com/a/73466347/5431347 to see why type="search" is required -->
       <v-text-field
-        name="new_item_name"
-        id="new_item_name"
+        name="ListComponent.search.textfield"
         type="search"
         aria-autocomplete="both" aria-haspopup="false"
         ref="searchInput"
@@ -131,6 +131,7 @@
         bg-color="transparent"
         hide-details="auto"/>
       <v-btn
+        name="ListComponent.search.button"
         depressed
         small
         color="primary"

@@ -23,7 +23,7 @@
                 <v-col md="4">
                   <v-text-field
                     dense
-                    name="name"
+                    name="HomeComponent.board-name.textfield"
                     :label="$t('home.input.board-name')"
                     autocomplete="osl-board-name"
                     ref="boardNameInput"
@@ -37,7 +37,8 @@
             <v-container v-if="boardNameInput.length > 0">
               <v-row align="center" justify="center">
                 <v-col md="4">
-                  <v-btn @click="onOpenBoard"
+                  <v-btn name="HomeComponent.open-board.button"
+                         @click="onOpenBoard"
                          color="primary">{{ $t('home.button.open-board') }}</v-btn>
                 </v-col>
               </v-row>
@@ -70,7 +71,8 @@
                           </v-avatar>
                         </template>
                         <template v-slot:append>
-                          <v-btn v-if="boardDeletionEnabled"
+                          <v-btn name="HomeComponent.delete-board.button"
+                                 v-if="boardDeletionEnabled"
                                  @click="(ev) => onDeleteBoard(ev, item)"
                                  color="grey-lighten-1"
                                  icon="mdi-delete"

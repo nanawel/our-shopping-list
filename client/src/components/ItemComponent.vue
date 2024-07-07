@@ -25,7 +25,8 @@
         <v-list-item-subtitle v-text="item.details"></v-list-item-subtitle>
 
         <template v-slot:append>
-          <v-btn @click="onEditClick"
+          <v-btn name="ItemComponent.edit.button"
+                 @click="onEditClick"
                  icon
                  :aria-label="$t('edit')"
                  variant="text"

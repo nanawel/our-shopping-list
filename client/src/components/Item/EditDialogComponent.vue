@@ -15,6 +15,7 @@
             <v-row>
               <v-col>
                 <v-text-field
+                  name="Item/EditDialogComponent.name.textfield"
                   ref="nameInput"
                   :label="$t('item.input.name')"
                   autocapitalize="sentences"
@@ -26,18 +27,21 @@
               </v-col>
             </v-row>
             <v-text-field
+              name="Item/EditDialogComponent.qty.textfield"
               type="number"
               :label="$t('item.input.qty')"
               v-model="formItem.qty"
               @keydown.enter="onSaveItemForm"/>
             <v-textarea
+              name="Item/EditDialogComponent.details.textarea"
               :label="$t('item.input.details')"
               autocapitalize="sentences"
               v-model="formItem.details"
               :rows="2">
             </v-textarea>
             <div class="list-selector">
-              <v-select :label="$t('item.input.list')"
+              <v-select name="Item/EditDialogComponent.list.select"
+                        :label="$t('item.input.list')"
                         density="compact"
                         :items="lists"
                         item-title="name"
@@ -54,6 +58,7 @@
 
         <v-card-actions>
           <v-btn
+            name="Item/EditDialogComponent.delete.button"
             icon
             color="red"
             plain
@@ -62,12 +67,14 @@
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
+            name="Item/EditDialogComponent.cancel.button"
             color="grey"
             plain
             @click="onCancelItemForm">
             {{ $t('cancel') }}
           </v-btn>
           <v-btn
+            name="Item/EditDialogComponent.save.button"
             color="primary"
             depressed
             @click="onSaveItemForm">
