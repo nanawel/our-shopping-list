@@ -155,7 +155,9 @@ export default {
     }
   },
   mounted() {
-    this.$refs.boardNameInput.focus()
+    this.$nextTick(() => {
+      this.$refs.boardNameInput.focus()
+    })
     this.refreshAllBoards()
   },
   methods: {
