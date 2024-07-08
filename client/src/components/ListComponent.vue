@@ -29,7 +29,8 @@
                 autocapitalize="sentences"
                 v-model="listModel.name"
                 :placeholder="$t('list.new.input-placeholder')"
-                @keydown.enter="saveList"/>
+                @keydown.enter="saveList"
+                autofocus/>
               <div class="btn-wrapper">
                 <v-btn v-if="listModel.name.length > 0"
                        class="md-raised md-primary"
@@ -161,6 +162,7 @@
 
 <script>
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import {apm} from '@/service/apm'
 
 import debounce from 'lodash.debounce'
 import {DynamicScroller, DynamicScrollerItem} from 'vue-virtual-scroller'
@@ -318,7 +320,7 @@ export default {
     }
   },
   created() {
-    this.apmSpan = this.$apm.startSpan('components/ListComponent::create-mount')
+    this.apmSpan = apm.startSpan('components/ListComponent::create-mount')
     this.unwatchLoadingOverlay = this.$store.watch(
       (state, getters) => getters['modelSync/isSyncInProgress'](List, this.listModelId),
       debounce(

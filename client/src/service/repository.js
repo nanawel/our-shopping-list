@@ -177,9 +177,7 @@ class Repository {
           })
       }
       else {
-        throw {
-          reason: 'Model has no ID'
-        }
+        logger.info('Will not check sync a model with no ID')
       }
     }
     finally {

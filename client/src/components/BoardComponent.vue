@@ -128,7 +128,7 @@ export default {
     navTitle: {
       get: function() {
         return this.$store.state?.list?.currentList
-          ? false
+          ? ''
           : (config.VUE_APP_TITLE || 'Our Shopping List')
       },
     },

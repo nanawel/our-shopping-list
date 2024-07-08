@@ -28,7 +28,8 @@
                     autocomplete="osl-board-name"
                     ref="boardNameInput"
                     v-model="boardNameInput"
-                    @keydown.enter="onOpenBoard"/>
+                    @keydown.enter="onOpenBoard"
+                    autofocus/>
                   </v-col>
               </v-row>
             </v-container>
@@ -155,9 +156,6 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.$refs.boardNameInput.focus()
-    })
     this.refreshAllBoards()
   },
   methods: {
