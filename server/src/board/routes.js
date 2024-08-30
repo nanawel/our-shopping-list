@@ -135,15 +135,12 @@ router.delete('/boards/:id', (req, res, next) => {
     //      or add a dedicated prune command in CLI.
 
     BoardModel
-      .findById(id)
+      .findByIdAndDelete(id)
       .then((board) => {
         if (board) {
-          board.delete()
-            .then(() => {
-              res.status(200)
-                .json(board);
-            })
-            .catch(next);
+          console.debug('BOARD DELETED', board);
+          res.status(200)
+            .json(board);
         } else {
           res.status(404)
             .json({

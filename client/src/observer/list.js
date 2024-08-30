@@ -1,5 +1,6 @@
 import eventBus from '@/service/event-bus'
 import {store} from '@/service/store'
+import {router} from '@/router'
 import {repository} from '@/service/repository'
 import {snackbar} from '@/service/snackbar'
 import {logger} from '@/service/logger'
@@ -14,6 +15,15 @@ export default {
         && store.state.board?.currentBoardId
       ) {
         model.boardId = store.state.board.currentBoardId
+      }
+    })
+
+    // Exit list page when model is deleted
+    eventBus.$on('repository_delete::after', function (model) {
+      if (model instanceof ListModel
+        && router.currentRoute.value?.params?.listId === model._id
+      ) {
+        router.push('/board')
       }
     })
 

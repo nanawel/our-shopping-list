@@ -110,6 +110,9 @@ class Repository {
           // https://vuex-orm.github.io/plugin-axios/guide/usage.html#delete-requests
           return model
             .$delete()
+            .then(() => {
+              eventBus.$emit('repository_delete::after', model, schema)
+            })
             .finally(() => {
               apmSpan.end()
             })
@@ -117,6 +120,9 @@ class Repository {
     } else {
         return model
           .$delete()
+          .then(() => {
+            eventBus.$emit('repository_delete::after', model, schema)
+          })
           .finally(() => {
             apmSpan.end()
           })

@@ -116,15 +116,12 @@ router.delete('/lists/:id', (req, res, next) => {
   console.debug('DELETE LIST', id, req.body);
 
   ListModel
-    .findById(id)
+    .findByIdAndDelete(id)
     .then((list) => {
+      console.debug('LIST DELETED', list);
       if (list) {
-        list.delete()
-          .then(() => {
-            res.status(200)
-              .json(list);
-          })
-          .catch(next);
+        res.status(200)
+          .json(list);
       } else {
         res.status(404)
           .json({

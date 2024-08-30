@@ -131,23 +131,20 @@ router.delete('/items/:id', (req, res, next) => {
   const id = req.params.id;
   console.debug('DELETE ITEM', id, req.body);
   ItemModel
-    .findById(id)
-    .then((item) => {
-      if (item) {
-        item.delete()
-          .then(() => {
-            res.status(200)
-              .json(item);
-          })
-          .catch(next);
-      } else {
-        res.status(404)
-          .json({
-            error: {
-              message: 'Item not found'
-            }
-          });
-      }
-    })
-    .catch(next);
+  .findByIdAndDelete(id)
+  .then((item) => {
+    if (item) {
+      console.debug('ITEM DELETED', item);
+      res.status(200)
+        .json(item);
+    } else {
+      res.status(404)
+        .json({
+          error: {
+            message: 'Item not found'
+          }
+        });
+    }
+  })
+  .catch(next);
 });

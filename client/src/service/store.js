@@ -85,6 +85,15 @@ Query.on('afterDelete', function (model) {
   }
 })
 
+// Unset list from store on deletion
+Query.on('afterDelete', function (model) {
+  if (model instanceof List
+    && model._id === store.state.list.currentListId
+  ) {
+    store.dispatch('list/reset')
+  }
+})
+
 // Trigger init for the "loadingProgress" module here
 store.dispatch('loadingProgress/init')
 const storePlugin = {
