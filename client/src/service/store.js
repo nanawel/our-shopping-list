@@ -2,7 +2,6 @@ import config from '@/config'
 import path from 'path-browserify'
 
 import {createStore} from 'vuex'
-import {VuexPersistence} from 'vuex-persist'
 
 // ORM/Axios
 import VuexORM, {Query} from '@vuex-orm/core'
@@ -35,24 +34,6 @@ database.register(Board)
 database.register(List)
 database.register(Item)
 
-const vuexPersistence = new VuexPersistence({
-  key: config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'store',
-  storage: window.localStorage,
-  reducer: (state) => {
-    let persistedState = Object.assign({}, state)
-    persistedState.board = {
-      currentBoardId: board.currentBoardId,
-      lastBoardId: board.lastBoardId
-    }
-    persistedState.list = {
-      currentListId: list.currentListId,
-      lastListId: list.lastListId
-    }
-    delete persistedState.sync
-    return persistedState
-  }
-})
-
 // Create Vuex Store and register database through Vuex ORM
 let store = createStore({
     //strict: true,
@@ -66,8 +47,7 @@ let store = createStore({
       modelSync: modelSync.module()
     },
     plugins: [
-      VuexORM.install(database),
-      vuexPersistence.plugin
+      VuexORM.install(database)
     ],
   })
 
