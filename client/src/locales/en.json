@@ -38,7 +38,8 @@
         "open": "Open the menu",
         "item": {
             "new-list": "New list…",
-            "about": "About"
+            "about": "About",
+            "debug": "Debug"
         }
     },
     "about": {
@@ -83,6 +84,9 @@
         "new-item": {
             "subtitle": "This list is empty.",
             "button": "New item"
+        },
+        "loading": {
+            "subtitle": "Loading…"
         },
         "all-checked": {
             "subtitle": "All items are checked!"

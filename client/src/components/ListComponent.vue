@@ -55,6 +55,16 @@
       </div>
     </template>
 
+    <template v-else-if="shouldDisplayLoadingInProgress">
+      <div class="list-wrapper loading">
+        <EmptyStateComponent key="empty-loading">
+          <template v-slot:icon-name>mdi-cloud-sync-outline</template>
+          <template v-slot:title>{{ listModel.name }}</template>
+          <template v-slot:subtitle>{{ $t('list.loading.subtitle') }}</template>
+        </EmptyStateComponent>
+      </div>
+    </template>
+
     <template v-else-if="shouldDisplayAllCheckedMessage">
       <div class="list-wrapper">
         <EmptyStateComponent key="empty-all-checked">
@@ -230,9 +240,16 @@ export default {
         return this.listModelId
       }
     },
+    shouldDisplayLoadingInProgress: {
+      get: debounce(function() {
+        return this.$store.getters['modelSync/isSyncInProgress'](List, this.listModelId)
+          && this.allItems.length === 0
+      }, 200)
+    },
     shouldDisplayNewItemPrompt: {
       get: function() {
-        return this.allItems.length === 0
+        return !this.$store.getters['modelSync/isSyncInProgress'](List, this.listModelId)
+          && this.allItems.length === 0
       }
     },
     shouldDisplayAllCheckedMessage: {
@@ -465,11 +482,11 @@ export default {
     },
     onTouchHoldItem(itemId) {
       const self = this
-      // // v-touch:* are not like v-on but custom directives so we need a little
-      // // workaround here to declare the handler.
-      // // This is also why we must pass the ID instead of the instance, and load the model
-      // // on trigger (bug #49).
-      // // See https://github.com/robinrodricks/vue3-touch-events?tab=readme-ov-file#passing-parameters-to-the-event-handler
+      // v-touch:* are not like "v-on" but custom directives, so we need a little
+      // workaround here to declare the handler.
+      // This is also why we must pass the ID instead of the instance, and load the model
+      // on trigger (bug #49).
+      // See https://github.com/robinrodricks/vue3-touch-events?tab=readme-ov-file#passing-parameters-to-the-event-handler
       return function (ev) {
         const item = Item.find(itemId)
         self.$logger.debug('LIST.onTouchHoldItem()', ev, item)
@@ -572,6 +589,10 @@ export default {
 
   > .empty-state {
     padding: 1rem;
+  }
+
+  &.loading {
+    opacity: 60%;
   }
 }
 #list-scroller {

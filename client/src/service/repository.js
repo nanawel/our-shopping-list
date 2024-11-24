@@ -156,7 +156,7 @@ class Repository {
                 case 404:
                   // Model does not exist (anymore) on server: it should not exist on client either
                   logger.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
-                  model.$delete()
+                  schema.delete(model._id)
                   return true
               }
               logger.error(`[${res.status}] ${res.statusText}`)
@@ -208,9 +208,13 @@ class Repository {
         return schema.api()
           .get(`/${schema.entity}/${model._id}`)
           .catch((e) => {
-            // The model does not seem to exist (anymore) so remove it from local store
-            if (e.response && e.response.status === 404) {
+            if (e.response?.status === 404) {
+              // Model does not exist (anymore) on server: it should not exist on client either
+              logger.warn(`Model ${schema.entity}/${model._id} not found on server: deleting.`)
               schema.delete(model._id)
+            } else {
+              logger.error('$repository::sync', e)
+              throw e
             }
           })
           .finally(() => {

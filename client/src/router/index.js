@@ -7,6 +7,7 @@ import config from '@/config'
 // Components
 const HomeComponent = () => import('@/components/HomeComponent.vue')
 const AboutComponent = () => import('@/components/AboutComponent.vue')
+const DebugComponent = () => import('@/components/DebugComponent.vue')
 
 const routes = [
   {
@@ -29,6 +30,16 @@ const routes = [
     name: 'about',
     components: {
       root: AboutComponent,
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
+  },
+  {
+    path: '/debug',
+    name: 'debug',
+    components: {
+      root: DebugComponent,
     },
     beforeEnter: (to, from, next) => {
       next()

@@ -81,6 +81,17 @@
               </v-avatar>
             </template>
         </v-list-item>
+
+        <v-list-item v-if="shouldShowDebugMenuItem"
+                     :to="{ name: 'debug' }"
+                     :title="$t('menu-nav.item.debug')"
+                     class="debug-item">
+            <template v-slot:prepend>
+              <v-avatar>
+                <v-icon>mdi-code-braces</v-icon>
+              </v-avatar>
+            </template>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -155,6 +166,11 @@ export default {
         return typeof window.navigator.share === 'function'
           || config.VUE_APP_ENV === 'development'
       }
+    },
+    shouldShowDebugMenuItem: {
+      get: function () {
+        return config.VUE_APP_ENV === 'development'
+      }
     }
   },
   methods: {
@@ -188,7 +204,8 @@ export default {
 #router-view-container {
   padding: 0 !important;
 }
-.about-item {
+.about-item,
+.debug-item {
   opacity: var(--v-medium-emphasis-opacity);
 }
 #ws-connection-status-indicator {

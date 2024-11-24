@@ -38,7 +38,8 @@
         "open": "Ouvrir le menu",
         "item": {
             "new-list": "Nouvelle liste…",
-            "about": "À propos"
+            "about": "À propos",
+            "debug": "Debug"
         }
     },
     "about": {
@@ -83,6 +84,9 @@
         "new-item": {
             "subtitle": "Cette liste est vide.",
             "button": "Nouvel article"
+        },
+        "loading": {
+          "subtitle": "Chargement…"
         },
         "all-checked": {
             "subtitle": "Tous les articles sont cochés !"
