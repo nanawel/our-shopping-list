@@ -241,10 +241,10 @@ export default {
       }
     },
     shouldDisplayLoadingInProgress: {
-      get: debounce(function() {
+      get: function() {
         return this.$store.getters['modelSync/isSyncInProgress'](List, this.listModelId)
           && this.allItems.length === 0
-      }, 200)
+      },
     },
     shouldDisplayNewItemPrompt: {
       get: function() {
