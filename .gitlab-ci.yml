@@ -19,7 +19,7 @@ build_image:
   script:
     - time make config
     - export buildVersion=$([ -z "${CI_COMMIT_TAG}" ] && echo ${CI_COMMIT_REF_SLUG} || echo ${CI_COMMIT_TAG})
-      && time make build args="--build-arg build_version=${buildVersion} --build-arg build_id=${CI_COMMIT_SHORT_SHA} --build-arg build_date=$(date -Is)"
+      && time make build args="--pull --build-arg build_version=${buildVersion} --build-arg build_id=${CI_COMMIT_SHORT_SHA} --build-arg build_date=$(date -Is)"
     - time docker tag ${CONTAINER_BUILD_IMAGE}:${APP_VERSION:-latest} ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - time docker push ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}
     - "echo Pushed image: ${CONTAINER_RELEASE_IMAGE}:${CI_COMMIT_SHORT_SHA}"
