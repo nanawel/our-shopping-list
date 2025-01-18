@@ -71,8 +71,8 @@ the steps below:
   - Once started, use the CLI to migrate existing lists to the special board
     used as common parent for lists in "singleboard" mode.
     ```shell
-    docker-compose exec app node cli.js board:create --singleboard
-    docker-compose exec app node cli.js list:move-to-board --all --singleboard
+    docker compose exec app node cli.js board:create --singleboard
+    docker compose exec app node cli.js list:move-to-board --all --singleboard
     ```
   - Use the application as usual (you might have to clear your browser's cache
     to make sure there's no invalid data left).
@@ -83,8 +83,8 @@ the steps below:
   - Create a new board with the name of your choice
     ```shell
     # Get the created board's slug from the output and use it in the following command
-    docker-compose exec app node cli.js board:create my-board
-    docker-compose exec app node cli.js list:move-to-board --all --board my-board
+    docker compose exec app node cli.js board:create my-board
+    docker compose exec app node cli.js list:move-to-board --all --board my-board
     ```
   - Open the application, and from the home screen open the board you've just created
     to find your lists.
@@ -148,7 +148,7 @@ docker run --detach \
   ourshoppinglist/our-shopping-list
 ```
 
-### 🐋 With `docker-compose`
+### 🐋 With `docker compose`
 
 Use the provided [`docker-compose.yml`](doc/docker-compose.yml) and adapt it to
 your needs.
@@ -156,7 +156,7 @@ your needs.
 Then to start the containers:
 
 ```shell
-docker-compose up -d
+docker compose up -d
 ```
 
 **Available environment variables for the `app` container**
@@ -296,7 +296,7 @@ Use the provided automated script as follows:
 
 ```shell
 # Make a backup with mongodump first!
-docker-compose exec -T mongodb mongodump -d osl --archive > osl-backup.archive
+docker compose exec -T mongodb mongodump -d osl --archive > osl-backup.archive
 
 bash doc/update-mongo7.sh
 ```

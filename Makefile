@@ -9,11 +9,11 @@ dev-%:
 
 .PHONY: pull
 pull:
-	docker-compose pull
+	docker compose pull
 
 .PHONY: init
 init:
-	docker-compose run \
+	docker compose run \
 		--rm \
 		--name osl_app_install \
 		-u $$(id -u) app \
@@ -21,59 +21,59 @@ init:
 
 .PHONY: config
 config:
-	docker-compose config
+	docker compose config
 
 .PHONY: upd
 upd:
-	docker-compose up -d $(args)
+	docker compose up -d $(args)
 
 .PHONY: upd-force
 upd-force:
-	docker-compose up -d --force-recreate $(args)
+	docker compose up -d --force-recreate $(args)
 
 .PHONY: restart
 restart:
-	docker-compose restart $(args)
+	docker compose restart $(args)
 
 .PHONY: stop
 stop:
-	docker-compose stop
+	docker compose stop
 
 .PHONY: down
 down:
-	docker-compose down
+	docker compose down
 
 .PHONY: build
 build:
-	docker-compose build $(args)
+	docker compose build $(args)
 
 .PHONY: shell
 shell:
-	docker-compose exec -u $$(id -u) app bash
+	docker compose exec -u $$(id -u) app bash
 
 .PHONY: shell-root
 shell-root:
-	docker-compose exec app bash
+	docker compose exec app bash
 
 .SILENT:
 .PHONY: cli
 cli:
-	@docker-compose exec -u $$(id -u) app node ./cli.js $(cmd)
+	@docker compose exec -u $$(id -u) app node ./cli.js $(cmd)
 
 .PHONY: ps
 ps:
-	docker-compose ps
+	docker compose ps
 
 .PHONY: logs
 logs:
-	docker-compose logs
+	docker compose logs
 
 .PHONY: logs-follow
 logs-follow:
-	docker-compose logs -f --tail=200 app
+	docker compose logs -f --tail=200 app
 
 .PHONY: watch
 watch:
-	docker-compose exec \
+	docker compose exec \
 		-u $$(id -u) app \
 		sh -c 'cd /app/client && yarn serve'
