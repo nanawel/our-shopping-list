@@ -555,7 +555,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'vuetify/settings';
+@use "sass:map";
+@use 'vuetify/settings' as vsettings;
 
 [v-cloak] {
   display: none;
@@ -613,7 +614,7 @@ export default {
   bottom: 0;
 
   .v-btn__content {
-    @media #{map-get($display-breakpoints, 'md-and-down')} {
+    @media #{map.get(vsettings.$display-breakpoints, 'md-and-down')} {
       > span {
         display: none;
       }
