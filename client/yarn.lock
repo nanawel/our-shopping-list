@@ -157,7 +157,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.26.5.tgz#df93ac37f4417854130e21d72c66ff3d4b897fc7"
   integrity sha512-XvcZi1KWf88RVbF9wn8MN6tYFloU5qX8KjuF3E1PVBmJ9eypXfs4GRiJwLuTZL0iSnJUKn1BFPa5BPZZJyFzPg==
 
-"@babel/core@^7.1.6", "@babel/core@^7.10.3", "@babel/core@^7.11.1", "@babel/core@^7.12.16", "@babel/core@^7.24.7":
+"@babel/core@^7.1.6", "@babel/core@^7.10.3", "@babel/core@^7.11.1", "@babel/core@^7.12.16", "@babel/core@^7.26.0":
   version "7.26.0"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.26.0.tgz#d78b6023cc8f3114ccf049eb219613f74a747b40"
   integrity sha512-i1SLeK+DzNnQ3LL/CswPCa/E5u4lh1k6IAEphON8F+cXt0t9euTshDru0q7/IqMa1PMPz5RnHuHscF8/ZJsStg==
@@ -178,7 +178,7 @@
     json5 "^2.2.3"
     semver "^6.3.1"
 
-"@babel/eslint-parser@^7.12.16":
+"@babel/eslint-parser@^7.26.5":
   version "7.26.5"
   resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.26.5.tgz#aa669f4d873f9cd617050cf3c40c19cd96307efb"
   integrity sha512-Kkm8C8uxI842AwQADxl0GbcG1rupELYLShazYEZO/2DYjhyWXJIOUVOE3tBYm6JXzUCNJOZEzqc4rCW/jsEQYQ==
@@ -1084,7 +1084,7 @@
     opentracing "^0.14.3"
     promise-polyfill "^8.1.3"
 
-"@elastic/apm-rum-vue@^2.1.6":
+"@elastic/apm-rum-vue@^2.1.9":
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/@elastic/apm-rum-vue/-/apm-rum-vue-2.1.9.tgz#991456d43b2abb5659a5816438355f6d86cfea17"
   integrity sha512-OERqBCun+sDseNcvGSRt1kO8YnnOi46vLNOaNBabwGczYwgucjcXtS0kpqz0iL7mxjF4DXRJhHxzG86cW1RJvg==
@@ -1299,9 +1299,9 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz#4fc56c15c580b9adb7dc3c333a134e540b44bfb1"
   integrity sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==
 
-"@mdi/font@git+https://github.com/nanawel/MaterialDesign-Webfont.git#semver:v6.7.96-lite-1":
-  version "6.7.96"
-  resolved "git+https://github.com/nanawel/MaterialDesign-Webfont.git#c231fc3204140fcb55fba3f253e899eb5004c900"
+"@mdi/font@git+https://github.com/nanawel/MaterialDesign-Webfont.git#semver:v7.4.47-lite-1":
+  version "7.4.47"
+  resolved "git+https://github.com/nanawel/MaterialDesign-Webfont.git#8ad4a65af7ce38c31f179ce42b7452a8ca1bd4bb"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
@@ -2048,7 +2048,7 @@
     webpack "^5.54.0"
     yorkie "^2.0.0"
 
-"@vue/cli-plugin-pwa@~5.0.6":
+"@vue/cli-plugin-pwa@^5.0.8":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-pwa/-/cli-plugin-pwa-5.0.8.tgz#b4c55873d96ce6effa08e5b578fe1a5ec6c7fd10"
   integrity sha512-MnD9Y6I3nX7c/NawpsJtbXaGFjI9LT5Az7IQjpshS65+yvuOcxV2j/tCjPTrja+zd1VmB4DZUhrfUU2exSBfGg==
@@ -2194,7 +2194,7 @@
     subscriptions-transport-ws "^0.11.0"
     typescript "~4.5.5"
 
-"@vue/cli@^5.0.4":
+"@vue/cli@^5.0.8":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@vue/cli/-/cli-5.0.8.tgz#97b2bad9cb331dcffdd4fbe8532bdeacd2441166"
   integrity sha512-c/QKPdC09bYkW22m/boXkLaiz10z0Z2WHZO7zEeNdfSduqyWINZhKc6hVQU3Vk0NXW7BJAd7zWmcUrC8L9TuAA==
@@ -3250,9 +3250,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001646, caniuse-lite@^1.0.30001688:
-  version "1.0.30001692"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001692.tgz#4585729d95e6b95be5b439da6ab55250cd125bf9"
-  integrity sha512-A95VKan0kdtrsnMubMKxEKUKImOPSuCpYgxSQBo036P5YYgVIcOYJEgt/txJWqObiRQeISNCfef9nvlQ0vbV7A==
+  version "1.0.30001695"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001695.tgz#39dfedd8f94851132795fdf9b79d29659ad9c4d4"
+  integrity sha512-vHyLade6wTgI2u1ec3WQBxv+2BrTERV28UXQu9LO6lZ9pYeMk34vjXFLOxo1A4UBA8XTL4njRQZdno/yYaSmWw==
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.4.0"
@@ -3621,7 +3621,7 @@ core-js-compat@^3.38.0, core-js-compat@^3.38.1, core-js-compat@^3.8.3:
   dependencies:
     browserslist "^4.24.3"
 
-core-js@^3.6.5, core-js@^3.8.3:
+core-js@^3.40.0, core-js@^3.8.3:
   version "3.40.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.40.0.tgz#2773f6b06877d8eda102fc42f828176437062476"
   integrity sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ==
@@ -8643,7 +8643,7 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-slugify@^1.6.5:
+slugify@^1.6.6:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.6.6.tgz#2d4ac0eacb47add6af9e04d3be79319cbcc7924b"
   integrity sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==
@@ -9682,7 +9682,7 @@ vue-resize@^2.0.0-alpha.1:
   resolved "https://registry.yarnpkg.com/vue-resize/-/vue-resize-2.0.0-alpha.1.tgz#43eeb79e74febe932b9b20c5c57e0ebc14e2df3a"
   integrity sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==
 
-vue-router@^4.3.0:
+vue-router@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.5.0.tgz#58fc5fe374e10b6018f910328f756c3dae081f14"
   integrity sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==
@@ -9711,7 +9711,7 @@ vue-virtual-scroller@^2.0.0-beta.8:
     vue-observe-visibility "^2.0.0-alpha.1"
     vue-resize "^2.0.0-alpha.1"
 
-vue3-touch-events@^4.1.8:
+vue3-touch-events@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/vue3-touch-events/-/vue3-touch-events-4.2.0.tgz#77adb5c9522d629992f310d694689a79b17ed9be"
   integrity sha512-DgZJo8/QE72ilEDJ5+01SJ2JH7Aj55k0PidGLDU1jHewIG3GOW25azFuDsJ6nIXrfN8kMXBRR8PDx0GuNbIXhw==
@@ -9724,7 +9724,7 @@ vue@^2.6.14:
     "@vue/compiler-sfc" "2.7.16"
     csstype "^3.1.0"
 
-vue@^3.4.20:
+vue@^3.5.13:
   version "3.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.13.tgz#9f760a1a982b09c0c04a867903fc339c9f29ec0a"
   integrity sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==
@@ -9735,7 +9735,7 @@ vue@^3.4.20:
     "@vue/server-renderer" "3.5.13"
     "@vue/shared" "3.5.13"
 
-vuetify@^3.6.8:
+vuetify@^3.7.6:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.7.6.tgz#f966dbe74666cb847d67b3e3d8c6fee75cf972d3"
   integrity sha512-lol0Va5HtMIqZfjccSD5DLv5v31R/asJXzc6s7ULy51PHr1DjXxWylZejhq0kVpMGW64MiV1FmA/p8eYQfOWfQ==
