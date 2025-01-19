@@ -36,7 +36,7 @@
     "sha1": "^1.1.1",
     "slugify": "^1.6.6",
     "socket.io": "^4.8.1",
-    "uuid": "^10.0.0",
+    "uuid": "^11.0.5",
     "yargs": "^17.7.2"
   },
   "nodemonConfig": {

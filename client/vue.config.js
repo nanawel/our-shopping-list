@@ -87,6 +87,16 @@ module.exports = {
         }
       ]
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        },
+        sass: {
+          api: 'modern-compiler'
+        }
+      }
+    },
     iconPaths: {
       faviconSVG: null,
       favicon32: 'img/icons/favicon-32x32.png',
