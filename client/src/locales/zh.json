@@ -47,7 +47,7 @@
         "button": {
             "open-board": "打开面板"
         },
-        "reopen-last-board": "您是否想要重新打开 <strong>%{boardName}</strong> ？"
+        "reopen-last-board": "您是否想要重新打开 <strong>{boardName}</strong> ？"
     },
     "board-home-nav": {
         "title": "创建购物清单",
@@ -92,7 +92,7 @@
             "qty": "数量",
             "details": "详情"
         },
-        "last-checked-label": "最近勾选: %{date}",
+        "last-checked-label": "最近勾选: {date}",
         "help-onclick-checked": "💡 ⬅ 向左滑动以取消选中项目",
         "help-onclick-unchecked": "💡 向右滑动以确认勾选项目 ➡"
     },

@@ -54,15 +54,15 @@
             "open-board": "Open board"
         },
         "boards": {
-            "all-title": "All boards (%{count})",
+            "all-title": "All boards ({count})",
             "default-retrieval-error-message": "Sorry, could not fetch boards.",
             "item": {
-                "lists-count": "(no list yet) | 1 list | %{count} lists"
+                "lists-count": "(no list yet) | 1 list | {count} lists"
             },
             "confirm-deletion": "Delete this board?",
             "deleted-successfully": "Board deleted."
         },
-        "reopen-last-board": "Would you like to reopen <strong>%{boardName}</strong> instead?"
+        "reopen-last-board": "Would you like to reopen <strong>{boardName}</strong> instead?"
     },
     "board-home-nav": {
         "title": "Create a shopping list",
@@ -111,7 +111,7 @@
             "details": "Details",
             "list": "Move to list..."
         },
-        "last-checked-label": "Last checked: %{date}",
+        "last-checked-label": "Last checked: {date}",
         "help-onclick-checked": "💡 ⬅ Swipe left to uncheck an item",
         "help-onclick-unchecked": "💡 Swipe right to check an item ➡"
     },

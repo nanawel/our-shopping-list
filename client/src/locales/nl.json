@@ -49,15 +49,15 @@
             "open-board": "Open bord"
         },
         "boards": {
-            "all-title": "Alle borden (%{count})",
+            "all-title": "Alle borden ({count})",
             "default-retrieval-error-message": "Sorry, kon borden niet ophalen.",
             "item": {
-                "lists-count": "(nog geen lijst) | 1 lijst | %{count} lijsten"
+                "lists-count": "(nog geen lijst) | 1 lijst | {count} lijsten"
             },
             "confirm-deletion": "Weet je zeker dat je dit bord wilt verwijderen?",
             "deleted-successfully": "Bord succesvol verwijderd."
         },
-        "reopen-last-board": "Wil je in plaats daarvan <strong>%{boardName}</strong> openen?",
+        "reopen-last-board": "Wil je in plaats daarvan <strong>{boardName}</strong> openen?",
         "page-title": "Start"
     },
     "board-home-nav": {
@@ -103,7 +103,7 @@
             "qty": "Hoeveelheid",
             "details": "Details"
         },
-        "last-checked-label": "Laatst gecontroleerd: %{date}",
+        "last-checked-label": "Laatst gecontroleerd: {date}",
         "help-onclick-checked": "💡 ⬅ Veeg naar links om een item uit te vinken",
         "help-onclick-unchecked": "💡 Veeg naar rechts om een item aan te vinken ➡"
     },

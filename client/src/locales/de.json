@@ -47,7 +47,7 @@
         "button": {
             "open-board": "Board öffnen"
         },
-        "reopen-last-board": "Möchtest du stattdessen <strong>%{boardName}</strong> wieder öffnen?"
+        "reopen-last-board": "Möchtest du stattdessen <strong>{boardName}</strong> wieder öffnen?"
     },
     "board-home-nav": {
         "title": "Einkaufsliste erstellen",
@@ -92,7 +92,7 @@
             "qty": "Menge",
             "details": "Details"
         },
-        "last-checked-label": "Zuletzt abgehakt: %{date}",
+        "last-checked-label": "Zuletzt abgehakt: {date}",
         "help-onclick-checked": "💡 ⬅ Nach links wischen, um ein Element wiederherzustellen",
         "help-onclick-unchecked": "💡 Nach rechts wischen, um ein Element abzuhaken ➡"
     },

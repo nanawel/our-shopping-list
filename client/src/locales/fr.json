@@ -54,15 +54,15 @@
             "open-board": "Ouvrir le tableau"
         },
         "boards": {
-            "all-title": "Tous les tableaux (%{count})",
+            "all-title": "Tous les tableaux ({count})",
             "default-retrieval-error-message": "Désolé, impossible de récupérer les tableaux.",
             "item": {
-                "lists-count": "(aucune liste) | 1 liste | %{count} listes"
+                "lists-count": "(aucune liste) | 1 liste | {count} listes"
             },
             "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
             "deleted-successfully": "Tableau supprimé avec succès."
         },
-        "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>%{boardName}</strong> ?"
+        "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>{boardName}</strong> ?"
     },
     "board-home-nav": {
         "title": "Créer une liste de courses",
@@ -111,7 +111,7 @@
             "details": "Détails",
             "list": "Déplacer vers..."
         },
-        "last-checked-label": "Coché la dernière fois : %{date}",
+        "last-checked-label": "Coché la dernière fois : {date}",
         "help-onclick-checked": "💡 ⬅ Faites glisser vers la gauche pour décocher",
         "help-onclick-unchecked": "💡 Faites glisser vers la droite pour cocher ➡"
     },

@@ -49,15 +49,15 @@
             "open-board": "פתיחת לוח"
         },
         "boards": {
-            "all-title": "כל הלוחות (%{count})",
+            "all-title": "כל הלוחות ({count})",
             "default-retrieval-error-message": "לא הצלחנו למשוך לוחות, סליחה.",
             "item": {
-                "lists-count": "(אין רשימות עדיין) | רשימה אחת | %{count} רשימות"
+                "lists-count": "(אין רשימות עדיין) | רשימה אחת | {count} רשימות"
             },
             "confirm-deletion": "למחוק את הלוח הזה?",
             "deleted-successfully": "הלוח נמחק בהצלחה."
         },
-        "reopen-last-board": "לפתוח את <strong>%{boardName}</strong> מחדש במקום?",
+        "reopen-last-board": "לפתוח את <strong>{boardName}</strong> מחדש במקום?",
         "page-title": "מסך בית"
     },
     "board-home-nav": {
@@ -104,7 +104,7 @@
             "details": "פרטים",
             "list": "הזז לרשימה..."
         },
-        "last-checked-label": "בדיקה אחרונה: %{date}",
+        "last-checked-label": "בדיקה אחרונה: {date}",
         "help-onclick-checked": "💡 ⬅ יש להחליק שמאלה כדי לבטל סימון פריט",
         "help-onclick-unchecked": "💡 יש להחליק ימינה כדי לסמן פריט ➡"
     },

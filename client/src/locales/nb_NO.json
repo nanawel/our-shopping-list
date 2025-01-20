@@ -40,15 +40,15 @@
             "open-board": "Åpne listesamling"
         },
         "boards": {
-            "all-title": "Alle listesamlinger (%{count})",
+            "all-title": "Alle listesamlinger ({count})",
             "item": {
-                "lists-count": "(ingen listesamlinger enda) | 1 liste | %{count} lister"
+                "lists-count": "(ingen listesamlinger enda) | 1 liste | {count} lister"
             },
             "confirm-deletion": "Slett denne listesamlingen?",
             "default-retrieval-error-message": "Kunne ikke hente listesamlinger.",
             "deleted-successfully": "Listesamling slettet."
         },
-        "reopen-last-board": "Åpne <strong>%{boardName}</strong> igjen istedenfor?",
+        "reopen-last-board": "Åpne <strong>{boardName}</strong> igjen istedenfor?",
         "input": {
             "board-name": "Åpne listesamling …"
         }
@@ -97,7 +97,7 @@
             "qty": "Mengde",
             "details": "Detaljer"
         },
-        "last-checked-label": "Sist sjekket: %{date}",
+        "last-checked-label": "Sist sjekket: {date}",
         "help-onclick-checked": "💡 ⬅ Dra til venstre for å fravelge et element",
         "help-onclick-unchecked": "💡 Dra til høyre for å velge et element ➡"
     },
