@@ -65,7 +65,7 @@
                       <v-list-item :key="item._id"
                                    :to="{ name: 'board', params: { boardSlug: item.slug } }"
                                    :title="item.name"
-                                   :subtitle="$tc('home.boards.item.lists-count', item.lists?.length, {count: item.lists?.length})">
+                                   :subtitle="$t('home.boards.item.lists-count', item.lists?.length, {count: item.lists?.length})">
                         <template v-slot:prepend>
                           <v-avatar color="teal-lighten-2">
                             <v-icon color="white">mdi-clipboard-list-outline</v-icon>
