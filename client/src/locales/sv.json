@@ -1,1 +1,128 @@
-{}
+{
+    "delete": "Radera",
+    "edit": "Redigera",
+    "back": "Tillbaka",
+    "menu-nav": {
+        "item": {
+            "debug": "Debug",
+            "about": "Om",
+            "new-list": "Ny lista…"
+        },
+        "open": "Öppna menyn"
+    },
+    "confirmation-question": "Är du säker?",
+    "errors": {
+        "board": {
+            "invalid-name": "Felaktigt tavelnamn!",
+            "delete": "Kunde inte radera tavla :("
+        },
+        "list": {
+            "load": "Kunde inte ladda lista :(",
+            "save": "Kunde inte spara lista :(",
+            "delete": "Kunde inte radera lista :("
+        },
+        "item": {
+            "load": "Kunde inte ladda vara :(",
+            "save": "Kunde inte spara vara :(",
+            "delete": "Kunde inte radera vara :("
+        },
+        "overlay": {
+            "not-connected": "Inte ansluten"
+        }
+    },
+    "about": {
+        "page-title": "Om"
+    },
+    "close": "Stäng",
+    "cancel": "Avbryt",
+    "save": "Spara",
+    "share": "Dela",
+    "ok": "Okej",
+    "ok-thanks": "Okej, tack",
+    "notice": {
+        "application-updated-alert": "Appen har uppgraderats.\nDenna sida kommer att uppdateras automatiskt.",
+        "force-refresh-hint-title": "Visste du?",
+        "force-refresh-hint-message": "Använd uppdatera-knappen i vänstra menyn för att lösa synk- eller uppgraderingsproblem."
+    },
+    "home": {
+        "page-title": "Hem",
+        "input": {
+            "board-name": "Öppna tavla…"
+        },
+        "button": {
+            "open-board": "Öppna tavla"
+        },
+        "boards": {
+            "all-title": "Alla tavlor ({count})",
+            "default-retrieval-error-message": "Kunde inte hämta tavlor.",
+            "item": {
+                "lists-count": "(inga listor än) | 1 lista | {count} listor"
+            },
+            "confirm-deletion": "Radera denna tavla?",
+            "deleted-successfully": "Tavla raderad."
+        },
+        "reopen-last-board": "Vill du återöppna <strong>{boardName}</strong> istället?"
+    },
+    "board-home-nav": {
+        "title": "Skapa en köplista",
+        "subtitle": "Du kan då dela den till familjemedlemmar och arbeta med den.",
+        "button": "Skapa en lista"
+    },
+    "list": {
+        "toggle-history-mode": "Växla historieläge",
+        "not-found": {
+            "title": "Lista hittades inte!",
+            "subtitle": "Denna lista existerar inte (längre?).",
+            "button": "Skapa en lista"
+        },
+        "new": {
+            "title": "Namnge din lista",
+            "input-placeholder": "Min köplista…",
+            "button": "Skapa"
+        },
+        "new-item": {
+            "subtitle": "Denna lista är tom.",
+            "button": "Ny vara"
+        },
+        "search-bar": {
+            "add-button": "Lägg till",
+            "input-label": "Sök eller lägg till en ny vara"
+        },
+        "loading": {
+            "subtitle": "Laddar…"
+        },
+        "all-checked": {
+            "subtitle": "Alla varor är bockade!"
+        },
+        "none-checked": {
+            "subtitle": "Ingen vara här (än)…"
+        },
+        "no-results": {
+            "title": "Inga resultat",
+            "subtitle": "Klicka \"Lägg till\" för att skapa en ny vara."
+        }
+    },
+    "item": {
+        "empty-qty-label": "(ingen kvantitet specificerad)",
+        "input": {
+            "name": "Namn",
+            "qty": "Kvantitet",
+            "details": "Detaljer",
+            "list": "Flytta till lista…"
+        },
+        "last-checked-label": "Sist bockad: {date}",
+        "help-onclick-checked": "💡 ⬅ Swipa vänster för att bocka ur en vara",
+        "help-onclick-unchecked": "💡 Swipa höger för att bocka en vara ➡"
+    },
+    "edit-list-dialog": {
+        "existing-title": "Redigera lista",
+        "new-title": "(Ny lista)",
+        "name-input": "Namn",
+        "creation-date-label": "Skapelsedatum"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Redigera vara",
+        "new-title": "Ny vara"
+    },
+    "app-name": "Our Shopping List"
+}
