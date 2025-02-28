@@ -1,0 +1,128 @@
+{
+    "app-name": "Our Shopping List",
+    "back": "Retroceder",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "delete": "Borrar",
+    "edit": "Editar",
+    "save": "Guardar",
+    "share": "Compartir",
+    "ok": "OK",
+    "ok-thanks": "De acuerdo, gracias",
+    "confirmation-question": "¿Estás seguro?",
+    "errors": {
+        "board": {
+            "invalid-name": "¡Nombre de panel no válido!",
+            "delete": "No se pudo borrar el panel :("
+        },
+        "list": {
+            "load": "Could not load list :(",
+            "save": "Could not save list :(",
+            "delete": "Could not delete list :("
+        },
+        "item": {
+            "load": "Could not load item :(",
+            "save": "Could not save item :(",
+            "delete": "Could not delete item :("
+        },
+        "overlay": {
+            "not-connected": "Not connected"
+        }
+    },
+    "notice": {
+        "application-updated-alert": "The app has been upgraded.\nThis page will now be reloaded automatically.",
+        "force-refresh-hint-title": "Did you know?",
+        "force-refresh-hint-message": "Use the refresh button in the left menu to solve sync- or upgrading issues."
+    },
+    "menu-nav": {
+        "open": "Open the menu",
+        "item": {
+            "new-list": "New list…",
+            "about": "About",
+            "debug": "Debug"
+        }
+    },
+    "about": {
+        "page-title": "About"
+    },
+    "home": {
+        "page-title": "Home",
+        "input": {
+            "board-name": "Open Board…"
+        },
+        "button": {
+            "open-board": "Open board"
+        },
+        "boards": {
+            "all-title": "All boards ({count})",
+            "default-retrieval-error-message": "Sorry, could not fetch boards.",
+            "item": {
+                "lists-count": "(no list yet) | 1 list | {count} lists"
+            },
+            "confirm-deletion": "Delete this board?",
+            "deleted-successfully": "Board deleted."
+        },
+        "reopen-last-board": "Would you like to reopen <strong>{boardName}</strong> instead?"
+    },
+    "board-home-nav": {
+        "title": "Create a shopping list",
+        "subtitle": "You will then be able to share it with relatives and work with it.",
+        "button": "Create a list"
+    },
+    "list": {
+        "toggle-history-mode": "Toggle history mode",
+        "not-found": {
+            "title": "List not found!",
+            "subtitle": "This list does not exist (anymore?).",
+            "button": "Create a list"
+        },
+        "new": {
+            "title": "Name your list",
+            "input-placeholder": "My shopping list…",
+            "button": "Create"
+        },
+        "new-item": {
+            "subtitle": "This list is empty.",
+            "button": "New item"
+        },
+        "loading": {
+            "subtitle": "Loading…"
+        },
+        "all-checked": {
+            "subtitle": "All items are checked!"
+        },
+        "none-checked": {
+            "subtitle": "No item here (yet)…"
+        },
+        "no-results": {
+            "title": "No results",
+            "subtitle": "Click \"Add\" to create a new item."
+        },
+        "search-bar": {
+            "input-label": "Search or add a new item",
+            "add-button": "Add"
+        }
+    },
+    "item": {
+        "empty-qty-label": "(no quantity specified)",
+        "input": {
+            "name": "Name",
+            "qty": "Quantity",
+            "details": "Details",
+            "list": "Move to list..."
+        },
+        "last-checked-label": "Last checked: {date}",
+        "help-onclick-checked": "💡 ⬅ Swipe left to uncheck an item",
+        "help-onclick-unchecked": "💡 Swipe right to check an item ➡"
+    },
+    "edit-list-dialog": {
+        "existing-title": "Edit List",
+        "new-title": "(New List)",
+        "name-input": "Name",
+        "creation-date-label": "Creation Date"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Edit Item",
+        "new-title": "New Item"
+    }
+}
