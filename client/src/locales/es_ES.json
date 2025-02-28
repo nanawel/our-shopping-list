@@ -1,6 +1,6 @@
 {
     "app-name": "Our Shopping List",
-    "back": "Retroceder",
+    "back": "Volver",
     "close": "Cerrar",
     "cancel": "Cancelar",
     "delete": "Borrar",
@@ -9,120 +9,120 @@
     "share": "Compartir",
     "ok": "OK",
     "ok-thanks": "De acuerdo, gracias",
-    "confirmation-question": "¿Estás seguro?",
+    "confirmation-question": "¿Está seguro?",
     "errors": {
         "board": {
             "invalid-name": "¡Nombre de panel no válido!",
             "delete": "No se pudo borrar el panel :("
         },
         "list": {
-            "load": "Could not load list :(",
-            "save": "Could not save list :(",
-            "delete": "Could not delete list :("
+            "load": "No se pudo cargar la lista :(",
+            "save": "No se pudo guardar la lista :(",
+            "delete": "No se pudo borrar la lista :("
         },
         "item": {
-            "load": "Could not load item :(",
-            "save": "Could not save item :(",
-            "delete": "Could not delete item :("
+            "load": "No se pudo cargar el artículo :(",
+            "save": "No se pudo guardar el artículo :(",
+            "delete": "No se pudo borrar el artículo :("
         },
         "overlay": {
-            "not-connected": "Not connected"
+            "not-connected": "No conectado"
         }
     },
     "notice": {
-        "application-updated-alert": "The app has been upgraded.\nThis page will now be reloaded automatically.",
-        "force-refresh-hint-title": "Did you know?",
-        "force-refresh-hint-message": "Use the refresh button in the left menu to solve sync- or upgrading issues."
+        "application-updated-alert": "La aplicación se actualizó.\nÉsta página se recargará automáticamente.",
+        "force-refresh-hint-title": "¿Sabía que...?",
+        "force-refresh-hint-message": "Use el botón de recarga en el menú de la izquierda para resolver problemas de sincronización o actualización"
     },
     "menu-nav": {
-        "open": "Open the menu",
+        "open": "Abrir el menú",
         "item": {
-            "new-list": "New list…",
-            "about": "About",
-            "debug": "Debug"
+            "new-list": "Nueva lista…",
+            "about": "Acerca de",
+            "debug": "Depurar"
         }
     },
     "about": {
-        "page-title": "About"
+        "page-title": "Acerca de"
     },
     "home": {
-        "page-title": "Home",
+        "page-title": "Inicio",
         "input": {
-            "board-name": "Open Board…"
+            "board-name": "Abrir panel…"
         },
         "button": {
-            "open-board": "Open board"
+            "open-board": "Abrir panel"
         },
         "boards": {
-            "all-title": "All boards ({count})",
-            "default-retrieval-error-message": "Sorry, could not fetch boards.",
+            "all-title": "Todos los paneles ({count})",
+            "default-retrieval-error-message": "Lo siento, no se pudieron recuperar todos los paneles.",
             "item": {
-                "lists-count": "(no list yet) | 1 list | {count} lists"
+                "lists-count": "(aún sin listas) | 1 lista | {count} listas"
             },
-            "confirm-deletion": "Delete this board?",
-            "deleted-successfully": "Board deleted."
+            "confirm-deletion": "¿Borrar este panel?",
+            "deleted-successfully": "Panel borrado."
         },
-        "reopen-last-board": "Would you like to reopen <strong>{boardName}</strong> instead?"
+        "reopen-last-board": "¿Le gustaría volver a abrir <strong>{boardName}</strong>?"
     },
     "board-home-nav": {
-        "title": "Create a shopping list",
-        "subtitle": "You will then be able to share it with relatives and work with it.",
-        "button": "Create a list"
+        "title": "Crear una lista de la compra",
+        "subtitle": "A continuación podrá compartirla con sus familiares y trabajar con ella",
+        "button": "Crear una lista"
     },
     "list": {
-        "toggle-history-mode": "Toggle history mode",
+        "toggle-history-mode": "Conmutar modo historial",
         "not-found": {
-            "title": "List not found!",
-            "subtitle": "This list does not exist (anymore?).",
-            "button": "Create a list"
+            "title": "¡Lista no encontrada!",
+            "subtitle": "Esta lista no existe (¿ya?).",
+            "button": "Crear una lista"
         },
         "new": {
-            "title": "Name your list",
-            "input-placeholder": "My shopping list…",
-            "button": "Create"
+            "title": "Elija un nombre a su lista",
+            "input-placeholder": "Mi lista de la compra…",
+            "button": "Crear"
         },
         "new-item": {
-            "subtitle": "This list is empty.",
-            "button": "New item"
+            "subtitle": "Esta lista está vacía.",
+            "button": "Nuevo artículo"
         },
         "loading": {
-            "subtitle": "Loading…"
+            "subtitle": "Cargando…"
         },
         "all-checked": {
-            "subtitle": "All items are checked!"
+            "subtitle": "¡Todos los artículos se marcaron!"
         },
         "none-checked": {
-            "subtitle": "No item here (yet)…"
+            "subtitle": "No hay artículos aquí (todavía)…"
         },
         "no-results": {
-            "title": "No results",
-            "subtitle": "Click \"Add\" to create a new item."
+            "title": "Sin resultados",
+            "subtitle": "Haga clic en \"Añadir\" para crear un nuevo artículo."
         },
         "search-bar": {
-            "input-label": "Search or add a new item",
-            "add-button": "Add"
+            "input-label": "Busque o añada un nuevo artículo",
+            "add-button": "Añadir"
         }
     },
     "item": {
-        "empty-qty-label": "(no quantity specified)",
+        "empty-qty-label": "(cantidad no especificada)",
         "input": {
-            "name": "Name",
-            "qty": "Quantity",
-            "details": "Details",
-            "list": "Move to list..."
+            "name": "Nombre",
+            "qty": "Cantidad",
+            "details": "Detalles",
+            "list": "Mover a la lista..."
         },
-        "last-checked-label": "Last checked: {date}",
-        "help-onclick-checked": "💡 ⬅ Swipe left to uncheck an item",
-        "help-onclick-unchecked": "💡 Swipe right to check an item ➡"
+        "last-checked-label": "Última comprobación: {date}",
+        "help-onclick-checked": "💡 ⬅ Deslizar hacia la izquierda para desmarcar un artículo",
+        "help-onclick-unchecked": "💡 Deslizar hacia la derecha para marcar un artículo ➡"
     },
     "edit-list-dialog": {
-        "existing-title": "Edit List",
-        "new-title": "(New List)",
-        "name-input": "Name",
-        "creation-date-label": "Creation Date"
+        "existing-title": "Editar lista",
+        "new-title": "(Nueva lista)",
+        "name-input": "Nombre",
+        "creation-date-label": "Fecha de creación"
     },
     "edit-item-dialog": {
-        "existing-title": "Edit Item",
-        "new-title": "New Item"
+        "existing-title": "Editar artículo",
+        "new-title": "Nuevo artículo"
     }
 }
