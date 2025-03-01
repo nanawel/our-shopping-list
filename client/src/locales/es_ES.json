@@ -1,0 +1,128 @@
+{
+    "app-name": "Our Shopping List",
+    "back": "Volver",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "delete": "Borrar",
+    "edit": "Editar",
+    "save": "Guardar",
+    "share": "Compartir",
+    "ok": "OK",
+    "ok-thanks": "De acuerdo, gracias",
+    "confirmation-question": "¿Está seguro?",
+    "errors": {
+        "board": {
+            "invalid-name": "¡Nombre de panel no válido!",
+            "delete": "No se pudo borrar el panel :("
+        },
+        "list": {
+            "load": "No se pudo cargar la lista :(",
+            "save": "No se pudo guardar la lista :(",
+            "delete": "No se pudo borrar la lista :("
+        },
+        "item": {
+            "load": "No se pudo cargar el artículo :(",
+            "save": "No se pudo guardar el artículo :(",
+            "delete": "No se pudo borrar el artículo :("
+        },
+        "overlay": {
+            "not-connected": "No conectado"
+        }
+    },
+    "notice": {
+        "application-updated-alert": "La aplicación se actualizó.\nÉsta página se recargará automáticamente.",
+        "force-refresh-hint-title": "¿Sabía que...?",
+        "force-refresh-hint-message": "Use el botón de recarga en el menú de la izquierda para resolver problemas de sincronización o actualización"
+    },
+    "menu-nav": {
+        "open": "Abrir el menú",
+        "item": {
+            "new-list": "Nueva lista…",
+            "about": "Acerca de",
+            "debug": "Depurar"
+        }
+    },
+    "about": {
+        "page-title": "Acerca de"
+    },
+    "home": {
+        "page-title": "Inicio",
+        "input": {
+            "board-name": "Abrir panel…"
+        },
+        "button": {
+            "open-board": "Abrir panel"
+        },
+        "boards": {
+            "all-title": "Todos los paneles ({count})",
+            "default-retrieval-error-message": "Lo siento, no se pudieron recuperar todos los paneles.",
+            "item": {
+                "lists-count": "(aún sin listas) | 1 lista | {count} listas"
+            },
+            "confirm-deletion": "¿Borrar este panel?",
+            "deleted-successfully": "Panel borrado."
+        },
+        "reopen-last-board": "¿Le gustaría volver a abrir <strong>{boardName}</strong>?"
+    },
+    "board-home-nav": {
+        "title": "Crear una lista de la compra",
+        "subtitle": "A continuación podrá compartirla con sus familiares y trabajar con ella",
+        "button": "Crear una lista"
+    },
+    "list": {
+        "toggle-history-mode": "Conmutar modo historial",
+        "not-found": {
+            "title": "¡Lista no encontrada!",
+            "subtitle": "Esta lista no existe (¿ya?).",
+            "button": "Crear una lista"
+        },
+        "new": {
+            "title": "Elija un nombre a su lista",
+            "input-placeholder": "Mi lista de la compra…",
+            "button": "Crear"
+        },
+        "new-item": {
+            "subtitle": "Esta lista está vacía.",
+            "button": "Nuevo artículo"
+        },
+        "loading": {
+            "subtitle": "Cargando…"
+        },
+        "all-checked": {
+            "subtitle": "¡Todos los artículos se marcaron!"
+        },
+        "none-checked": {
+            "subtitle": "No hay artículos aquí (todavía)…"
+        },
+        "no-results": {
+            "title": "Sin resultados",
+            "subtitle": "Haga clic en \"Añadir\" para crear un nuevo artículo."
+        },
+        "search-bar": {
+            "input-label": "Busque o añada un nuevo artículo",
+            "add-button": "Añadir"
+        }
+    },
+    "item": {
+        "empty-qty-label": "(cantidad no especificada)",
+        "input": {
+            "name": "Nombre",
+            "qty": "Cantidad",
+            "details": "Detalles",
+            "list": "Mover a la lista..."
+        },
+        "last-checked-label": "Última comprobación: {date}",
+        "help-onclick-checked": "💡 ⬅ Deslizar hacia la izquierda para desmarcar un artículo",
+        "help-onclick-unchecked": "💡 Deslizar hacia la derecha para marcar un artículo ➡"
+    },
+    "edit-list-dialog": {
+        "existing-title": "Editar lista",
+        "new-title": "(Nueva lista)",
+        "name-input": "Nombre",
+        "creation-date-label": "Fecha de creación"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Editar artículo",
+        "new-title": "Nuevo artículo"
+    }
+}
