@@ -73,7 +73,7 @@
         "toggle-history-mode": "Toggle history mode",
         "not-found": {
             "title": "List not found!",
-            "subtitle": "This list does not exist (anymore?).",
+            "subtitle": "This list does not exist (anymore?)",
             "button": "Create a list"
         },
         "new": {
