@@ -9,21 +9,21 @@
     "share": "Partager",
     "ok": "OK",
     "ok-thanks": "Compris, merci",
-    "confirmation-question": "Êtes-vous sûr(e)?",
+    "confirmation-question": "Êtes-vous sûr(e) ?",
     "errors": {
         "board": {
-            "invalid-name": "Nom de tableau invalide !",
-            "delete": "Impossible de supprimer le tableau :("
+            "invalid-name": "Nom de tableau invalide !",
+            "delete": "Impossible de supprimer le tableau :("
         },
         "list": {
-            "load": "Impossible de charger la liste :(",
-            "save": "Impossible d'enregistrer la liste :(",
-            "delete": "Impossible de supprimer la liste :("
+            "load": "Impossible de charger la liste :(",
+            "save": "Impossible d'enregistrer la liste :(",
+            "delete": "Impossible de supprimer la liste :("
         },
         "item": {
-            "load": "Impossible de charger l'article :(",
-            "save": "Impossible d'enregistrer l'article :(",
-            "delete": "Impossible de supprimer l'article :("
+            "load": "Impossible de charger l'article :(",
+            "save": "Impossible d'enregistrer l'article :(",
+            "delete": "Impossible de supprimer l'article :("
         },
         "overlay": {
             "not-connected": "Non connecté"
@@ -62,7 +62,7 @@
             "confirm-deletion": "Êtes-vous sûr(e) de vouloir supprimer ce tableau ?",
             "deleted-successfully": "Tableau supprimé avec succès."
         },
-        "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>{boardName}</strong> ?"
+        "reopen-last-board": "Voulez-vous plutôt rouvrir <strong>{boardName}</strong> ?"
     },
     "board-home-nav": {
         "title": "Créer une liste de courses",
@@ -72,8 +72,8 @@
     "list": {
         "toggle-history-mode": "Basculer en mode historique",
         "not-found": {
-            "title": "Liste introuvable !",
-            "subtitle": "Cette liste n'existe pas (plus ?)",
+            "title": "Liste introuvable !",
+            "subtitle": "Cette liste n'existe pas (plus ?)",
             "button": "Créer une liste"
         },
         "new": {
@@ -89,7 +89,7 @@
           "subtitle": "Chargement…"
         },
         "all-checked": {
-            "subtitle": "Tous les articles sont cochés !"
+            "subtitle": "Tous les articles sont cochés !"
         },
         "none-checked": {
             "subtitle": "Aucun article ici (pour l'instant)…"
