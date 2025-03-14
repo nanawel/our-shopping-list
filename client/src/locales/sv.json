@@ -72,7 +72,7 @@
         "toggle-history-mode": "Växla historieläge",
         "not-found": {
             "title": "Lista hittades inte!",
-            "subtitle": "Denna lista existerar inte (längre?).",
+            "subtitle": "Denna lista existerar inte (längre?)",
             "button": "Skapa en lista"
         },
         "new": {
