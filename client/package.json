@@ -24,6 +24,7 @@
     "dom7": "*",
     "lodash.debounce": "^4.0.8",
     "mitt": "^3.0.1",
+    "path-browserify": "^1.0.1",
     "register-service-worker": "^1.7.2",
     "slugify": "^1.6.6",
     "socket.io-client": "^4.7.5",
