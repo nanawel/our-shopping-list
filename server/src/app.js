@@ -36,10 +36,7 @@ require('./middleware/app/static')(app);
 require('./middleware/app/json')(app);
 
 
-mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`);
 
 const router = express.Router();
 app.use(router);
