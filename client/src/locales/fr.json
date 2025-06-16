@@ -86,7 +86,7 @@
             "button": "Nouvel article"
         },
         "loading": {
-          "subtitle": "Chargement…"
+            "subtitle": "Chargement…"
         },
         "all-checked": {
             "subtitle": "Tous les articles sont cochés !"
