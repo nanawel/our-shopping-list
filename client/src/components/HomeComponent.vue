@@ -175,7 +175,7 @@ export default {
       ev.stopPropagation()
       ev.preventDefault()
       this.$logger.debug('About to delete', board)
-      if (confirm(this.$t('home.boards.confirm-deletion'))) {
+      if (confirm(this.$t('home.boards.confirm-deletion'))) {  // eslint-disable-line
         this.$repository.delete(board)
           . then(() => {
             this.$snackbar.msg(this.$t('home.boards.deleted-successfully'))

@@ -36,7 +36,7 @@
     "vue-logger-plugin": "^2.2.3",
     "vue-router": "^4.5.0",
     "vue-virtual-scroller": "^2.0.0-beta.8",
-    "vue3-touch-events": "^4.2.0",
+    "vue3-touch-events": "^5.0.13",
     "vuetify": "^3.7.6",
     "vuex": "^4.1.0"
   },
@@ -51,10 +51,11 @@
     "@vue/compiler-sfc": "^3.1.0-0",
     "deepmerge": "^4.2.2",
     "eslint": "8",
-    "eslint-plugin-vue": "^8.0.3",
+    "eslint-plugin-vue": "^10.2",
     "eslint-plugin-vuetify": "^2.1.1",
     "sass": "^1.77.4",
     "sass-loader": "^16.0.4",
+    "vue-eslint-parser": "^10.1",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-plugin-vuetify": "^3.0.1"
   },

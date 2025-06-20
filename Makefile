@@ -45,6 +45,7 @@ down:
 
 .PHONY: build
 build:
+	test -n "$$COMPOSE_FILE" || echo >&2 "WARN: COMPOSE_FILE is empty. Will most likely not build aything."
 	docker compose build $(args)
 
 .PHONY: shell

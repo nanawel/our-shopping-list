@@ -130,7 +130,7 @@ export default {
     onDeleteListForm(listData) {
       const self = this
       this.$logger.debug('onDeleteListForm()', listData)
-      if (confirm(self.$t('confirmation-question'))) {
+      if (confirm(self.$t('confirmation-question'))) {  // eslint-disable-line
         this.deleteList(listData, function() {
           self.closeEditListForm()
         })

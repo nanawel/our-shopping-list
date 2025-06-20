@@ -346,7 +346,7 @@ export default {
       }, 500)
     )
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.unwatchLoadingOverlay()
   },
   mounted() {
@@ -530,7 +530,7 @@ export default {
     onDeleteItemForm(itemData) {
       this.$logger.debug('onDeleteItemForm()', itemData)
       const self = this
-      if (confirm(this.$t('confirmation-question'))) {
+      if (confirm(this.$t('confirmation-question'))) {  // eslint-disable-line
         if (itemData && itemData._id) {
           this.deleteItem(itemData, function() {
             self.closeEditItemForm()

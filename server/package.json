@@ -23,21 +23,21 @@
     "todo-list"
   ],
   "dependencies": {
-    "compression": "^1.7.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-urlrewrite": "^2.0.3",
-    "http-proxy-middleware": "^3.0.3",
-    "mongodb": "^6.12.0",
-    "mongoose": "^8.9.5",
-    "mongoose-unique-validator": "^5.0.1",
+    "compression": "^1.8",
+    "dotenv": "^16.5",
+    "express": "^5.1.0",
+    "express-urlrewrite": "^2.0",
+    "http-proxy-middleware": "^3.0",
+    "mongodb": "^6.17",
+    "mongoose": "^8.16",
+    "mongoose-unique-validator": "^5.0",
     "nanobus": "^4.5.0",
     "nodemon": "^3.1.9",
     "sha1": "^1.1.1",
     "slugify": "^1.6.6",
     "socket.io": "^4.8.1",
     "uuid": "^11.0.5",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0"
   },
   "nodemonConfig": {
     "ignore": [
