@@ -77,4 +77,4 @@ logs-follow:
 watch:
 	docker compose exec \
 		-u $$(id -u) app \
-		sh -c 'cd /app/client && yarn serve'
+		sh -c 'cd /app/client && yarn dev'
