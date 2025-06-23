@@ -28,6 +28,9 @@ EXPOSE 8080
 HEALTHCHECK --interval=1m --timeout=20s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:${LISTEN_PORT:-8080}/${BASE_URL}/healthcheck || exit 1
 
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT "/docker-entrypoint.sh"
+
 CMD [ "node", "index.js" ]
 
 COPY ./server/ /app
@@ -45,5 +48,5 @@ LABEL org.label-schema.build-date="${build_date}"
 ENV APP_ENV=production
 ENV APP_VERSION=${build_version}
 ENV APP_BUILD_ID=${build_id}
-ENV VUE_APP_I18N_LOCALE=en
-ENV VUE_APP_I18N_FALLBACK_LOCALE=en
+ENV VITE_I18N_LOCALE=en
+ENV VITE_I18N_FALLBACK_LOCALE=en

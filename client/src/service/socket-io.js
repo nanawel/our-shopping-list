@@ -11,7 +11,7 @@ const manager = new Manager({
   timeout: 4000,
 
   // https://socket.io/docs/v4/client-options/#transports
-  transports: config.VUE_APP_SOCKETIO_TRANSPORTS.split(',') || ['websocket'],
+  transports: config.VITE_SOCKETIO_TRANSPORTS.split(',') || ['websocket'],
 
   // https://socket.io/docs/v4/client-options/#upgrade
   //upgrade: true

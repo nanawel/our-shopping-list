@@ -4,8 +4,8 @@ import {store} from '@/service/store'
 import {logger} from '@/service/logger'
 import config from '@/config'
 
-const currentBoardSlugKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'currentBoardSlug'
-const currentListSlugKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'currentListId'
+const currentBoardSlugKey = config.VITE_LOCALSTORAGE_KEY_PREFIX + 'currentBoardSlug'
+const currentListSlugKey = config.VITE_LOCALSTORAGE_KEY_PREFIX + 'currentListId'
 
 export default {
   install() {

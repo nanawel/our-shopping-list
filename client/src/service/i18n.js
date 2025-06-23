@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n'
+import {createI18n, useI18n} from 'vue-i18n'
 
 import config from '@/config'
 import {logger} from '@/service/logger'
@@ -7,38 +7,38 @@ import {logger} from '@/service/logger'
  * @see https://phrase.com/blog/posts/ultimate-guide-to-vue-localization-with-vue-i18n/
  */
 function loadLocaleMessages() {
-  const locales = require.context(
-    '@/locales',
-    true,
-    /[A-Za-z0-9-_,\s]+\.json$/i
-  )
+  const locales = import.meta.glob('@/locales/*.json', {
+    eager: true, // => disable loading by promise
+    import: 'default'
+  })
   const messages = {}
-  locales.keys().forEach(key => {
+  Object.keys(locales).forEach((key) => {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i)
-    if (matched && matched.length > 1) {
+    if (matched?.length > 1) {
       const locale = matched[1]
-      logger.info('[i18n] Found locale: ', locale)
-      messages[locale] = locales(key)
+      logger.info('[i18n] Found locale:', locale)
+      messages[locale] = locales[key]
     }
   })
   return messages
 }
 
 function getLocale() {
-  if (config.VUE_APP_I18N_FORCE_LOCALE) {
-    return config.VUE_APP_I18N_LOCALE
+  if (config.VITE_I18N_FORCE_LOCALE) {
+    logger.info('[i18n] Forced locale to:', config.VITE_I18N_LOCALE)
+    return config.VITE_I18N_LOCALE
   }
-  return navigator.language.split('-')[0]
+  const detectedLocale = navigator.language.split('-')[0]
+  logger.info('[i18n] Detected locale:', detectedLocale)
+  return detectedLocale
 }
 
 const i18n = createI18n({
-  legacy: true,
+  legacy: true, // Keep API mode instead of Composition mode for now
   locale: getLocale(),
-  fallbackLocale: config.VUE_APP_I18N_FALLBACK_LOCALE,
+  fallbackLocale: config.VITE_I18N_FALLBACK_LOCALE,
   messages: loadLocaleMessages()
 })
-
-const legacyI18n = i18n.global
 
 const i18nPlugin = {
   install(app) {
@@ -46,8 +46,7 @@ const i18nPlugin = {
   }
 }
 
-
 export {
   i18nPlugin,
-  legacyI18n as i18n
+  i18n
 }

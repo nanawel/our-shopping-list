@@ -5,8 +5,6 @@ services:
     command: '${NODE_BIN:-node} index.js'
     ports:
       - '8080:8080'
-      - '8081:8081'
-      - '8888:8888'   # Webpack Bundle Analyzer
       - '9229:9229'   # Debugger
     volumes:
       - ./server:/app
@@ -15,10 +13,10 @@ services:
       # NOTICE: devDependencies won't be installed by yarn if you use "production"
       NODE_ENV: development
       ENABLE_TLS: 1
-      VUE_APP_CLIENT_LOG_ENABLED: 1
-      VUE_APP_CLIENT_LOG_CONSOLE_ENABLED: 1
-      VUE_APP_CLIENT_LOG_LEVEL: debug
-      VUE_APP_ENV: development
+      VITE_CLIENT_LOG_ENABLED: 1
+      VITE_CLIENT_LOG_CONSOLE_ENABLED: 1
+      VITE_CLIENT_LOG_LEVEL: debug
+      VITE_ENV: development
       # For more config variables, see server/src/config.js
     depends_on:
       - mongodb

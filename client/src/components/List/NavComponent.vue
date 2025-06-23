@@ -34,7 +34,7 @@
 <script>
 import {DISPLAY_MODE_UNCHECKED_ONLY, DISPLAY_MODE_CHECKED_HISTORY} from '@/constants'
 
-import EditDialogComponent from "@/components/List/EditDialogComponent"
+import EditDialogComponent from "@/components/List/EditDialogComponent.vue"
 import List from "@/models/List"
 
 export default {
@@ -130,7 +130,7 @@ export default {
     onDeleteListForm(listData) {
       const self = this
       this.$logger.debug('onDeleteListForm()', listData)
-      if (confirm(self.$t('confirmation-question'))) {  // eslint-disable-line
+      if (confirm(self.$t('confirmation-question'))) {
         this.deleteList(listData, function() {
           self.closeEditListForm()
         })

@@ -8,7 +8,7 @@ import {repository} from '@/service/repository'
 import eventBus from '@/service/event-bus'
 import {logger} from '@/service/logger'
 
-const serverHashKey = config.VUE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
+const serverHashKey = config.VITE_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
 
 export default {
   install: (app) => {
@@ -31,7 +31,7 @@ export default {
 
             if (shouldRefresh) {
               logger.warn('Server version mismatch, reloading app.')
-              alert(i18n.t('notice.application-updated-alert'))
+              alert(i18n.global.t('notice.application-updated-alert'))
               localStorage.removeItem(serverHashKey)
               hardRefresh()
               return

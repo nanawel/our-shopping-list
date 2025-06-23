@@ -176,9 +176,9 @@ import {apm} from '@/service/apm'
 
 import debounce from 'lodash.debounce'
 import {DynamicScroller, DynamicScrollerItem} from 'vue-virtual-scroller'
-import EmptyStateComponent from "./EmptyStateComponent"
-import ItemEditDialogComponent from "./Item/EditDialogComponent"
-import ItemComponent from "./ItemComponent"
+import EmptyStateComponent from "./EmptyStateComponent.vue"
+import ItemEditDialogComponent from "./Item/EditDialogComponent.vue"
+import ItemComponent from "./ItemComponent.vue"
 import List from '@/models/List'
 import Item from '@/models/Item'
 
@@ -279,8 +279,8 @@ export default {
           if (this.displayMode === DISPLAY_MODE_CHECKED_HISTORY) {
               q.where('checked', true)
                 .orderBy(item =>
-                  item[config.VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD || 'lastCheckedAt'] || 0,  // Need to handle specifically undefined values as 0
-                  String(config.VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER).toLowerCase() === 'asc' ? 'asc' : 'desc'
+                  item[config.VITE_CHECKED_ITEMS_HISTORY_SORT_FIELD || 'lastCheckedAt'] || 0,  // Need to handle specifically undefined values as 0
+                  String(config.VITE_CHECKED_ITEMS_HISTORY_SORT_ORDER).toLowerCase() === 'asc' ? 'asc' : 'desc'
                 )
           } else {
               q.orderBy('checked')
@@ -444,13 +444,13 @@ export default {
       this.populateNewItemFromSearchString(item, this.searchString)
       this.saveItem(item, function(newItem) {
         self.cancelSearch()
-        if (config.VUE_APP_EDIT_ITEM_ON_CREATE) {
+        if (config.VITE_EDIT_ITEM_ON_CREATE) {
           self.editItem(newItem)
         }
       })
     },
     populateNewItemFromSearchString(item, searchString) {
-      if (config.VUE_APP_USE_ITEM_QUICK_SYNTAX) {
+      if (config.VITE_USE_ITEM_QUICK_SYNTAX) {
         const re = new RegExp('^(\\d+)x (.*)$')
         const m = searchString.match(re)
         if (!m || !m.length) {
@@ -530,7 +530,7 @@ export default {
     onDeleteItemForm(itemData) {
       this.$logger.debug('onDeleteItemForm()', itemData)
       const self = this
-      if (confirm(this.$t('confirmation-question'))) {  // eslint-disable-line
+      if (confirm(this.$t('confirmation-question'))) {
         if (itemData && itemData._id) {
           this.deleteItem(itemData, function() {
             self.closeEditItemForm()

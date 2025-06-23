@@ -14,7 +14,7 @@ lists** of course, and any other small todo-list that needs to be used
 <p align="center"><img src="doc/osl-usage.gif" height="400" /></p>
 
 The current implementation provides the following features:
-- **Multiple boards** (can be disabled, see `VUE_APP_SINGLEBOARD_MODE`)
+- **Multiple boards** (can be disabled, see `VITE_SINGLEBOARD_MODE`)
 - Each board with **multiple lists**
 - **Real-time sync** between users
 - Items with the following fields: name, quantity, details
@@ -40,7 +40,7 @@ people use the lists from a board collaboratively.
 
 But, you might want to disable that feature and keep using a unique board for
 your whole instance. In that case, just use the provided
-`VUE_APP_SINGLEBOARD_MODE` environment variable.
+`VITE_SINGLEBOARD_MODE` environment variable.
 
 **But have no fear, you can always:**
 
@@ -67,7 +67,7 @@ the steps below:
 
 ### If you want to keep using one single board on your instance (just like on v1)
 
-  - Make sure you set the `VUE_APP_SINGLEBOARD_MODE` to `1`
+  - Make sure you set the `VITE_SINGLEBOARD_MODE` to `1`
   - Once started, use the CLI to migrate existing lists to the special board
     used as common parent for lists in "singleboard" mode.
     ```shell
@@ -79,7 +79,7 @@ the steps below:
 
 ### If you want to enable the new _boards_ feature and migrate your existing lists to a dedicated board
 
-  - Make sure `VUE_APP_SINGLEBOARD_MODE` is **not set** or set to `0`
+  - Make sure `VITE_SINGLEBOARD_MODE` is **not set** or set to `0`
   - Create a new board with the name of your choice
     ```shell
     # Get the created board's slug from the output and use it in the following command
@@ -161,6 +161,9 @@ docker compose up -d
 
 **Available environment variables for the `app` container**
 
+⚠️ The original `VUE_APP_` prefix has been replaced due to the migration to Vite.  
+You must now use `VITE_` instead.
+
 - **System keys**
   - `LISTEN_PORT` (default: `8080`)
   - `MONGODB_HOST` (default: `mongodb`)
@@ -171,31 +174,31 @@ docker compose up -d
   > MongoDB authentication is not supported yet.
 
 - **Application keys**
-  - `VUE_APP_APM_ENABLED` (default: `0`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/intro.html)
-  - `VUE_APP_APM_LOGLEVEL` (default: `warn`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#log-level)
-  - `VUE_APP_APM_SERVERURL` (default: `http://localhost:8200`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#server-url)
-  - `VUE_APP_APM_SERVERURLPREFIX` (default: `/intake/v${apiVersion}/rum/events`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#server-url-prefix)
-  - `VUE_APP_APM_SERVICENAME` [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#service-name)
-  - `VUE_APP_BOARD_DELETION_ENABLED` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/17)
-  - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD` (default: `lastCheckedAt`, see available fields [here](./client/src/models/Item.js))
-  - `VUE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER` (default: `desc`)
-  - `VUE_APP_CLIENT_LOG_CONSOLE_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
-  - `VUE_APP_CLIENT_LOG_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
-  - `VUE_APP_CLIENT_LOG_LEVEL` (default: `debug`)
-  - `VUE_APP_EDIT_ITEM_ON_CREATE` (default: `0`)
-  - `VUE_APP_HOME_MESSAGE` (default: _empty_)
-  - `VUE_APP_I18N_FALLBACK_LOCALE` (default: `en`)
-  - `VUE_APP_I18N_FORCE_LOCALE` (default: `0`)
-  - `VUE_APP_I18N_LOCALE` (default: `en`)
-  - `VUE_APP_LIST_ALL_BOARDS_ENABLED` (default: `0`, has no effect in _singleboard_ mode)
-  - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` (default: `OurShoppingList_`)
-  - `VUE_APP_SHORT_TITLE` (default: `OSL`)
-  - `VUE_APP_SINGLEBOARD_MODE` (default: `0`)
-  - `VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION` (default: `1800000` = 30mn)
-  - `VUE_APP_SOCKETIO_PING_INTERVAL` (default: `25000` = 25sec.)
-  - `VUE_APP_SOCKETIO_PING_TIMEOUT` (default: `20000` = 20sec.)
-  - `VUE_APP_TITLE` (default: `Our Shopping List`)
-  - `VUE_APP_USE_ITEM_QUICK_SYNTAX` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/20)
+  - `VITE_APM_ENABLED` (default: `0`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/intro.html)
+  - `VITE_APM_LOGLEVEL` (default: `warn`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#log-level)
+  - `VITE_APM_SERVERURL` (default: `http://localhost:8200`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#server-url)
+  - `VITE_APM_SERVERURLPREFIX` (default: `/intake/v${apiVersion}/rum/events`) [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#server-url-prefix)
+  - `VITE_APM_SERVICENAME` [Reference](https://www.elastic.co/guide/en/apm/agent/rum-js/current/configuration.html#service-name)
+  - `VITE_BOARD_DELETION_ENABLED` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/17)
+  - `VITE_CHECKED_ITEMS_HISTORY_SORT_FIELD` (default: `lastCheckedAt`, see available fields [here](./client/src/models/Item.js))
+  - `VITE_CHECKED_ITEMS_HISTORY_SORT_ORDER` (default: `desc`)
+  - `VITE_CLIENT_LOG_CONSOLE_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
+  - `VITE_CLIENT_LOG_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
+  - `VITE_CLIENT_LOG_LEVEL` (default: `debug`)
+  - `VITE_EDIT_ITEM_ON_CREATE` (default: `0`)
+  - `VITE_HOME_MESSAGE` (default: _empty_)
+  - `VITE_I18N_FALLBACK_LOCALE` (default: `en`)
+  - `VITE_I18N_FORCE_LOCALE` (default: `0`)
+  - `VITE_I18N_LOCALE` (default: `en`)
+  - `VITE_LIST_ALL_BOARDS_ENABLED` (default: `0`, has no effect in _singleboard_ mode)
+  - `VITE_LOCALSTORAGE_KEY_PREFIX` (default: `OurShoppingList_`)
+  - `VITE_SHORT_TITLE` (default: `OSL`)
+  - `VITE_SINGLEBOARD_MODE` (default: `0`)
+  - `VITE_SOCKETIO_CSR_MAXDISCONNECTIONDURATION` (default: `1800000` = 30mn)
+  - `VITE_SOCKETIO_PING_INTERVAL` (default: `25000` = 25sec.)
+  - `VITE_SOCKETIO_PING_TIMEOUT` (default: `20000` = 20sec.)
+  - `VITE_TITLE` (default: `Our Shopping List`)
+  - `VITE_USE_ITEM_QUICK_SYNTAX` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/20)
 
 ### Robots.txt
 
@@ -256,17 +259,17 @@ location / {
 
 Remember to set the `BASE_URL` variable to the matching web root on each instance.
 
-Make sure you set `VUE_APP_LOCALSTORAGE_KEY_PREFIX` to a unique value too, otherwise clients switching from
+Make sure you set `VITE_LOCALSTORAGE_KEY_PREFIX` to a unique value too, otherwise clients switching from
 one instance to another might corrupt the internal cache in their browser.
 
 Example:
 
 - 1st instance on https://my.host/public-osl
   - `BASE_URL` = `public-osl/`
-  - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` = `OSL1_`
+  - `VITE_LOCALSTORAGE_KEY_PREFIX` = `OSL1_`
 - 2nd instance on https://my.host/private-osl
   - `BASE_URL` = `private-osl/`
-  - `VUE_APP_LOCALSTORAGE_KEY_PREFIX` = `OSL2_`
+  - `VITE_LOCALSTORAGE_KEY_PREFIX` = `OSL2_`
 - etc.
 
 ### Debugging on server side

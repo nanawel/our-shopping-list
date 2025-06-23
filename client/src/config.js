@@ -3,7 +3,7 @@ import path from 'path-browserify'
 const config = {}
 Object.entries(window)
   .filter(([k]) => {
-    return k.startsWith('VUE_APP_') || k === 'BASE_URL' || k === 'DEBUG'
+    return k.startsWith('VITE_') || k === 'BASE_URL' || k === 'DEBUG'
   })
   .map(([k, v]) => {
     // Custom web root support (#58/GITHUB#18)

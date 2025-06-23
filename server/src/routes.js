@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {app} = require('./app');
-const config = require('./config');
+const {createProxyMiddleware} = require('http-proxy-middleware');
+const {config} = require('./config');
 const fs = require('fs');
 
 /**
@@ -28,6 +29,18 @@ app.get('/robots.txt', (req, res) => {
   }
   res.end();
 });
+
+/**
+ * Dev Proxy (Vite)
+ */
+app.use(
+  '/',
+  createProxyMiddleware({
+    target: 'http://localhost:5173',
+    changeOrigin: true,
+    ws: true
+  })
+);
 
 /**
  * Error handling

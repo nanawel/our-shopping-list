@@ -1,6 +1,3 @@
-// const fs = require('fs');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 module.exports = {
   publicPath: './',
   productionSourceMap: process.env.NODE_ENV !== 'production',
@@ -25,17 +22,6 @@ module.exports = {
         }
       })
   },
-  // configureWebpack: {
-  //   plugins: [
-  //     new BundleAnalyzerPlugin({ /* https://www.npmjs.com/package/webpack-bundle-analyzer */
-  //       analyzerMode: 'static',
-  //       analyzerHost: '0.0.0.0'
-  //     }),
-  //   ]
-  // },
-  // transpileDependencies: [
-  //   'vuetify'
-  // ],
   devServer: {
     port: 8081,
     allowedHosts: 'all',

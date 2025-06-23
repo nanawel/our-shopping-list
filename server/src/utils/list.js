@@ -1,6 +1,6 @@
 const BoardModel = require('../board/model');
 const ListModel = require('../list/model');
-const {VUE_APP_SINGLEBOARD_ID} = require("../config");
+const {VITE_SINGLEBOARD_ID} = require("../config");
 
 module.exports = {
   /**

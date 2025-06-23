@@ -1,4 +1,4 @@
-const {VUE_APP_SINGLEBOARD_ID, VUE_APP_SINGLEBOARD_SLUG} = require('../../config');
+const {VITE_SINGLEBOARD_ID, VITE_SINGLEBOARD_SLUG} = require('../../config');
 const BoardModel = require('../../board/model');
 const ListModel = require("../../list/model");
 const ItemModel = require("../../item/model");
@@ -7,7 +7,7 @@ const deniedReasonHeader = 'Not-In-Singleboard-Mode';
 
 const ensureSingleBoardExists = function () {
   return BoardModel
-    .findById(VUE_APP_SINGLEBOARD_ID)
+    .findById(VITE_SINGLEBOARD_ID)
     .exec()
     .then((doc) => {
       if (!doc) {
@@ -15,8 +15,8 @@ const ensureSingleBoardExists = function () {
 
         // Force create the board before continuing
         return (new BoardModel({
-          _id: VUE_APP_SINGLEBOARD_ID,
-          slug: VUE_APP_SINGLEBOARD_SLUG
+          _id: VITE_SINGLEBOARD_ID,
+          slug: VITE_SINGLEBOARD_SLUG
         })).save();
       }
     });
@@ -27,7 +27,7 @@ const getList = async function (listId) {
     .findById(listId)
     .exec()
     .then((doc) => {
-      if (doc && doc.boardId !== VUE_APP_SINGLEBOARD_ID) {
+      if (doc && doc.boardId !== VITE_SINGLEBOARD_ID) {
         throw new Error(deniedReasonHeader);
       }
       return doc;
@@ -56,11 +56,11 @@ module.exports = (router) => {
   // HEAD + GET
   router.all('/boards/by-slug/:slug', function(req, res, next) {
     console.log('REDIRECT', '/boards/by-slug/:slug');
-    res.redirect(307, `/boards/${VUE_APP_SINGLEBOARD_ID}`);
+    res.redirect(307, `/boards/${VITE_SINGLEBOARD_ID}`);
   });
   // HEAD + GET
   router.all('/boards/:boardId', function(req, res, next) {
-    if (req.params.boardId !== VUE_APP_SINGLEBOARD_ID) {
+    if (req.params.boardId !== VITE_SINGLEBOARD_ID) {
       res.status(403)
         .set('Osl-Reason', deniedReasonHeader)
         .end();
@@ -97,7 +97,7 @@ module.exports = (router) => {
 
   // POST
   router.post('/lists', (req, res, next) => {
-    if (req.body && req.body.boardId !== VUE_APP_SINGLEBOARD_ID) {
+    if (req.body && req.body.boardId !== VITE_SINGLEBOARD_ID) {
       res.status(403)
         .set('Osl-Reason', deniedReasonHeader)
         .end();
@@ -108,7 +108,7 @@ module.exports = (router) => {
 
   // PATCH
   router.patch('/lists', (req, res, next) => {
-    if (req.body && req.body.boardId !== VUE_APP_SINGLEBOARD_ID) {
+    if (req.body && req.body.boardId !== VITE_SINGLEBOARD_ID) {
       res.status(403)
         .set('Osl-Reason', deniedReasonHeader)
         .end();

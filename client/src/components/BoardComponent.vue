@@ -16,7 +16,7 @@
                   <router-link :to="{name: 'home'}">
                     <v-img
                       class="app-logo"
-                      :src="require('@/assets/logo.svg')"
+                      :src="logoUrl"
                       width="40"
                       height="40"/>
                   </router-link>
@@ -118,6 +118,10 @@
   </div>
 </template>
 
+<script setup>
+import logoUrl from '@/assets/logo.svg'
+</script>
+
 <script>
 import {useDisplay} from 'vuetify'
 
@@ -140,7 +144,7 @@ export default {
       get: function() {
         return this.$store.state?.list?.currentList
           ? ''
-          : (config.VUE_APP_TITLE || 'Our Shopping List')
+          : (config.VITE_TITLE || 'Our Shopping List')
       },
     },
     boardModel: {
@@ -164,12 +168,12 @@ export default {
     shouldShowBoardShareButton: {
       get: function () {
         return typeof window.navigator.share === 'function'
-          || config.VUE_APP_ENV === 'development'
+          || config.VITE_ENV === 'development'
       }
     },
     shouldShowDebugMenuItem: {
       get: function () {
-        return config.VUE_APP_ENV === 'development'
+        return config.VITE_ENV === 'development'
       }
     }
   },

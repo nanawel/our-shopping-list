@@ -3,7 +3,7 @@
 
 const path = require('path');
 const rewrite = require('express-urlrewrite');
-const config = require('../../config');
+const { config } = require('../../config');
 
 const trimedWebRoot = path.normalize(`/${config.BASE_URL}`);
 console.info(`Using web root: ${trimedWebRoot}`);

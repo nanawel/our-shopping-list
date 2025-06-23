@@ -19,7 +19,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (isSingleBoardMode()) {
         // Skip screen and force redirect to the board
-        next({name: 'board', params: {boardSlug: config.VUE_APP_SINGLEBOARD_SLUG}})
+        next({name: 'board', params: {boardSlug: config.VITE_SINGLEBOARD_SLUG}})
       } else {
         next()
       }
@@ -56,10 +56,10 @@ const router = createRouter({
 router.afterEach((to) => {
   switch (to.name) {
     case 'home':
-      setPageTitle(i18n.t('home.page-title'))
+      setPageTitle(i18n.global.t('home.page-title'))
       break
     case 'about':
-      setPageTitle(i18n.t('about.page-title'))
+      setPageTitle(i18n.global.t('about.page-title'))
       break
   }
 })

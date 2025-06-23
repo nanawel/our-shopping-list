@@ -4,7 +4,7 @@ const yargs = require('yargs');
 require('dotenv').config();
 
 require('./src/app');
-const {VUE_APP_SINGLEBOARD_ID, VUE_APP_SINGLEBOARD_SLUG} = require('./src/config');
+const {VITE_SINGLEBOARD_ID, VITE_SINGLEBOARD_SLUG} = require('./src/config');
 const BoardModel = require('./src/board/model');
 const ListModel = require('./src/list/model');
 const ListUtils = require('./src/utils/list');
@@ -53,9 +53,9 @@ yargs
       const boardModel = new BoardModel(
         argv.singleboard
         ? {
-            _id: VUE_APP_SINGLEBOARD_ID,
+            _id: VITE_SINGLEBOARD_ID,
             name: argv.name,
-            slug: VUE_APP_SINGLEBOARD_SLUG
+            slug: VITE_SINGLEBOARD_SLUG
           }
         : {
             name: argv.name,
@@ -65,7 +65,7 @@ yargs
       // In singleboard mode, check that the board does not already exist and
       // display a proper message if it does.
       if (argv.singleboard) {
-        if (await BoardModel.findOne({_id: VUE_APP_SINGLEBOARD_ID, slug: VUE_APP_SINGLEBOARD_SLUG})) {
+        if (await BoardModel.findOne({_id: VITE_SINGLEBOARD_ID, slug: VITE_SINGLEBOARD_SLUG})) {
           console.info('Nothing to do: the singleboard already exists. Exiting.');
           yargs.exit(2);
         }
@@ -149,7 +149,7 @@ yargs
           describe: 'Move lists to the special board used in "singleboard" mode.'
         });
     }, async function (argv) {
-      const boardSlug = argv.singleboard ? VUE_APP_SINGLEBOARD_SLUG : argv.board;
+      const boardSlug = argv.singleboard ? VITE_SINGLEBOARD_SLUG : argv.board;
       await ListUtils.moveToBoard(argv.all ? '*' : argv.lists, boardSlug)
         .then((res) => {
           ConsoleUtils.json(res);

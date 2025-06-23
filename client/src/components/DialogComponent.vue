@@ -35,7 +35,7 @@ const defaultData = () => ({
   show: false,
   title: '',
   message: '',
-  closeButtonLabel: i18n.t('ok')
+  closeButtonLabel: i18n.global.t('ok')
 })
 
 export default {

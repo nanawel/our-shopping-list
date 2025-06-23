@@ -79,7 +79,7 @@ export default {
 
 <!-- GLOBAL STYLE -->
 <style lang="scss">
-@import '~typeface-roboto/index.css';
+@import '../node_modules/typeface-roboto/index.css';
 
 .v-application--wrap {
   // GITHUB#9 BEGIN ## Fix for svh compatibility with old mobile browsers

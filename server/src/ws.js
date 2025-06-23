@@ -1,5 +1,5 @@
 const path = require('path');
-const config = require('./config');
+const { config } = require('./config');
 
 const SERVER_VERSION = process.env.APP_VERSION   || 'dev';
 const SERVER_BUILD_ID = process.env.APP_BUILD_ID || '(unknown)';
@@ -11,10 +11,10 @@ const {httpServer} = require('./app');
 const {Server} = require('socket.io');
 const io = new Server(httpServer, {
   path: path.normalize(`/${config.BASE_URL}/socket.io/`),  // #58/GITHUB#18
-  pingInterval: config.VUE_APP_SOCKETIO_PING_INTERVAL,
-  pingTimeout: config.VUE_APP_SOCKETIO_PING_TIMEOUT,
+  pingInterval: config.VITE_SOCKETIO_PING_INTERVAL,
+  pingTimeout: config.VITE_SOCKETIO_PING_TIMEOUT,
   connectionStateRecovery: {
-    maxDisconnectionDuration: config.VUE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION,
+    maxDisconnectionDuration: config.VITE_SOCKETIO_CSR_MAXDISCONNECTIONDURATION,
     skipMiddlewares: true,
   }
 });
