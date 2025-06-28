@@ -123,10 +123,10 @@ export default {
   },
   data() {
     return {
-      title: config.VITE_TITLE || 'Our Shopping List',
+      title: config.VITE_APP_TITLE || 'Our Shopping List',
       boardNameInput: '',
       boardsRetrievalErrorMessage: null,
-      homeMessage: config.VITE_HOME_MESSAGE,
+      homeMessage: config.VITE_APP_HOME_MESSAGE,
     }
   },
   computed: {
@@ -138,12 +138,12 @@ export default {
     allBoardsEnabled: {
       get: function () {
         return !isSingleBoardMode()
-          && config.VITE_LIST_ALL_BOARDS_ENABLED
+          && config.VITE_APP_LIST_ALL_BOARDS_ENABLED
       }
     },
     boardDeletionEnabled: {
       get: function () {
-        return !!config.VITE_BOARD_DELETION_ENABLED
+        return !!config.VITE_APP_BOARD_DELETION_ENABLED
       }
     },
     allBoards: {

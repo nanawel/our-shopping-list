@@ -24,9 +24,9 @@ function loadLocaleMessages() {
 }
 
 function getLocale() {
-  if (config.VITE_I18N_FORCE_LOCALE) {
-    logger.info('[i18n] Forced locale to:', config.VITE_I18N_LOCALE)
-    return config.VITE_I18N_LOCALE
+  if (config.VITE_APP_I18N_FORCE_LOCALE) {
+    logger.info('[i18n] Forced locale to:', config.VITE_APP_I18N_LOCALE)
+    return config.VITE_APP_I18N_LOCALE
   }
   const detectedLocale = navigator.language.split('-')[0]
   logger.info('[i18n] Detected locale:', detectedLocale)
@@ -36,7 +36,7 @@ function getLocale() {
 const i18n = createI18n({
   legacy: true, // Keep API mode instead of Composition mode for now
   locale: getLocale(),
-  fallbackLocale: config.VITE_I18N_FALLBACK_LOCALE,
+  fallbackLocale: config.VITE_APP_I18N_FALLBACK_LOCALE,
   messages: loadLocaleMessages()
 })
 

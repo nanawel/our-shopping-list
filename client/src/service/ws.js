@@ -8,7 +8,7 @@ import {repository} from '@/service/repository'
 import eventBus from '@/service/event-bus'
 import {logger} from '@/service/logger'
 
-const serverHashKey = config.VITE_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
+const serverHashKey = config.VITE_APP_LOCALSTORAGE_KEY_PREFIX + 'serverHash'
 
 export default {
   install: (app) => {

@@ -1,3 +1,4 @@
+const path = require('path');
 const mongoose = require('mongoose');
 const {app} = require('./app');
 const {createProxyMiddleware} = require('http-proxy-middleware');
@@ -33,14 +34,22 @@ app.get('/robots.txt', (req, res) => {
 /**
  * Dev Proxy (Vite)
  */
-app.use(
-  '/',
-  createProxyMiddleware({
-    target: 'http://localhost:5173',
-    changeOrigin: true,
-    ws: true
-  })
-);
+if (config.VITE_APP_ENV === 'development') {
+  // Vite can't provide a way to use custom base path in dev mode :(
+  // const normalizedBaseUrl = path.normalize(`/${config.BASE_URL}`);
+  // const proxyTarget = 'http://localhost:5173' + normalizedBaseUrl;
+
+  const proxyTarget = 'http://localhost:5173/';
+  app.use(
+    '/',
+    createProxyMiddleware({
+      target: proxyTarget,
+      changeOrigin: true,
+      ws: true
+    })
+  );
+  console.info(`Created proxy middleware from "/" to "${proxyTarget}"`)
+}
 
 /**
  * Error handling

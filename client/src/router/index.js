@@ -19,7 +19,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (isSingleBoardMode()) {
         // Skip screen and force redirect to the board
-        next({name: 'board', params: {boardSlug: config.VITE_SINGLEBOARD_SLUG}})
+        next({name: 'board', params: {boardSlug: config.VITE_APP_SINGLEBOARD_SLUG}})
       } else {
         next()
       }

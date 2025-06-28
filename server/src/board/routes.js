@@ -19,11 +19,11 @@ const onHeadRequest = function (req, res, doc, next) {
 }
 
 router.get('/boards', (req, res, next) => {
-  if (!config.VITE_LIST_ALL_BOARDS_ENABLED) {
+  if (!config.VITE_APP_LIST_ALL_BOARDS_ENABLED) {
     res.status(403)
       .json({
         error: {
-          message: "Not available! See VITE_LIST_ALL_BOARDS_ENABLED."
+          message: "Not available! See VITE_APP_LIST_ALL_BOARDS_ENABLED."
         }
       });
   } else {
@@ -120,11 +120,11 @@ router.get('/boards/by-slug/:slug/lists', (req, res, next) => {
 });
 
 router.delete('/boards/:id', (req, res, next) => {
-  if (!config.VITE_BOARD_DELETION_ENABLED) {
+  if (!config.VITE_APP_BOARD_DELETION_ENABLED) {
     res.status(403)
       .json({
         error: {
-          message: "Not available! See VITE_BOARD_DELETION_ENABLED."
+          message: "Not available! See VITE_APP_BOARD_DELETION_ENABLED."
         }
       });
   } else {

@@ -7,18 +7,18 @@ import config from '@/config'
 
 const apmPlugin = {
   install(app) {
-    if (config.VITE_APM_ENABLED
-      && config.VITE_APM_SERVERURL
-      && config.VITE_APM_SERVICENAME
+    if (config.VITE_APP_APM_ENABLED
+      && config.VITE_APP_APM_SERVERURL
+      && config.VITE_APP_APM_SERVICENAME
     ) {
-      console.info('APM is ENABLED', config.VITE_APM_SERVICENAME)
+      console.info('APM is ENABLED', config.VITE_APP_APM_SERVICENAME)
       app.use(ApmVuePlugin, {
         router,
         config: {
-          serviceName: config.VITE_APM_SERVICENAME,
-          serverUrl: config.VITE_APM_SERVERURL,
-          serverUrlPrefix: config.VITE_APM_SERVERURLPREFIX,
-          logLevel: config.VITE_APM_LOGLEVEL || 'warn'
+          serviceName: config.VITE_APP_APM_SERVICENAME,
+          serverUrl: config.VITE_APP_APM_SERVERURL,
+          serverUrlPrefix: config.VITE_APP_APM_SERVERURLPREFIX,
+          logLevel: config.VITE_APP_APM_LOGLEVEL || 'warn'
         }
       })
     }

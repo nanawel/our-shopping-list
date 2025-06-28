@@ -9,11 +9,11 @@ module.exports = function (app) {
     if (req.method === 'GET' && req.url === '/manifest.json') {
       try {
         const manifestContent = JSON.parse(fs.readFileSync('client/dist/manifest.json'));
-        if (config.VITE_TITLE) {
-          manifestContent.name = config.VITE_TITLE;
+        if (config.VITE_APP_TITLE) {
+          manifestContent.name = config.VITE_APP_TITLE;
         }
-        if (config.VITE_SHORT_TITLE) {
-          manifestContent.short_name = config.VITE_SHORT_TITLE;
+        if (config.VITE_APP_SHORT_TITLE) {
+          manifestContent.short_name = config.VITE_APP_SHORT_TITLE;
         }
         res.set('Cache-Control', 'max-age=86400')
           .json(manifestContent)

@@ -3,7 +3,7 @@ import {store} from '@/service/store'
 import config from '@/config'
 import {i18n} from '@/service/i18n'
 
-const forceRefreshHintShownKey = config.VITE_LOCALSTORAGE_KEY_PREFIX + 'forceRefreshHintShown'
+const forceRefreshHintShownKey = config.VITE_APP_LOCALSTORAGE_KEY_PREFIX + 'forceRefreshHintShown'
 
 export default {
   install() {

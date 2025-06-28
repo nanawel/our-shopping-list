@@ -144,7 +144,7 @@ export default {
       get: function() {
         return this.$store.state?.list?.currentList
           ? ''
-          : (config.VITE_TITLE || 'Our Shopping List')
+          : (config.VITE_APP_TITLE || 'Our Shopping List')
       },
     },
     boardModel: {
@@ -168,12 +168,12 @@ export default {
     shouldShowBoardShareButton: {
       get: function () {
         return typeof window.navigator.share === 'function'
-          || config.VITE_ENV === 'development'
+          || config.VITE_APP_ENV === 'development'
       }
     },
     shouldShowDebugMenuItem: {
       get: function () {
-        return config.VITE_ENV === 'development'
+        return config.VITE_APP_ENV === 'development'
       }
     }
   },

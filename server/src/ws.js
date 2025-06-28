@@ -10,11 +10,11 @@ const {httpServer} = require('./app');
 
 const {Server} = require('socket.io');
 const io = new Server(httpServer, {
-  path: path.normalize(`/${config.BASE_URL}/socket.io/`),  // #58/GITHUB#18
-  pingInterval: config.VITE_SOCKETIO_PING_INTERVAL,
-  pingTimeout: config.VITE_SOCKETIO_PING_TIMEOUT,
+  path: path.normalize(`/${config.BASE_URL}/socket.io/`),  // Custom web root support (#58/GITHUB#18)
+  pingInterval: config.VITE_APP_SOCKETIO_PING_INTERVAL,
+  pingTimeout: config.VITE_APP_SOCKETIO_PING_TIMEOUT,
   connectionStateRecovery: {
-    maxDisconnectionDuration: config.VITE_SOCKETIO_CSR_MAXDISCONNECTIONDURATION,
+    maxDisconnectionDuration: config.VITE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION,
     skipMiddlewares: true,
   }
 });

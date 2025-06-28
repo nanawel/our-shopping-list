@@ -2,21 +2,23 @@ services:
   app:
     image: node:${node_version}${node_variant_dev}
     working_dir: /app
+    entrypoint: /docker-entrypoint.sh
     command: '${NODE_BIN:-node} index.js'
     ports:
       - '8080:8080'
       - '9229:9229'   # Debugger
     volumes:
+      - ./docker-entrypoint.sh:/docker-entrypoint.sh
       - ./server:/app
       - ./client:/app/client
     environment:
       # NOTICE: devDependencies won't be installed by yarn if you use "production"
       NODE_ENV: development
       ENABLE_TLS: 1
-      VITE_CLIENT_LOG_ENABLED: 1
-      VITE_CLIENT_LOG_CONSOLE_ENABLED: 1
-      VITE_CLIENT_LOG_LEVEL: debug
-      VITE_ENV: development
+      VITE_APP_CLIENT_LOG_ENABLED: 1
+      VITE_APP_CLIENT_LOG_CONSOLE_ENABLED: 1
+      VITE_APP_CLIENT_LOG_LEVEL: debug
+      VITE_APP_ENV: development
       # For more config variables, see server/src/config.js
     depends_on:
       - mongodb

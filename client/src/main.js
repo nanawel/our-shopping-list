@@ -70,7 +70,7 @@ if (!window.location.pathname.startsWith(config.BASE_URL)) {
 // Mount app
 app.mount('#app')
 
-if (config.VITE_DISABLE_CONTEXTMENU) {
+if (config.VITE_APP_DISABLE_CONTEXTMENU) {
   // Prevent context menu from popping when using Chrome DevTools with touch-hold event
   window.addEventListener('contextmenu', function(ev) {
     ev.preventDefault()

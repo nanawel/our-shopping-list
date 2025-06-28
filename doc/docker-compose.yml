@@ -6,10 +6,10 @@ services:
       - '8080:8080'
     environment:
       # Default values below (See README for more)
-      VITE_I18N_LOCALE: en
-      VITE_I18N_FALLBACK_LOCALE: en
-      VITE_I18N_FORCE_LOCALE: 0
-      VITE_SINGLEBOARD_MODE: 0
+      VITE_APP_I18N_LOCALE: en
+      VITE_APP_I18N_FALLBACK_LOCALE: en
+      VITE_APP_I18N_FORCE_LOCALE: 0
+      VITE_APP_SINGLEBOARD_MODE: 0
     # You may want to use a .env file instead
     #env_file:
     #  - .env

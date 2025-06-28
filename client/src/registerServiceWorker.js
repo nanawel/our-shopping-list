@@ -6,7 +6,7 @@ import config from '@/config'
 import {logger} from '@/service/logger'
 
 if (process.env.NODE_ENV === 'production') {
-  register(`/${config.BASE_URL}service-worker.js`, {
+  register(`/${config.BASE_URL}service-worker.js`, {  // Custom web root support (#58/GITHUB#18)
     ready () {
       logger.log(
         'App is being served from cache by a service worker.\n' +

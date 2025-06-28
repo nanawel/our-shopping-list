@@ -40,5 +40,13 @@ require('./src/list/observer');
 
 const worker = httpServer.listen(LISTEN_PORT, () => {
   console.info(`OSL Server started on [${worker.address().address}]:${worker.address().port}`);
-  console.info('Current environment:', process.env);
+  console.info(
+    'Current environment:',
+    Object.keys(process.env).sort().reduce((obj, key) => {
+        obj[key] = process.env[key];
+        return obj;
+      },
+      {}
+    )
+  );
 });

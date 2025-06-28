@@ -48,6 +48,10 @@ build:
 	test -n "$$COMPOSE_FILE" || echo >&2 "WARN: COMPOSE_FILE is empty. Will most likely not build aything."
 	docker compose build $(args)
 
+.PHONY: build-prod
+build-prod: export COMPOSE_FILE=docker-compose.build.yml
+build-prod: build
+
 .PHONY: shell
 shell:
 	docker compose exec -u $$(id -u) app bash
@@ -78,3 +82,9 @@ watch:
 	docker compose exec \
 		-u $$(id -u) app \
 		sh -c 'cd /app/client && yarn dev'
+
+.PHONY: watch-debug
+watch-debug:
+	docker compose exec \
+		-u $$(id -u) app \
+		sh -c 'cd /app/client && yarn dev-debug'

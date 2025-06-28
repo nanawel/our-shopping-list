@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const express = require('express');
 const compression = require('compression');
-const {VITE_SINGLEBOARD_MODE} = require('./config');
+const {VITE_APP_SINGLEBOARD_MODE} = require('./config');
 
 const app = express();
 
@@ -41,7 +41,7 @@ mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`);
 const router = express.Router();
 app.use(router);
 
-if (VITE_SINGLEBOARD_MODE) {
+if (VITE_APP_SINGLEBOARD_MODE) {
   require('./middleware/router/singleboard')(router);
 }
 

@@ -279,8 +279,8 @@ export default {
           if (this.displayMode === DISPLAY_MODE_CHECKED_HISTORY) {
               q.where('checked', true)
                 .orderBy(item =>
-                  item[config.VITE_CHECKED_ITEMS_HISTORY_SORT_FIELD || 'lastCheckedAt'] || 0,  // Need to handle specifically undefined values as 0
-                  String(config.VITE_CHECKED_ITEMS_HISTORY_SORT_ORDER).toLowerCase() === 'asc' ? 'asc' : 'desc'
+                  item[config.VITE_APP_CHECKED_ITEMS_HISTORY_SORT_FIELD || 'lastCheckedAt'] || 0,  // Need to handle specifically undefined values as 0
+                  String(config.VITE_APP_CHECKED_ITEMS_HISTORY_SORT_ORDER).toLowerCase() === 'asc' ? 'asc' : 'desc'
                 )
           } else {
               q.orderBy('checked')
@@ -444,13 +444,13 @@ export default {
       this.populateNewItemFromSearchString(item, this.searchString)
       this.saveItem(item, function(newItem) {
         self.cancelSearch()
-        if (config.VITE_EDIT_ITEM_ON_CREATE) {
+        if (config.VITE_APP_EDIT_ITEM_ON_CREATE) {
           self.editItem(newItem)
         }
       })
     },
     populateNewItemFromSearchString(item, searchString) {
-      if (config.VITE_USE_ITEM_QUICK_SYNTAX) {
+      if (config.VITE_APP_USE_ITEM_QUICK_SYNTAX) {
         const re = new RegExp('^(\\d+)x (.*)$')
         const m = searchString.match(re)
         if (!m || !m.length) {
