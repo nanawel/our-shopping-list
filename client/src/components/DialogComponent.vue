@@ -1,14 +1,14 @@
 <template>
-  <v-dialog v-model="show"
+  <v-dialog v-model="model.show"
             width="auto">
     <v-card>
-      <v-card-title v-if="title"
+      <v-card-title v-if="model.title"
                     class="text-h5 grey lighten-2">
-        {{ title }}
+        {{ model.title }}
       </v-card-title>
 
       <v-card-text class="message">
-        {{ message }}
+        {{ model.message }}
       </v-card-text>
 
       <v-divider></v-divider>
@@ -19,17 +19,19 @@
           name="DialogComponent.close.button"
           color="primary"
           text
-          @click="show = false"
+          @click="model.show = false"
         >
-          {{ closeButtonLabel }}
+          {{ model.closeButtonLabel }}
         </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script>
+<script setup>
+import {store} from '@/service/store'
 import {i18n} from '@/service/i18n'
+import {ref} from 'vue'
 
 const defaultData = () => ({
   show: false,
@@ -37,33 +39,23 @@ const defaultData = () => ({
   message: '',
   closeButtonLabel: i18n.global.t('ok')
 })
+const model = ref(defaultData())
 
-export default {
-  data () {
-    return defaultData()
-  },
-  created () {
-    this.$store.subscribe((mutation, state) => {
-      if (mutation.type === 'dialog/showMessage') {
-        this.title = state.dialog.title
-        this.message = state.dialog.message
-        this.closeButtonLabel = state.dialog.closeButtonLabel
-        this.show = true
-      }
-      if (mutation.type === 'dialog/close') {
-        this.close()
-      }
-    })
-  },
-  methods: {
-    close: function() {
-      this.reset()
-    },
-    reset: function() {
-      Object.assign(this.$data, defaultData())
-    }
-  }
+const reset = () => {
+  Object.assign(model, defaultData())
 }
+
+store.subscribe((mutation, state) => {
+  if (mutation.type === 'dialog/showMessage') {
+    model.value.title = state.dialog.title
+    model.value.message = state.dialog.message
+    model.value.closeButtonLabel = state.dialog.closeButtonLabel
+    model.value.show = true
+  }
+  if (mutation.type === 'dialog/close') {
+    reset()
+  }
+})
 </script>
 
 <style lang="scss" scoped>

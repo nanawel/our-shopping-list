@@ -28,8 +28,7 @@
                     autocomplete="osl-board-name"
                     ref="boardNameInput"
                     v-model="boardNameInput"
-                    @keydown.enter="onOpenBoard"
-                    autofocus/>
+                    @keydown.enter="onOpenBoard"/>
                   </v-col>
               </v-row>
             </v-container>

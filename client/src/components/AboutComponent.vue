@@ -63,8 +63,15 @@
           </v-window-item>
         </v-window>
 
-        <v-btn name="AboutComponent.back.button"
-               @click="onBackClick">{{ $t('back') }}</v-btn>
+        <v-container>
+          <v-row>
+            <v-col style="text-align: left">
+              <v-btn name="AboutComponent.back.button"
+                     @click="onBackClick"
+                     prepend-icon="mdi-arrow-left">{{ $t('back') }}</v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>

@@ -28,8 +28,21 @@
           </v-window-item>
         </v-window>
 
-        <v-btn name="DebugComponent.back.button"
-               @click="onBackClick">{{ $t('back') }}</v-btn>
+        <v-container>
+          <v-row>
+            <v-col cols="6">
+              <v-btn name="DebugComponent.back.button"
+                     @click="onBackClick"
+                     prepend-icon="mdi-arrow-left">{{ $t('back') }}</v-btn>
+            </v-col>
+            <v-col cols="6"
+                   style="text-align: right">
+              <v-btn name="DebugComponent.say-hello.button"
+                     @click="onTestDialogClick"
+                     prepend-icon="mdi-window-restore">Test dialog</v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
@@ -85,6 +98,13 @@ export default {
   methods: {
     onBackClick: function () {
       router.back()
+    },
+    onTestDialogClick: function () {
+      this.$store.commit('dialog/showMessage', {
+        title: 'This is a title',
+        message: "This is a message",
+        closeButtonLabel: 'Close'
+      })
     }
   }
 }
