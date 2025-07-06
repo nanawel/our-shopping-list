@@ -11,9 +11,6 @@ app.use(loggerPlugin)
 import {apmPlugin} from '@/service/apm'
 app.use(apmPlugin)
 
-// PWA
-import '@/registerServiceWorker'
-
 // App config
 import config from '@/config'
 

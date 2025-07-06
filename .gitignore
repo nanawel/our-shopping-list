@@ -3,6 +3,7 @@
 .idea
 .history
 .vscode
+/client/dev-dist
 /docker-compose.dev.override.yml
 /server/.env
 /server/robots.txt
