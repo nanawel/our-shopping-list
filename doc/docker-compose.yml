@@ -1,6 +1,6 @@
 services:
   app:
-    image: ourshoppinglist/our-shopping-list:latest
+    image: ${DOCKER_IMAGE:-ourshoppinglist/our-shopping-list}:latest
     restart: always
     ports:
       - '8080:8080'
