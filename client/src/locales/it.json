@@ -1,1 +1,128 @@
-{}
+{
+    "app-name": "Our Shopping List",
+    "back": "Indietro",
+    "close": "Chiudi",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "save": "Salva",
+    "share": "Condividi",
+    "ok": "OK",
+    "ok-thanks": "OK, grazie",
+    "confirmation-question": "Sei sicuro/a?",
+    "errors": {
+        "board": {
+            "invalid-name": "Nome della tabella non valido!",
+            "delete": "Impossibile eliminare la tabella :("
+        },
+        "list": {
+            "load": "Impossibile caricare la lista :(",
+            "save": "Impossibile salvare la lista :(",
+            "delete": "Impossibile eliminare la lista :("
+        },
+        "item": {
+            "load": "Impossibile caricare l'oggetto :(",
+            "save": "Impossibile salvare l'oggetto :(",
+            "delete": "Impossibile eliminare l'oggetto :("
+        },
+        "overlay": {
+            "not-connected": "Non connesso"
+        }
+    },
+    "notice": {
+        "application-updated-alert": "L'app è stata aggiornata.\nQuesta pagina verrà ricaricata automaticamente.",
+        "force-refresh-hint-title": "Lo sapevi?",
+        "force-refresh-hint-message": "Usa il pulsante ricarica nel menù di sinistra per risolvere problemi di sincronizzazione o di aggiornamento."
+    },
+    "menu-nav": {
+        "open": "Apri il menù",
+        "item": {
+            "new-list": "Nuova lista…",
+            "about": "Informazioni",
+            "debug": "Debug"
+        }
+    },
+    "about": {
+        "page-title": "Informazioni"
+    },
+    "home": {
+        "page-title": "Home",
+        "input": {
+            "board-name": "Apri Tabella…"
+        },
+        "button": {
+            "open-board": "Apri tabella"
+        },
+        "boards": {
+            "all-title": "Tutte le tabelle ({count})",
+            "default-retrieval-error-message": "Mi dispiace, impossibile recuperare le tabelle.",
+            "item": {
+                "lists-count": "(ancora nessuna lista) | 1 lista | {count} liste"
+            },
+            "confirm-deletion": "Eliminare questa tabella?",
+            "deleted-successfully": "Tabella eliminata."
+        },
+        "reopen-last-board": "Vorresti riaprire <strong>{boardName}</strong> invece?"
+    },
+    "board-home-nav": {
+        "title": "Crea una lista della spesa",
+        "subtitle": "Sarai in grado di condividerla con i tuoi parenti e di lavorarci sopra.",
+        "button": "Crea una lista"
+    },
+    "list": {
+        "toggle-history-mode": "Attiva/disattiva cronologia",
+        "not-found": {
+            "title": "Lista non trovata!",
+            "subtitle": "Questa lista non esiste (più?)",
+            "button": "Crea una lista"
+        },
+        "new": {
+            "title": "Dai un nome alla tua lista",
+            "input-placeholder": "La mia lista della spesa…",
+            "button": "Crea"
+        },
+        "new-item": {
+            "subtitle": "Questa lista è vuota.",
+            "button": "Nuovo oggetto"
+        },
+        "loading": {
+            "subtitle": "Caricamento…"
+        },
+        "all-checked": {
+            "subtitle": "Tutti gli oggetti sono spuntati!"
+        },
+        "none-checked": {
+            "subtitle": "Nessun oggetto qui (per ora)…"
+        },
+        "no-results": {
+            "title": "Nessun risultato",
+            "subtitle": "Clicca \"Aggiungi\" per creare un oggetto."
+        },
+        "search-bar": {
+            "input-label": "Cerca o aggiungi un nuovo oggetto",
+            "add-button": "Aggiungi"
+        }
+    },
+    "item": {
+        "empty-qty-label": "(quantità non specificata)",
+        "input": {
+            "name": "Nome",
+            "qty": "Quantità",
+            "details": "Dettagli",
+            "list": "Sposta nella lista..."
+        },
+        "last-checked-label": "Ultima spunta: {date}",
+        "help-onclick-checked": "💡 ⬅ Scorri a sinistra per togliere la spunta da un oggetto",
+        "help-onclick-unchecked": "💡 Scorri a destra per spuntare un oggetto ➡"
+    },
+    "edit-list-dialog": {
+        "existing-title": "Modifica Lista",
+        "new-title": "(Nuova Lista)",
+        "name-input": "Nome",
+        "creation-date-label": "Data di Creazione"
+    },
+    "edit-item-dialog": {
+        "existing-title": "Modifica Oggetto",
+        "new-title": "Nuovo Oggetto"
+    }
+}
