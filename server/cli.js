@@ -12,7 +12,7 @@ const ItemModel = require('./src/item/model');
 const ItemUtils = require('./src/utils/item');
 const ConsoleUtils = require('./src/utils/console');
 
-yargs
+yargs(process.argv.slice(2))
   .usage('$0 <cmd> [args]')
 
   ///////////////////////////////////////////////
@@ -21,11 +21,11 @@ yargs
     'config:show',
     'Dump config as JSON.',
     (yargs) => {}, async function () {
-      ConsoleUtils.json({
-        env: process.env,
-        config: require('./src/config'),
-    });
-      yargs.exit(0);
+        ConsoleUtils.json({
+          env: process.env,
+          config: require('./src/config'),
+      });
+      process.exit(0);
     })
 
   ///////////////////////////////////////////////
@@ -67,7 +67,7 @@ yargs
       if (argv.singleboard) {
         if (await BoardModel.findOne({_id: VITE_APP_SINGLEBOARD_ID, slug: VITE_APP_SINGLEBOARD_SLUG})) {
           console.info('Nothing to do: the singleboard already exists. Exiting.');
-          yargs.exit(2);
+          process.exit(2);
         }
       }
       await boardModel.save()
@@ -76,9 +76,9 @@ yargs
         })
         .catch(function (err) {
           console.error(err);
-          yargs.exit(1);
+          process.exit(1);
         });
-      yargs.exit(0);
+      process.exit(0);
     })
   .command(
     'board:find [filter]',
@@ -97,9 +97,9 @@ yargs
         })
         .catch(function (err) {
           console.error(err);
-          yargs.exit(1);
+          process.exit(1);
         });
-      yargs.exit(0);
+      process.exit(0);
     })
 
   ///////////////////////////////////////////////
@@ -121,9 +121,9 @@ yargs
         })
         .catch(function (err) {
           console.error(err);
-          yargs.exit(1);
+          process.exit(1);
         });
-      yargs.exit(0);
+      process.exit(0);
     })
   .command(
     'list:move-to-board [lists..]',
@@ -156,9 +156,9 @@ yargs
         })
         .catch(function (err) {
           console.error(err);
-          yargs.exit(1);
+          process.exit(1);
         });
-      yargs.exit(0);
+      process.exit(0);
     })
 
   ///////////////////////////////////////////////
@@ -180,9 +180,9 @@ yargs
         })
         .catch(function (err) {
           console.error(err);
-          yargs.exit(1);
+          process.exit(1);
         });
-      yargs.exit(0);
+      process.exit(0);
     })
   .command(
     'item:move-to-list [items..]',
@@ -235,9 +235,9 @@ yargs
         })
         .catch(function (err) {
           console.error(err);
-          yargs.exit(1);
+          process.exit(1);
       });
-      yargs.exit(0);
+      process.exit(0);
     })
 
   .demandCommand()
