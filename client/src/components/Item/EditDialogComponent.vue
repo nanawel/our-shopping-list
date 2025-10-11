@@ -22,7 +22,7 @@
                   v-model="formItem.name"
                   @keydown.enter="onSaveItemForm"/>
               </v-col>
-              <v-col cols="2" md="1">
+              <v-col cols="2">
                 <v-checkbox v-model="formItem.checked"></v-checkbox>
               </v-col>
             </v-row>
