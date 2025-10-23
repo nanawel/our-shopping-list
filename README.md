@@ -23,9 +23,8 @@ The current implementation provides the following features:
 - Intuitive **search**
 - **Mobile-first UI** with swipeable items
 - [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) basic support
-- Partial internationalisation (i18n)
-  - Only EN and FR languages are available at that time, but PR are welcome for more!
-    See examples [here](./client/src/locales).
+- Internationalisation (i18n) ([available languages listed here](./client/src/locales))
+  - Want to help? Create or update translations on [Weblate](https://hosted.weblate.org/projects/our-shopping-list/client-src-locales/)
 
 But, at this date it lacks the following:
 - Full PWA support with offline mode and deferred sync
