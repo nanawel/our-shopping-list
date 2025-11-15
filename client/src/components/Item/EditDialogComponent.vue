@@ -3,7 +3,8 @@
       v-model="showDialog"
       persistent
       max-width="500"
-      @keydown.esc="onCancelItemForm">
+      @keydown.esc="onCancelItemForm"
+      @keydown.enter="onSaveItemForm">
       <v-card>
         <v-card-title class="headline grey lighten-2">
           <span v-if="formItem && formItem._id">{{ $t('edit-item-dialog.existing-title') }}</span>
