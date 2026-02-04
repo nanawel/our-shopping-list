@@ -197,6 +197,7 @@ You must now use `VITE_APP_` instead.
   - `VITE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION` (default: `1800000` = 30mn)
   - `VITE_APP_SOCKETIO_PING_INTERVAL` (default: `25000` = 25sec.)
   - `VITE_APP_SOCKETIO_PING_TIMEOUT` (default: `20000` = 20sec.)
+  - `VITE_APP_THEME` (`system` | `light` | `dark`, default: `system`) [Reference](https://github.com/nanawel/our-shopping-list/issues/48)
   - `VITE_APP_TITLE` (default: `Our Shopping List`)
   - `VITE_APP_USE_ITEM_QUICK_SYNTAX` (default: `0`) [Reference](https://github.com/nanawel/our-shopping-list/issues/20)
 

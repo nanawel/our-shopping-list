@@ -47,6 +47,7 @@ let config = {
   /** @see https://socket.io/docs/v4/server-options/#pingtimeout */
   VITE_APP_SOCKETIO_PING_TIMEOUT: process.env.VITE_APP_SOCKETIO_PING_TIMEOUT || 20000,
   VITE_APP_SOCKETIO_TRANSPORTS: process.env.VITE_APP_SOCKETIO_TRANSPORTS || 'websocket',
+  VITE_APP_THEME: process.env.VITE_APP_THEME || 'system',
   VITE_APP_TITLE: process.env.VITE_APP_TITLE || 'Our Shopping List',
   VITE_APP_USE_ITEM_QUICK_SYNTAX: !!parseInt(process.env.VITE_APP_USE_ITEM_QUICK_SYNTAX),
 }
