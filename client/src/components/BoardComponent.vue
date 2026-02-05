@@ -2,8 +2,7 @@
   <div class="board">
     <v-navigation-drawer
       app
-      v-model="sidebarMenu"
-      color="grey-lighten-4">
+      v-model="sidebarMenu">
       <v-list dense>
         <v-list-item>
           <template v-slot:prepend>

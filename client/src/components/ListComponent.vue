@@ -604,7 +604,7 @@ export default {
 }
 .list-footer {
   height: 80px;
-  background-color: #f5f5f5;
+  background-color: rgb(var(--v-theme-background));
   display: flex;
   padding: 6px 16px;
   align-items: center;
