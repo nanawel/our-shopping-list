@@ -305,6 +305,10 @@ docker compose exec -T mongodb mongodump -d osl --archive > osl-backup.archive
 bash doc/update-mongo7.sh
 ```
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nanawel/our-shopping-list&type=date&legend=top-left)](https://www.star-history.com/#nanawel/our-shopping-list&type=date&legend=top-left)
+
 ## 👷 Developer installation
 
 > 🐋 This method also uses Docker, but with the local source files mounted
