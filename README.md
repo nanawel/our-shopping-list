@@ -186,6 +186,7 @@ You must now use `VITE_APP_` instead.
   - `VITE_APP_CLIENT_LOG_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
   - `VITE_APP_CLIENT_LOG_LEVEL` (default: `debug`)
   - `VITE_APP_EDIT_ITEM_ON_CREATE` (default: `0`)
+  - `VITE_APP_HIDE_FORCE_REFRESH_HINT` (default: `0`)
   - `VITE_APP_HOME_MESSAGE` (default: _empty_)
   - `VITE_APP_I18N_FALLBACK_LOCALE` (default: `en`)
   - `VITE_APP_I18N_FORCE_LOCALE` (default: `0`)
