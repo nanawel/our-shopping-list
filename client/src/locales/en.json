@@ -103,7 +103,7 @@
             "add-button": "Add"
         },
       "paste-csv": {
-        "confirm": "Mass-create items from the clipboard?",
+        "confirm": "Mass-create items from the clipboard? ({rowsCount} items found)",
         "items-created": "{itemsCreated} item(s) have been created. {itemsUpdated} have been updated."
       }
     },

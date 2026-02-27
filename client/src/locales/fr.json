@@ -103,7 +103,7 @@
             "add-button": "Ajouter"
         },
         "paste-csv": {
-            "confirm": "Créez des articles en masse depuis le presse-papier ?",
+            "confirm": "Créez des articles en masse depuis le presse-papier ? ({rowsCount} articles trouvés)",
             "items-created": "{itemsCreated} articles créé(s). {itemsUpdated} mis à jour."
         }
     },

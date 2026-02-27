@@ -555,7 +555,6 @@ export default {
       if (!config.VITE_APP_DISABLE_PASTE_CSV) {
         let paste = (ev.clipboardData || window.clipboardData).getData("text")
         let nl = null;
-        console.log(paste.includes("\r\n"));
         if (paste.includes("\r\n")) {
           nl = "\r\n"
         } else if (paste.includes("\n")) {
@@ -563,12 +562,12 @@ export default {
         }
         // At least one NL detected: start CSV processing
         if (nl !== null) {
-          console.info('Pasted CSV found: ', paste)
-          if (confirm(this.$t('list.paste-csv.confirm'))) {
+          this.$logger.debug('Pasted CSV found: ', paste)
+          const rows = paste.split(nl)
+          if (confirm(this.$t('list.paste-csv.confirm', {rowsCount: rows.length}))) {
             ev.preventDefault()
             let itemsCreated = 0
             let itemsUpdated = 0
-            const rows = paste.split(nl)
             for (let rowIdx in rows) {
               const row = rows[rowIdx].split(config.VITE_APP_PASTE_CSV_SEPARATOR)
               let itemData = {
