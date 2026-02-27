@@ -140,7 +140,8 @@
         class="pr-4"
         @keydown.enter="submitSearchInput"
         bg-color="transparent"
-        hide-details="auto"/>
+        hide-details="auto"
+        @paste="onSearchPaste"/>
       <v-btn
         name="ListComponent.search.button"
         depressed
@@ -549,6 +550,62 @@ export default {
     // SEARCH
     cancelSearch() {
       this.searchInputValue = ''
+    },
+    onSearchPaste(ev) {
+      if (!config.VITE_APP_DISABLE_PASTE_CSV) {
+        let paste = (ev.clipboardData || window.clipboardData).getData("text")
+        let nl = null;
+        console.log(paste.includes("\r\n"));
+        if (paste.includes("\r\n")) {
+          nl = "\r\n"
+        } else if (paste.includes("\n")) {
+          nl = "\n"
+        }
+        // At least one NL detected: start CSV processing
+        if (nl !== null) {
+          console.info('Pasted CSV found: ', paste)
+          if (confirm(this.$t('list.paste-csv.confirm'))) {
+            ev.preventDefault()
+            let itemsCreated = 0
+            let itemsUpdated = 0
+            const rows = paste.split(nl)
+            for (let rowIdx in rows) {
+              const row = rows[rowIdx].split(config.VITE_APP_PASTE_CSV_SEPARATOR)
+              let itemData = {
+                name: String(row[0]),
+                qty: parseInt(row[1]),
+                details: String(row[2] || ''),
+              }
+
+              let item = Item.query()
+                .where('listId', this.listModelId)
+                .where('name', itemData.name)
+                .first()
+              if (item) {
+                if (itemData.qty > 0) {
+                  item.qty = itemData.qty
+                }
+                if (itemData.details.length > 0) {
+                  item.details = itemData.details
+                }
+                itemsUpdated++
+              } else {
+                item = new Item()
+                item.name = itemData.name
+                item.qty = itemData.qty
+                item.details = itemData.details
+                itemsCreated++
+              }
+              item.checked = false
+              this.saveItem(item)
+            }
+            this.$snackbar.msg(this.$t(
+              'list.paste-csv.items-created',
+              {itemsCreated: itemsCreated, itemsUpdated: itemsUpdated}
+            ))
+          }
+        }
+      }
     },
   },
 }

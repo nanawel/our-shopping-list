@@ -101,6 +101,10 @@
         "search-bar": {
             "input-label": "Recherchez ou ajoutez un article",
             "add-button": "Ajouter"
+        },
+        "paste-csv": {
+            "confirm": "Créez des articles en masse depuis le presse-papier ?",
+            "items-created": "{itemsCreated} articles créé(s). {itemsUpdated} mis à jour."
         }
     },
     "item": {

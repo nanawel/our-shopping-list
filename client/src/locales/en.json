@@ -101,7 +101,11 @@
         "search-bar": {
             "input-label": "Search or add a new item",
             "add-button": "Add"
-        }
+        },
+      "paste-csv": {
+        "confirm": "Mass-create items from the clipboard?",
+        "items-created": "{itemsCreated} item(s) have been created. {itemsUpdated} have been updated."
+      }
     },
     "item": {
         "empty-qty-label": "(no quantity specified)",
