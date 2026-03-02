@@ -18,11 +18,11 @@
     "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
-    "@elastic/apm-rum-vue": "^2.1.9",
+    "@elastic/apm-rum-vue": "^2.1",
     "@mdi/font": "git+https://github.com/nanawel/MaterialDesign-Webfont.git#semver:v7.4.47-lite-1",
     "@vite-pwa/assets-generator": "^1.0.0",
-    "@vuex-orm/core": "^0.36.4",
-    "@vuex-orm/plugin-axios": "^0.9.4",
+    "@vuex-orm/core": "^0.36",
+    "@vuex-orm/plugin-axios": "^0.9",
     "async-mutex": "^0.5.0",
     "dom7": "*",
     "lodash.debounce": "^4.0.8",
@@ -31,16 +31,16 @@
     "slugify": "^1.6",
     "socket.io-client": "^4.8",
     "ssr-window": "*",
-    "swiper": "^11.2",
+    "swiper": "^12",
     "typeface-roboto": "^1.1",
-    "vue": "^3.5.13",
+    "vue": "^3.5.29",
     "vue-i18n": "^11.1",
     "vue-logger-plugin": "^2.2.3",
-    "vue-router": "^4.5.0",
+    "vue-router": "^4.6",
     "vue-virtual-scroller": "^2.0.0-beta.8",
     "vue3-touch-events": "^5.0",
-    "vuetify": "^3.10",
-    "vuex": "^4.1.0"
+    "vuetify": "^3.12",
+    "vuex": "^4.1"
   },
   "devDependencies": {
     "@babel/core": "7.*",

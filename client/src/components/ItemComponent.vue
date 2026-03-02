@@ -60,9 +60,13 @@ export default {
     }
   },
   watch: {
+    'item': function() {
+      // GITHUB#51 Necessary since the RecycleScroller re-use widget instances for different items
+      this.initSwiper()
+    },
     'item.checked': function() {
       this.initSwiper()
-    }
+    },
   },
   mounted() {
     const self = this
