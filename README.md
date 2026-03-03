@@ -25,6 +25,8 @@ The current implementation provides the following features:
 - [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) basic support
 - Internationalisation (i18n) ([available languages listed here](./client/src/locales))
   - Want to help? Create or update translations on [Weblate](https://hosted.weblate.org/projects/our-shopping-list/client-src-locales/)
+- Mass-create items by [pasting a CSV](https://github.com/nanawel/our-shopping-list/issues/51#issuecomment-3985512155)
+  in the search field (can be disabled, see `VITE_APP_DISABLE_PASTE_CSV`)
 
 But, at this date it lacks the following:
 - Full PWA support with offline mode and deferred sync
@@ -185,6 +187,7 @@ You must now use `VITE_APP_` instead.
   - `VITE_APP_CLIENT_LOG_CONSOLE_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
   - `VITE_APP_CLIENT_LOG_ENABLED` (default: `false`, [see doc here](https://github.com/dev-tavern/vue-logger-plugin/tree/v1.2.3#enabled-vs-consoleenabled))
   - `VITE_APP_CLIENT_LOG_LEVEL` (default: `debug`)
+  - `VITE_APP_DISABLE_PASTE_CSV` (default: `0`)
   - `VITE_APP_EDIT_ITEM_ON_CREATE` (default: `0`)
   - `VITE_APP_HIDE_FORCE_REFRESH_HINT` (default: `0`)
   - `VITE_APP_HOME_MESSAGE` (default: _empty_)
@@ -193,6 +196,7 @@ You must now use `VITE_APP_` instead.
   - `VITE_APP_I18N_LOCALE` (default: `en`)
   - `VITE_APP_LIST_ALL_BOARDS_ENABLED` (default: `0`, has no effect in _singleboard_ mode)
   - `VITE_APP_LOCALSTORAGE_KEY_PREFIX` (default: `OurShoppingList_`)
+  - `VITE_APP_PASTE_CSV_SEPARATOR` (default: `,`)
   - `VITE_APP_SHORT_TITLE` (default: `OSL`)
   - `VITE_APP_SINGLEBOARD_MODE` (default: `0`)
   - `VITE_APP_SOCKETIO_CSR_MAXDISCONNECTIONDURATION` (default: `1800000` = 30mn)
