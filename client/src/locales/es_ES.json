@@ -73,7 +73,7 @@
         "toggle-history-mode": "Conmutar modo historial",
         "not-found": {
             "title": "¡Lista no encontrada!",
-            "subtitle": "Esta lista no existe (¿ya?).",
+            "subtitle": "Esta lista no existe (¿ya?)",
             "button": "Crear una lista"
         },
         "new": {
