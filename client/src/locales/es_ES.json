@@ -101,6 +101,10 @@
         "search-bar": {
             "input-label": "Busque o añada un nuevo artículo",
             "add-button": "Añadir"
+        },
+        "paste-csv": {
+            "confirm": "¿Crear elementos de forma masiva desde el portapapeles? (se encontraron {rowsCount} elementos)",
+            "items-created": "Se han creado {itemsCreated} elemento(s). Se han actualizado {itemsUpdated}."
         }
     },
     "item": {
