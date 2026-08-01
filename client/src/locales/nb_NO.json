@@ -31,7 +31,8 @@
     "menu-nav": {
         "item": {
             "new-list": "Ny liste …",
-            "about": "Om"
+            "about": "Om",
+            "debug": ""
         },
         "open": "Åpne menyen"
     },
@@ -51,7 +52,8 @@
         "reopen-last-board": "Åpne <strong>{boardName}</strong> igjen istedenfor?",
         "input": {
             "board-name": "Åpne listesamling …"
-        }
+        },
+        "page-title": ""
     },
     "board-home-nav": {
         "title": "Opprett en handleliste",
@@ -87,6 +89,13 @@
         "no-results": {
             "title": "Resultatløst",
             "subtitle": "Klikk «Legg til» for å opprette et nytt element."
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
+        },
+        "loading": {
+            "subtitle": ""
         }
     },
     "ok": "OK",
@@ -95,7 +104,8 @@
         "input": {
             "name": "Navn",
             "qty": "Mengde",
-            "details": "Detaljer"
+            "details": "Detaljer",
+            "list": ""
         },
         "last-checked-label": "Sist sjekket: {date}",
         "help-onclick-checked": "💡 ⬅ Dra til venstre for å fravelge et element",
@@ -115,5 +125,8 @@
     "back": "Tilbake",
     "close": "Lukk",
     "share": "Del",
-    "save": "Lagre"
+    "save": "Lagre",
+    "about": {
+        "page-title": ""
+    }
 }
