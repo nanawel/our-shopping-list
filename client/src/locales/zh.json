@@ -55,7 +55,9 @@
             "all-title": "",
             "item": {
                 "lists-count": ""
-            }
+            },
+            "confirm-deletion": "",
+            "deleted-successfully": ""
         },
         "page-title": ""
     },
