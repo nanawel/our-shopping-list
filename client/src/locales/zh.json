@@ -12,7 +12,8 @@
     "confirmation-question": "您确定吗？",
     "errors": {
         "board": {
-            "invalid-name": "无效面板名称"
+            "invalid-name": "无效面板名称",
+            "delete": ""
         },
         "list": {
             "load": "无法加载列表 :(",
@@ -37,7 +38,8 @@
         "open": "打开菜单",
         "item": {
             "new-list": "新的列表…",
-            "about": "关于"
+            "about": "关于",
+            "debug": ""
         }
     },
     "home": {
@@ -47,7 +49,15 @@
         "button": {
             "open-board": "打开面板"
         },
-        "reopen-last-board": "您是否想要重新打开 <strong>{boardName}</strong> ？"
+        "reopen-last-board": "您是否想要重新打开 <strong>{boardName}</strong> ？",
+        "boards": {
+            "default-retrieval-error-message": "",
+            "all-title": "",
+            "item": {
+                "lists-count": ""
+            }
+        },
+        "page-title": ""
     },
     "board-home-nav": {
         "title": "创建购物清单",
@@ -83,6 +93,13 @@
         "search-bar": {
             "input-label": "搜索或添加一个新的项目",
             "add-button": "添加"
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
+        },
+        "loading": {
+            "subtitle": ""
         }
     },
     "item": {
@@ -90,7 +107,8 @@
         "input": {
             "name": "名称",
             "qty": "数量",
-            "details": "详情"
+            "details": "详情",
+            "list": ""
         },
         "last-checked-label": "最近勾选: {date}",
         "help-onclick-checked": "💡 ⬅ 向左滑动以取消选中项目",
@@ -105,5 +123,8 @@
     "edit-item-dialog": {
         "existing-title": "编辑项目",
         "new-title": "新的项目"
+    },
+    "about": {
+        "page-title": ""
     }
 }
