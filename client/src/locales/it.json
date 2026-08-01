@@ -101,6 +101,10 @@
         "search-bar": {
             "input-label": "Cerca o aggiungi un nuovo oggetto",
             "add-button": "Aggiungi"
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
         }
     },
     "item": {
