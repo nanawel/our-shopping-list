@@ -12,7 +12,8 @@
     "confirmation-question": "Bist du sicher?",
     "errors": {
         "board": {
-            "invalid-name": "Ungültiger Boardname!"
+            "invalid-name": "Ungültiger Boardname!",
+            "delete": ""
         },
         "list": {
             "load": "Liste konnte nicht geladen werden :(",
@@ -37,7 +38,8 @@
         "open": "Menü öffnen",
         "item": {
             "new-list": "Neue Liste…",
-            "about": "Über"
+            "about": "Über",
+            "debug": ""
         }
     },
     "home": {
@@ -47,7 +49,15 @@
         "button": {
             "open-board": "Board öffnen"
         },
-        "reopen-last-board": "Möchtest du stattdessen <strong>{boardName}</strong> wieder öffnen?"
+        "reopen-last-board": "Möchtest du stattdessen <strong>{boardName}</strong> wieder öffnen?",
+        "boards": {
+            "default-retrieval-error-message": "",
+            "all-title": "",
+            "item": {
+                "lists-count": ""
+            }
+        },
+        "page-title": ""
     },
     "board-home-nav": {
         "title": "Einkaufsliste erstellen",
@@ -83,6 +93,13 @@
         "search-bar": {
             "input-label": "Eintrag suchen oder hinzufügen",
             "add-button": "Hinzufügen"
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
+        },
+        "loading": {
+            "subtitle": ""
         }
     },
     "item": {
@@ -90,7 +107,8 @@
         "input": {
             "name": "Name",
             "qty": "Menge",
-            "details": "Details"
+            "details": "Details",
+            "list": ""
         },
         "last-checked-label": "Zuletzt abgehakt: {date}",
         "help-onclick-checked": "💡 ⬅ Nach links wischen, um ein Element wiederherzustellen",
@@ -105,5 +123,8 @@
     "edit-item-dialog": {
         "existing-title": "Eintrag bearbeiten",
         "new-title": "Neuer Eintrag"
+    },
+    "about": {
+        "page-title": ""
     }
 }
