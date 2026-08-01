@@ -38,7 +38,8 @@
         "open": "פתיחת התפריט",
         "item": {
             "new-list": "רשימה חדשה…",
-            "about": "על אודות"
+            "about": "על אודות",
+            "debug": ""
         }
     },
     "home": {
@@ -94,6 +95,13 @@
         "search-bar": {
             "input-label": "חיפוש או הוספת פריט חדש",
             "add-button": "הוספה"
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
+        },
+        "loading": {
+            "subtitle": ""
         }
     },
     "item": {
