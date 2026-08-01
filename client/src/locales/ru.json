@@ -12,7 +12,8 @@
     "confirmation-question": "Вы уверены?",
     "errors": {
         "board": {
-            "invalid-name": "Недопустимое имя доски!"
+            "invalid-name": "Недопустимое имя доски!",
+            "delete": ""
         },
         "list": {
             "load": "Не удалось загрузить список :(",
@@ -37,7 +38,8 @@
         "open": "Открыть меню",
         "item": {
             "new-list": "Новый список…",
-            "about": "О программе"
+            "about": "О программе",
+            "debug": ""
         }
     },
     "home": {
@@ -51,8 +53,13 @@
         "boards": {
             "deleted-successfully": "Доска удалена.",
             "default-retrieval-error-message": "Извините, не смогли загрузить доски.",
-            "confirm-deletion": "Удалить эту доску?"
-        }
+            "confirm-deletion": "Удалить эту доску?",
+            "all-title": "",
+            "item": {
+                "lists-count": ""
+            }
+        },
+        "page-title": ""
     },
     "board-home-nav": {
         "title": "Создать список покупок",
@@ -88,6 +95,13 @@
         "search-bar": {
             "input-label": "Поиск или добавление новой записи",
             "add-button": "Добавить"
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
+        },
+        "loading": {
+            "subtitle": ""
         }
     },
     "item": {
@@ -111,5 +125,8 @@
     "edit-item-dialog": {
         "existing-title": "Редактировать запись",
         "new-title": "Новая запись"
+    },
+    "about": {
+        "page-title": ""
     }
 }
