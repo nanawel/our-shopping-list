@@ -38,7 +38,8 @@
         "open": "Menu openen",
         "item": {
             "new-list": "Nieuwe lijst...",
-            "about": "Over"
+            "about": "Over",
+            "debug": ""
         }
     },
     "home": {
@@ -94,6 +95,13 @@
         "search-bar": {
             "input-label": "Zoek of voeg een nieuw item toe",
             "add-button": "Toevoegen"
+        },
+        "paste-csv": {
+            "items-created": "",
+            "confirm": ""
+        },
+        "loading": {
+            "subtitle": ""
         }
     },
     "item": {
@@ -101,7 +109,8 @@
         "input": {
             "name": "Naam",
             "qty": "Hoeveelheid",
-            "details": "Details"
+            "details": "Details",
+            "list": ""
         },
         "last-checked-label": "Laatst gecontroleerd: {date}",
         "help-onclick-checked": "💡 ⬅ Veeg naar links om een item uit te vinken",
